@@ -1,1674 +1,940 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>רבקה חיים — פיסול נייר</title>
-  <meta name="description" content="רבקה חיים — אמנית פיסול נייר ופאפייה-מאשה. יצירות מקוריות למכירה וסדנאות סטודיו." />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>רבקה חיים — פיסול נייר</title>
+<meta name="description" content="רבקה חיים — אמנית פיסול נייר ופאפייה-מאשה. יצירות מקוריות וסדנאות סטודיו."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Spectral:ital,wght@0,200;0,300;0,400;1,300&family=Assistant:wght@300;400;500&family=Frank+Ruhl+Libre:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+/* ── Exact reference design tokens ──────────────────────────────── */
+:root {
+  --paper: #fcfbf9;
+  --ink:   #282623;
+  --char:  #16130e;
+  --line:  #d3caba;
+  --muted: #8a8174;
+  --ease:  cubic-bezier(.22,1,.36,1);
+}
+html[lang="he"] { --fs: 'Assistant',system-ui,sans-serif; --fsr: 'Frank Ruhl Libre',Georgia,serif; }
+html[lang="en"] { --fs: 'Inter',system-ui,sans-serif;     --fsr: 'Spectral',Georgia,serif; }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Frank+Ruhl+Libre:wght@300;400&display=swap" rel="stylesheet" />
+/* ── Reset ───────────────────────────────────────────────────────── */
+*,::before,::after { box-sizing:border-box; margin:0; padding:0; border:0 solid var(--line); }
+html { line-height:1.5; -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+body { background:var(--paper); color:var(--ink); font-family:var(--fs); -webkit-font-smoothing:antialiased; }
+img  { display:block; max-width:100%; }
+a    { color:inherit; text-decoration:none; }
+button { cursor:pointer; background:none; border:none; font:inherit; color:inherit; padding:0; }
+h1,h2,h3,h4,h5,h6 { font-size:inherit; font-weight:inherit; }
+ul,ol { list-style:none; }
+:focus-visible { outline:1.5px solid var(--ink); outline-offset:2px; }
 
-  <style>
-    /* ── Tokens ─────────────────────────────────────────────────── */
-    :root {
-      --white:    #ffffff;
-      --black:    #0a0a0a;
-      --gray-1:   #f5f5f5;
-      --gray-2:   #e8e8e8;
-      --gray-3:   #999999;
-      --gray-4:   #555555;
+/* ── Core utilities ──────────────────────────────────────────────── */
+.label { font-family:var(--fs); font-size:11px; text-transform:uppercase; letter-spacing:.22em; }
+.serif { font-family:var(--fsr); }
+.muted { color:var(--muted); }
 
-      --font-sans:   'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-heb:    'Frank Ruhl Libre', serif;
+/* Link underline animation — exact from reference CSS */
+.link-u { position:relative; display:inline-block; }
+.link-u::after {
+  content:''; position:absolute; bottom:0; left:0;
+  height:1px; width:100%;
+  transform-origin:right; transform:scaleX(0);
+  background:currentColor;
+  transition:transform .5s var(--ease);
+}
+.link-u:hover::after, .link-u.on::after { transform-origin:left; transform:scaleX(1); }
 
-      --gutter: clamp(1.25rem, 4vw, 3rem);
-      --max-w:  1400px;
-    }
+/* ── Layout ──────────────────────────────────────────────────────── */
+.mx-page { max-width:1600px; margin-inline:auto; }
+.px     { padding-inline:1.5rem; }
+@media(min-width:768px){ .px{ padding-inline:2.5rem; } }
 
-    /* ── Reset ──────────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
-    body {
-      background: var(--white);
-      color: var(--black);
-      font-family: var(--font-sans);
-      font-weight: 300;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    img  { display: block; max-width: 100%; height: auto; }
-    a    { color: inherit; text-decoration: none; }
-    button { cursor: pointer; background: none; border: none; color: inherit; font: inherit; padding: 0; }
-    :focus-visible { outline: 1.5px solid var(--black); outline-offset: 3px; }
+/* ── Page transition ─────────────────────────────────────────────── */
+#app { transition:opacity .18s ease; min-height:100vh; }
+#app.fade { opacity:0; }
 
-    /* ── Helpers ────────────────────────────────────────────────── */
-    .wrap {
-      max-width: var(--max-w);
-      margin-inline: auto;
-      padding-inline: var(--gutter);
-    }
-    .label {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-    }
-    .divider {
-      border: none;
-      border-top: 1px solid var(--gray-2);
-    }
+/* ══ HEADER ══════════════════════════════════════════════════════════ */
+#hdr {
+  position:fixed; inset-inline:0; top:0; z-index:50;
+  background:rgba(252,251,249,.75);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+}
+.hdr-in {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:1.25rem;
+  display:flex; align-items:center; justify-content:space-between;
+}
+@media(min-width:768px){ .hdr-in{ padding-inline:2.5rem; padding-block:1.5rem; } }
 
-    /* ── Lang toggle ────────────────────────────────────────────── */
-    .he { display: block; }
-    .en { display: none; }
-    span.he { display: inline; }
-    span.en { display: none; }
-    html[lang="en"] .he  { display: none; }
-    html[lang="en"] .en  { display: block; }
-    html[lang="en"] span.he { display: none; }
-    html[lang="en"] span.en { display: inline; }
+.logo { font-family:var(--fsr); font-size:clamp(1.4rem,3vw,2.25rem); font-weight:300; color:var(--ink); line-height:1; }
 
-    /* ── Reveal ─────────────────────────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal.in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-      html    { scroll-behavior: auto; }
-    }
+.nav-d { display:none; align-items:center; gap:2.25rem; }
+@media(min-width:768px){ .nav-d{ display:flex; } }
+.nav-d a { color:var(--muted); transition:color .4s; }
+.nav-d a:hover, .nav-d a.on { color:var(--ink); }
 
-    /* ════════════════════════════════════════════════════════════
-       HEADER
-    ════════════════════════════════════════════════════════════ */
-    #header {
-      position: fixed;
-      inset-block-start: 0;
-      inset-inline: 0;
-      z-index: 200;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--gray-2);
-    }
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 56px;
-    }
-    .logo {
-      font-family: var(--font-heb);
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: 0.02em;
-      color: var(--black);
-    }
-    html[lang="en"] .logo { font-family: var(--font-sans); font-size: 0.95rem; letter-spacing: 0.04em; }
+.hdr-right { display:flex; align-items:center; gap:1.25rem; }
+.lang-btn  { color:var(--muted); transition:color .3s; }
+.lang-btn:hover { color:var(--ink); }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.75rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      color: var(--gray-4);
-      transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+.ham { display:flex; flex-direction:column; gap:5px; padding:4px; }
+.ham span { display:block; width:22px; height:1px; background:var(--ink); transition:transform .4s var(--ease),opacity .3s; }
+@media(min-width:768px){ .ham{ display:none; } }
 
-    .lang-btn {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      color: var(--gray-3);
-      transition: color 0.2s;
-    }
-    .lang-btn:hover { color: var(--black); }
+/* Mobile nav overlay */
+#mob-nav {
+  position:fixed; inset:0; z-index:40; background:var(--paper);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem;
+  transition:opacity .5s var(--ease); pointer-events:none; opacity:0;
+}
+#mob-nav.open { pointer-events:auto; opacity:1; }
+#mob-nav a { font-family:var(--fsr); font-size:1.875rem; font-weight:300; color:var(--ink); }
 
-    #menu-btn {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      padding: 4px;
-    }
-    #menu-btn span {
-      display: block;
-      width: 20px;
-      height: 1px;
-      background: var(--black);
-      transition: transform 0.25s, opacity 0.25s;
-    }
-    @media (max-width: 680px) {
-      #menu-btn { display: flex; }
-      .nav-links {
-        display: none;
-        position: fixed;
-        inset: 56px 0 0;
-        background: var(--white);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2.5rem;
-        z-index: 190;
-      }
-      .nav-links.open { display: flex; }
-      .nav-links a { font-size: 1rem; }
-    }
+/* ══ FOOTER ══════════════════════════════════════════════════════════ */
+footer { position:relative; z-index:10; border-top:1px solid var(--line); }
+.ftr-in {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:3rem;
+  display:flex; flex-direction:column; gap:2rem;
+}
+@media(min-width:768px){
+  .ftr-in{ flex-direction:row; align-items:flex-end; justify-content:space-between; padding-inline:2.5rem; padding-block:4rem; }
+}
+.ftr-tag { font-family:var(--fsr); font-size:1.125rem; font-weight:300; max-width:20rem; line-height:1.55; color:rgba(40,38,35,.7); }
+.ftr-links { display:flex; flex-direction:column; gap:.6rem; }
+@media(min-width:768px){ .ftr-links{ align-items:flex-end; } }
+.ftr-links a { color:var(--muted); transition:color .3s; }
+.ftr-links a:hover { color:var(--ink); }
+.ftr-copy { color:var(--muted); margin-top:.5rem; }
 
-    /* ════════════════════════════════════════════════════════════
-       HERO
-    ════════════════════════════════════════════════════════════ */
-    #hero {
-      padding-block-start: 56px; /* header height */
-    }
-    .hero-image {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: var(--gray-1);
-      overflow: hidden;
-      position: relative;
-    }
-    @media (max-width: 768px) { .hero-image { aspect-ratio: 4/3; } }
-    .hero-image img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    .hero-ph {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 0.75rem;
-      color: var(--gray-3);
-    }
-    .hero-ph svg { width: 40px; height: 40px; }
-    .hero-ph span { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; }
+/* ══ HOME ════════════════════════════════════════════════════════════ */
+.home-hero {
+  min-height:100svh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding-inline:1.5rem; padding-block:7rem 8rem; gap:0;
+}
+.home-tag {
+  font-family:var(--fsr); font-size:1.5rem; font-weight:300;
+  line-height:1.4; text-align:center; max-width:36rem;
+  color:var(--ink); margin-bottom:3rem;
+}
+@media(min-width:768px){ .home-tag{ font-size:1.875rem; } }
 
-    /* ════════════════════════════════════════════════════════════
-       TAGLINE BAND (below hero)
-    ════════════════════════════════════════════════════════════ */
-    #tagline {
-      padding-block: clamp(3rem, 6vw, 5rem);
-      border-bottom: 1px solid var(--gray-2);
-    }
-    .tagline-text {
-      font-size: clamp(1.25rem, 3vw, 2rem);
-      font-weight: 300;
-      line-height: 1.45;
-      max-width: 800px;
-      color: var(--black);
-    }
-    html[lang="he"] .tagline-text { font-family: var(--font-heb); }
+.home-cats {
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+  gap:1.25rem 1.5rem; margin-bottom:3.5rem; max-width:36rem;
+}
+@media(min-width:768px){ .home-cats{ flex-wrap:nowrap; max-width:none; gap:0 1.5rem; margin-bottom:4rem; } }
+.home-cats a { color:var(--muted); transition:color .3s; }
+.home-cats a:hover, .home-cats a.on { color:var(--ink); }
 
-    /* category nav row */
-    .cat-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      margin-block-start: 2.5rem;
-      border-top: 1px solid var(--gray-2);
-    }
-    .cat-nav a {
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: var(--gray-3);
-      padding: 0.85rem 1.5rem 0.85rem 0;
-      border-top: 2px solid transparent;
-      margin-top: -1px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    [dir="rtl"] .cat-nav a { padding: 0.85rem 0 0.85rem 1.5rem; }
-    .cat-nav a:hover, .cat-nav a.active { color: var(--black); border-top-color: var(--black); }
+/* Featured artwork card — portrait, viewport-relative (exact reference sizes) */
+.feat {
+  position:relative; overflow:hidden;
+  background:rgba(211,202,186,.4);
+  cursor:pointer; display:block;
+  height:64vw; width:51.2vw;
+}
+@media(min-width:640px){ .feat{ height:58vw; width:46.4vw; } }
+@media(min-width:768px){ .feat{ height:58vh; width:46.4vh; } }
 
-    /* ════════════════════════════════════════════════════════════
-       SECTION SHARED
-    ════════════════════════════════════════════════════════════ */
-    section { padding-block: clamp(4rem, 8vw, 7rem); }
-    .section-eyebrow {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-      margin-block-end: 1.25rem;
-    }
-    .section-title {
-      font-size: clamp(1.75rem, 4vw, 3rem);
-      font-weight: 300;
-      line-height: 1.15;
-      margin-block-end: 1rem;
-    }
-    html[lang="he"] .section-title { font-family: var(--font-heb); }
+.feat img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; opacity:.82;
+  transition:transform 1600ms var(--ease), opacity 1400ms var(--ease);
+}
+.feat:hover img { transform:scale(1.04); opacity:.97; }
+.feat-grad {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom,rgba(22,19,14,.1),transparent 50%,rgba(22,19,14,.5));
+}
+.feat-info {
+  position:absolute; inset-inline:0; bottom:0;
+  padding-inline:1.5rem; padding-bottom:2rem;
+}
+@media(min-width:768px){ .feat-info{ padding-inline:2rem; padding-bottom:2.5rem; } }
+.feat-cat   { color:rgba(252,251,249,.8); }
+.feat-title { font-family:var(--fsr); font-size:1.25rem; font-weight:300; color:var(--paper); margin-top:.4rem; }
 
-    /* ════════════════════════════════════════════════════════════
-       GALLERY SECTION
-    ════════════════════════════════════════════════════════════ */
-    #gallery { border-top: 1px solid var(--gray-2); }
-    .gallery-top {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-block-end: clamp(2rem, 4vw, 3.5rem);
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .gallery-top-text {}
-    .gallery-note {
-      font-size: 0.75rem;
-      color: var(--gray-3);
-      max-width: 240px;
-      text-align: end;
-    }
-    [dir="rtl"] .gallery-note { text-align: start; }
+/* Image placeholder */
+.iph {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:.75rem; color:rgba(211,202,186,.9);
+}
+.iph svg   { width:36px; opacity:.6; }
+.iph span  { font-size:10px; letter-spacing:.2em; text-transform:uppercase; }
 
-    /* Work grid — mimics the portfolio grid from reference site */
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--gray-2);
-      border: 1px solid var(--gray-2);
-    }
-    @media (max-width: 600px) { .work-grid { grid-template-columns: 1fr; } }
+/* ══ GALLERY ═════════════════════════════════════════════════════════ */
+.gal-page { padding-top:56px; }
+.gal-hdr {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:4rem 2rem;
+}
+@media(min-width:768px){ .gal-hdr{ padding-inline:2.5rem; padding-block:7rem 2.5rem; } }
+.gal-h1 { font-family:var(--fsr); font-size:3rem; font-weight:200; line-height:1; }
+@media(min-width:768px){ .gal-h1{ font-size:4.5rem; } }
+.gal-filter {
+  display:flex; flex-wrap:wrap; gap:.75rem 2rem;
+  margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--line);
+}
+.gal-filter a { color:var(--muted); transition:color .3s; }
+.gal-filter a:hover, .gal-filter a.on { color:var(--ink); }
 
-    .work-item {
-      background: var(--white);
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      overflow: hidden;
-    }
-    .work-item:nth-child(1) {
-      grid-column: span 2;
-    }
-    @media (max-width: 600px) { .work-item:nth-child(1) { grid-column: span 1; } }
+.works-grid {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:2.5rem 6rem;
+  display:grid; grid-template-columns:1fr; gap:1.5rem;
+}
+@media(min-width:640px){ .works-grid{ grid-template-columns:1fr 1fr; gap:2.5rem; } }
+@media(min-width:768px){ .works-grid{ padding-inline:2.5rem; } }
 
-    .work-img {
-      position: relative;
-      overflow: hidden;
-      background: var(--gray-1);
-    }
-    .work-item:nth-child(1) .work-img { aspect-ratio: 16/7; }
-    .work-item:not(:nth-child(1)) .work-img { aspect-ratio: 4/3; }
+.wcard { display:block; cursor:pointer; }
+.wcard-img {
+  position:relative; aspect-ratio:4/3;
+  overflow:hidden; background:rgba(211,202,186,.35);
+}
+.wcard-img img {
+  width:100%; height:100%; object-fit:cover; opacity:.82;
+  transition:transform 1600ms var(--ease),opacity 1400ms var(--ease);
+}
+.wcard:hover .wcard-img img { transform:scale(1.04); opacity:.97; }
+.wcard-info { padding-block:.85rem; display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; }
+.wcard-cat   { color:var(--muted); }
+.wcard-title { font-family:var(--fsr); font-size:1.125rem; font-weight:300; margin-top:.2rem; }
+.wcard-year  { color:var(--muted); flex-shrink:0; margin-top:.15rem; }
 
-    .work-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease, opacity 0.4s;
-    }
-    .work-item:hover .work-img img { transform: scale(1.03); }
-    .work-img .img-ph {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 0.5rem;
-      color: var(--gray-3);
-    }
-    .work-img .img-ph svg { width: 28px; }
-    .work-img .img-ph span { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; }
+/* ══ WORK DETAIL ═════════════════════════════════════════════════════ */
+/* Hero — full-width, tall (88svh on desktop), title overlaid at bottom */
+.wd-hero {
+  position:relative; width:100%; height:78svh;
+  overflow:hidden; background:var(--char);
+}
+@media(min-width:768px){ .wd-hero{ height:88svh; } }
+.wd-hero-img { position:absolute; inset:0; }
+.wd-hero-img img { width:100%; height:100%; object-fit:cover; opacity:.82; }
+.wd-grad {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom,rgba(22,19,14,.2),transparent 45%,rgba(22,19,14,.5));
+}
+/* Title + breadcrumb OVERLAID at the bottom of the hero image */
+.wd-btm {
+  position:absolute; inset-inline:0; bottom:0;
+  padding-inline:1.5rem; padding-bottom:3rem;
+  max-width:1600px; margin-inline:auto;
+}
+@media(min-width:768px){ .wd-btm{ padding-inline:2.5rem; padding-bottom:4rem; } }
+.wd-bread { color:rgba(252,251,249,.8); }
+.wd-htitle {
+  font-family:var(--fsr); font-weight:200; line-height:1;
+  color:var(--paper); margin-top:1rem; font-size:2.25rem;
+}
+@media(min-width:768px){ .wd-htitle{ font-size:4.5rem; } }
 
-    .work-info {
-      padding: 1.1rem 1.25rem 1.3rem;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      border-top: 1px solid var(--gray-2);
-      gap: 1rem;
-    }
-    .work-meta { display: flex; flex-direction: column; gap: 0.2rem; }
-    .work-cat {
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-    }
-    .work-title {
-      font-size: 0.95rem;
-      font-weight: 400;
-      color: var(--black);
-      letter-spacing: 0.02em;
-    }
-    html[lang="he"] .work-title { font-family: var(--font-heb); font-size: 1rem; }
-    .work-year {
-      font-size: 0.7rem;
-      color: var(--gray-3);
-      white-space: nowrap;
-    }
+/* Content below hero */
+.wd-body {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:4rem 2rem;
+}
+@media(min-width:768px){ .wd-body{ padding-inline:2.5rem; padding-block:7rem 2.5rem; } }
 
-    /* ════════════════════════════════════════════════════════════
-       PIECE DETAIL OVERLAY / SECTION
-    ════════════════════════════════════════════════════════════ */
-    /* Full piece detail page feel — shown on click */
-    #piece-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--white);
-      z-index: 300;
-      overflow-y: auto;
-      padding-block-start: 56px;
-    }
-    #piece-overlay.open { display: block; }
-    .piece-close {
-      position: fixed;
-      top: 14px;
-      z-index: 310;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: color 0.2s;
-      inset-inline-end: var(--gutter);
-    }
-    [dir="rtl"] .piece-close { inset-inline-end: auto; inset-inline-start: var(--gutter); }
-    .piece-close:hover { color: var(--black); }
-    .piece-close svg { width: 14px; }
+.wd-back {
+  display:inline-flex; align-items:center; gap:.4rem;
+  color:var(--muted); margin-bottom:2.5rem; transition:color .3s;
+}
+.wd-back:hover { color:var(--ink); }
 
-    .piece-hero-img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: var(--gray-1);
-      overflow: hidden;
-      position: relative;
-    }
-    @media (max-width: 768px) { .piece-hero-img { aspect-ratio: 4/3; } }
-    .piece-hero-img .img-ph {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 0.75rem;
-      color: var(--gray-3);
-    }
+/* Metadata — flex row of key/value pairs */
+.wd-meta {
+  display:flex; flex-wrap:wrap; gap:1.5rem 3rem;
+  padding-bottom:2.5rem; border-bottom:1px solid var(--line);
+}
+.wd-mk { color:var(--muted); margin-bottom:.35rem; }
+.wd-mv { font-family:var(--fsr); font-size:1.125rem; font-weight:300; }
 
-    .piece-detail {
-      padding-block: clamp(2.5rem, 5vw, 4rem);
-      border-bottom: 1px solid var(--gray-2);
-    }
-    /* 3-column metadata row — exact mirror of reference site */
-    .piece-meta-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border-bottom: 1px solid var(--gray-2);
-      padding-block-end: 1.75rem;
-      margin-block-end: 2rem;
-    }
-    @media (max-width: 560px) { .piece-meta-row { grid-template-columns: 1fr; gap: 1rem; } }
-    .meta-col {}
-    .meta-col .meta-key {
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-      margin-block-end: 0.4rem;
-    }
-    .meta-col .meta-val {
-      font-size: 0.88rem;
-      font-weight: 300;
-      color: var(--black);
-    }
+/* 12-col grid for description */
+.wd-grid { display:grid; grid-template-columns:1fr; gap:2.5rem; margin-top:2.5rem; }
+@media(min-width:768px){
+  .wd-grid{ grid-template-columns:repeat(12,1fr); gap:0 4rem; }
+  .wd-c4{ grid-column:span 4; }
+  .wd-c8{ grid-column:span 8; }
+}
 
-    .piece-title-large {
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 300;
-      line-height: 1.1;
-      margin-block-end: 1.25rem;
-    }
-    html[lang="he"] .piece-title-large { font-family: var(--font-heb); }
+.wd-desc {
+  font-family:var(--fsr); font-weight:300; line-height:1.65;
+  color:rgba(40,38,35,.85); font-size:1.5rem;
+}
+@media(min-width:768px){ .wd-desc{ font-size:1.875rem; } }
 
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      color: var(--gray-3);
-      margin-block-end: 2rem;
-      transition: color 0.2s;
-    }
-    .back-link:hover { color: var(--black); }
-    .back-link svg { width: 14px; }
+.btn-inq {
+  display:inline-flex; align-items:center; gap:.5rem;
+  margin-top:2rem; border:1px solid var(--line);
+  padding:.85rem 1.75rem; color:var(--ink);
+  transition:background .4s,color .4s,border-color .4s;
+}
+.btn-inq:hover { background:var(--ink); color:var(--paper); border-color:var(--ink); }
 
-    .piece-desc {
-      font-size: 0.95rem;
-      color: var(--gray-4);
-      max-width: 600px;
-      line-height: 1.7;
-      margin-block-end: 2.5rem;
-    }
-    html[lang="he"] .piece-desc { font-family: var(--font-heb); font-size: 1rem; }
+/* Gallery strip */
+.wd-gal-wrap {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:1.5rem 0;
+}
+@media(min-width:768px){ .wd-gal-wrap{ padding-inline:2.5rem; } }
+.wd-gal { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+@media(min-width:640px){ .wd-gal{ grid-template-columns:1fr 1fr; } }
+@media(min-width:768px){ .wd-gal{ gap:2.5rem; } }
+.wd-gi { position:relative; overflow:hidden; background:rgba(211,202,186,.3); aspect-ratio:4/3; }
+.wd-gi.wide { grid-column:1/-1; aspect-ratio:16/7; }
+.wd-gi img  { width:100%; height:100%; object-fit:cover; }
 
-    .piece-price-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      border-top: 1px solid var(--gray-2);
-      padding-block-start: 1.5rem;
-    }
-    .piece-price {
-      font-size: 1.25rem;
-      font-weight: 300;
-      color: var(--black);
-      letter-spacing: 0.02em;
-    }
-    .btn-inquire {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid var(--black);
-      color: var(--black);
-      padding: 0.75rem 1.75rem;
-      transition: background 0.25s, color 0.25s;
-    }
-    .btn-inquire:hover { background: var(--black); color: var(--white); }
+/* Next artwork — full-width tall card */
+.wd-next {
+  position:relative; display:block; width:100%; overflow:hidden;
+  height:52svh; background:var(--char); margin-top:2.5rem; cursor:pointer;
+}
+@media(min-width:768px){ .wd-next{ height:64svh; } }
+.wd-next-img { position:absolute; inset:0; }
+.wd-next-img img { width:100%; height:100%; object-fit:cover; }
+.wd-next-grad {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom,rgba(22,19,14,.65),rgba(22,19,14,0) 40%,rgba(22,19,14,.75));
+}
+.wd-next-cnt {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; color:var(--paper); padding:2rem;
+}
+.wd-next-lbl  { color:rgba(252,251,249,.8); }
+.wd-next-ttl  { font-family:var(--fsr); font-weight:200; font-size:2.25rem; line-height:1.1; margin-top:1rem; }
+@media(min-width:768px){ .wd-next-ttl{ font-size:3.75rem; } }
+.wd-next-arr  { display:flex; align-items:center; gap:.5rem; margin-top:1.25rem; color:rgba(252,251,249,.8); }
 
-    /* Detail image strip */
-    .piece-images {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--gray-2);
-      margin-block: 1px;
-    }
-    @media (max-width: 560px) { .piece-images { grid-template-columns: 1fr; } }
-    .piece-images .pi {
-      aspect-ratio: 4/3;
-      background: var(--gray-1);
-      position: relative;
-      overflow: hidden;
-    }
-    .piece-images .pi.wide { grid-column: span 2; aspect-ratio: 16/7; }
-    @media (max-width: 560px) { .piece-images .pi.wide { grid-column: span 1; aspect-ratio: 4/3; } }
-    .piece-images .pi .img-ph {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 0.5rem;
-      color: var(--gray-3);
-    }
+/* ══ ABOUT ═══════════════════════════════════════════════════════════ */
+.ab-page { padding-top:56px; }
+.ab-wrap {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:6rem;
+}
+@media(min-width:768px){ .ab-wrap{ padding-inline:2.5rem; padding-block:11rem 8rem; } }
+.ab-grid { display:grid; grid-template-columns:1fr; gap:3rem; }
+@media(min-width:768px){
+  .ab-grid{ grid-template-columns:repeat(12,1fr); gap:4rem; }
+  .ab-c5{ grid-column:span 5; }
+  .ab-c7{ grid-column:span 7; padding-inline-start:2rem; }
+}
+.ab-port { position:relative; overflow:hidden; background:rgba(211,202,186,.5); aspect-ratio:4/5; }
+.ab-port img { width:100%; height:100%; object-fit:cover; }
 
-    /* Next piece card */
-    .next-piece {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      background: var(--gray-1);
-      border-top: 1px solid var(--gray-2);
-      cursor: pointer;
-      transition: background 0.25s;
-    }
-    @media (max-width: 560px) { .next-piece { grid-template-columns: 1fr; } }
-    .next-piece:hover { background: var(--gray-2); }
-    .next-piece-img {
-      aspect-ratio: 4/3;
-      background: var(--gray-2);
-      overflow: hidden;
-      position: relative;
-    }
-    .next-piece-img img { width:100%;height:100%;object-fit:cover; }
-    .next-piece-img .img-ph { position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;color:var(--gray-3); }
-    .next-piece-info {
-      padding: clamp(2rem, 5vw, 4rem);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .next-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-3); }
-    .next-title {
-      font-size: clamp(1.5rem, 3vw, 2.5rem);
-      font-weight: 300;
-      line-height: 1.15;
-      margin-block: 1rem;
-    }
-    html[lang="he"] .next-title { font-family: var(--font-heb); }
-    .next-arrow {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      color: var(--gray-4);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+.ab-eye { color:var(--muted); }
+.ab-h1  {
+  font-family:var(--fsr); font-weight:200; line-height:1.2;
+  margin-top:1.25rem; font-size:3rem; max-width:36rem;
+}
+@media(min-width:768px){ .ab-h1{ font-size:3.75rem; } }
+.ab-body {
+  margin-top:2.5rem; max-width:36rem;
+  display:flex; flex-direction:column; gap:1.5rem;
+  font-size:1rem; line-height:1.7; color:rgba(40,38,35,.75);
+}
+html[lang="he"] .ab-body { font-family:var(--fsr); font-size:1.05rem; }
+.ab-cats {
+  margin-top:3rem; padding-top:2rem; border-top:1px solid var(--line);
+  display:flex; flex-wrap:wrap; gap:.75rem 1.5rem;
+}
+.ab-cats a { font-family:var(--fsr); font-size:1.125rem; font-weight:300; color:var(--ink); transition:opacity .3s; }
+.ab-cats a:hover { opacity:.55; }
+.ab-cta { display:inline-flex; align-items:center; gap:.5rem; margin-top:1.25rem; font-family:var(--fsr); font-size:1.125rem; font-weight:300; }
 
-    /* ════════════════════════════════════════════════════════════
-       ABOUT SECTION
-    ════════════════════════════════════════════════════════════ */
-    #about {
-      border-top: 1px solid var(--gray-2);
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(2.5rem, 6vw, 6rem);
-      align-items: start;
-    }
-    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+/* ══ WORKSHOPS ═══════════════════════════════════════════════════════ */
+.ws-page { padding-top:56px; }
+.ws-wrap {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:6rem;
+}
+@media(min-width:768px){ .ws-wrap{ padding-inline:2.5rem; padding-block:11rem 8rem; } }
+.ws-h1 { font-family:var(--fsr); font-weight:200; line-height:1; font-size:3rem; }
+@media(min-width:768px){ .ws-h1{ font-size:4.5rem; } }
+.ws-intro {
+  margin-top:1.25rem; max-width:36rem;
+  font-family:var(--fsr); font-size:1.125rem; font-weight:300;
+  line-height:1.6; color:rgba(40,38,35,.7);
+}
+@media(min-width:768px){ .ws-intro{ font-size:1.25rem; } }
+.ws-list { margin-top:4rem; border-top:1px solid var(--line); }
+.ws-row {
+  padding-block:2rem; border-bottom:1px solid var(--line);
+  display:grid; grid-template-columns:1fr; gap:1.5rem;
+}
+@media(min-width:768px){
+  .ws-row{ grid-template-columns:repeat(12,1fr); gap:2rem 4rem; padding-block:2.5rem; align-items:start; }
+  .wsr-l{ grid-column:span 7; }
+  .wsr-r{ grid-column:span 5; display:flex; flex-direction:column; align-items:flex-end; gap:1rem; }
+  html[dir="rtl"] .wsr-r{ align-items:flex-start; }
+}
+.wsr-type { color:var(--muted); margin-bottom:.5rem; }
+.wsr-name { font-family:var(--fsr); font-size:1.5rem; font-weight:300; line-height:1.2; margin-bottom:.85rem; }
+@media(min-width:768px){ .wsr-name{ font-size:1.875rem; } }
+.wsr-desc { font-size:.9rem; line-height:1.7; color:rgba(40,38,35,.7); max-width:36rem; }
+html[lang="he"] .wsr-desc{ font-family:var(--fsr); font-size:.95rem; }
+.wsr-specs { display:flex; flex-wrap:wrap; gap:1rem 2rem; margin-top:1.25rem; }
+.wsr-sk { color:var(--muted); margin-bottom:.15rem; }
+.wsr-sv { font-size:.9rem; }
+.wsr-price { font-family:var(--fsr); font-size:2.25rem; font-weight:300; line-height:1; }
+.wsr-pnote { color:var(--muted); margin-top:.3rem; }
+.btn-ws {
+  display:inline-block; margin-top:.75rem;
+  border:1px solid var(--line); padding:.75rem 1.5rem;
+  color:var(--ink); transition:background .4s,color .4s,border-color .4s; white-space:nowrap;
+}
+.btn-ws:hover { background:var(--ink); color:var(--paper); border-color:var(--ink); }
 
-    .about-portrait {
-      aspect-ratio: 3/4;
-      background: var(--gray-1);
-      position: relative;
-      overflow: hidden;
-    }
-    .about-portrait img { width: 100%; height: 100%; object-fit: cover; }
-    .about-portrait .img-ph {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 0.75rem; color: var(--gray-3);
-    }
-
-    .about-text .section-title { margin-block-end: 1.5rem; }
-    .about-text p {
-      font-size: 0.95rem;
-      color: var(--gray-4);
-      line-height: 1.75;
-      margin-block-end: 1.1rem;
-    }
-    html[lang="he"] .about-text p { font-family: var(--font-heb); font-size: 1rem; }
-
-    .about-facts {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border-top: 1px solid var(--gray-2);
-      margin-block-start: 2.5rem;
-    }
-    .fact {
-      padding-block: 1.5rem;
-      border-inline-end: 1px solid var(--gray-2);
-      padding-inline-end: 1.5rem;
-    }
-    .fact:last-child { border-inline-end: none; }
-    [dir="rtl"] .fact {
-      border-inline-end: none;
-      border-inline-start: 1px solid var(--gray-2);
-      padding-inline-end: 0;
-      padding-inline-start: 1.5rem;
-    }
-    [dir="rtl"] .fact:last-child { border-inline-start: none; }
-    .fact-num {
-      font-size: 1.75rem;
-      font-weight: 300;
-      line-height: 1;
-      color: var(--black);
-    }
-    .fact-lbl {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-      margin-block-start: 0.35rem;
-    }
-
-    /* ════════════════════════════════════════════════════════════
-       WORKSHOPS SECTION
-    ════════════════════════════════════════════════════════════ */
-    #workshops {
-      border-top: 1px solid var(--gray-2);
-    }
-    .ws-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem, 5vw, 5rem);
-      margin-block-end: clamp(3rem, 6vw, 5rem);
-      align-items: end;
-    }
-    @media (max-width: 680px) { .ws-top { grid-template-columns: 1fr; } }
-    .ws-top p {
-      font-size: 0.9rem;
-      color: var(--gray-4);
-      line-height: 1.7;
-    }
-    html[lang="he"] .ws-top p { font-family: var(--font-heb); }
-
-    .ws-list { display: flex; flex-direction: column; gap: 0; }
-    .ws-row {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 2rem 3rem;
-      align-items: start;
-      padding-block: 2.25rem;
-      border-top: 1px solid var(--gray-2);
-      transition: background 0.2s;
-    }
-    .ws-row:last-child { border-bottom: 1px solid var(--gray-2); }
-    .ws-row:hover { background: var(--gray-1); }
-    @media (max-width: 680px) {
-      .ws-row { grid-template-columns: 1fr; gap: 1rem; }
-    }
-    .ws-index {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      color: var(--gray-3);
-      padding-block-start: 0.2rem;
-      min-width: 2.5rem;
-    }
-    .ws-content {}
-    .ws-type {
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-      margin-block-end: 0.5rem;
-    }
-    .ws-name {
-      font-size: clamp(1rem, 2.2vw, 1.4rem);
-      font-weight: 300;
-      color: var(--black);
-      margin-block-end: 0.65rem;
-      line-height: 1.25;
-    }
-    html[lang="he"] .ws-name { font-family: var(--font-heb); }
-    .ws-desc {
-      font-size: 0.85rem;
-      color: var(--gray-3);
-      max-width: 480px;
-      line-height: 1.65;
-      margin-block-end: 1rem;
-    }
-    html[lang="he"] .ws-desc { font-family: var(--font-heb); font-size: 0.9rem; }
-    .ws-specs {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .ws-spec {}
-    .ws-spec .sk {
-      font-size: 0.58rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-    }
-    .ws-spec .sv {
-      font-size: 0.8rem;
-      color: var(--black);
-      margin-block-start: 0.15rem;
-    }
-
-    .ws-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 1rem;
-    }
-    @media (max-width: 680px) { .ws-right { align-items: flex-start; } }
-    .ws-price {
-      font-size: 1.25rem;
-      font-weight: 300;
-      color: var(--black);
-      white-space: nowrap;
-    }
-    .ws-price-note {
-      font-size: 0.65rem;
-      color: var(--gray-3);
-      margin-block-start: -0.5rem;
-      text-align: end;
-    }
-    [dir="rtl"] .ws-right .ws-price-note { text-align: start; }
-    .btn-ws {
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid var(--black);
-      color: var(--black);
-      padding: 0.6rem 1.35rem;
-      transition: background 0.22s, color 0.22s;
-      white-space: nowrap;
-    }
-    .btn-ws:hover { background: var(--black); color: var(--white); }
-
-    /* ════════════════════════════════════════════════════════════
-       CONTACT SECTION
-    ════════════════════════════════════════════════════════════ */
-    #contact {
-      border-top: 1px solid var(--gray-2);
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(3rem, 8vw, 8rem);
-      align-items: start;
-    }
-    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
-
-    .contact-left {}
-    .contact-left .section-title { margin-block-end: 1rem; }
-    .contact-left p {
-      font-size: 0.9rem;
-      color: var(--gray-3);
-      line-height: 1.7;
-      margin-block-end: 2.5rem;
-    }
-    html[lang="he"] .contact-left p { font-family: var(--font-heb); font-size: 0.95rem; }
-
-    .channels { display: flex; flex-direction: column; }
-    .ch {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding-block: 1.1rem;
-      border-top: 1px solid var(--gray-2);
-      transition: opacity 0.2s;
-    }
-    .ch:last-child { border-bottom: 1px solid var(--gray-2); }
-    .ch:hover { opacity: 0.6; }
-    .ch-icon {
-      width: 32px;
-      height: 32px;
-      border: 1px solid var(--gray-2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .ch-icon svg { width: 14px; height: 14px; stroke: var(--black); fill: none; stroke-width: 1.5; }
-    .ch-lbl { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-3); }
-    .ch-val { font-size: 0.9rem; color: var(--black); margin-block-start: 0.15rem; }
-
-    /* Form */
-    .contact-form { display: flex; flex-direction: column; }
-    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.5rem; }
-    @media (max-width: 420px) { .f-row { grid-template-columns: 1fr; } }
-    .f-field { margin-block-end: 1.75rem; }
-    .f-field label {
-      display: block;
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gray-3);
-      margin-block-end: 0.5rem;
-    }
-    .f-field input,
-    .f-field textarea,
-    .f-field select {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--gray-2);
-      font-family: var(--font-sans);
-      font-size: 0.9rem;
-      font-weight: 300;
-      color: var(--black);
-      padding-block: 0.5rem;
-      transition: border-color 0.2s;
-      outline: none;
-      -webkit-appearance: none;
-    }
-    .f-field input::placeholder,
-    .f-field textarea::placeholder { color: var(--gray-3); }
-    .f-field input:focus,
-    .f-field textarea:focus,
-    .f-field select:focus { border-bottom-color: var(--black); }
-    .f-field select option { background: var(--white); }
-    .f-field textarea { resize: vertical; min-height: 100px; }
-    .btn-send {
-      align-self: flex-start;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      background: var(--black);
-      color: var(--white);
-      border: 1px solid var(--black);
-      padding: 0.85rem 2.25rem;
-      transition: background 0.25s, color 0.25s;
-      margin-block-start: 0.5rem;
-    }
-    .btn-send:hover { background: transparent; color: var(--black); }
-
-    /* ════════════════════════════════════════════════════════════
-       FOOTER
-    ════════════════════════════════════════════════════════════ */
-    footer {
-      border-top: 1px solid var(--gray-2);
-      padding-block: 1.75rem;
-    }
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .footer-tagline {
-      font-size: 0.75rem;
-      color: var(--gray-3);
-      max-width: 360px;
-    }
-    html[lang="he"] .footer-tagline { font-family: var(--font-heb); }
-    .footer-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .footer-links { display: flex; gap: 1.25rem; }
-    .footer-links a {
-      font-size: 0.7rem;
-      color: var(--gray-3);
-      letter-spacing: 0.06em;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--black); }
-    .footer-copy {
-      font-size: 0.7rem;
-      color: var(--gray-3);
-    }
-  </style>
+/* ══ CONTACT ═════════════════════════════════════════════════════════ */
+.ct-page { padding-top:56px; }
+.ct-wrap {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:6rem;
+}
+@media(min-width:768px){ .ct-wrap{ padding-inline:2.5rem; padding-block:11rem 8rem; } }
+.ct-grid { display:grid; grid-template-columns:1fr; gap:4rem; }
+@media(min-width:768px){
+  .ct-grid{ grid-template-columns:repeat(12,1fr); gap:4rem; }
+  .ct-l{ grid-column:span 4; }
+  .ct-r{ grid-column:span 8; }
+}
+.ct-h1 { font-family:var(--fsr); font-weight:200; line-height:1; font-size:3rem; margin-bottom:2rem; }
+@media(min-width:768px){ .ct-h1{ font-size:4.5rem; } }
+.ct-chs { display:flex; flex-direction:column; }
+.ct-ch {
+  display:flex; align-items:flex-start; gap:.75rem;
+  padding-block:1.25rem; border-bottom:1px solid var(--line);
+  color:var(--ink); transition:opacity .3s;
+}
+.ct-ch:first-child { border-top:1px solid var(--line); }
+.ct-ch:hover { opacity:.6; }
+.ct-ch-k { color:var(--muted); min-width:5rem; flex-shrink:0; }
+.ct-ch-v { font-family:var(--fsr); font-size:1rem; font-weight:300; }
+.ct-fh { font-family:var(--fsr); font-size:1.5rem; font-weight:300; margin-bottom:2rem; color:rgba(40,38,35,.75); }
+.fg { margin-bottom:2rem; }
+.fg label { display:block; color:var(--muted); margin-bottom:.45rem; }
+.fg input,.fg textarea,.fg select {
+  width:100%; background:transparent;
+  border-bottom:1px solid var(--line);
+  font-family:var(--fs); font-size:.95rem; color:var(--ink);
+  padding-block:.5rem; outline:none; -webkit-appearance:none;
+  transition:border-color .3s;
+}
+.fg input:focus,.fg textarea:focus,.fg select:focus { border-bottom-color:var(--ink); }
+.fg input::placeholder,.fg textarea::placeholder { color:var(--line); }
+.fg textarea { resize:vertical; min-height:120px; }
+.fg select option { background:var(--paper); }
+.fg-row { display:grid; grid-template-columns:1fr 1fr; gap:0 1.5rem; }
+@media(max-width:480px){ .fg-row{ grid-template-columns:1fr; } }
+.btn-send {
+  display:inline-block; background:var(--ink); color:var(--paper);
+  border:1px solid var(--ink); padding:1rem 2.5rem;
+  transition:background .4s,color .4s; margin-top:.5rem;
+}
+.btn-send:hover { background:transparent; color:var(--ink); }
+</style>
 </head>
-
 <body>
 
-<!-- PIECE DETAIL OVERLAY ────────────────────────────────────────────── -->
-<div id="piece-overlay" role="dialog" aria-modal="true" aria-label="Artwork detail">
-  <button class="piece-close" id="overlay-close" aria-label="Close">
-    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-      <path d="M1 1l12 12M13 1L1 13"/>
-    </svg>
-    <span class="he">סגור</span><span class="en">Close</span>
-  </button>
-
-  <div class="piece-hero-img" id="overlay-hero">
-    <div class="img-ph">
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.8" aria-hidden="true">
-        <rect x="1" y="1" width="38" height="38"/><line x1="1" y1="1" x2="39" y2="39"/><line x1="39" y1="1" x2="1" y2="39"/>
-      </svg>
-      <span class="he">[תמונת יצירה ראשית]</span><span class="en">[MAIN ARTWORK IMAGE]</span>
-    </div>
-  </div>
-
-  <div class="piece-detail wrap">
-    <button class="back-link" id="overlay-back">
-      <svg viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-        <path d="M13 4H1M5 1L1 4l4 3"/>
-      </svg>
-      <span class="he">חזרה לגלריה</span><span class="en">Back to Gallery</span>
-    </button>
-
-    <!-- 3-col metadata row — exact pattern from reference site -->
-    <div class="piece-meta-row" id="overlay-meta">
-      <div class="meta-col">
-        <div class="meta-key"><span class="he">חומר</span><span class="en">Medium</span></div>
-        <div class="meta-val" id="om-medium">—</div>
-      </div>
-      <div class="meta-col">
-        <div class="meta-key"><span class="he">מידות</span><span class="en">Dimensions</span></div>
-        <div class="meta-val" id="om-dims">—</div>
-      </div>
-      <div class="meta-col">
-        <div class="meta-key"><span class="he">שנה</span><span class="en">Year</span></div>
-        <div class="meta-val" id="om-year">—</div>
-      </div>
-    </div>
-
-    <h1 class="piece-title-large" id="overlay-title">—</h1>
-    <p class="piece-desc" id="overlay-desc">—</p>
-
-    <div class="piece-price-row">
-      <span class="piece-price" id="overlay-price">₪—</span>
-      <a href="#contact" class="btn-inquire" id="overlay-cta" onclick="closeOverlay()">
-        <span class="he">פנייה לרכישה</span>
-        <span class="en">Inquire to purchase</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- Detail image strip -->
-  <div class="piece-images" style="margin-block-start:1px;">
-    <div class="pi wide">
-      <div class="img-ph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="22" height="22"/><line x1="1" y1="1" x2="23" y2="23"/></svg><span class="he">[תמונת פירוט 1]</span><span class="en">[DETAIL IMAGE 1]</span></div>
-    </div>
-    <div class="pi">
-      <div class="img-ph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="22" height="22"/><line x1="1" y1="1" x2="23" y2="23"/></svg><span class="he">[תמונת פירוט 2]</span><span class="en">[DETAIL IMAGE 2]</span></div>
-    </div>
-    <div class="pi">
-      <div class="img-ph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="22" height="22"/><line x1="1" y1="1" x2="23" y2="23"/></svg><span class="he">[תמונת פירוט 3]</span><span class="en">[DETAIL IMAGE 3]</span></div>
-    </div>
-  </div>
-
-  <!-- Next piece -->
-  <div class="next-piece" id="overlay-next" onclick="closeOverlay()">
-    <div class="next-piece-img">
-      <div class="img-ph"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/></svg></div>
-    </div>
-    <div class="next-piece-info">
-      <div>
-        <div class="next-label"><span class="he">היצירה הבאה</span><span class="en">Next work</span></div>
-        <div class="next-title" id="overlay-next-title">
-          <span class="he">[שם יצירה הבאה]</span>
-          <span class="en">[Next piece title]</span>
-        </div>
-      </div>
-      <div class="next-arrow">
-        <span class="he">לצפייה ביצירה</span><span class="en">View piece</span>
-        <svg viewBox="0 0 20 8" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" width="20"><path d="M1 4h18M14 1l4 3-4 3"/></svg>
-      </div>
-    </div>
-  </div>
+<!-- Mobile nav overlay -->
+<div id="mob-nav" role="dialog" aria-modal="true">
+  <a href="#/" data-nav class="serif" style="font-size:1.875rem;font-weight:300"><span data-he>רבקה חיים</span><span data-en>Rivka Chaim</span></a>
+  <a href="#/gallery"   data-nav class="serif" style="font-size:1.5rem;font-weight:300"><span data-he>גלריה</span><span data-en>Gallery</span></a>
+  <a href="#/workshops" data-nav class="serif" style="font-size:1.5rem;font-weight:300"><span data-he>סדנאות</span><span data-en>Workshops</span></a>
+  <a href="#/about"     data-nav class="serif" style="font-size:1.5rem;font-weight:300"><span data-he>אודות</span><span data-en>About</span></a>
+  <a href="#/contact"   data-nav class="serif" style="font-size:1.5rem;font-weight:300"><span data-he>יצירת קשר</span><span data-en>Contact</span></a>
 </div>
 
-<!-- HEADER ─────────────────────────────────────────────────────────── -->
-<header id="header">
-  <div class="wrap header-inner">
-    <a class="logo" href="#hero">
-      <span class="he">רבקה חיים</span>
-      <span class="en">Rivka Chaim</span>
-    </a>
-
-    <div class="nav-right">
-      <ul class="nav-links" id="nav-links" role="list">
-        <li><a href="#about"><span class="he">אודות</span><span class="en">About</span></a></li>
-        <li><a href="#workshops"><span class="he">סדנאות</span><span class="en">Workshops</span></a></li>
-        <li><a href="#contact"><span class="he">יצירת קשר</span><span class="en">Contact</span></a></li>
-      </ul>
-      <button class="lang-btn" id="lang-btn" aria-label="Switch language">
-        <span class="he">EN</span><span class="en">עב</span>
+<!-- Header -->
+<header id="hdr">
+  <div class="hdr-in">
+    <a href="#/" class="logo link-u"><span data-he>רבקה חיים</span><span data-en>Rivka Chaim</span></a>
+    <nav class="nav-d" aria-label="Main">
+      <a href="#/gallery"   class="label link-u"><span data-he>גלריה</span><span data-en>Gallery</span></a>
+      <a href="#/workshops" class="label link-u"><span data-he>סדנאות</span><span data-en>Workshops</span></a>
+      <a href="#/about"     class="label link-u"><span data-he>אודות</span><span data-en>About</span></a>
+      <a href="#/contact"   class="label link-u"><span data-he>יצירת קשר</span><span data-en>Contact</span></a>
+    </nav>
+    <div class="hdr-right">
+      <button class="lang-btn label" id="lang-btn" aria-label="Switch language">
+        <span data-he>EN</span><span data-en>עב</span>
       </button>
-      <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+      <button class="ham" id="ham-btn" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<!-- HERO ────────────────────────────────────────────────────────────── -->
-<div id="hero">
-  <div class="hero-image">
-    <!-- Replace: <img src="[HERO_IMAGE_URL]" alt="[HERO_IMAGE_ALT]" /> -->
-    <div class="hero-ph">
-      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true">
-        <rect x="1" y="1" width="38" height="38"/><line x1="1" y1="1" x2="39" y2="39"/><line x1="39" y1="1" x2="1" y2="39"/>
-      </svg>
-      <span><span class="he">[תמונת הגיבור — יצירה ראשית]</span><span class="en">[HERO IMAGE — featured artwork]</span></span>
-    </div>
-  </div>
-</div>
+<!-- Page root -->
+<div id="app"></div>
 
-<!-- TAGLINE + CATEGORY NAV ──────────────────────────────────────────── -->
-<div id="tagline">
-  <div class="wrap reveal">
-    <p class="tagline-text">
-      <span class="he">פיסול שמעביר את מה שמרגישים כשמחזיקים נייר בידיים — לא רק את מה שרואים.</span>
-      <span class="en">Sculpture that conveys what it feels like to hold paper in your hands — not only what you see.</span>
-    </p>
-    <nav class="cat-nav" aria-label="Categories">
-      <a href="#gallery" class="active">
-        <span class="he">כל היצירות</span><span class="en">All works</span>
-      </a>
-      <a href="#gallery">
-        <span class="he">פיסול נייר</span><span class="en">Paper sculpture</span>
-      </a>
-      <a href="#gallery">
-        <span class="he">פאפייה-מאשה</span><span class="en">Papier-mâché</span>
-      </a>
-      <a href="#gallery">
-        <span class="he">קולאז'</span><span class="en">Collage</span>
-      </a>
-      <a href="#workshops">
-        <span class="he">סדנאות</span><span class="en">Workshops</span>
-      </a>
-    </nav>
-  </div>
-</div>
-
-<!-- GALLERY ──────────────────────────────────────────────────────────── -->
-<section id="gallery">
-  <div class="wrap">
-    <div class="gallery-top reveal">
-      <div class="gallery-top-text">
-        <div class="section-eyebrow">
-          <span class="he">יצירות מקוריות למכירה</span>
-          <span class="en">Original works for sale</span>
-        </div>
-        <h2 class="section-title">
-          <span class="he">גלריה</span>
-          <span class="en">Gallery</span>
-        </h2>
-      </div>
-      <p class="gallery-note">
-        <span class="he">כל יצירה חד-פעמית. לפרטים ומחירים — לחצו על היצירה.</span>
-        <span class="en">Every piece is one-of-a-kind. Click any piece for details and pricing.</span>
-      </p>
-    </div>
-
-    <div class="work-grid" id="work-grid">
-
-      <!-- Featured piece — spans full width -->
-      <div class="work-item reveal" data-piece="0" tabindex="0" role="button" aria-label="Open artwork detail">
-        <div class="work-img">
-          <!-- <img src="[PIECE_1_IMAGE]" alt="[PIECE_1_TITLE]" loading="lazy" /> -->
-          <div class="img-ph">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="30" height="30"/><line x1="1" y1="1" x2="31" y2="31"/></svg>
-            <span class="he">[יצירה ראשית — תמונה גדולה]</span><span class="en">[FEATURED PIECE — large image]</span>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <span class="work-cat"><span class="he">פאפייה-מאשה</span><span class="en">Papier-mâché</span></span>
-            <span class="work-title"><span class="he">[שם יצירה 1]</span><span class="en">[Piece Title 1]</span></span>
-          </div>
-          <span class="work-year">[YEAR]</span>
-        </div>
-      </div>
-
-      <!-- Piece 2 -->
-      <div class="work-item reveal" data-piece="1" tabindex="0" role="button" style="transition-delay:0.06s">
-        <div class="work-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
-            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <span class="work-cat"><span class="he">פיסול נייר</span><span class="en">Paper sculpture</span></span>
-            <span class="work-title"><span class="he">[שם יצירה 2]</span><span class="en">[Piece Title 2]</span></span>
-          </div>
-          <span class="work-year">[YEAR]</span>
-        </div>
-      </div>
-
-      <!-- Piece 3 -->
-      <div class="work-item reveal" data-piece="2" tabindex="0" role="button" style="transition-delay:0.12s">
-        <div class="work-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
-            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <span class="work-cat"><span class="he">קולאז'</span><span class="en">Collage</span></span>
-            <span class="work-title"><span class="he">[שם יצירה 3]</span><span class="en">[Piece Title 3]</span></span>
-          </div>
-          <span class="work-year">[YEAR]</span>
-        </div>
-      </div>
-
-      <!-- Piece 4 -->
-      <div class="work-item reveal" data-piece="3" tabindex="0" role="button" style="transition-delay:0.06s">
-        <div class="work-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
-            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <span class="work-cat"><span class="he">פאפייה-מאשה</span><span class="en">Papier-mâché</span></span>
-            <span class="work-title"><span class="he">[שם יצירה 4]</span><span class="en">[Piece Title 4]</span></span>
-          </div>
-          <span class="work-year">[YEAR]</span>
-        </div>
-      </div>
-
-      <!-- Piece 5 -->
-      <div class="work-item reveal" data-piece="4" tabindex="0" role="button" style="transition-delay:0.12s">
-        <div class="work-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
-            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <span class="work-cat"><span class="he">פיסול נייר</span><span class="en">Paper sculpture</span></span>
-            <span class="work-title"><span class="he">[שם יצירה 5]</span><span class="en">[Piece Title 5]</span></span>
-          </div>
-          <span class="work-year">[YEAR]</span>
-        </div>
-      </div>
-
-      <!-- Piece 6 -->
-      <div class="work-item reveal" data-piece="5" tabindex="0" role="button" style="transition-delay:0.06s">
-        <div class="work-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
-            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <span class="work-cat"><span class="he">קולאז'</span><span class="en">Collage</span></span>
-            <span class="work-title"><span class="he">[שם יצירה 6]</span><span class="en">[Piece Title 6]</span></span>
-          </div>
-          <span class="work-year">[YEAR]</span>
-        </div>
-      </div>
-
-      <!-- Piece 7 -->
-      <div class="work-item reveal" data-piece="6" tabindex="0" role="button" style="transition-delay:0.12s">
-        <div class="work-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
-            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <span class="work-cat"><span class="he">פאפייה-מאשה</span><span class="en">Papier-mâché</span></span>
-            <span class="work-title"><span class="he">[שם יצירה 7]</span><span class="en">[Piece Title 7]</span></span>
-          </div>
-          <span class="work-year">[YEAR]</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT ────────────────────────────────────────────────────────────── -->
-<section id="about">
-  <div class="wrap">
-    <div class="about-grid">
-
-      <div class="about-portrait reveal">
-        <!-- <img src="[ARTIST_PHOTO_URL]" alt="[ARTIST_PHOTO_ALT]" /> -->
-        <div class="img-ph">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true">
-            <rect x="1" y="1" width="34" height="34"/><line x1="1" y1="1" x2="35" y2="35"/><line x1="35" y1="1" x2="1" y2="35"/>
-          </svg>
-          <span class="he">[תמונת האמנית]</span>
-          <span class="en">[ARTIST PHOTO]</span>
-        </div>
-      </div>
-
-      <div class="about-text reveal" style="transition-delay:0.12s">
-        <div class="section-eyebrow">
-          <span class="he">אודות</span>
-          <span class="en">About</span>
-        </div>
-        <h2 class="section-title">
-          <span class="he">רבקה חיים</span>
-          <span class="en">Rivka Chaim</span>
-        </h2>
-        <p class="he">[ביוגרפיה ראשונה — מי היא רבקה, מה הוביל אותה לפיסול נייר ופאפייה-מאשה, הסגנון הייחודי שלה. כ-70 מילה.]</p>
-        <p class="en">[First biography paragraph — who Rivka is, what led her to paper sculpture and papier-mâché, her distinctive aesthetic. Approx. 70 words.]</p>
-        <p class="he">[ביוגרפיה שנייה — הסטודיו, תהליך העבודה, מה הסדנאות נותנות למשתתפים. כ-55 מילה.]</p>
-        <p class="en">[Second paragraph — the studio, working process, what workshops offer participants. Approx. 55 words.]</p>
-
-        <div class="about-facts">
-          <div class="fact">
-            <div class="fact-num">[X]+</div>
-            <div class="fact-lbl"><span class="he">שנות יצירה</span><span class="en">Years creating</span></div>
-          </div>
-          <div class="fact">
-            <div class="fact-num">[X]</div>
-            <div class="fact-lbl"><span class="he">יצירות מקוריות</span><span class="en">Original pieces</span></div>
-          </div>
-          <div class="fact">
-            <div class="fact-num">[X]+</div>
-            <div class="fact-lbl"><span class="he">סדנאות</span><span class="en">Workshops taught</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WORKSHOPS ────────────────────────────────────────────────────────── -->
-<section id="workshops">
-  <div class="wrap">
-    <div class="ws-top reveal">
-      <div>
-        <div class="section-eyebrow">
-          <span class="he">סדנאות סטודיו</span>
-          <span class="en">Studio workshops</span>
-        </div>
-        <h2 class="section-title">
-          <span class="he">ללמוד עם הידיים</span>
-          <span class="en">Learning through the hands</span>
-        </h2>
-      </div>
-      <p>
-        <span class="he">סדנאות אינטימיות בסטודיו לכל רמות הניסיון. כל מפגש כולל חומרים ויצירה שלוקחים הביתה.</span>
-        <span class="en">Intimate studio sessions for all experience levels. Every session includes materials and a piece to take home.</span>
-      </p>
-    </div>
-
-    <div class="ws-list">
-
-      <!-- Workshop 1 -->
-      <div class="ws-row reveal">
-        <div class="ws-index">01</div>
-        <div class="ws-content">
-          <div class="ws-type">
-            <span class="he">סדנה פרטית</span><span class="en">Private session</span>
-          </div>
-          <div class="ws-name">
-            <span class="he">מפגש אחד על אחד</span>
-            <span class="en">One-on-One</span>
-          </div>
-          <div class="ws-desc">
-            <span class="he">סדנה מותאמת אישית לרמתך ולמטרות שלך. נעסוק בטכניקת הפאפייה-מאשה, גמר, צבע ושמירה.</span>
-            <span class="en">A fully tailored session matched to your level and goals — papier-mâché technique, finishing, colour, and preservation.</span>
-          </div>
-          <div class="ws-specs">
-            <div class="ws-spec">
-              <div class="sk"><span class="he">משך</span><span class="en">Duration</span></div>
-              <div class="sv"><span class="he">[X] שעות</span><span class="en">[X] hours</span></div>
-            </div>
-            <div class="ws-spec">
-              <div class="sk"><span class="he">מיקום</span><span class="en">Location</span></div>
-              <div class="sv"><span class="he">סטודיו, [עיר]</span><span class="en">Studio, [CITY]</span></div>
-            </div>
-            <div class="ws-spec">
-              <div class="sk"><span class="he">זמינות</span><span class="en">Availability</span></div>
-              <div class="sv"><span class="he">[ימים / שעות]</span><span class="en">[DAYS / HOURS]</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="ws-right">
-          <div>
-            <div class="ws-price">₪[PRICE]</div>
-            <div class="ws-price-note"><span class="he">למפגש · כולל חומרים</span><span class="en">per session · incl. materials</span></div>
-          </div>
-          <a href="#contact" class="btn-ws">
-            <span class="he">שריינו מקום</span><span class="en">Reserve</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Workshop 2 -->
-      <div class="ws-row reveal" style="transition-delay:0.08s">
-        <div class="ws-index">02</div>
-        <div class="ws-content">
-          <div class="ws-type">
-            <span class="he">קבוצה קטנה</span><span class="en">Small group</span>
-          </div>
-          <div class="ws-name">
-            <span class="he">סדנת ערב קבוצתית</span>
-            <span class="en">Evening Group Workshop</span>
-          </div>
-          <div class="ws-desc">
-            <span class="he">חוויה קבוצתית חמה — שיחה, יצירה וגילוי. מתאים לאירועים, ימי הולדת, או ערב יוצר עם חברים.</span>
-            <span class="en">A warm group experience — conversation, creating and discovery. Perfect for events, birthdays, or a creative evening with friends.</span>
-          </div>
-          <div class="ws-specs">
-            <div class="ws-spec">
-              <div class="sk"><span class="he">משך</span><span class="en">Duration</span></div>
-              <div class="sv"><span class="he">[X] שעות</span><span class="en">[X] hours</span></div>
-            </div>
-            <div class="ws-spec">
-              <div class="sk"><span class="he">משתתפים</span><span class="en">Group size</span></div>
-              <div class="sv"><span class="he">עד [X] אנשים</span><span class="en">Up to [X] people</span></div>
-            </div>
-            <div class="ws-spec">
-              <div class="sk"><span class="he">מועד הבא</span><span class="en">Next date</span></div>
-              <div class="sv"><span class="he">[תאריך]</span><span class="en">[DATE]</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="ws-right">
-          <div>
-            <div class="ws-price">₪[PRICE]</div>
-            <div class="ws-price-note"><span class="he">לאדם · כולל חומרים</span><span class="en">per person · incl. materials</span></div>
-          </div>
-          <a href="#contact" class="btn-ws">
-            <span class="he">הרשמה</span><span class="en">Register</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Workshop 3 -->
-      <div class="ws-row reveal" style="transition-delay:0.16s">
-        <div class="ws-index">03</div>
-        <div class="ws-content">
-          <div class="ws-type">
-            <span class="he">קורס מתמשך</span><span class="en">Ongoing course</span>
-          </div>
-          <div class="ws-name">
-            <span class="he">יסודות פיסול הנייר — [X] מפגשים</span>
-            <span class="en">Foundations of Paper Sculpture — [X] sessions</span>
-          </div>
-          <div class="ws-desc">
-            <span class="he">קורס מלא שעובר דרך כל שלבי הפאפייה-מאשה — מבנה, שכבות, גמר וצביעה. מיועד למי שרוצה עומק ומיומנות אמיתית.</span>
-            <span class="en">A complete course covering all stages of papier-mâché — structure, layering, finishing, painting. For those who want real depth and skill.</span>
-          </div>
-          <div class="ws-specs">
-            <div class="ws-spec">
-              <div class="sk"><span class="he">מפגשים</span><span class="en">Sessions</span></div>
-              <div class="sv"><span class="he">[X] × [X] שעות</span><span class="en">[X] × [X] hrs</span></div>
-            </div>
-            <div class="ws-spec">
-              <div class="sk"><span class="he">רמה</span><span class="en">Level</span></div>
-              <div class="sv"><span class="he">כל הרמות</span><span class="en">All levels</span></div>
-            </div>
-            <div class="ws-spec">
-              <div class="sk"><span class="he">מחזור הבא</span><span class="en">Next cohort</span></div>
-              <div class="sv"><span class="he">[תאריך]</span><span class="en">[DATE]</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="ws-right">
-          <div>
-            <div class="ws-price">₪[PRICE]</div>
-            <div class="ws-price-note"><span class="he">לקורס מלא · כולל חומרים</span><span class="en">full course · incl. materials</span></div>
-          </div>
-          <a href="#contact" class="btn-ws">
-            <span class="he">הרשמה</span><span class="en">Register</span>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT ──────────────────────────────────────────────────────────── -->
-<section id="contact">
-  <div class="wrap">
-    <div class="contact-grid">
-
-      <div class="contact-left reveal">
-        <div class="section-eyebrow">
-          <span class="he">יצירת קשר</span>
-          <span class="en">Contact</span>
-        </div>
-        <h2 class="section-title">
-          <span class="he">נשמח לשמוע מכם</span>
-          <span class="en">Get in touch</span>
-        </h2>
-        <p>
-          <span class="he">לשאלות על יצירות, הזמנות מיוחדות, סדנאות, או שיתופי פעולה — פנו ישירות.</span>
-          <span class="en">For artwork inquiries, commissions, workshops, or collaborations — reach out directly.</span>
-        </p>
-
-        <div class="channels">
-          <a href="https://wa.me/[PHONE_INTERNATIONAL]" class="ch" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <div class="ch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/></svg></div>
-            <div>
-              <div class="ch-lbl">WhatsApp</div>
-              <div class="ch-val">[PHONE_DISPLAY]</div>
-            </div>
-          </a>
-          <a href="https://instagram.com/[INSTAGRAM]" class="ch" target="_blank" rel="noopener" aria-label="Instagram">
-            <div class="ch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></div>
-            <div>
-              <div class="ch-lbl">Instagram</div>
-              <div class="ch-val">@[INSTAGRAM]</div>
-            </div>
-          </a>
-          <a href="mailto:[EMAIL]" class="ch" aria-label="Email">
-            <div class="ch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
-            <div>
-              <div class="ch-lbl"><span class="he">אימייל</span><span class="en">Email</span></div>
-              <div class="ch-val">[EMAIL]</div>
-            </div>
-          </a>
-          <div class="ch">
-            <div class="ch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
-            <div>
-              <div class="ch-lbl"><span class="he">סטודיו</span><span class="en">Studio</span></div>
-              <div class="ch-val"><span class="he">[כתובת], [עיר]</span><span class="en">[ADDRESS], [CITY]</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="reveal" style="transition-delay:0.12s">
-        <form class="contact-form" name="contact" method="POST">
-          <div class="f-row">
-            <div class="f-field">
-              <label for="fn"><span class="he">שם מלא</span><span class="en">Full name</span></label>
-              <input type="text" id="fn" name="name" required autocomplete="name" />
-            </div>
-            <div class="f-field">
-              <label for="fe"><span class="he">אימייל</span><span class="en">Email</span></label>
-              <input type="email" id="fe" name="email" required autocomplete="email" />
-            </div>
-          </div>
-          <div class="f-field">
-            <label for="fs"><span class="he">נושא</span><span class="en">Subject</span></label>
-            <select id="fs" name="subject" required>
-              <option value="" disabled selected>—</option>
-              <option value="gallery"><span class="he">שאלה על יצירה</span><span class="en">Artwork inquiry</span></option>
-              <option value="private"><span class="he">סדנה פרטית</span><span class="en">Private workshop</span></option>
-              <option value="group"><span class="he">סדנה קבוצתית</span><span class="en">Group workshop</span></option>
-              <option value="course"><span class="he">קורס</span><span class="en">Course</span></option>
-              <option value="commission"><span class="he">הזמנה מיוחדת</span><span class="en">Commission</span></option>
-              <option value="other"><span class="he">אחר</span><span class="en">Other</span></option>
-            </select>
-          </div>
-          <div class="f-field">
-            <label for="fm"><span class="he">הודעה</span><span class="en">Message</span></label>
-            <textarea id="fm" name="message" required></textarea>
-          </div>
-          <button type="submit" class="btn-send">
-            <span class="he">שלחו הודעה</span><span class="en">Send message</span>
-          </button>
-        </form>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER ──────────────────────────────────────────────────────────── -->
-<footer>
-  <div class="wrap">
-    <div class="footer-inner">
-      <p class="footer-tagline">
-        <span class="he">© <span id="yr"></span> רבקה חיים — כל הזכויות שמורות</span>
-        <span class="en">© <span class="yr-en"></span> Rivka Chaim — All rights reserved</span>
-      </p>
-      <div class="footer-right">
-        <div class="footer-links">
-          <a href="#about"><span class="he">אודות</span><span class="en">About</span></a>
-          <a href="#workshops"><span class="he">סדנאות</span><span class="en">Workshops</span></a>
-          <a href="#contact"><span class="he">יצירת קשר</span><span class="en">Contact</span></a>
-          <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener">Instagram (@[INSTAGRAM])</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- JAVASCRIPT ──────────────────────────────────────────────────────── -->
 <script>
-  /* ── Piece data ───────────────────────────────────────────────── */
-  const pieces = [
-    {
-      titleHe: '[שם יצירה 1]', titleEn: '[Piece Title 1]',
-      mediumHe: 'פאפייה-מאשה על בסיס עץ', mediumEn: 'Papier-mâché on wood base',
-      dims: '[W × H × D] cm', year: '[YEAR]',
-      descHe: '[תיאור קצר של היצירה — רוח, תהליך, מה היא מעוררת. כ-30 מילה.]',
-      descEn: '[Short description — spirit, process, what it evokes. Approx. 30 words.]',
-      price: '₪[PRICE]',
-      nextTitleHe: '[שם יצירה 2]', nextTitleEn: '[Piece Title 2]',
-    },
-    {
-      titleHe: '[שם יצירה 2]', titleEn: '[Piece Title 2]',
-      mediumHe: 'פיסול נייר ידני', mediumEn: 'Hand-formed paper sculpture',
-      dims: '[W × H × D] cm', year: '[YEAR]',
-      descHe: '[תיאור קצר]', descEn: '[Short description]',
-      price: '₪[PRICE]',
-      nextTitleHe: '[שם יצירה 3]', nextTitleEn: '[Piece Title 3]',
-    },
-    {
-      titleHe: '[שם יצירה 3]', titleEn: '[Piece Title 3]',
-      mediumHe: 'נייר ופיגמנטים טבעיים', mediumEn: 'Paper with natural pigments',
-      dims: '[W × H × D] cm', year: '[YEAR]',
-      descHe: '[תיאור קצר]', descEn: '[Short description]',
-      price: '₪[PRICE]',
-      nextTitleHe: '[שם יצירה 4]', nextTitleEn: '[Piece Title 4]',
-    },
-    {
-      titleHe: '[שם יצירה 4]', titleEn: '[Piece Title 4]',
-      mediumHe: 'פאפייה-מאשה משכבות', mediumEn: 'Layered papier-mâché',
-      dims: '[W × H × D] cm', year: '[YEAR]',
-      descHe: '[תיאור קצר]', descEn: '[Short description]',
-      price: '₪[PRICE]',
-      nextTitleHe: '[שם יצירה 5]', nextTitleEn: '[Piece Title 5]',
-    },
-    {
-      titleHe: '[שם יצירה 5]', titleEn: '[Piece Title 5]',
-      mediumHe: 'נייר ומתכת', mediumEn: 'Paper and metal',
-      dims: '[W × H × D] cm', year: '[YEAR]',
-      descHe: '[תיאור קצר]', descEn: '[Short description]',
-      price: '₪[PRICE]',
-      nextTitleHe: '[שם יצירה 6]', nextTitleEn: '[Piece Title 6]',
-    },
-    {
-      titleHe: '[שם יצירה 6]', titleEn: '[Piece Title 6]',
-      mediumHe: 'קולאז\' נייר ואקוורל', mediumEn: 'Paper collage and watercolour',
-      dims: '[W × H × D] cm', year: '[YEAR]',
-      descHe: '[תיאור קצר]', descEn: '[Short description]',
-      price: '₪[PRICE]',
-      nextTitleHe: '[שם יצירה 7]', nextTitleEn: '[Piece Title 7]',
-    },
-    {
-      titleHe: '[שם יצירה 7]', titleEn: '[Piece Title 7]',
-      mediumHe: 'פאפייה-מאשה וצבעי אקריל', mediumEn: 'Papier-mâché and acrylic',
-      dims: '[W × H × D] cm', year: '[YEAR]',
-      descHe: '[תיאור קצר]', descEn: '[Short description]',
-      price: '₪[PRICE]',
-      nextTitleHe: '[שם יצירה 1]', nextTitleEn: '[Piece Title 1]',
-    },
-  ]
+/* ══ DATA ══════════════════════════════════════════════════════════ */
+const AW = [
+  { slug:'yotzer-1', featured:true,
+    tHe:'[שם יצירה 1]', tEn:'[Piece Title 1]',
+    cSlug:'papier-mache', cHe:'פאפייה-מאשה', cEn:'Papier-mâché',
+    mHe:'פאפייה-מאשה על עץ', mEn:'Papier-mâché on wood',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר של היצירה — רוח, תהליך, מה שהיא מעוררת. כ-40 מילה.]',
+    dEn:'[Short description — spirit, process, what it evokes. Approx. 40 words.]' },
+  { slug:'yotzer-2',
+    tHe:'[שם יצירה 2]', tEn:'[Piece Title 2]',
+    cSlug:'paper-sculpture', cHe:'פיסול נייר', cEn:'Paper sculpture',
+    mHe:'נייר ידני מקופל', mEn:'Hand-folded paper',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-3',
+    tHe:'[שם יצירה 3]', tEn:'[Piece Title 3]',
+    cSlug:'collage', cHe:"קולאז'", cEn:'Collage',
+    mHe:"קולאז' נייר ואקוורל", mEn:'Paper collage and watercolour',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-4',
+    tHe:'[שם יצירה 4]', tEn:'[Piece Title 4]',
+    cSlug:'papier-mache', cHe:'פאפייה-מאשה', cEn:'Papier-mâché',
+    mHe:'פאפייה-מאשה ופיגמנטים', mEn:'Papier-mâché and pigments',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-5',
+    tHe:'[שם יצירה 5]', tEn:'[Piece Title 5]',
+    cSlug:'paper-sculpture', cHe:'פיסול נייר', cEn:'Paper sculpture',
+    mHe:'נייר ומתכת', mEn:'Paper and metal',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-6',
+    tHe:'[שם יצירה 6]', tEn:'[Piece Title 6]',
+    cSlug:'collage', cHe:"קולאז'", cEn:'Collage',
+    mHe:'שכבות נייר ודיו', mEn:'Layered paper and ink',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-7',
+    tHe:'[שם יצירה 7]', tEn:'[Piece Title 7]',
+    cSlug:'papier-mache', cHe:'פאפייה-מאשה', cEn:'Papier-mâché',
+    mHe:'פאפייה-מאשה וצבעי אקריל', mEn:'Papier-mâché and acrylic',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-8',
+    tHe:'[שם יצירה 8]', tEn:'[Piece Title 8]',
+    cSlug:'paper-sculpture', cHe:'פיסול נייר', cEn:'Paper sculpture',
+    mHe:'נייר ועץ', mEn:'Paper and wood',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+];
+const CATS = [
+  { slug:'all',            he:'כל היצירות',   en:'All works' },
+  { slug:'papier-mache',   he:'פאפייה-מאשה',  en:'Papier-mâché' },
+  { slug:'paper-sculpture',he:'פיסול נייר',   en:'Paper sculpture' },
+  { slug:'collage',        he:"קולאז'",        en:'Collage' },
+];
 
-  /* ── Language ─────────────────────────────────────────────────── */
-  const html = document.documentElement
-  document.getElementById('lang-btn').addEventListener('click', () => {
-    const next = html.lang === 'he' ? 'en' : 'he'
-    html.setAttribute('lang', next)
-    html.setAttribute('dir', next === 'he' ? 'rtl' : 'ltr')
-    localStorage.setItem('rc-lang', next)
-  })
-  const saved = localStorage.getItem('rc-lang') || 'he'
-  html.setAttribute('lang', saved)
-  html.setAttribute('dir', saved === 'he' ? 'rtl' : 'ltr')
+/* ══ LANGUAGE ══════════════════════════════════════════════════════ */
+const HL = document.documentElement;
+let lang = localStorage.getItem('rc-lang') || 'he';
 
-  /* ── Mobile menu ──────────────────────────────────────────────── */
-  const menuBtn  = document.getElementById('menu-btn')
-  const navLinks = document.getElementById('nav-links')
-  menuBtn.addEventListener('click', () => {
-    const o = navLinks.classList.toggle('open')
-    menuBtn.setAttribute('aria-expanded', String(o))
-    document.body.style.overflow = o ? 'hidden' : ''
-  })
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    navLinks.classList.remove('open')
-    menuBtn.setAttribute('aria-expanded', 'false')
-    document.body.style.overflow = ''
-  }))
+function applyLang(l) {
+  lang = l;
+  HL.setAttribute('lang', l);
+  HL.setAttribute('dir', l === 'he' ? 'rtl' : 'ltr');
+  localStorage.setItem('rc-lang', l);
+  document.querySelectorAll('[data-he]').forEach(el => el.style.display = l==='he' ? '' : 'none');
+  document.querySelectorAll('[data-en]').forEach(el => el.style.display = l==='en' ? '' : 'none');
+}
+function T(he, en) { return lang === 'he' ? he : en; }
 
-  /* ── Sticky header ────────────────────────────────────────────── */
-  window.addEventListener('scroll', () => {
-    document.getElementById('header').style.borderBottomColor =
-      window.scrollY > 10 ? '' : 'transparent'
-  }, { passive: true })
+document.getElementById('lang-btn').addEventListener('click', () => {
+  applyLang(lang === 'he' ? 'en' : 'he');
+  route();
+});
 
-  /* ── Active nav ───────────────────────────────────────────────── */
-  document.querySelectorAll('section[id]').forEach(s =>
-    new IntersectionObserver(([e]) => {
-      if (e.isIntersecting)
-        document.querySelectorAll('.nav-links a').forEach(a =>
-          a.classList.toggle('active', a.getAttribute('href') === '#' + s.id))
-    }, { rootMargin: '-40% 0px -55% 0px' }).observe(s)
-  )
+/* ══ MOBILE MENU ══════════════════════════════════════════════════ */
+const mobNav = document.getElementById('mob-nav');
+const hamBtn = document.getElementById('ham-btn');
+function closeMob() {
+  mobNav.classList.remove('open');
+  hamBtn.setAttribute('aria-expanded','false');
+  document.body.style.overflow = '';
+}
+hamBtn.addEventListener('click', () => {
+  const o = mobNav.classList.toggle('open');
+  hamBtn.setAttribute('aria-expanded', String(o));
+  document.body.style.overflow = o ? 'hidden' : '';
+});
+document.querySelectorAll('[data-nav]').forEach(a => a.addEventListener('click', closeMob));
 
-  /* ── Scroll reveal ────────────────────────────────────────────── */
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (!reduced) {
-    const ro = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target) } })
-    }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' })
-    document.querySelectorAll('.reveal').forEach(el => ro.observe(el))
-  } else {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'))
+/* ══ ROUTER ════════════════════════════════════════════════════════ */
+const app = document.getElementById('app');
+
+function navigate(path) { location.hash = path; }
+
+function route() {
+  const hash  = location.hash.replace('#','') || '/';
+  const parts = hash.split('/').filter(Boolean);
+  const page  = parts[0] || '';
+  const sub   = parts[1] || '';
+
+  document.querySelectorAll('.nav-d a').forEach(a => {
+    const h = a.getAttribute('href').replace('#/','');
+    a.classList.toggle('on', h === page || (h==='gallery' && page==='gallery'));
+  });
+
+  let html;
+  if (!page)               html = buildHome();
+  else if (page==='gallery') html = buildGallery(sub);
+  else if (page==='work' && sub) {
+    const w = AW.find(a => a.slug === sub);
+    html = w ? buildWork(w) : buildHome();
   }
+  else if (page==='about')     html = buildAbout();
+  else if (page==='workshops') html = buildWorkshops();
+  else if (page==='contact')   html = buildContact();
+  else html = buildHome();
 
-  /* ── Piece overlay ────────────────────────────────────────────── */
-  const overlay   = document.getElementById('piece-overlay')
-  const oTitle    = document.getElementById('overlay-title')
-  const oMedium   = document.getElementById('om-medium')
-  const oDims     = document.getElementById('om-dims')
-  const oYear     = document.getElementById('om-year')
-  const oDesc     = document.getElementById('overlay-desc')
-  const oPrice    = document.getElementById('overlay-price')
-  const oNextTitle= document.getElementById('overlay-next-title')
+  app.classList.add('fade');
+  setTimeout(() => {
+    app.innerHTML = html;
+    app.classList.remove('fade');
+    window.scrollTo(0, 0);
+    applyLang(lang);
+    bindEvents();
+  }, 180);
+}
 
-  function openPiece(idx) {
-    const p = pieces[idx]
-    const isHe = html.lang === 'he'
-    oTitle.textContent   = isHe ? p.titleHe  : p.titleEn
-    oMedium.textContent  = isHe ? p.mediumHe : p.mediumEn
-    oDims.textContent    = p.dims
-    oYear.textContent    = p.year
-    oDesc.textContent    = isHe ? p.descHe   : p.descEn
-    oPrice.textContent   = p.price
-    oNextTitle.innerHTML =
-      `<span class="he">${p.nextTitleHe}</span><span class="en">${p.nextTitleEn}</span>`
-    // Re-apply lang show/hide inside overlay
-    overlay.querySelectorAll('.he').forEach(el => el.style.display = isHe ? '' : 'none')
-    overlay.querySelectorAll('.en').forEach(el => el.style.display = isHe ? 'none' : '')
-    overlay.classList.add('open')
-    overlay.scrollTop = 0
-    document.body.style.overflow = 'hidden'
-  }
+function bindEvents() {
+  app.querySelectorAll('[data-slug]').forEach(el => {
+    el.addEventListener('click',    () => navigate('#/work/' + el.dataset.slug));
+    el.addEventListener('keydown',  e => { if(e.key==='Enter'||e.key===' ') navigate('#/work/'+el.dataset.slug); });
+  });
+  app.querySelectorAll('[data-cat]').forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); navigate('#/gallery/' + el.dataset.cat); });
+  });
+  const f = app.querySelector('form[data-cf]');
+  if (f) f.addEventListener('submit', e => { e.preventDefault(); alert(T('תודה! ניצור איתך קשר בקרוב.','Thank you! We\'ll be in touch soon.')); });
+}
 
-  function closeOverlay() {
-    overlay.classList.remove('open')
-    document.body.style.overflow = ''
-  }
+window.addEventListener('hashchange', route);
 
-  document.getElementById('overlay-close').addEventListener('click', closeOverlay)
-  document.getElementById('overlay-back').addEventListener('click', closeOverlay)
+/* ══ SHARED HELPERS ════════════════════════════════════════════════ */
+function iph(he, en) {
+  return `<div class="iph">
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width=".7" aria-hidden="true">
+      <rect x="1" y="1" width="38" height="38"/><line x1="1" y1="1" x2="39" y2="39"/><line x1="39" y1="1" x2="1" y2="39"/>
+    </svg>
+    <span data-he>${he}</span><span data-en>${en}</span>
+  </div>`;
+}
+function arrR() { return `<svg width="20" height="8" viewBox="0 0 20 8" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M1 4h18M14 1l4 3-4 3"/></svg>`; }
+function arrL() { return `<svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M13 4H1M5 1L1 4l4 3"/></svg>`; }
 
-  document.querySelectorAll('.work-item').forEach(item => {
-    item.addEventListener('click', () => openPiece(+item.dataset.piece))
-    item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openPiece(+item.dataset.piece) })
-  })
+function footer() {
+  const yr = new Date().getFullYear();
+  return `<footer>
+    <div class="ftr-in">
+      <p class="ftr-tag">
+        <span data-he>פיסול נייר ופאפייה-מאשה — יצירות שמחזיקות זמן בתוכן.</span>
+        <span data-en>Paper sculpture and papier-mâché — works that hold time inside them.</span>
+      </p>
+      <div class="ftr-links label">
+        <a href="#/gallery"   class="link-u"><span data-he>גלריה</span><span data-en>Gallery</span></a>
+        <a href="#/workshops" class="link-u"><span data-he>סדנאות</span><span data-en>Workshops</span></a>
+        <a href="#/about"     class="link-u"><span data-he>אודות</span><span data-en>About</span></a>
+        <a href="#/contact"   class="link-u"><span data-he>יצירת קשר</span><span data-en>Contact</span></a>
+        <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener" class="link-u">Instagram (@[INSTAGRAM])</a>
+        <p class="ftr-copy">© ${yr} <span data-he>רבקה חיים — כל הזכויות שמורות</span><span data-en>Rivka Chaim — All rights reserved</span></p>
+      </div>
+    </div>
+  </footer>`;
+}
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay() })
+/* ══ HOME ══════════════════════════════════════════════════════════ */
+function buildHome() {
+  const feat = AW.find(a => a.featured) || AW[0];
+  const cats = CATS.map(c =>
+    `<a href="#" data-cat="${c.slug}" class="label link-u">
+      <span data-he>${c.he}</span><span data-en>${c.en}</span>
+    </a>`).join('');
+  return `<main>
+    <section class="home-hero">
+      <p class="home-tag">
+        <span data-he>פיסול שמעביר את מה שמרגישים כשמחזיקים נייר בידיים — לא רק את מה שרואים.</span>
+        <span data-en>Sculpture that conveys what it feels like to hold paper in your hands — not only what you see.</span>
+      </p>
+      <nav class="home-cats label">${cats}</nav>
+      <div class="feat" data-slug="${feat.slug}" role="button" tabindex="0">
+        ${iph('[תמונה ראשית]','[FEATURED IMAGE]')}
+        <div class="feat-grad"></div>
+        <div class="feat-info">
+          <p class="label feat-cat"><span data-he>${feat.cHe}</span><span data-en>${feat.cEn}</span></p>
+          <p class="feat-title"><span data-he>${feat.tHe}</span><span data-en>${feat.tEn}</span></p>
+        </div>
+      </div>
+    </section>
+  </main>${footer()}`;
+}
 
-  /* ── Footer year ──────────────────────────────────────────────── */
-  const y = new Date().getFullYear()
-  document.getElementById('yr').textContent = y
-  document.querySelectorAll('.yr-en').forEach(el => el.textContent = y)
+/* ══ GALLERY ═══════════════════════════════════════════════════════ */
+function buildGallery(cat) {
+  const active = cat || 'all';
+  const list   = active==='all' ? AW : AW.filter(a => a.cSlug===active);
+  const fil = CATS.map(c =>
+    `<a href="#" data-cat="${c.slug}" class="label link-u ${c.slug===active?'on':''}">
+      <span data-he>${c.he}</span><span data-en>${c.en}</span>
+    </a>`).join('');
+  const cards = list.map(w =>
+    `<div class="wcard" data-slug="${w.slug}" role="button" tabindex="0">
+      <div class="wcard-img">${iph('[תמונה]','[IMAGE]')}</div>
+      <div class="wcard-info">
+        <div class="wcard-left">
+          <p class="label wcard-cat"><span data-he>${w.cHe}</span><span data-en>${w.cEn}</span></p>
+          <p class="wcard-title"><span data-he>${w.tHe}</span><span data-en>${w.tEn}</span></p>
+        </div>
+        <p class="label wcard-year muted">${w.yr}</p>
+      </div>
+    </div>`).join('');
+  return `<div class="gal-page">
+    <div class="gal-hdr">
+      <h1 class="gal-h1"><span data-he>גלריה</span><span data-en>Gallery</span></h1>
+      <nav class="gal-filter label">${fil}</nav>
+    </div>
+    <div class="works-grid">${cards||`<p class="muted label" style="grid-column:1/-1;padding:3rem">
+      <span data-he>אין יצירות בקטגוריה זו.</span><span data-en>No works in this category.</span></p>`}
+    </div>
+  </div>${footer()}`;
+}
+
+/* ══ WORK DETAIL ═══════════════════════════════════════════════════ */
+function buildWork(w) {
+  const idx  = AW.indexOf(w);
+  const next = AW[(idx+1) % AW.length];
+  const meta = [
+    { kh:'חומר',   ke:'Medium',     vh:w.mHe,   ve:w.mEn   },
+    { kh:'מידות',  ke:'Dimensions', vh:w.dims,  ve:w.dims  },
+    { kh:'שנה',    ke:'Year',       vh:w.yr,    ve:w.yr    },
+    { kh:'מחיר',   ke:'Price',      vh:w.price, ve:w.price },
+  ].map(m => `<div>
+    <p class="label wd-mk"><span data-he>${m.kh}</span><span data-en>${m.ke}</span></p>
+    <p class="wd-mv"><span data-he>${m.vh}</span><span data-en>${m.ve}</span></p>
+  </div>`).join('');
+
+  return `<article>
+    <div class="wd-hero">
+      <div class="wd-hero-img">${iph('[תמונת כיסוי]','[COVER IMAGE]')}</div>
+      <div class="wd-grad"></div>
+      <div class="wd-btm">
+        <p class="label wd-bread"><span data-he>${w.cHe}</span><span data-en>${w.cEn}</span></p>
+        <h1 class="wd-htitle"><span data-he>${w.tHe}</span><span data-en>${w.tEn}</span></h1>
+      </div>
+    </div>
+    <div class="wd-body">
+      <a href="#/gallery" class="wd-back label link-u">${arrL()}<span data-he>חזרה לגלריה</span><span data-en>Back to gallery</span></a>
+      <div class="wd-meta">${meta}</div>
+      <div class="wd-grid">
+        <div class="wd-c4"></div>
+        <div class="wd-c8">
+          <p class="wd-desc"><span data-he>${w.dHe}</span><span data-en>${w.dEn}</span></p>
+          <a href="#/contact" class="btn-inq label">
+            <span data-he>פנייה לרכישה</span><span data-en>Inquire to purchase</span>${arrR()}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="wd-gal-wrap">
+      <div class="wd-gal">
+        <div class="wd-gi wide">${iph('[פירוט 1]','[DETAIL 1]')}</div>
+        <div class="wd-gi">${iph('[פירוט 2]','[DETAIL 2]')}</div>
+        <div class="wd-gi">${iph('[פירוט 3]','[DETAIL 3]')}</div>
+        <div class="wd-gi">${iph('[פירוט 4]','[DETAIL 4]')}</div>
+        <div class="wd-gi">${iph('[פירוט 5]','[DETAIL 5]')}</div>
+      </div>
+    </div>
+    <div class="wd-next" data-slug="${next.slug}" role="button" tabindex="0">
+      <div class="wd-next-img">${iph('[יצירה הבאה]','[NEXT ARTWORK]')}</div>
+      <div class="wd-next-grad"></div>
+      <div class="wd-next-cnt">
+        <p class="label wd-next-lbl"><span data-he>היצירה הבאה</span><span data-en>Next work</span></p>
+        <p class="wd-next-ttl"><span data-he>${next.tHe}</span><span data-en>${next.tEn}</span></p>
+        <div class="wd-next-arr label"><span data-he>לצפייה ביצירה</span><span data-en>View work</span>${arrR()}</div>
+      </div>
+    </div>
+  </article>${footer()}`;
+}
+
+/* ══ ABOUT ═════════════════════════════════════════════════════════ */
+function buildAbout() {
+  const catLinks = CATS.filter(c=>c.slug!=='all').map(c =>
+    `<a href="#" data-cat="${c.slug}" class="link-u serif" style="font-size:1.125rem;font-weight:300">
+      <span data-he>${c.he}</span><span data-en>${c.en}</span>
+    </a>`).join('');
+  return `<div class="ab-page">
+    <div class="ab-wrap">
+      <div class="ab-grid">
+        <div class="ab-c5">
+          <div class="ab-port">${iph('[תמונת האמנית]','[ARTIST PHOTO]')}</div>
+        </div>
+        <div class="ab-c7">
+          <p class="label ab-eye"><span data-he>אודות</span><span data-en>About</span></p>
+          <h1 class="ab-h1">
+            <span data-he>אני עובדת עם נייר כי הוא מחזיק כל מה שמניחים עליו.</span>
+            <span data-en>I work with paper because it holds everything placed on it.</span>
+          </h1>
+          <div class="ab-body">
+            <p><span data-he>[פסקה ראשונה — מי היא רבקה, מה הוביל אותה לפיסול נייר ופאפייה-מאשה, הסגנון הייחודי שלה. כ-70 מילה.]</span>
+               <span data-en>[First paragraph — who Rivka is, what led her to paper sculpture and papier-mâché, her distinctive aesthetic. Approx. 70 words.]</span></p>
+            <p><span data-he>[פסקה שנייה — הסטודיו, תהליך העבודה, מה שמניע אותה. כ-55 מילה.]</span>
+               <span data-en>[Second paragraph — the studio, working process, what drives her. Approx. 55 words.]</span></p>
+            <p><span data-he>[פסקה שלישית — זמינות, שיתופי פעולה, מיקום.]</span>
+               <span data-en>[Third paragraph — availability, collaborations, location.]</span></p>
+          </div>
+          <div class="ab-cats label">${catLinks}
+            <a href="#/workshops" class="link-u serif" style="font-size:1.125rem;font-weight:300">
+              <span data-he>סדנאות</span><span data-en>Workshops</span>
+            </a>
+          </div>
+          <a href="#/contact" class="ab-cta">
+            <span data-he>בואו ניצור משהו</span><span data-en>Let's create something</span>${arrR()}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>${footer()}`;
+}
+
+/* ══ WORKSHOPS ═════════════════════════════════════════════════════ */
+function buildWorkshops() {
+  const WS = [
+    { idx:'01', typeHe:'סדנה פרטית', typeEn:'Private session',
+      nHe:'מפגש אחד על אחד', nEn:'One-on-One',
+      dHe:'סדנה מותאמת אישית לרמתך ולמטרותיך. נעסוק בטכניקת הפאפייה-מאשה, גמר, צבע ושמירה.',
+      dEn:'A fully tailored session matched to your level and goals — papier-mâché technique, finishing, colour, and preservation.',
+      specs:[{kh:'משך',ke:'Duration',vh:'[X] שעות',ve:'[X] hours'},{kh:'מיקום',ke:'Location',vh:'סטודיו, [עיר]',ve:'Studio, [CITY]'},{kh:'זמינות',ke:'Availability',vh:'[ימים]',ve:'[DAYS]'}],
+      pH:'₪[מחיר]', pE:'₪[PRICE]', pnH:'למפגש · כולל חומרים', pnE:'per session · incl. materials' },
+    { idx:'02', typeHe:'קבוצה קטנה', typeEn:'Small group',
+      nHe:'סדנת ערב קבוצתית', nEn:'Evening Group Workshop',
+      dHe:'חוויה קבוצתית חמה — שיחה, יצירה וגילוי. מתאים לאירועים, ימי הולדת, וערבי יצירה.',
+      dEn:'A warm group experience — conversation, creating and discovery. Perfect for events, birthdays, and creative evenings.',
+      specs:[{kh:'משך',ke:'Duration',vh:'[X] שעות',ve:'[X] hours'},{kh:'משתתפים',ke:'Group size',vh:'עד [X]',ve:'Up to [X]'},{kh:'מועד הבא',ke:'Next date',vh:'[תאריך]',ve:'[DATE]'}],
+      pH:'₪[מחיר]', pE:'₪[PRICE]', pnH:'לאדם · כולל חומרים', pnE:'per person · incl. materials' },
+    { idx:'03', typeHe:'קורס מתמשך', typeEn:'Ongoing course',
+      nHe:'יסודות פיסול הנייר', nEn:'Foundations of Paper Sculpture',
+      dHe:'קורס מלא שעובר דרך כל שלבי הפאפייה-מאשה — מבנה, שכבות, גמר וצביעה. לכל רמות הניסיון.',
+      dEn:'A complete course covering all stages of papier-mâché — structure, layering, finishing, and painting. All levels welcome.',
+      specs:[{kh:'מפגשים',ke:'Sessions',vh:'[X] × [X] שעות',ve:'[X] × [X] hrs'},{kh:'רמה',ke:'Level',vh:'כל הרמות',ve:'All levels'},{kh:'מחזור הבא',ke:'Next cohort',vh:'[תאריך]',ve:'[DATE]'}],
+      pH:'₪[מחיר]', pE:'₪[PRICE]', pnH:'לקורס מלא · כולל חומרים', pnE:'full course · incl. materials' },
+  ];
+
+  const rows = WS.map(w => {
+    const specs = w.specs.map(s =>
+      `<div><p class="label wsr-sk muted"><span data-he>${s.kh}</span><span data-en>${s.ke}</span></p>
+       <p class="wsr-sv"><span data-he>${s.vh}</span><span data-en>${s.ve}</span></p></div>`
+    ).join('');
+    return `<div class="ws-row">
+      <div class="wsr-l">
+        <p class="label wsr-type muted">${w.idx} — <span data-he>${w.typeHe}</span><span data-en>${w.typeEn}</span></p>
+        <h2 class="wsr-name"><span data-he>${w.nHe}</span><span data-en>${w.nEn}</span></h2>
+        <p class="wsr-desc"><span data-he>${w.dHe}</span><span data-en>${w.dEn}</span></p>
+        <div class="wsr-specs label">${specs}</div>
+      </div>
+      <div class="wsr-r">
+        <div>
+          <p class="wsr-price"><span data-he>${w.pH}</span><span data-en>${w.pE}</span></p>
+          <p class="label wsr-pnote muted"><span data-he>${w.pnH}</span><span data-en>${w.pnE}</span></p>
+        </div>
+        <a href="#/contact" class="btn-ws label"><span data-he>שריינו מקום</span><span data-en>Reserve</span></a>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<div class="ws-page">
+    <div class="ws-wrap">
+      <p class="label muted"><span data-he>סדנאות סטודיו</span><span data-en>Studio workshops</span></p>
+      <h1 class="ws-h1" style="margin-top:.75rem">
+        <span data-he>ללמוד עם הידיים</span><span data-en>Learning through the hands</span>
+      </h1>
+      <p class="ws-intro">
+        <span data-he>סדנאות אינטימיות בסטודיו לכל רמות הניסיון. כל מפגש כולל חומרים ויצירה שלוקחים הביתה.</span>
+        <span data-en>Intimate studio sessions for all experience levels. Every session includes materials and a piece to take home.</span>
+      </p>
+      <div class="ws-list">${rows}</div>
+    </div>
+  </div>${footer()}`;
+}
+
+/* ══ CONTACT ═══════════════════════════════════════════════════════ */
+function buildContact() {
+  return `<div class="ct-page">
+    <div class="ct-wrap">
+      <div class="ct-grid">
+        <div class="ct-l">
+          <h1 class="ct-h1"><span data-he>יצירת קשר</span><span data-en>Contact</span></h1>
+          <div class="ct-chs label">
+            <a href="https://wa.me/[PHONE]" target="_blank" rel="noopener" class="ct-ch">
+              <span class="ct-ch-k"><span data-he>וואטסאפ</span><span data-en>WhatsApp</span></span>
+              <span class="ct-ch-v">[PHONE_DISPLAY]</span>
+            </a>
+            <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener" class="ct-ch">
+              <span class="ct-ch-k">Instagram</span>
+              <span class="ct-ch-v">@[INSTAGRAM]</span>
+            </a>
+            <a href="mailto:[EMAIL]" class="ct-ch">
+              <span class="ct-ch-k"><span data-he>אימייל</span><span data-en>Email</span></span>
+              <span class="ct-ch-v">[EMAIL]</span>
+            </a>
+            <div class="ct-ch" style="cursor:default">
+              <span class="ct-ch-k"><span data-he>סטודיו</span><span data-en>Studio</span></span>
+              <span class="ct-ch-v"><span data-he>[כתובת], [עיר]</span><span data-en>[ADDRESS], [CITY]</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="ct-r">
+          <p class="ct-fh"><span data-he>שלחו הודעה</span><span data-en>Send a message</span></p>
+          <form data-cf>
+            <div class="fg-row">
+              <div class="fg">
+                <label class="label" for="cf-n"><span data-he>שם מלא</span><span data-en>Full name</span></label>
+                <input type="text" id="cf-n" name="name" required autocomplete="name"/>
+              </div>
+              <div class="fg">
+                <label class="label" for="cf-e"><span data-he>אימייל</span><span data-en>Email</span></label>
+                <input type="email" id="cf-e" name="email" required autocomplete="email"/>
+              </div>
+            </div>
+            <div class="fg">
+              <label class="label" for="cf-s"><span data-he>נושא</span><span data-en>Subject</span></label>
+              <select id="cf-s" name="subject" required>
+                <option value="" disabled selected>—</option>
+                <option value="artwork"><span data-he>שאלה על יצירה</span><span data-en>Artwork inquiry</span></option>
+                <option value="private"><span data-he>סדנה פרטית</span><span data-en>Private workshop</span></option>
+                <option value="group"><span data-he>סדנה קבוצתית</span><span data-en>Group workshop</span></option>
+                <option value="course"><span data-he>קורס</span><span data-en>Course</span></option>
+                <option value="commission"><span data-he>הזמנה מיוחדת</span><span data-en>Commission</span></option>
+                <option value="other"><span data-he>אחר</span><span data-en>Other</span></option>
+              </select>
+            </div>
+            <div class="fg">
+              <label class="label" for="cf-m"><span data-he>הודעה</span><span data-en>Message</span></label>
+              <textarea id="cf-m" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn-send label">
+              <span data-he>שלחו</span><span data-en>Send</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>${footer()}`;
+}
+
+/* ══ BOOT ══════════════════════════════════════════════════════════ */
+applyLang(lang);
+route();
 </script>
 </body>
 </html>
