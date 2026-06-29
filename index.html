@@ -142,23 +142,43 @@ footer { position:relative; z-index:10; border-top:1px solid var(--line); }
 @media(min-width:640px){ .feat{ height:58vw; width:46.4vw; } }
 @media(min-width:768px){ .feat{ height:58vh; width:46.4vh; } }
 
-.feat img {
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; opacity:.82;
-  transition:transform 1600ms var(--ease), opacity 1400ms var(--ease);
-}
-.feat:hover img { transform:scale(1.04); opacity:.97; }
-.feat-grad {
+/* Slideshow slides */
+.feat-slide {
   position:absolute; inset:0;
+  opacity:0; transition:opacity 1s var(--ease);
+}
+.feat-slide.active { opacity:1; }
+.feat-slide img {
+  width:100%; height:100%; object-fit:cover; opacity:.82;
+  transition:transform 5000ms var(--ease), opacity 1400ms var(--ease);
+}
+.feat-slide.active img { transform:scale(1.04); }
+.feat:hover .feat-slide.active img { opacity:.97; }
+
+.feat-grad {
+  position:absolute; inset:0; z-index:1;
   background:linear-gradient(to bottom,rgba(22,19,14,.1),transparent 50%,rgba(22,19,14,.5));
+  pointer-events:none;
 }
 .feat-info {
-  position:absolute; inset-inline:0; bottom:0;
+  position:absolute; inset-inline:0; bottom:0; z-index:2;
   padding-inline:1.5rem; padding-bottom:2rem;
 }
 @media(min-width:768px){ .feat-info{ padding-inline:2rem; padding-bottom:2.5rem; } }
-.feat-cat   { color:rgba(252,251,249,.8); }
-.feat-title { font-family:var(--fsr); font-size:1.25rem; font-weight:300; color:var(--paper); margin-top:.4rem; }
+.feat-cat   { color:rgba(252,251,249,.8); transition:opacity .5s; }
+.feat-title { font-family:var(--fsr); font-size:1.25rem; font-weight:300; color:var(--paper); margin-top:.4rem; transition:opacity .5s; }
+
+/* Dot indicators */
+.feat-dots {
+  position:absolute; inset-inline:0; top:1.25rem; z-index:2;
+  display:flex; justify-content:center; gap:.4rem;
+}
+.feat-dot {
+  width:18px; height:1.5px;
+  background:rgba(252,251,249,.4);
+  transition:background .4s, width .4s var(--ease);
+}
+.feat-dot.active { background:rgba(252,251,249,.9); width:28px; }
 
 /* Image placeholder */
 .iph {
@@ -609,6 +629,9 @@ function route() {
 }
 
 function bindEvents() {
+  // Stop any running slideshow when navigating away
+  if (_slideTimer) { clearInterval(_slideTimer); _slideTimer = null; }
+
   app.querySelectorAll('[data-slug]').forEach(el => {
     el.addEventListener('click',    () => navigate('#/work/' + el.dataset.slug));
     el.addEventListener('keydown',  e => { if(e.key==='Enter'||e.key===' ') navigate('#/work/'+el.dataset.slug); });
@@ -618,6 +641,9 @@ function bindEvents() {
   });
   const f = app.querySelector('form[data-cf]');
   if (f) f.addEventListener('submit', e => { e.preventDefault(); alert(T('תודה! ניצור איתך קשר בקרוב.','Thank you! We\'ll be in touch soon.')); });
+
+  // Start slideshow if we're on the home page
+  if (document.getElementById('feat-card')) startSlideshow();
 }
 
 window.addEventListener('hashchange', route);
@@ -655,12 +681,26 @@ function footer() {
 }
 
 /* ══ HOME ══════════════════════════════════════════════════════════ */
+let _slideTimer = null;
+let _slideIdx   = 0;
+
 function buildHome() {
-  const feat = AW.find(a => a.featured) || AW[0];
   const cats = CATS.map(c =>
     `<a href="#" data-cat="${c.slug}" class="label link-u">
       <span data-he>${c.he}</span><span data-en>${c.en}</span>
     </a>`).join('');
+
+  // One slide per artwork
+  const slides = AW.map((w, i) =>
+    `<div class="feat-slide${i===0?' active':''}" data-i="${i}">
+      ${iph(`[תמונה ${i+1}]`, `[IMAGE ${i+1}]`)}
+    </div>`
+  ).join('');
+
+  const dots = AW.map((_,i) =>
+    `<div class="feat-dot${i===0?' active':''}"></div>`
+  ).join('');
+
   return `<main>
     <section class="home-hero">
       <p class="home-tag">
@@ -668,16 +708,48 @@ function buildHome() {
         <span data-en>Sculpture that conveys what it feels like to hold paper in your hands — not only what you see.</span>
       </p>
       <nav class="home-cats label">${cats}</nav>
-      <div class="feat" data-slug="${feat.slug}" role="button" tabindex="0">
-        ${iph('[תמונה ראשית]','[FEATURED IMAGE]')}
+      <div class="feat" id="feat-card" role="button" tabindex="0" data-slug="${AW[0].slug}">
+        ${slides}
         <div class="feat-grad"></div>
+        <div class="feat-dots">${dots}</div>
         <div class="feat-info">
-          <p class="label feat-cat"><span data-he>${feat.cHe}</span><span data-en>${feat.cEn}</span></p>
-          <p class="feat-title"><span data-he>${feat.tHe}</span><span data-en>${feat.tEn}</span></p>
+          <p class="label feat-cat" id="feat-cat">
+            <span data-he>${AW[0].cHe}</span><span data-en>${AW[0].cEn}</span>
+          </p>
+          <p class="feat-title" id="feat-title">
+            <span data-he>${AW[0].tHe}</span><span data-en>${AW[0].tEn}</span>
+          </p>
         </div>
       </div>
     </section>
   </main>${footer()}`;
+}
+
+function startSlideshow() {
+  if (_slideTimer) clearInterval(_slideTimer);
+  _slideIdx = 0;
+  _slideTimer = setInterval(advanceSlide, 3800);
+}
+
+function advanceSlide() {
+  const slides = document.querySelectorAll('.feat-slide');
+  const dots   = document.querySelectorAll('.feat-dot');
+  const catEl  = document.getElementById('feat-cat');
+  const ttlEl  = document.getElementById('feat-title');
+  const card   = document.getElementById('feat-card');
+  if (!slides.length) return;
+
+  slides[_slideIdx].classList.remove('active');
+  dots[_slideIdx].classList.remove('active');
+  _slideIdx = (_slideIdx + 1) % AW.length;
+  slides[_slideIdx].classList.add('active');
+  dots[_slideIdx].classList.add('active');
+
+  const w = AW[_slideIdx];
+  if (catEl) catEl.innerHTML = `<span data-he>${w.cHe}</span><span data-en>${w.cEn}</span>`;
+  if (ttlEl) ttlEl.innerHTML = `<span data-he>${w.tHe}</span><span data-en>${w.tEn}</span>`;
+  if (card)  card.dataset.slug = w.slug;
+  applyLang(lang);
 }
 
 /* ══ GALLERY ═══════════════════════════════════════════════════════ */
