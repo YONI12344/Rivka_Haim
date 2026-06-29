@@ -3,970 +3,867 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>רבקה חיים | Rivka Chaim — Paper Sculpture</title>
+  <title>רבקה חיים — פיסול נייר</title>
   <meta name="description" content="רבקה חיים — אמנית פיסול נייר ופאפייה-מאשה. יצירות מקוריות למכירה וסדנאות סטודיו." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Frank+Ruhl+Libre:wght@300;400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Frank+Ruhl+Libre:wght@300;400&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── Design tokens ────────────────────────────────────────── */
+    /* ── Tokens ─────────────────────────────────────────────────── */
     :root {
-      --cream:       #F3E8D8;
-      --cream-dark:  #EAD9C2;
-      --cream-mid:   #F8F1E6;
-      --red:         #9E2B25;
-      --red-light:   rgba(158,43,37,0.1);
-      --orange:      #E08A33;
-      --jade:        #1F5C53;
-      --gold:        #BF9B30;
-      --gold-light:  rgba(191,155,48,0.2);
-      --ink:         #2C1F18;
-      --ink-mid:     rgba(44,31,24,0.65);
-      --ink-soft:    rgba(44,31,24,0.38);
+      --white:    #ffffff;
+      --black:    #0a0a0a;
+      --gray-1:   #f5f5f5;
+      --gray-2:   #e8e8e8;
+      --gray-3:   #999999;
+      --gray-4:   #555555;
 
-      --font-display-latin:  'Fraunces', Georgia, serif;
-      --font-display-hebrew: 'Frank Ruhl Libre', serif;
-      --font-body:           'Jost', 'Helvetica Neue', sans-serif;
+      --font-sans:   'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heb:    'Frank Ruhl Libre', serif;
 
-      --max-w:   1320px;
-      --gutter:  clamp(1.25rem, 5vw, 3.5rem);
-      --gap:     var(--section-gap);
-      --section-gap: clamp(5rem, 10vw, 9rem);
-      --ease:    cubic-bezier(0.22, 1, 0.36, 1);
+      --gutter: clamp(1.25rem, 4vw, 3rem);
+      --max-w:  1400px;
     }
 
-    /* ─── Reset ────────────────────────────────────────────────── */
+    /* ── Reset ──────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { font-size: 16px; scroll-behavior: smooth; }
     body {
-      background: var(--cream);
-      color: var(--ink);
-      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font-sans);
       font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    img  { display: block; max-width: 100%; }
+    img  { display: block; max-width: 100%; height: auto; }
     a    { color: inherit; text-decoration: none; }
-    button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
-    :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+    button { cursor: pointer; background: none; border: none; color: inherit; font: inherit; padding: 0; }
+    :focus-visible { outline: 1.5px solid var(--black); outline-offset: 3px; }
 
-    /* ─── Type helpers ─────────────────────────────────────────── */
-    h1, h2, h3, h4 {
-      font-family: var(--font-display-latin);
-      font-weight: 300;
-      line-height: 1.1;
-    }
-    :lang(he) h1, :lang(he) h2, :lang(he) h3, :lang(he) h4 {
-      font-family: var(--font-display-hebrew);
-    }
-    .eyebrow {
-      display: block;
-      font-family: var(--font-body);
-      font-size: 0.67rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--red);
-    }
-
-    /* ─── Container ────────────────────────────────────────────── */
-    .container {
-      width: 100%;
+    /* ── Helpers ────────────────────────────────────────────────── */
+    .wrap {
       max-width: var(--max-w);
       margin-inline: auto;
       padding-inline: var(--gutter);
     }
-
-    /* ─── Scroll reveal ────────────────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal            { opacity: 1; transform: none; transition: none; }
-      html               { scroll-behavior: auto; }
-    }
-
-    /* ─── Lang switcher ────────────────────────────────────────── */
-    .lang-he { display: block; }
-    .lang-en { display: none; }
-    span.lang-he { display: inline; }
-    span.lang-en { display: none; }
-    li.lang-he   { display: list-item; }
-    li.lang-en   { display: none; }
-
-    html[lang="en"] .lang-he  { display: none; }
-    html[lang="en"] .lang-en  { display: block; }
-    html[lang="en"] span.lang-he { display: none; }
-    html[lang="en"] span.lang-en { display: inline; }
-    html[lang="en"] li.lang-he   { display: none; }
-    html[lang="en"] li.lang-en   { display: list-item; }
-
-    /* ═══════════════════════════════════════════════════════════
-       HEADER
-    ═══════════════════════════════════════════════════════════ */
-    #site-header {
-      position: fixed;
-      inset-block-start: 0;
-      inset-inline: 0;
-      z-index: 100;
-      padding-block: 1.1rem;
-      transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
-    }
-    #site-header.scrolled {
-      background: rgba(243,232,216,0.94);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 1px 0 rgba(191,155,48,0.3);
-      padding-block: 0.75rem;
-    }
-    .nav-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-    }
-    .nav-logo {
-      font-family: var(--font-display-latin);
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      font-weight: 300;
-      letter-spacing: 0.04em;
-      color: var(--ink);
-      flex-shrink: 0;
-    }
-    :lang(he) .nav-logo { font-family: var(--font-display-hebrew); }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: clamp(1rem, 3vw, 2.5rem);
-    }
-    .nav-links a {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-mid);
-      position: relative;
-      padding-block-end: 0.2rem;
-      transition: color 0.25s;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      inset-block-end: 0;
-      inset-inline-start: 0;
-      width: 100%;
-      height: 1.5px;
-      background: var(--red);
-      transform: scaleX(0);
-      transform-origin: inline-start;
-      transition: transform 0.35s var(--ease);
-    }
-    [dir="rtl"] .nav-links a::after { transform-origin: right; }
-    .nav-links a:hover, .nav-links a.active { color: var(--red); }
-    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
-
-    #lang-btn {
-      font-size: 0.68rem;
+    .label {
+      font-size: 0.65rem;
       font-weight: 500;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      border: 1.5px solid var(--red);
-      color: var(--red);
-      padding: 0.35rem 0.85rem;
-      transition: background 0.25s, color 0.25s;
-      flex-shrink: 0;
+      color: var(--gray-3);
     }
-    #lang-btn:hover { background: var(--red); color: var(--cream); }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--gray-2);
+    }
+
+    /* ── Lang toggle ────────────────────────────────────────────── */
+    .he { display: block; }
+    .en { display: none; }
+    span.he { display: inline; }
+    span.en { display: none; }
+    html[lang="en"] .he  { display: none; }
+    html[lang="en"] .en  { display: block; }
+    html[lang="en"] span.he { display: none; }
+    html[lang="en"] span.en { display: inline; }
+
+    /* ── Reveal ─────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html    { scroll-behavior: auto; }
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       HEADER
+    ════════════════════════════════════════════════════════════ */
+    #header {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 200;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-2);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .logo {
+      font-family: var(--font-heb);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--black);
+    }
+    html[lang="en"] .logo { font-family: var(--font-sans); font-size: 0.95rem; letter-spacing: 0.04em; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--gray-4);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+
+    .lang-btn {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--gray-3);
+      transition: color 0.2s;
+    }
+    .lang-btn:hover { color: var(--black); }
 
     #menu-btn {
       display: none;
       flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      padding: 6px 4px;
+      gap: 4px;
+      padding: 4px;
     }
     #menu-btn span {
       display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--ink);
-      transition: transform 0.3s, opacity 0.3s;
+      width: 20px;
+      height: 1px;
+      background: var(--black);
+      transition: transform 0.25s, opacity 0.25s;
     }
-
-    @media (max-width: 740px) {
+    @media (max-width: 680px) {
       #menu-btn { display: flex; }
       .nav-links {
         display: none;
         position: fixed;
-        inset: 0;
-        background: var(--cream);
+        inset: 56px 0 0;
+        background: var(--white);
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         gap: 2.5rem;
-        z-index: 200;
+        z-index: 190;
       }
       .nav-links.open { display: flex; }
-      .nav-links a { font-size: 1.1rem; letter-spacing: 0.08em; }
+      .nav-links a { font-size: 1rem; }
     }
 
-    /* ═══════════════════════════════════════════════════════════
+    /* ════════════════════════════════════════════════════════════
        HERO
-    ═══════════════════════════════════════════════════════════ */
+    ════════════════════════════════════════════════════════════ */
     #hero {
-      position: relative;
-      min-height: 100svh;
-      display: flex;
-      align-items: flex-end;
-      padding-block-end: clamp(4rem, 10vw, 8rem);
-      overflow: hidden;
+      padding-block-start: 56px; /* header height */
     }
-
-    /* Abstract marbling SVG flourish — behind everything */
-    .hero-marbling {
-      position: absolute;
-      inset-block-start: -5%;
-      inset-inline-end: -8%;
-      width: min(75vw, 720px);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.68;
-    }
-    [dir="rtl"] .hero-marbling {
-      inset-inline-end: auto;
-      inset-inline-start: -8%;
-      transform: scaleX(-1);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 780px;
-    }
-    [dir="rtl"] .hero-content { text-align: right; }
-
-    .hero-eyebrow { margin-block-end: 1.25rem; }
-
-    h1.hero-title {
-      font-size: clamp(3rem, 9vw, 7.5rem);
-      font-weight: 300;
-      letter-spacing: -0.02em;
-      line-height: 1.0;
-      color: var(--ink);
-      margin-block-end: 0.15em;
-    }
-    /* The one jade underline signature moment */
-    .hero-title-underline {
-      display: block;
-      position: relative;
-    }
-    .hero-title-underline::after {
-      content: '';
-      position: absolute;
-      inset-block-end: 0.06em;
-      inset-inline-start: 0;
+    .hero-image {
       width: 100%;
-      height: 3px;
-      background: var(--jade);
-      transform: scaleX(0);
-      transform-origin: inline-start;
-      transition: transform 0.9s 0.6s var(--ease);
-    }
-    [dir="rtl"] .hero-title-underline::after { transform-origin: right; }
-    .hero-title-underline.drawn::after { transform: scaleX(1); }
-
-    .hero-ethos {
-      font-family: var(--font-display-latin);
-      font-style: italic;
-      font-size: clamp(1.1rem, 2.2vw, 1.45rem);
-      color: var(--ink-mid);
-      line-height: 1.55;
-      max-width: 520px;
-      margin-block: 1.75rem 2.5rem;
-    }
-    :lang(he) .hero-ethos {
-      font-family: var(--font-display-hebrew);
-      font-style: normal;
-      font-weight: 300;
-    }
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    [dir="rtl"] .hero-ctas { flex-direction: row-reverse; }
-
-    .btn-primary {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      background: var(--red);
-      color: var(--cream);
-      padding: 0.85rem 2.2rem;
-      border: 1.5px solid var(--red);
-      transition: background 0.25s, color 0.25s;
-    }
-    .btn-primary:hover { background: transparent; color: var(--red); }
-    .btn-outline {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      border: 1.5px solid rgba(44,31,24,0.3);
-      color: var(--ink-mid);
-      padding: 0.85rem 2.2rem;
-      transition: border-color 0.25s, color 0.25s;
-    }
-    .btn-outline:hover { border-color: var(--red); color: var(--red); }
-
-    /* Decorative scroll indicator */
-    .scroll-hint {
-      position: absolute;
-      inset-block-end: 2rem;
-      inset-inline-start: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--ink-soft);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      z-index: 2;
-    }
-    .scroll-hint-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
-      50%       { opacity: 1;   transform: scaleY(1);   transform-origin: top; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .scroll-hint-line { animation: none; opacity: 0.5; }
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       GOLD RULE divider
-    ═══════════════════════════════════════════════════════════ */
-    .gold-rule {
-      border: none;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin-block: 0;
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       ABOUT
-    ═══════════════════════════════════════════════════════════ */
-    #about { padding-block: var(--section-gap); }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 5fr 4fr;
-      gap: clamp(2.5rem, 6vw, 6rem);
-      align-items: start;
-    }
-    @media (max-width: 820px) {
-      .about-grid { grid-template-columns: 1fr; }
-    }
-
-    .about-text .eyebrow { margin-block-end: 1rem; }
-    .about-text h2 {
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      margin-block-end: 1.5rem;
-    }
-    .about-text p {
-      color: var(--ink-mid);
-      margin-block-end: 1.1rem;
-      font-size: 1.0rem;
-    }
-    .about-facts {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-      margin-block-start: 2.25rem;
-      padding-block-start: 2rem;
-      border-block-start: 1px solid var(--gold-light);
-    }
-    .fact-item {}
-    .fact-num {
-      font-family: var(--font-display-latin);
-      font-size: 2.2rem;
-      font-weight: 300;
-      color: var(--red);
-      line-height: 1;
-    }
-    .fact-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      margin-block-start: 0.2rem;
-    }
-
-    /* Portrait */
-    .about-portrait {
-      position: relative;
-    }
-    .portrait-frame {
-      position: relative;
-      aspect-ratio: 3/4;
-      background: var(--cream-dark);
+      aspect-ratio: 16/9;
+      background: var(--gray-1);
       overflow: hidden;
+      position: relative;
     }
-    .portrait-frame img {
+    @media (max-width: 768px) { .hero-image { aspect-ratio: 4/3; } }
+    .hero-image img {
       width: 100%; height: 100%;
       object-fit: cover;
     }
-    .portrait-placeholder {
+    .hero-ph {
       position: absolute;
       inset: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
       gap: 0.75rem;
-      color: var(--ink-soft);
+      color: var(--gray-3);
+    }
+    .hero-ph svg { width: 40px; height: 40px; }
+    .hero-ph span { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; }
+
+    /* ════════════════════════════════════════════════════════════
+       TAGLINE BAND (below hero)
+    ════════════════════════════════════════════════════════════ */
+    #tagline {
+      padding-block: clamp(3rem, 6vw, 5rem);
+      border-bottom: 1px solid var(--gray-2);
+    }
+    .tagline-text {
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      font-weight: 300;
+      line-height: 1.45;
+      max-width: 800px;
+      color: var(--black);
+    }
+    html[lang="he"] .tagline-text { font-family: var(--font-heb); }
+
+    /* category nav row */
+    .cat-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-block-start: 2.5rem;
+      border-top: 1px solid var(--gray-2);
+    }
+    .cat-nav a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--gray-3);
+      padding: 0.85rem 1.5rem 0.85rem 0;
+      border-top: 2px solid transparent;
+      margin-top: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    [dir="rtl"] .cat-nav a { padding: 0.85rem 0 0.85rem 1.5rem; }
+    .cat-nav a:hover, .cat-nav a.active { color: var(--black); border-top-color: var(--black); }
+
+    /* ════════════════════════════════════════════════════════════
+       SECTION SHARED
+    ════════════════════════════════════════════════════════════ */
+    section { padding-block: clamp(4rem, 8vw, 7rem); }
+    .section-eyebrow {
       font-size: 0.65rem;
+      font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--gray-3);
+      margin-block-end: 1.25rem;
     }
-    /* Offset decorative orange square behind portrait */
-    .portrait-deco {
-      position: absolute;
-      inset-block-end: -16px;
-      inset-inline-end: -16px;
-      width: 60%;
-      height: 60%;
-      background: var(--orange);
-      opacity: 0.12;
-      z-index: -1;
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-block-end: 1rem;
     }
-    .portrait-caption {
-      margin-block-start: 1rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      color: var(--ink-soft);
-      text-align: center;
-    }
+    html[lang="he"] .section-title { font-family: var(--font-heb); }
 
-    /* ═══════════════════════════════════════════════════════════
-       GALLERY — editorial asymmetric grid
-    ═══════════════════════════════════════════════════════════ */
-    #gallery {
-      padding-block: var(--section-gap);
-      background: var(--cream-mid);
-      border-block: 1px solid rgba(191,155,48,0.22);
-    }
-    .gallery-header {
+    /* ════════════════════════════════════════════════════════════
+       GALLERY SECTION
+    ════════════════════════════════════════════════════════════ */
+    #gallery { border-top: 1px solid var(--gray-2); }
+    .gallery-top {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      margin-block-end: clamp(2.5rem, 5vw, 4rem);
+      margin-block-end: clamp(2rem, 4vw, 3.5rem);
       gap: 2rem;
       flex-wrap: wrap;
     }
-    .gallery-header-text h2 {
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      margin-block-start: 0.75rem;
-    }
-    .gallery-header-note {
-      font-size: 0.85rem;
-      color: var(--ink-soft);
-      max-width: 280px;
+    .gallery-top-text {}
+    .gallery-note {
+      font-size: 0.75rem;
+      color: var(--gray-3);
+      max-width: 240px;
       text-align: end;
     }
-    [dir="rtl"] .gallery-header-note { text-align: start; }
+    [dir="rtl"] .gallery-note { text-align: start; }
 
-    /* The editorial grid */
-    .art-grid {
+    /* Work grid — mimics the portfolio grid from reference site */
+    .work-grid {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-auto-rows: auto;
-      gap: 1.5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--gray-2);
+      border: 1px solid var(--gray-2);
     }
-    /* Named slots for desktop */
-    .art-a { grid-column: 1 / 6;  grid-row: 1 / 3; } /* Large portrait  */
-    .art-b { grid-column: 6 / 9;  grid-row: 1;     } /* Medium          */
-    .art-c { grid-column: 9 / 13; grid-row: 1;     } /* Medium          */
-    .art-d { grid-column: 6 / 10; grid-row: 2;     } /* Medium-wide     */
-    .art-e { grid-column: 10 / 13; grid-row: 2;    } /* Small           */
-    .art-f { grid-column: 1 / 5;  grid-row: 3;     } /* Medium          */
-    .art-g { grid-column: 5 / 9;  grid-row: 3;     } /* Medium          */
-    .art-h { grid-column: 9 / 13; grid-row: 3;     } /* Medium          */
+    @media (max-width: 600px) { .work-grid { grid-template-columns: 1fr; } }
 
-    @media (max-width: 900px) {
-      .art-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-      .art-a, .art-b, .art-c, .art-d, .art-e, .art-f, .art-g, .art-h {
-        grid-column: auto;
-        grid-row: auto;
-      }
-      .art-a { grid-column: span 2; }
-    }
-    @media (max-width: 560px) {
-      .art-grid { grid-template-columns: 1fr; }
-      .art-a, .art-b, .art-c, .art-d, .art-e, .art-f, .art-g, .art-h {
-        grid-column: span 1;
-      }
-    }
-
-    /* Piece card */
-    .piece {
-      background: var(--cream);
-      border: 1px solid rgba(191,155,48,0.18);
+    .work-item {
+      background: var(--white);
       display: flex;
       flex-direction: column;
-      transition: box-shadow 0.35s, border-color 0.35s;
-    }
-    .piece:hover {
-      box-shadow: 0 6px 32px rgba(158,43,37,0.1);
-      border-color: rgba(191,155,48,0.55);
-    }
-    .piece-img {
-      background: var(--cream-dark);
+      cursor: pointer;
       overflow: hidden;
-      flex-shrink: 0;
     }
-    .art-a .piece-img { aspect-ratio: 3/5; }
-    .art-b .piece-img,
-    .art-c .piece-img,
-    .art-d .piece-img,
-    .art-f .piece-img,
-    .art-g .piece-img,
-    .art-h .piece-img { aspect-ratio: 4/3; }
-    .art-e .piece-img  { aspect-ratio: 1/1; }
+    .work-item:nth-child(1) {
+      grid-column: span 2;
+    }
+    @media (max-width: 600px) { .work-item:nth-child(1) { grid-column: span 1; } }
 
-    .piece-img img {
+    .work-img {
+      position: relative;
+      overflow: hidden;
+      background: var(--gray-1);
+    }
+    .work-item:nth-child(1) .work-img { aspect-ratio: 16/7; }
+    .work-item:not(:nth-child(1)) .work-img { aspect-ratio: 4/3; }
+
+    .work-img img {
       width: 100%; height: 100%;
       object-fit: cover;
-      transition: transform 0.6s var(--ease), opacity 0.4s;
-      opacity: 0.9;
+      transition: transform 0.6s ease, opacity 0.4s;
     }
-    .piece:hover .piece-img img { transform: scale(1.04); opacity: 1; }
-    .img-ph {
-      width: 100%; height: 100%;
+    .work-item:hover .work-img img { transform: scale(1.03); }
+    .work-img .img-ph {
+      position: absolute;
+      inset: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
       gap: 0.5rem;
-      color: var(--ink-soft);
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      min-height: 180px;
+      color: var(--gray-3);
     }
-    .piece-body {
-      padding: 1.1rem 1.25rem 1.35rem;
-      flex: 1;
+    .work-img .img-ph svg { width: 28px; }
+    .work-img .img-ph span { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; }
+
+    .work-info {
+      padding: 1.1rem 1.25rem 1.3rem;
       display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-    .piece-meta-row {
-      display: flex;
-      gap: 1.25rem;
-      margin-block-end: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .piece-meta-group {}
-    .meta-key {
-      font-size: 0.56rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-    .meta-val {
-      font-size: 0.78rem;
-      color: var(--ink-mid);
-      margin-block-start: 0.1rem;
-    }
-    .piece-title {
-      font-family: var(--font-display-latin);
-      font-style: italic;
-      font-size: 1.15rem;
-      font-weight: 300;
-      color: var(--ink);
-    }
-    :lang(he) .piece-title {
-      font-family: var(--font-display-hebrew);
-      font-style: normal;
-    }
-    .piece-desc {
-      font-size: 0.8rem;
-      color: var(--ink-soft);
-      line-height: 1.55;
-      flex: 1;
-    }
-    .piece-footer {
-      display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
-      margin-block-start: 0.9rem;
-      padding-block-start: 0.75rem;
-      border-block-start: 1px solid rgba(191,155,48,0.2);
-    }
-    .piece-price {
-      font-family: var(--font-display-latin);
-      font-size: 1.15rem;
-      font-weight: 300;
-      color: var(--gold);
-    }
-    .btn-inquire {
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: 1.5px solid var(--red);
-      color: var(--red);
-      padding: 0.45rem 1.1rem;
-      transition: background 0.25s, color 0.25s;
-    }
-    .btn-inquire:hover { background: var(--red); color: var(--cream); }
-
-    /* ═══════════════════════════════════════════════════════════
-       WORKSHOPS — ticket-style cards
-    ═══════════════════════════════════════════════════════════ */
-    #workshops { padding-block: var(--section-gap); }
-    .ws-header { margin-block-end: clamp(2.5rem, 5vw, 4.5rem); }
-    .ws-header h2 {
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      margin-block: 0.75rem 1rem;
-    }
-    .ws-header p {
-      max-width: 520px;
-      color: var(--ink-mid);
-    }
-
-    .tickets-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-      gap: 1.75rem;
-    }
-
-    /* Ticket card */
-    .ticket {
-      background: var(--cream);
-      border: 1.5px solid rgba(158,43,37,0.18);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: box-shadow 0.35s, transform 0.35s;
-    }
-    .ticket:hover {
-      box-shadow: 0 8px 40px rgba(158,43,37,0.12);
-      transform: translateY(-3px);
-    }
-    /* Perforated tear edge */
-    .ticket-tear {
-      height: 1px;
-      background-image: repeating-linear-gradient(
-        90deg,
-        var(--red) 0,
-        var(--red) 6px,
-        transparent 6px,
-        transparent 12px
-      );
-      opacity: 0.3;
-      flex-shrink: 0;
-    }
-
-    .ticket-top {
-      padding: 1.5rem 1.6rem 1.25rem;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
+      border-top: 1px solid var(--gray-2);
       gap: 1rem;
     }
-    /* Jade stamp circle */
-    .ticket-stamp {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      background: var(--jade);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .ticket-stamp-text {
-      font-size: 0.5rem;
+    .work-meta { display: flex; flex-direction: column; gap: 0.2rem; }
+    .work-cat {
+      font-size: 0.62rem;
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
-      text-align: center;
-      line-height: 1.3;
+      color: var(--gray-3);
     }
-    .ticket-type {
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-block-end: 0.5rem;
+    .work-title {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--black);
+      letter-spacing: 0.02em;
     }
-    .ticket-title {
-      font-family: var(--font-display-latin);
-      font-size: 1.3rem;
-      font-weight: 300;
-      line-height: 1.2;
-      color: var(--ink);
-    }
-    :lang(he) .ticket-title { font-family: var(--font-display-hebrew); }
-
-    .ticket-body {
-      padding: 0 1.6rem 1.25rem;
-    }
-    .ticket-body p {
-      font-size: 0.85rem;
-      color: var(--ink-mid);
-      line-height: 1.6;
-    }
-
-    .ticket-tear { margin: 0; }
-
-    .ticket-bottom {
-      padding: 1.1rem 1.6rem 1.5rem;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-    }
-    .ticket-detail-key {
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-    .ticket-detail-val {
-      font-size: 0.82rem;
-      color: var(--ink);
-      margin-block-start: 0.1rem;
-    }
-
-    .ticket-footer {
-      padding: 1rem 1.6rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      border-block-start: 1px dashed rgba(158,43,37,0.2);
-    }
-    .ticket-price {
-      font-family: var(--font-display-latin);
-      font-size: 1.6rem;
-      font-weight: 300;
-      color: var(--red);
-    }
-    .ticket-price-note {
-      font-size: 0.65rem;
-      color: var(--ink-soft);
-      letter-spacing: 0.1em;
-    }
-    .btn-book {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      background: var(--red);
-      color: var(--cream);
-      padding: 0.65rem 1.4rem;
-      border: 1.5px solid var(--red);
-      transition: background 0.25s, color 0.25s;
+    html[lang="he"] .work-title { font-family: var(--font-heb); font-size: 1rem; }
+    .work-year {
+      font-size: 0.7rem;
+      color: var(--gray-3);
       white-space: nowrap;
     }
-    .btn-book:hover { background: transparent; color: var(--red); }
 
-    /* ═══════════════════════════════════════════════════════════
-       INTERSTITIAL — editorial pull-quote
-    ═══════════════════════════════════════════════════════════ */
-    #interstitial {
-      padding-block: clamp(4rem, 9vw, 7rem);
-      border-block: 1px solid rgba(191,155,48,0.22);
-      background: var(--cream-dark);
+    /* ════════════════════════════════════════════════════════════
+       PIECE DETAIL OVERLAY / SECTION
+    ════════════════════════════════════════════════════════════ */
+    /* Full piece detail page feel — shown on click */
+    #piece-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      z-index: 300;
+      overflow-y: auto;
+      padding-block-start: 56px;
+    }
+    #piece-overlay.open { display: block; }
+    .piece-close {
+      position: fixed;
+      top: 14px;
+      z-index: 310;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-3);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+      inset-inline-end: var(--gutter);
+    }
+    [dir="rtl"] .piece-close { inset-inline-end: auto; inset-inline-start: var(--gutter); }
+    .piece-close:hover { color: var(--black); }
+    .piece-close svg { width: 14px; }
+
+    .piece-hero-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--gray-1);
       overflow: hidden;
       position: relative;
     }
-    .interstitial-inner {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: clamp(2rem, 5vw, 5rem);
-      align-items: center;
-    }
-    @media (max-width: 680px) {
-      .interstitial-inner { grid-template-columns: 1fr; }
-    }
-    .interstitial-label {
+    @media (max-width: 768px) { .piece-hero-img { aspect-ratio: 4/3; } }
+    .piece-hero-img .img-ph {
+      position: absolute;
+      inset: 0;
       display: flex;
+      align-items: center;
+      justify-content: center;
       flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-start;
-    }
-    [dir="rtl"] .interstitial-label { align-items: flex-end; }
-    .interstitial-num {
-      font-family: var(--font-display-latin);
-      font-size: 6rem;
-      font-weight: 300;
-      line-height: 1;
-      color: rgba(158,43,37,0.12);
-      letter-spacing: -0.04em;
-    }
-    .interstitial-quote {
-      font-family: var(--font-display-latin);
-      font-style: italic;
-      font-size: clamp(1.3rem, 3vw, 2.1rem);
-      font-weight: 300;
-      line-height: 1.45;
-      color: var(--ink);
-    }
-    :lang(he) .interstitial-quote {
-      font-family: var(--font-display-hebrew);
-      font-style: normal;
-    }
-    .interstitial-quote em {
-      font-style: normal;
-      color: var(--red);
-    }
-    .interstitial-attr {
-      display: block;
-      margin-block-start: 1.25rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
+      gap: 0.75rem;
+      color: var(--gray-3);
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       CONTACT
-    ═══════════════════════════════════════════════════════════ */
-    #contact { padding-block: var(--section-gap); }
-    .contact-grid {
+    .piece-detail {
+      padding-block: clamp(2.5rem, 5vw, 4rem);
+      border-bottom: 1px solid var(--gray-2);
+    }
+    /* 3-column metadata row — exact mirror of reference site */
+    .piece-meta-row {
       display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: clamp(3rem, 8vw, 7rem);
-      align-items: start;
-    }
-    @media (max-width: 820px) {
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-    .contact-left h2 {
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      margin-block: 0.75rem 1.25rem;
-    }
-    .contact-left p {
-      color: var(--ink-mid);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--gray-2);
+      padding-block-end: 1.75rem;
       margin-block-end: 2rem;
     }
-    .channels { display: flex; flex-direction: column; }
-    .channel {
+    @media (max-width: 560px) { .piece-meta-row { grid-template-columns: 1fr; gap: 1rem; } }
+    .meta-col {}
+    .meta-col .meta-key {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray-3);
+      margin-block-end: 0.4rem;
+    }
+    .meta-col .meta-val {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--black);
+    }
+
+    .piece-title-large {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-block-end: 1.25rem;
+    }
+    html[lang="he"] .piece-title-large { font-family: var(--font-heb); }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--gray-3);
+      margin-block-end: 2rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--black); }
+    .back-link svg { width: 14px; }
+
+    .piece-desc {
+      font-size: 0.95rem;
+      color: var(--gray-4);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-block-end: 2.5rem;
+    }
+    html[lang="he"] .piece-desc { font-family: var(--font-heb); font-size: 1rem; }
+
+    .piece-price-row {
       display: flex;
       align-items: center;
-      gap: 1.1rem;
-      padding-block: 1rem;
-      border-block-end: 1px solid rgba(44,31,24,0.08);
-      transition: color 0.25s;
+      justify-content: space-between;
+      gap: 2rem;
+      border-top: 1px solid var(--gray-2);
+      padding-block-start: 1.5rem;
     }
-    .channel:last-child { border-block-end: none; }
-    .channel:hover { color: var(--red); }
+    .piece-price {
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--black);
+      letter-spacing: 0.02em;
+    }
+    .btn-inquire {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--black);
+      color: var(--black);
+      padding: 0.75rem 1.75rem;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-inquire:hover { background: var(--black); color: var(--white); }
+
+    /* Detail image strip */
+    .piece-images {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--gray-2);
+      margin-block: 1px;
+    }
+    @media (max-width: 560px) { .piece-images { grid-template-columns: 1fr; } }
+    .piece-images .pi {
+      aspect-ratio: 4/3;
+      background: var(--gray-1);
+      position: relative;
+      overflow: hidden;
+    }
+    .piece-images .pi.wide { grid-column: span 2; aspect-ratio: 16/7; }
+    @media (max-width: 560px) { .piece-images .pi.wide { grid-column: span 1; aspect-ratio: 4/3; } }
+    .piece-images .pi .img-ph {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--gray-3);
+    }
+
+    /* Next piece card */
+    .next-piece {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--gray-1);
+      border-top: 1px solid var(--gray-2);
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+    @media (max-width: 560px) { .next-piece { grid-template-columns: 1fr; } }
+    .next-piece:hover { background: var(--gray-2); }
+    .next-piece-img {
+      aspect-ratio: 4/3;
+      background: var(--gray-2);
+      overflow: hidden;
+      position: relative;
+    }
+    .next-piece-img img { width:100%;height:100%;object-fit:cover; }
+    .next-piece-img .img-ph { position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;color:var(--gray-3); }
+    .next-piece-info {
+      padding: clamp(2rem, 5vw, 4rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .next-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-3); }
+    .next-title {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-block: 1rem;
+    }
+    html[lang="he"] .next-title { font-family: var(--font-heb); }
+    .next-arrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--gray-4);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       ABOUT SECTION
+    ════════════════════════════════════════════════════════════ */
+    #about {
+      border-top: 1px solid var(--gray-2);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: start;
+    }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .about-portrait {
+      aspect-ratio: 3/4;
+      background: var(--gray-1);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-portrait img { width: 100%; height: 100%; object-fit: cover; }
+    .about-portrait .img-ph {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.75rem; color: var(--gray-3);
+    }
+
+    .about-text .section-title { margin-block-end: 1.5rem; }
+    .about-text p {
+      font-size: 0.95rem;
+      color: var(--gray-4);
+      line-height: 1.75;
+      margin-block-end: 1.1rem;
+    }
+    html[lang="he"] .about-text p { font-family: var(--font-heb); font-size: 1rem; }
+
+    .about-facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--gray-2);
+      margin-block-start: 2.5rem;
+    }
+    .fact {
+      padding-block: 1.5rem;
+      border-inline-end: 1px solid var(--gray-2);
+      padding-inline-end: 1.5rem;
+    }
+    .fact:last-child { border-inline-end: none; }
+    [dir="rtl"] .fact {
+      border-inline-end: none;
+      border-inline-start: 1px solid var(--gray-2);
+      padding-inline-end: 0;
+      padding-inline-start: 1.5rem;
+    }
+    [dir="rtl"] .fact:last-child { border-inline-start: none; }
+    .fact-num {
+      font-size: 1.75rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--black);
+    }
+    .fact-lbl {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-3);
+      margin-block-start: 0.35rem;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       WORKSHOPS SECTION
+    ════════════════════════════════════════════════════════════ */
+    #workshops {
+      border-top: 1px solid var(--gray-2);
+    }
+    .ws-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 5rem);
+      margin-block-end: clamp(3rem, 6vw, 5rem);
+      align-items: end;
+    }
+    @media (max-width: 680px) { .ws-top { grid-template-columns: 1fr; } }
+    .ws-top p {
+      font-size: 0.9rem;
+      color: var(--gray-4);
+      line-height: 1.7;
+    }
+    html[lang="he"] .ws-top p { font-family: var(--font-heb); }
+
+    .ws-list { display: flex; flex-direction: column; gap: 0; }
+    .ws-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 2rem 3rem;
+      align-items: start;
+      padding-block: 2.25rem;
+      border-top: 1px solid var(--gray-2);
+      transition: background 0.2s;
+    }
+    .ws-row:last-child { border-bottom: 1px solid var(--gray-2); }
+    .ws-row:hover { background: var(--gray-1); }
+    @media (max-width: 680px) {
+      .ws-row { grid-template-columns: 1fr; gap: 1rem; }
+    }
+    .ws-index {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--gray-3);
+      padding-block-start: 0.2rem;
+      min-width: 2.5rem;
+    }
+    .ws-content {}
+    .ws-type {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-3);
+      margin-block-end: 0.5rem;
+    }
+    .ws-name {
+      font-size: clamp(1rem, 2.2vw, 1.4rem);
+      font-weight: 300;
+      color: var(--black);
+      margin-block-end: 0.65rem;
+      line-height: 1.25;
+    }
+    html[lang="he"] .ws-name { font-family: var(--font-heb); }
+    .ws-desc {
+      font-size: 0.85rem;
+      color: var(--gray-3);
+      max-width: 480px;
+      line-height: 1.65;
+      margin-block-end: 1rem;
+    }
+    html[lang="he"] .ws-desc { font-family: var(--font-heb); font-size: 0.9rem; }
+    .ws-specs {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .ws-spec {}
+    .ws-spec .sk {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-3);
+    }
+    .ws-spec .sv {
+      font-size: 0.8rem;
+      color: var(--black);
+      margin-block-start: 0.15rem;
+    }
+
+    .ws-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+    @media (max-width: 680px) { .ws-right { align-items: flex-start; } }
+    .ws-price {
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--black);
+      white-space: nowrap;
+    }
+    .ws-price-note {
+      font-size: 0.65rem;
+      color: var(--gray-3);
+      margin-block-start: -0.5rem;
+      text-align: end;
+    }
+    [dir="rtl"] .ws-right .ws-price-note { text-align: start; }
+    .btn-ws {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--black);
+      color: var(--black);
+      padding: 0.6rem 1.35rem;
+      transition: background 0.22s, color 0.22s;
+      white-space: nowrap;
+    }
+    .btn-ws:hover { background: var(--black); color: var(--white); }
+
+    /* ════════════════════════════════════════════════════════════
+       CONTACT SECTION
+    ════════════════════════════════════════════════════════════ */
+    #contact {
+      border-top: 1px solid var(--gray-2);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 8vw, 8rem);
+      align-items: start;
+    }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    .contact-left {}
+    .contact-left .section-title { margin-block-end: 1rem; }
+    .contact-left p {
+      font-size: 0.9rem;
+      color: var(--gray-3);
+      line-height: 1.7;
+      margin-block-end: 2.5rem;
+    }
+    html[lang="he"] .contact-left p { font-family: var(--font-heb); font-size: 0.95rem; }
+
+    .channels { display: flex; flex-direction: column; }
+    .ch {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-block: 1.1rem;
+      border-top: 1px solid var(--gray-2);
+      transition: opacity 0.2s;
+    }
+    .ch:last-child { border-bottom: 1px solid var(--gray-2); }
+    .ch:hover { opacity: 0.6; }
     .ch-icon {
-      width: 38px;
-      height: 38px;
-      border: 1.5px solid rgba(44,31,24,0.15);
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--gray-2);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      transition: border-color 0.25s, background 0.25s;
     }
-    .channel:hover .ch-icon {
-      border-color: var(--red);
-      background: var(--red-light);
-    }
-    .ch-icon svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-    .ch-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-    .ch-val { font-size: 0.9rem; margin-block-start: 0.1rem; }
+    .ch-icon svg { width: 14px; height: 14px; stroke: var(--black); fill: none; stroke-width: 1.5; }
+    .ch-lbl { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-3); }
+    .ch-val { font-size: 0.9rem; color: var(--black); margin-block-start: 0.15rem; }
 
     /* Form */
-    .contact-form { display: flex; flex-direction: column; gap: 0; }
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
-    .field { margin-block-end: 1.5rem; }
-    .field label {
+    .contact-form { display: flex; flex-direction: column; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.5rem; }
+    @media (max-width: 420px) { .f-row { grid-template-columns: 1fr; } }
+    .f-field { margin-block-end: 1.75rem; }
+    .f-field label {
       display: block;
       font-size: 0.6rem;
       font-weight: 500;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--ink-soft);
-      margin-block-end: 0.45rem;
+      color: var(--gray-3);
+      margin-block-end: 0.5rem;
     }
-    .field input,
-    .field textarea,
-    .field select {
+    .f-field input,
+    .f-field textarea,
+    .f-field select {
       width: 100%;
       background: transparent;
       border: none;
-      border-block-end: 1.5px solid rgba(44,31,24,0.2);
-      color: var(--ink);
-      font-family: var(--font-body);
-      font-size: 0.95rem;
+      border-bottom: 1px solid var(--gray-2);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
       font-weight: 300;
+      color: var(--black);
       padding-block: 0.5rem;
-      transition: border-color 0.25s;
+      transition: border-color 0.2s;
       outline: none;
-      appearance: none;
       -webkit-appearance: none;
     }
-    .field input::placeholder,
-    .field textarea::placeholder { color: var(--ink-soft); }
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus { border-block-end-color: var(--red); }
-    .field select option { background: var(--cream); }
-    .field textarea { resize: vertical; min-height: 110px; }
+    .f-field input::placeholder,
+    .f-field textarea::placeholder { color: var(--gray-3); }
+    .f-field input:focus,
+    .f-field textarea:focus,
+    .f-field select:focus { border-bottom-color: var(--black); }
+    .f-field select option { background: var(--white); }
+    .f-field textarea { resize: vertical; min-height: 100px; }
     .btn-send {
       align-self: flex-start;
       font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      background: var(--red);
-      color: var(--cream);
-      padding: 0.9rem 2.5rem;
-      border: 1.5px solid var(--red);
+      background: var(--black);
+      color: var(--white);
+      border: 1px solid var(--black);
+      padding: 0.85rem 2.25rem;
       transition: background 0.25s, color 0.25s;
       margin-block-start: 0.5rem;
     }
-    .btn-send:hover { background: transparent; color: var(--red); }
+    .btn-send:hover { background: transparent; color: var(--black); }
 
-    /* ═══════════════════════════════════════════════════════════
+    /* ════════════════════════════════════════════════════════════
        FOOTER
-    ═══════════════════════════════════════════════════════════ */
+    ════════════════════════════════════════════════════════════ */
     footer {
-      border-block-start: 1px solid rgba(191,155,48,0.3);
-      padding-block: 2rem;
+      border-top: 1px solid var(--gray-2);
+      padding-block: 1.75rem;
     }
     .footer-inner {
       display: flex;
@@ -975,922 +872,612 @@
       flex-wrap: wrap;
       gap: 1rem;
     }
-    .footer-logo {
-      font-family: var(--font-display-latin);
-      font-size: 1rem;
-      font-weight: 300;
+    .footer-tagline {
+      font-size: 0.75rem;
+      color: var(--gray-3);
+      max-width: 360px;
+    }
+    html[lang="he"] .footer-tagline { font-family: var(--font-heb); }
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a {
+      font-size: 0.7rem;
+      color: var(--gray-3);
       letter-spacing: 0.06em;
-      color: var(--ink-mid);
+      transition: color 0.2s;
     }
-    :lang(he) .footer-logo { font-family: var(--font-display-hebrew); }
-    .footer-social { display: flex; gap: 1.5rem; }
-    .footer-social a {
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      transition: color 0.25s;
-    }
-    .footer-social a:hover { color: var(--red); }
+    .footer-links a:hover { color: var(--black); }
     .footer-copy {
-      font-size: 0.65rem;
-      color: var(--ink-soft);
-      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      color: var(--gray-3);
     }
   </style>
 </head>
 
 <body>
 
-<!-- ══ HEADER ═══════════════════════════════════════════════════════ -->
-<header id="site-header" role="banner">
-  <div class="container">
-    <nav class="nav-wrap" aria-label="ניווט ראשי / Main navigation">
-      <a class="nav-logo" href="#hero">
-        <span class="lang-he">רבקה חיים</span>
-        <span class="lang-en">Rivka Chaim</span>
+<!-- PIECE DETAIL OVERLAY ────────────────────────────────────────────── -->
+<div id="piece-overlay" role="dialog" aria-modal="true" aria-label="Artwork detail">
+  <button class="piece-close" id="overlay-close" aria-label="Close">
+    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <path d="M1 1l12 12M13 1L1 13"/>
+    </svg>
+    <span class="he">סגור</span><span class="en">Close</span>
+  </button>
+
+  <div class="piece-hero-img" id="overlay-hero">
+    <div class="img-ph">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.8" aria-hidden="true">
+        <rect x="1" y="1" width="38" height="38"/><line x1="1" y1="1" x2="39" y2="39"/><line x1="39" y1="1" x2="1" y2="39"/>
+      </svg>
+      <span class="he">[תמונת יצירה ראשית]</span><span class="en">[MAIN ARTWORK IMAGE]</span>
+    </div>
+  </div>
+
+  <div class="piece-detail wrap">
+    <button class="back-link" id="overlay-back">
+      <svg viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+        <path d="M13 4H1M5 1L1 4l4 3"/>
+      </svg>
+      <span class="he">חזרה לגלריה</span><span class="en">Back to Gallery</span>
+    </button>
+
+    <!-- 3-col metadata row — exact pattern from reference site -->
+    <div class="piece-meta-row" id="overlay-meta">
+      <div class="meta-col">
+        <div class="meta-key"><span class="he">חומר</span><span class="en">Medium</span></div>
+        <div class="meta-val" id="om-medium">—</div>
+      </div>
+      <div class="meta-col">
+        <div class="meta-key"><span class="he">מידות</span><span class="en">Dimensions</span></div>
+        <div class="meta-val" id="om-dims">—</div>
+      </div>
+      <div class="meta-col">
+        <div class="meta-key"><span class="he">שנה</span><span class="en">Year</span></div>
+        <div class="meta-val" id="om-year">—</div>
+      </div>
+    </div>
+
+    <h1 class="piece-title-large" id="overlay-title">—</h1>
+    <p class="piece-desc" id="overlay-desc">—</p>
+
+    <div class="piece-price-row">
+      <span class="piece-price" id="overlay-price">₪—</span>
+      <a href="#contact" class="btn-inquire" id="overlay-cta" onclick="closeOverlay()">
+        <span class="he">פנייה לרכישה</span>
+        <span class="en">Inquire to purchase</span>
       </a>
-
-      <ul class="nav-links" id="nav-links" role="list">
-        <li>
-          <a href="#about"><span class="lang-he">אמנית</span><span class="lang-en">Artist</span></a>
-        </li>
-        <li>
-          <a href="#gallery"><span class="lang-he">גלריה</span><span class="lang-en">Gallery</span></a>
-        </li>
-        <li>
-          <a href="#workshops"><span class="lang-he">סדנאות</span><span class="lang-en">Workshops</span></a>
-        </li>
-        <li>
-          <a href="#contact"><span class="lang-he">צור קשר</span><span class="lang-en">Contact</span></a>
-        </li>
-      </ul>
-
-      <div style="display:flex;align-items:center;gap:0.75rem;">
-        <button id="lang-btn" aria-label="Switch language">
-          <span class="lang-he">EN</span>
-          <span class="lang-en">עב</span>
-        </button>
-        <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </nav>
-  </div>
-</header>
-
-<!-- ══ HERO ══════════════════════════════════════════════════════════ -->
-<section id="hero" aria-label="Hero">
-
-  <!-- Abstract marbling flourish SVG — warm ink in water, not a literal pattern -->
-  <svg class="hero-marbling" viewBox="0 0 680 760" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs>
-      <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="6" result="blur"/>
-        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-      </filter>
-      <filter id="softer" x="-30%" y="-30%" width="160%" height="160%">
-        <feGaussianBlur stdDeviation="14"/>
-      </filter>
-    </defs>
-
-    <!-- Outer drift — gold -->
-    <path d="M620 80 C700 180 680 420 560 540 C440 660 220 720 100 640 C-20 560 20 340 80 220 C140 100 280 -20 420 20 C500 40 560 10 620 80Z"
-          fill="#BF9B30" opacity="0.13" filter="url(#softer)"/>
-
-    <!-- Main red swoosh — the dominant arm -->
-    <path d="M640 40 C680 140 660 300 580 420 C500 540 340 620 200 580 C80 548 40 440 60 320 C80 200 160 120 280 80 C380 48 500 -10 580 30 C620 48 636 36 640 40Z"
-          fill="#9E2B25" opacity="0.18" filter="url(#soft)"/>
-
-    <!-- Tighter red curl -->
-    <path d="M560 100 C620 180 600 340 520 440 C440 540 300 580 200 540 C120 508 100 420 120 320 C140 220 220 160 320 130 C400 106 500 60 560 100Z"
-          fill="#9E2B25" opacity="0.22"/>
-
-    <!-- Orange inner wave -->
-    <path d="M500 160 C540 240 520 380 440 460 C360 540 240 560 160 510 C100 472 100 380 120 290 C145 195 230 150 330 140 C410 132 468 98 500 160Z"
-          fill="#E08A33" opacity="0.2" filter="url(#soft)"/>
-
-    <!-- Gold thin ribbon -->
-    <path d="M460 200 Q540 280 480 400 Q420 520 300 540 Q200 556 160 480 Q120 400 180 310 Q230 230 340 210 Q400 198 460 200Z"
-          stroke="#BF9B30" stroke-width="2" opacity="0.35" fill="none"/>
-
-    <!-- Slim red tendril curling off to side -->
-    <path d="M580 60 C640 100 680 200 660 320 C648 390 620 440 580 460"
-          stroke="#9E2B25" stroke-width="3" opacity="0.18" fill="none" stroke-linecap="round"/>
-
-    <!-- Micro orange filament -->
-    <path d="M620 180 C660 220 680 300 650 380 C630 430 600 460 570 470"
-          stroke="#E08A33" stroke-width="1.5" opacity="0.2" fill="none" stroke-linecap="round"/>
-
-    <!-- Inner gold highlight blob -->
-    <ellipse cx="380" cy="340" rx="120" ry="160" fill="#BF9B30" opacity="0.07" filter="url(#softer)"/>
-
-    <!-- Tiny jade accent droplet — the signature one-time jade moment in the flourish -->
-    <circle cx="290" cy="500" r="38" fill="#1F5C53" opacity="0.1" filter="url(#soft)"/>
-    <circle cx="295" cy="496" r="18" fill="#1F5C53" opacity="0.12"/>
-  </svg>
-
-  <div class="container">
-    <div class="hero-content reveal">
-      <span class="eyebrow hero-eyebrow">
-        <span class="lang-he">פיסול נייר ופאפייה-מאשה — [עיר]</span>
-        <span class="lang-en">Paper Sculpture &amp; Papier-Mâché — [CITY]</span>
-      </span>
-
-      <h1 class="hero-title">
-        <span class="lang-he">
-          <span class="hero-title-underline">רבקה</span> חיים
-        </span>
-        <span class="lang-en">
-          <span class="hero-title-underline">Rivka</span> Chaim
-        </span>
-      </h1>
-
-      <p class="hero-ethos">
-        <span class="lang-he">מה שמתחיל כנייר רגיל — מסיים כדבר שמחזיק את הזמן בתוכו.</span>
-        <span class="lang-en">What begins as ordinary paper ends as something that holds time inside it.</span>
-      </p>
-
-      <div class="hero-ctas">
-        <a href="#gallery" class="btn-primary">
-          <span class="lang-he">צפו ביצירות</span>
-          <span class="lang-en">View Works</span>
-        </a>
-        <a href="#workshops" class="btn-outline">
-          <span class="lang-he">סדנאות</span>
-          <span class="lang-en">Workshops</span>
-        </a>
-      </div>
     </div>
   </div>
 
-  <div class="scroll-hint" aria-hidden="true">
-    <div class="scroll-hint-line"></div>
-  </div>
-</section>
-
-<hr class="gold-rule" />
-
-<!-- ══ ABOUT ══════════════════════════════════════════════════════════ -->
-<section id="about" aria-labelledby="about-heading">
-  <div class="container">
-    <div class="about-grid">
-
-      <!-- Text side -->
-      <div class="about-text reveal">
-        <span class="eyebrow">
-          <span class="lang-he">על האמנית</span>
-          <span class="lang-en">About the artist</span>
-        </span>
-        <h2 id="about-heading">
-          <span class="lang-he">יצירה שגדלה מתוך הסבלנות של הנייר.</span>
-          <span class="lang-en">Art grown from the patience of paper.</span>
-        </h2>
-        <p class="lang-he">
-          [ביוגרפיה ראשונה — מי היא רבקה, מה הוביל אותה לפיסול נייר ופאפייה-מאשה, האסתטיקה הייחודית שלה. כ-70 מילה.]
-        </p>
-        <p class="lang-en">
-          [First biography paragraph — who Rivka is, what led her to paper sculpture and papier-mâché, her distinctive aesthetic. Approx. 70 words.]
-        </p>
-        <p class="lang-he">
-          [ביוגרפיה שנייה — הסטודיו, תהליך העבודה, הדרכה ומה הסדנאות נותנות למשתתפים. כ-55 מילה.]
-        </p>
-        <p class="lang-en">
-          [Second paragraph — the studio, working process, what workshops give participants. Approx. 55 words.]
-        </p>
-
-        <div class="about-facts">
-          <div class="fact-item">
-            <div class="fact-num">[X]+</div>
-            <div class="fact-label">
-              <span class="lang-he">שנות יצירה</span>
-              <span class="lang-en">Years of work</span>
-            </div>
-          </div>
-          <div class="fact-item">
-            <div class="fact-num">[X]</div>
-            <div class="fact-label">
-              <span class="lang-he">יצירות מקוריות</span>
-              <span class="lang-en">Original pieces</span>
-            </div>
-          </div>
-          <div class="fact-item">
-            <div class="fact-num">[X]+</div>
-            <div class="fact-label">
-              <span class="lang-he">סדנאות ניתנו</span>
-              <span class="lang-en">Workshops taught</span>
-            </div>
-          </div>
-          <div class="fact-item">
-            <div class="fact-num">[X]</div>
-            <div class="fact-label">
-              <span class="lang-he">מדינות</span>
-              <span class="lang-en">Countries reached</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Portrait side -->
-      <div class="about-portrait reveal" style="transition-delay:0.15s">
-        <div class="portrait-frame">
-          <!-- Replace: <img src="[ARTIST_PHOTO_URL]" alt="[ARTIST_PHOTO_ALT]" /> -->
-          <div class="portrait-placeholder">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-              <rect x="1" y="1" width="34" height="34" stroke="currentColor" stroke-width="0.7"/>
-              <line x1="1" y1="1" x2="35" y2="35" stroke="currentColor" stroke-width="0.7"/>
-              <line x1="35" y1="1" x2="1" y2="35" stroke="currentColor" stroke-width="0.7"/>
-            </svg>
-            <span class="lang-he">[תמונת האמנית]</span>
-            <span class="lang-en">[ARTIST PHOTO]</span>
-          </div>
-          <div class="portrait-deco" aria-hidden="true"></div>
-        </div>
-        <p class="portrait-caption">
-          <span class="lang-he">רבקה חיים בסטודיו, [עיר] — [שנה]</span>
-          <span class="lang-en">Rivka Chaim in the studio, [CITY] — [YEAR]</span>
-        </p>
-      </div>
+  <!-- Detail image strip -->
+  <div class="piece-images" style="margin-block-start:1px;">
+    <div class="pi wide">
+      <div class="img-ph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="22" height="22"/><line x1="1" y1="1" x2="23" y2="23"/></svg><span class="he">[תמונת פירוט 1]</span><span class="en">[DETAIL IMAGE 1]</span></div>
+    </div>
+    <div class="pi">
+      <div class="img-ph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="22" height="22"/><line x1="1" y1="1" x2="23" y2="23"/></svg><span class="he">[תמונת פירוט 2]</span><span class="en">[DETAIL IMAGE 2]</span></div>
+    </div>
+    <div class="pi">
+      <div class="img-ph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="22" height="22"/><line x1="1" y1="1" x2="23" y2="23"/></svg><span class="he">[תמונת פירוט 3]</span><span class="en">[DETAIL IMAGE 3]</span></div>
     </div>
   </div>
-</section>
 
-<hr class="gold-rule" />
-
-<!-- ══ GALLERY ════════════════════════════════════════════════════════ -->
-<section id="gallery" aria-labelledby="gallery-heading">
-  <div class="container">
-
-    <div class="gallery-header reveal">
-      <div class="gallery-header-text">
-        <span class="eyebrow">
-          <span class="lang-he">יצירות מקוריות למכירה</span>
-          <span class="lang-en">Original works for sale</span>
-        </span>
-        <h2 id="gallery-heading">
-          <span class="lang-he">גלריה</span>
-          <span class="lang-en">Gallery</span>
-        </h2>
-      </div>
-      <p class="gallery-header-note lang-he">כל יצירה חד-פעמית. מחירים ופרטים — בפנייה ישירה.</p>
-      <p class="gallery-header-note lang-en">Every piece is one-of-a-kind. Prices and details on direct inquiry.</p>
+  <!-- Next piece -->
+  <div class="next-piece" id="overlay-next" onclick="closeOverlay()">
+    <div class="next-piece-img">
+      <div class="img-ph"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/></svg></div>
     </div>
-
-    <div class="art-grid">
-
-      <!-- A: Large portrait (spans 2 rows) -->
-      <article class="piece art-a reveal" style="transition-delay:0.05s" aria-label="Artwork 1">
-        <div class="piece-img">
-          <!-- <img src="[PIECE_1_IMAGE]" alt="[PIECE_1_TITLE]" loading="lazy" /> -->
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="1" y="1" width="26" height="26" stroke="currentColor" stroke-width="0.6"/><line x1="1" y1="1" x2="27" y2="27" stroke="currentColor" stroke-width="0.6"/></svg>
-            <span class="lang-he">[תמונה]</span><span class="lang-en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="piece-body">
-          <div class="piece-meta-row">
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">חומר</span><span class="lang-en">Medium</span></div>
-              <div class="meta-val"><span class="lang-he">פאפייה-מאשה על עץ</span><span class="lang-en">Papier-mâché on wood</span></div>
-            </div>
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">מידות</span><span class="lang-en">Dimensions</span></div>
-              <div class="meta-val">[W×H×D] cm</div>
-            </div>
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">שנה</span><span class="lang-en">Year</span></div>
-              <div class="meta-val">[YEAR]</div>
-            </div>
-          </div>
-          <h3 class="piece-title">
-            <span class="lang-he">[שם יצירה 1]</span>
-            <span class="lang-en">[Piece Title 1]</span>
-          </h3>
-          <p class="piece-desc">
-            <span class="lang-he">[תיאור קצר — רוח היצירה, תהליך, מה היא מעוררת. כ-25 מילה.]</span>
-            <span class="lang-en">[Short description — spirit, process, what it evokes. Approx. 25 words.]</span>
-          </p>
-          <div class="piece-footer">
-            <span class="piece-price">₪[PRICE]</span>
-            <a href="#contact" class="btn-inquire">
-              <span class="lang-he">פנייה</span><span class="lang-en">Inquire</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- B -->
-      <article class="piece art-b reveal" style="transition-delay:0.10s">
-        <div class="piece-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="1" y="1" width="26" height="26" stroke="currentColor" stroke-width="0.6"/><line x1="1" y1="1" x2="27" y2="27" stroke="currentColor" stroke-width="0.6"/></svg>
-            <span class="lang-he">[תמונה]</span><span class="lang-en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="piece-body">
-          <div class="piece-meta-row">
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">חומר</span><span class="lang-en">Medium</span></div>
-              <div class="meta-val"><span class="lang-he">נייר מקופל</span><span class="lang-en">Folded paper</span></div>
-            </div>
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">שנה</span><span class="lang-en">Year</span></div>
-              <div class="meta-val">[YEAR]</div>
-            </div>
-          </div>
-          <h3 class="piece-title">
-            <span class="lang-he">[שם יצירה 2]</span>
-            <span class="lang-en">[Piece Title 2]</span>
-          </h3>
-          <p class="piece-desc">
-            <span class="lang-he">[תיאור קצר]</span>
-            <span class="lang-en">[Short description]</span>
-          </p>
-          <div class="piece-footer">
-            <span class="piece-price">₪[PRICE]</span>
-            <a href="#contact" class="btn-inquire">
-              <span class="lang-he">פנייה</span><span class="lang-en">Inquire</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- C -->
-      <article class="piece art-c reveal" style="transition-delay:0.15s">
-        <div class="piece-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="1" y="1" width="26" height="26" stroke="currentColor" stroke-width="0.6"/><line x1="1" y1="1" x2="27" y2="27" stroke="currentColor" stroke-width="0.6"/></svg>
-            <span class="lang-he">[תמונה]</span><span class="lang-en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="piece-body">
-          <div class="piece-meta-row">
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">חומר</span><span class="lang-en">Medium</span></div>
-              <div class="meta-val"><span class="lang-he">נייר ופיגמנטים</span><span class="lang-en">Paper &amp; pigments</span></div>
-            </div>
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">שנה</span><span class="lang-en">Year</span></div>
-              <div class="meta-val">[YEAR]</div>
-            </div>
-          </div>
-          <h3 class="piece-title">
-            <span class="lang-he">[שם יצירה 3]</span>
-            <span class="lang-en">[Piece Title 3]</span>
-          </h3>
-          <p class="piece-desc">
-            <span class="lang-he">[תיאור קצר]</span>
-            <span class="lang-en">[Short description]</span>
-          </p>
-          <div class="piece-footer">
-            <span class="piece-price">₪[PRICE]</span>
-            <a href="#contact" class="btn-inquire">
-              <span class="lang-he">פנייה</span><span class="lang-en">Inquire</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- D -->
-      <article class="piece art-d reveal" style="transition-delay:0.20s">
-        <div class="piece-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="1" y="1" width="26" height="26" stroke="currentColor" stroke-width="0.6"/><line x1="1" y1="1" x2="27" y2="27" stroke="currentColor" stroke-width="0.6"/></svg>
-            <span class="lang-he">[תמונה]</span><span class="lang-en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="piece-body">
-          <div class="piece-meta-row">
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">חומר</span><span class="lang-en">Medium</span></div>
-              <div class="meta-val"><span class="lang-he">קולאז' נייר</span><span class="lang-en">Paper collage</span></div>
-            </div>
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">מידות</span><span class="lang-en">Dimensions</span></div>
-              <div class="meta-val">[W×H×D] cm</div>
-            </div>
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">שנה</span><span class="lang-en">Year</span></div>
-              <div class="meta-val">[YEAR]</div>
-            </div>
-          </div>
-          <h3 class="piece-title">
-            <span class="lang-he">[שם יצירה 4]</span>
-            <span class="lang-en">[Piece Title 4]</span>
-          </h3>
-          <p class="piece-desc">
-            <span class="lang-he">[תיאור קצר]</span>
-            <span class="lang-en">[Short description]</span>
-          </p>
-          <div class="piece-footer">
-            <span class="piece-price">₪[PRICE]</span>
-            <a href="#contact" class="btn-inquire">
-              <span class="lang-he">פנייה</span><span class="lang-en">Inquire</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- E -->
-      <article class="piece art-e reveal" style="transition-delay:0.25s">
-        <div class="piece-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="1" y="1" width="26" height="26" stroke="currentColor" stroke-width="0.6"/><line x1="1" y1="1" x2="27" y2="27" stroke="currentColor" stroke-width="0.6"/></svg>
-            <span class="lang-he">[תמונה]</span><span class="lang-en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="piece-body">
-          <div class="piece-meta-row">
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">חומר</span><span class="lang-en">Medium</span></div>
-              <div class="meta-val"><span class="lang-he">נייר ומתכת</span><span class="lang-en">Paper &amp; metal</span></div>
-            </div>
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">שנה</span><span class="lang-en">Year</span></div>
-              <div class="meta-val">[YEAR]</div>
-            </div>
-          </div>
-          <h3 class="piece-title">
-            <span class="lang-he">[שם יצירה 5]</span>
-            <span class="lang-en">[Piece Title 5]</span>
-          </h3>
-          <p class="piece-desc">
-            <span class="lang-he">[תיאור קצר]</span>
-            <span class="lang-en">[Short description]</span>
-          </p>
-          <div class="piece-footer">
-            <span class="piece-price">₪[PRICE]</span>
-            <a href="#contact" class="btn-inquire">
-              <span class="lang-he">פנייה</span><span class="lang-en">Inquire</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- F -->
-      <article class="piece art-f reveal" style="transition-delay:0.12s">
-        <div class="piece-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="1" y="1" width="26" height="26" stroke="currentColor" stroke-width="0.6"/><line x1="1" y1="1" x2="27" y2="27" stroke="currentColor" stroke-width="0.6"/></svg>
-            <span class="lang-he">[תמונה]</span><span class="lang-en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="piece-body">
-          <div class="piece-meta-row">
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">חומר</span><span class="lang-en">Medium</span></div>
-              <div class="meta-val"><span class="lang-he">פאפייה-מאשה צבוע</span><span class="lang-en">Painted papier-mâché</span></div>
-            </div>
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">שנה</span><span class="lang-en">Year</span></div>
-              <div class="meta-val">[YEAR]</div>
-            </div>
-          </div>
-          <h3 class="piece-title">
-            <span class="lang-he">[שם יצירה 6]</span>
-            <span class="lang-en">[Piece Title 6]</span>
-          </h3>
-          <p class="piece-desc">
-            <span class="lang-he">[תיאור קצר]</span>
-            <span class="lang-en">[Short description]</span>
-          </p>
-          <div class="piece-footer">
-            <span class="piece-price">₪[PRICE]</span>
-            <a href="#contact" class="btn-inquire">
-              <span class="lang-he">פנייה</span><span class="lang-en">Inquire</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- G -->
-      <article class="piece art-g reveal" style="transition-delay:0.18s">
-        <div class="piece-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="1" y="1" width="26" height="26" stroke="currentColor" stroke-width="0.6"/><line x1="1" y1="1" x2="27" y2="27" stroke="currentColor" stroke-width="0.6"/></svg>
-            <span class="lang-he">[תמונה]</span><span class="lang-en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="piece-body">
-          <div class="piece-meta-row">
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">חומר</span><span class="lang-en">Medium</span></div>
-              <div class="meta-val"><span class="lang-he">נייר ועץ</span><span class="lang-en">Paper &amp; wood</span></div>
-            </div>
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">שנה</span><span class="lang-en">Year</span></div>
-              <div class="meta-val">[YEAR]</div>
-            </div>
-          </div>
-          <h3 class="piece-title">
-            <span class="lang-he">[שם יצירה 7]</span>
-            <span class="lang-en">[Piece Title 7]</span>
-          </h3>
-          <p class="piece-desc">
-            <span class="lang-he">[תיאור קצר]</span>
-            <span class="lang-en">[Short description]</span>
-          </p>
-          <div class="piece-footer">
-            <span class="piece-price">₪[PRICE]</span>
-            <a href="#contact" class="btn-inquire">
-              <span class="lang-he">פנייה</span><span class="lang-en">Inquire</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- H -->
-      <article class="piece art-h reveal" style="transition-delay:0.24s">
-        <div class="piece-img">
-          <div class="img-ph">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="1" y="1" width="26" height="26" stroke="currentColor" stroke-width="0.6"/><line x1="1" y1="1" x2="27" y2="27" stroke="currentColor" stroke-width="0.6"/></svg>
-            <span class="lang-he">[תמונה]</span><span class="lang-en">[IMAGE]</span>
-          </div>
-        </div>
-        <div class="piece-body">
-          <div class="piece-meta-row">
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">חומר</span><span class="lang-en">Medium</span></div>
-              <div class="meta-val"><span class="lang-he">שכבות נייר ואקרילים</span><span class="lang-en">Layered paper &amp; acrylics</span></div>
-            </div>
-            <div class="piece-meta-group">
-              <div class="meta-key"><span class="lang-he">שנה</span><span class="lang-en">Year</span></div>
-              <div class="meta-val">[YEAR]</div>
-            </div>
-          </div>
-          <h3 class="piece-title">
-            <span class="lang-he">[שם יצירה 8]</span>
-            <span class="lang-en">[Piece Title 8]</span>
-          </h3>
-          <p class="piece-desc">
-            <span class="lang-he">[תיאור קצר]</span>
-            <span class="lang-en">[Short description]</span>
-          </p>
-          <div class="piece-footer">
-            <span class="piece-price">₪[PRICE]</span>
-            <a href="#contact" class="btn-inquire">
-              <span class="lang-he">פנייה</span><span class="lang-en">Inquire</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-    </div><!-- /art-grid -->
-  </div>
-</section>
-
-<!-- ══ WORKSHOPS ══════════════════════════════════════════════════════ -->
-<section id="workshops" aria-labelledby="workshops-heading">
-  <div class="container">
-
-    <div class="ws-header reveal">
-      <span class="eyebrow">
-        <span class="lang-he">סדנאות סטודיו</span>
-        <span class="lang-en">Studio Workshops</span>
-      </span>
-      <h2 id="workshops-heading">
-        <span class="lang-he">ללמוד עם הידיים</span>
-        <span class="lang-en">Learning through the hands</span>
-      </h2>
-      <p>
-        <span class="lang-he">סדנאות אינטימיות בסטודיו — לכל רמות הניסיון. כל מפגש כולל חומרים ויצירה שלוקחים הביתה.</span>
-        <span class="lang-en">Intimate studio sessions for all levels. Every session includes materials and a piece to take home.</span>
-      </p>
-    </div>
-
-    <div class="tickets-grid">
-
-      <!-- TICKET 1: Private -->
-      <div class="ticket reveal" style="transition-delay:0.05s">
-        <div class="ticket-top">
-          <div>
-            <div class="ticket-type">
-              <span class="lang-he">סדנה פרטית</span>
-              <span class="lang-en">Private Session</span>
-            </div>
-            <h3 class="ticket-title">
-              <span class="lang-he">מפגש אחד על אחד</span>
-              <span class="lang-en">One-on-One</span>
-            </h3>
-          </div>
-          <div class="ticket-stamp" aria-hidden="true">
-            <span class="ticket-stamp-text">STUDIO<br/>SESSION</span>
-          </div>
-        </div>
-
-        <div class="ticket-body">
-          <p class="lang-he">סדנה מותאמת אישית לרמתך ולמטרות שלך. נעסוק בטכניקת הפאפייה-מאשה, בנוסף לגמר, צבע ושמירה.</p>
-          <p class="lang-en">A fully tailored session matched to your level and goals. We work through papier-mâché technique, finishing, colour, and preservation.</p>
-        </div>
-
-        <div class="ticket-tear"></div>
-
-        <div class="ticket-bottom">
-          <div>
-            <div class="ticket-detail-key"><span class="lang-he">משך</span><span class="lang-en">Duration</span></div>
-            <div class="ticket-detail-val"><span class="lang-he">[X] שעות</span><span class="lang-en">[X] hrs</span></div>
-          </div>
-          <div>
-            <div class="ticket-detail-key"><span class="lang-he">מיקום</span><span class="lang-en">Location</span></div>
-            <div class="ticket-detail-val"><span class="lang-he">סטודיו, [עיר]</span><span class="lang-en">Studio, [CITY]</span></div>
-          </div>
-          <div>
-            <div class="ticket-detail-key"><span class="lang-he">זמינות</span><span class="lang-en">Availability</span></div>
-            <div class="ticket-detail-val"><span class="lang-he">[ימים]</span><span class="lang-en">[DAYS]</span></div>
-          </div>
-        </div>
-
-        <div class="ticket-footer">
-          <div>
-            <div class="ticket-price">₪[PRICE]</div>
-            <div class="ticket-price-note">
-              <span class="lang-he">למפגש · כולל חומרים</span>
-              <span class="lang-en">per session · incl. materials</span>
-            </div>
-          </div>
-          <a href="#contact" class="btn-book">
-            <span class="lang-he">שריינו</span>
-            <span class="lang-en">Reserve</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- TICKET 2: Group -->
-      <div class="ticket reveal" style="transition-delay:0.12s">
-        <div class="ticket-top">
-          <div>
-            <div class="ticket-type">
-              <span class="lang-he">קבוצה קטנה</span>
-              <span class="lang-en">Small Group</span>
-            </div>
-            <h3 class="ticket-title">
-              <span class="lang-he">סדנת ערב קבוצתית</span>
-              <span class="lang-en">Evening Group Workshop</span>
-            </h3>
-          </div>
-          <div class="ticket-stamp" aria-hidden="true">
-            <span class="ticket-stamp-text">GROUP<br/>STUDIO</span>
-          </div>
-        </div>
-
-        <div class="ticket-body">
-          <p class="lang-he">חוויה קבוצתית חמה — שיחה, יצירה וגילוי. מתאים לאירועים, ימי הולדת או ערב יוצר עם חברות/ים.</p>
-          <p class="lang-en">A warm group experience — conversation, creating, and discovery. Perfect for events, birthdays, or a creative evening with friends.</p>
-        </div>
-
-        <div class="ticket-tear"></div>
-
-        <div class="ticket-bottom">
-          <div>
-            <div class="ticket-detail-key"><span class="lang-he">משך</span><span class="lang-en">Duration</span></div>
-            <div class="ticket-detail-val"><span class="lang-he">[X] שעות</span><span class="lang-en">[X] hrs</span></div>
-          </div>
-          <div>
-            <div class="ticket-detail-key"><span class="lang-he">משתתפים</span><span class="lang-en">Size</span></div>
-            <div class="ticket-detail-val">
-              <span class="lang-he">עד [X] אנשים</span>
-              <span class="lang-en">Up to [X]</span>
-            </div>
-          </div>
-          <div>
-            <div class="ticket-detail-key"><span class="lang-he">מועד הבא</span><span class="lang-en">Next date</span></div>
-            <div class="ticket-detail-val"><span class="lang-he">[תאריך]</span><span class="lang-en">[DATE]</span></div>
-          </div>
-        </div>
-
-        <div class="ticket-footer">
-          <div>
-            <div class="ticket-price">₪[PRICE]<span style="font-size:0.8rem;color:var(--ink-soft);"> / <span class="lang-he">אדם</span><span class="lang-en">pp</span></span></div>
-            <div class="ticket-price-note">
-              <span class="lang-he">[X] מקומות פנויים</span>
-              <span class="lang-en">[X] spots remaining</span>
-            </div>
-          </div>
-          <a href="#contact" class="btn-book">
-            <span class="lang-he">הרשמה</span>
-            <span class="lang-en">Register</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- TICKET 3: Course -->
-      <div class="ticket reveal" style="transition-delay:0.19s">
-        <div class="ticket-top">
-          <div>
-            <div class="ticket-type">
-              <span class="lang-he">קורס מתמשך</span>
-              <span class="lang-en">Ongoing Course</span>
-            </div>
-            <h3 class="ticket-title">
-              <span class="lang-he">יסודות פיסול הנייר — [X] מפגשים</span>
-              <span class="lang-en">Foundations of Paper Sculpture — [X] Sessions</span>
-            </h3>
-          </div>
-          <div class="ticket-stamp" aria-hidden="true">
-            <span class="ticket-stamp-text">COURSE<br/>[X] WKS</span>
-          </div>
-        </div>
-
-        <div class="ticket-body">
-          <p class="lang-he">קורס מלא שעובר דרך כל שלבי הפאפייה-מאשה — מבנה, שכבות, גמר וצביעה. מיועד למי שרוצה עומק ומיומנות אמיתית.</p>
-          <p class="lang-en">A complete course covering all stages of papier-mâché — structure, layering, finishing, and painting. For those who want real depth and skill.</p>
-        </div>
-
-        <div class="ticket-tear"></div>
-
-        <div class="ticket-bottom">
-          <div>
-            <div class="ticket-detail-key"><span class="lang-he">מפגשים</span><span class="lang-en">Sessions</span></div>
-            <div class="ticket-detail-val"><span class="lang-he">[X] × [X] שעות</span><span class="lang-en">[X] × [X] hrs</span></div>
-          </div>
-          <div>
-            <div class="ticket-detail-key"><span class="lang-he">רמה</span><span class="lang-en">Level</span></div>
-            <div class="ticket-detail-val">
-              <span class="lang-he">כל הרמות</span>
-              <span class="lang-en">All levels</span>
-            </div>
-          </div>
-          <div>
-            <div class="ticket-detail-key"><span class="lang-he">מחזור הבא</span><span class="lang-en">Next cohort</span></div>
-            <div class="ticket-detail-val"><span class="lang-he">[תאריך]</span><span class="lang-en">[DATE]</span></div>
-          </div>
-        </div>
-
-        <div class="ticket-footer">
-          <div>
-            <div class="ticket-price">₪[PRICE]</div>
-            <div class="ticket-price-note">
-              <span class="lang-he">לקורס מלא · כולל חומרים</span>
-              <span class="lang-en">full course · incl. materials</span>
-            </div>
-          </div>
-          <a href="#contact" class="btn-book">
-            <span class="lang-he">הרשמה</span>
-            <span class="lang-en">Register</span>
-          </a>
-        </div>
-      </div>
-
-    </div><!-- /tickets-grid -->
-  </div>
-</section>
-
-<!-- ══ INTERSTITIAL QUOTE ══════════════════════════════════════════════ -->
-<div id="interstitial" aria-hidden="true">
-  <div class="container">
-    <div class="interstitial-inner reveal">
-      <div class="interstitial-label">
-        <span class="eyebrow">
-          <span class="lang-he">על התהליך</span>
-          <span class="lang-en">On process</span>
-        </span>
-        <div class="interstitial-num" aria-hidden="true">נ י י ר</div>
-      </div>
+    <div class="next-piece-info">
       <div>
-        <blockquote class="interstitial-quote">
-          <span class="lang-he">
-            הנייר רואה <em>כל דבר</em> — כל עיכוב, כל שינוי לחץ, כל תנועה שלא הייתה מכוונת. לכן הוא כל כך כנה.
-          </span>
-          <span class="lang-en">
-            Paper sees <em>everything</em> — every hesitation, every shift in pressure, every unintended movement. That is why it is so honest.
-          </span>
-        </blockquote>
-        <cite class="interstitial-attr">— רבקה חיים / Rivka Chaim</cite>
+        <div class="next-label"><span class="he">היצירה הבאה</span><span class="en">Next work</span></div>
+        <div class="next-title" id="overlay-next-title">
+          <span class="he">[שם יצירה הבאה]</span>
+          <span class="en">[Next piece title]</span>
+        </div>
+      </div>
+      <div class="next-arrow">
+        <span class="he">לצפייה ביצירה</span><span class="en">View piece</span>
+        <svg viewBox="0 0 20 8" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" width="20"><path d="M1 4h18M14 1l4 3-4 3"/></svg>
       </div>
     </div>
   </div>
 </div>
 
-<hr class="gold-rule" />
+<!-- HEADER ─────────────────────────────────────────────────────────── -->
+<header id="header">
+  <div class="wrap header-inner">
+    <a class="logo" href="#hero">
+      <span class="he">רבקה חיים</span>
+      <span class="en">Rivka Chaim</span>
+    </a>
 
-<!-- ══ CONTACT ════════════════════════════════════════════════════════ -->
-<section id="contact" aria-labelledby="contact-heading">
-  <div class="container">
+    <div class="nav-right">
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#about"><span class="he">אודות</span><span class="en">About</span></a></li>
+        <li><a href="#workshops"><span class="he">סדנאות</span><span class="en">Workshops</span></a></li>
+        <li><a href="#contact"><span class="he">יצירת קשר</span><span class="en">Contact</span></a></li>
+      </ul>
+      <button class="lang-btn" id="lang-btn" aria-label="Switch language">
+        <span class="he">EN</span><span class="en">עב</span>
+      </button>
+      <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO ────────────────────────────────────────────────────────────── -->
+<div id="hero">
+  <div class="hero-image">
+    <!-- Replace: <img src="[HERO_IMAGE_URL]" alt="[HERO_IMAGE_ALT]" /> -->
+    <div class="hero-ph">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true">
+        <rect x="1" y="1" width="38" height="38"/><line x1="1" y1="1" x2="39" y2="39"/><line x1="39" y1="1" x2="1" y2="39"/>
+      </svg>
+      <span><span class="he">[תמונת הגיבור — יצירה ראשית]</span><span class="en">[HERO IMAGE — featured artwork]</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- TAGLINE + CATEGORY NAV ──────────────────────────────────────────── -->
+<div id="tagline">
+  <div class="wrap reveal">
+    <p class="tagline-text">
+      <span class="he">פיסול שמעביר את מה שמרגישים כשמחזיקים נייר בידיים — לא רק את מה שרואים.</span>
+      <span class="en">Sculpture that conveys what it feels like to hold paper in your hands — not only what you see.</span>
+    </p>
+    <nav class="cat-nav" aria-label="Categories">
+      <a href="#gallery" class="active">
+        <span class="he">כל היצירות</span><span class="en">All works</span>
+      </a>
+      <a href="#gallery">
+        <span class="he">פיסול נייר</span><span class="en">Paper sculpture</span>
+      </a>
+      <a href="#gallery">
+        <span class="he">פאפייה-מאשה</span><span class="en">Papier-mâché</span>
+      </a>
+      <a href="#gallery">
+        <span class="he">קולאז'</span><span class="en">Collage</span>
+      </a>
+      <a href="#workshops">
+        <span class="he">סדנאות</span><span class="en">Workshops</span>
+      </a>
+    </nav>
+  </div>
+</div>
+
+<!-- GALLERY ──────────────────────────────────────────────────────────── -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="gallery-top reveal">
+      <div class="gallery-top-text">
+        <div class="section-eyebrow">
+          <span class="he">יצירות מקוריות למכירה</span>
+          <span class="en">Original works for sale</span>
+        </div>
+        <h2 class="section-title">
+          <span class="he">גלריה</span>
+          <span class="en">Gallery</span>
+        </h2>
+      </div>
+      <p class="gallery-note">
+        <span class="he">כל יצירה חד-פעמית. לפרטים ומחירים — לחצו על היצירה.</span>
+        <span class="en">Every piece is one-of-a-kind. Click any piece for details and pricing.</span>
+      </p>
+    </div>
+
+    <div class="work-grid" id="work-grid">
+
+      <!-- Featured piece — spans full width -->
+      <div class="work-item reveal" data-piece="0" tabindex="0" role="button" aria-label="Open artwork detail">
+        <div class="work-img">
+          <!-- <img src="[PIECE_1_IMAGE]" alt="[PIECE_1_TITLE]" loading="lazy" /> -->
+          <div class="img-ph">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="30" height="30"/><line x1="1" y1="1" x2="31" y2="31"/></svg>
+            <span class="he">[יצירה ראשית — תמונה גדולה]</span><span class="en">[FEATURED PIECE — large image]</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <span class="work-cat"><span class="he">פאפייה-מאשה</span><span class="en">Papier-mâché</span></span>
+            <span class="work-title"><span class="he">[שם יצירה 1]</span><span class="en">[Piece Title 1]</span></span>
+          </div>
+          <span class="work-year">[YEAR]</span>
+        </div>
+      </div>
+
+      <!-- Piece 2 -->
+      <div class="work-item reveal" data-piece="1" tabindex="0" role="button" style="transition-delay:0.06s">
+        <div class="work-img">
+          <div class="img-ph">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
+            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <span class="work-cat"><span class="he">פיסול נייר</span><span class="en">Paper sculpture</span></span>
+            <span class="work-title"><span class="he">[שם יצירה 2]</span><span class="en">[Piece Title 2]</span></span>
+          </div>
+          <span class="work-year">[YEAR]</span>
+        </div>
+      </div>
+
+      <!-- Piece 3 -->
+      <div class="work-item reveal" data-piece="2" tabindex="0" role="button" style="transition-delay:0.12s">
+        <div class="work-img">
+          <div class="img-ph">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
+            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <span class="work-cat"><span class="he">קולאז'</span><span class="en">Collage</span></span>
+            <span class="work-title"><span class="he">[שם יצירה 3]</span><span class="en">[Piece Title 3]</span></span>
+          </div>
+          <span class="work-year">[YEAR]</span>
+        </div>
+      </div>
+
+      <!-- Piece 4 -->
+      <div class="work-item reveal" data-piece="3" tabindex="0" role="button" style="transition-delay:0.06s">
+        <div class="work-img">
+          <div class="img-ph">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
+            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <span class="work-cat"><span class="he">פאפייה-מאשה</span><span class="en">Papier-mâché</span></span>
+            <span class="work-title"><span class="he">[שם יצירה 4]</span><span class="en">[Piece Title 4]</span></span>
+          </div>
+          <span class="work-year">[YEAR]</span>
+        </div>
+      </div>
+
+      <!-- Piece 5 -->
+      <div class="work-item reveal" data-piece="4" tabindex="0" role="button" style="transition-delay:0.12s">
+        <div class="work-img">
+          <div class="img-ph">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
+            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <span class="work-cat"><span class="he">פיסול נייר</span><span class="en">Paper sculpture</span></span>
+            <span class="work-title"><span class="he">[שם יצירה 5]</span><span class="en">[Piece Title 5]</span></span>
+          </div>
+          <span class="work-year">[YEAR]</span>
+        </div>
+      </div>
+
+      <!-- Piece 6 -->
+      <div class="work-item reveal" data-piece="5" tabindex="0" role="button" style="transition-delay:0.06s">
+        <div class="work-img">
+          <div class="img-ph">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
+            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <span class="work-cat"><span class="he">קולאז'</span><span class="en">Collage</span></span>
+            <span class="work-title"><span class="he">[שם יצירה 6]</span><span class="en">[Piece Title 6]</span></span>
+          </div>
+          <span class="work-year">[YEAR]</span>
+        </div>
+      </div>
+
+      <!-- Piece 7 -->
+      <div class="work-item reveal" data-piece="6" tabindex="0" role="button" style="transition-delay:0.12s">
+        <div class="work-img">
+          <div class="img-ph">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true"><rect x="1" y="1" width="26" height="26"/><line x1="1" y1="1" x2="27" y2="27"/></svg>
+            <span class="he">[תמונה]</span><span class="en">[IMAGE]</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <span class="work-cat"><span class="he">פאפייה-מאשה</span><span class="en">Papier-mâché</span></span>
+            <span class="work-title"><span class="he">[שם יצירה 7]</span><span class="en">[Piece Title 7]</span></span>
+          </div>
+          <span class="work-year">[YEAR]</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT ────────────────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+
+      <div class="about-portrait reveal">
+        <!-- <img src="[ARTIST_PHOTO_URL]" alt="[ARTIST_PHOTO_ALT]" /> -->
+        <div class="img-ph">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="0.7" aria-hidden="true">
+            <rect x="1" y="1" width="34" height="34"/><line x1="1" y1="1" x2="35" y2="35"/><line x1="35" y1="1" x2="1" y2="35"/>
+          </svg>
+          <span class="he">[תמונת האמנית]</span>
+          <span class="en">[ARTIST PHOTO]</span>
+        </div>
+      </div>
+
+      <div class="about-text reveal" style="transition-delay:0.12s">
+        <div class="section-eyebrow">
+          <span class="he">אודות</span>
+          <span class="en">About</span>
+        </div>
+        <h2 class="section-title">
+          <span class="he">רבקה חיים</span>
+          <span class="en">Rivka Chaim</span>
+        </h2>
+        <p class="he">[ביוגרפיה ראשונה — מי היא רבקה, מה הוביל אותה לפיסול נייר ופאפייה-מאשה, הסגנון הייחודי שלה. כ-70 מילה.]</p>
+        <p class="en">[First biography paragraph — who Rivka is, what led her to paper sculpture and papier-mâché, her distinctive aesthetic. Approx. 70 words.]</p>
+        <p class="he">[ביוגרפיה שנייה — הסטודיו, תהליך העבודה, מה הסדנאות נותנות למשתתפים. כ-55 מילה.]</p>
+        <p class="en">[Second paragraph — the studio, working process, what workshops offer participants. Approx. 55 words.]</p>
+
+        <div class="about-facts">
+          <div class="fact">
+            <div class="fact-num">[X]+</div>
+            <div class="fact-lbl"><span class="he">שנות יצירה</span><span class="en">Years creating</span></div>
+          </div>
+          <div class="fact">
+            <div class="fact-num">[X]</div>
+            <div class="fact-lbl"><span class="he">יצירות מקוריות</span><span class="en">Original pieces</span></div>
+          </div>
+          <div class="fact">
+            <div class="fact-num">[X]+</div>
+            <div class="fact-lbl"><span class="he">סדנאות</span><span class="en">Workshops taught</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHOPS ────────────────────────────────────────────────────────── -->
+<section id="workshops">
+  <div class="wrap">
+    <div class="ws-top reveal">
+      <div>
+        <div class="section-eyebrow">
+          <span class="he">סדנאות סטודיו</span>
+          <span class="en">Studio workshops</span>
+        </div>
+        <h2 class="section-title">
+          <span class="he">ללמוד עם הידיים</span>
+          <span class="en">Learning through the hands</span>
+        </h2>
+      </div>
+      <p>
+        <span class="he">סדנאות אינטימיות בסטודיו לכל רמות הניסיון. כל מפגש כולל חומרים ויצירה שלוקחים הביתה.</span>
+        <span class="en">Intimate studio sessions for all experience levels. Every session includes materials and a piece to take home.</span>
+      </p>
+    </div>
+
+    <div class="ws-list">
+
+      <!-- Workshop 1 -->
+      <div class="ws-row reveal">
+        <div class="ws-index">01</div>
+        <div class="ws-content">
+          <div class="ws-type">
+            <span class="he">סדנה פרטית</span><span class="en">Private session</span>
+          </div>
+          <div class="ws-name">
+            <span class="he">מפגש אחד על אחד</span>
+            <span class="en">One-on-One</span>
+          </div>
+          <div class="ws-desc">
+            <span class="he">סדנה מותאמת אישית לרמתך ולמטרות שלך. נעסוק בטכניקת הפאפייה-מאשה, גמר, צבע ושמירה.</span>
+            <span class="en">A fully tailored session matched to your level and goals — papier-mâché technique, finishing, colour, and preservation.</span>
+          </div>
+          <div class="ws-specs">
+            <div class="ws-spec">
+              <div class="sk"><span class="he">משך</span><span class="en">Duration</span></div>
+              <div class="sv"><span class="he">[X] שעות</span><span class="en">[X] hours</span></div>
+            </div>
+            <div class="ws-spec">
+              <div class="sk"><span class="he">מיקום</span><span class="en">Location</span></div>
+              <div class="sv"><span class="he">סטודיו, [עיר]</span><span class="en">Studio, [CITY]</span></div>
+            </div>
+            <div class="ws-spec">
+              <div class="sk"><span class="he">זמינות</span><span class="en">Availability</span></div>
+              <div class="sv"><span class="he">[ימים / שעות]</span><span class="en">[DAYS / HOURS]</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ws-right">
+          <div>
+            <div class="ws-price">₪[PRICE]</div>
+            <div class="ws-price-note"><span class="he">למפגש · כולל חומרים</span><span class="en">per session · incl. materials</span></div>
+          </div>
+          <a href="#contact" class="btn-ws">
+            <span class="he">שריינו מקום</span><span class="en">Reserve</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Workshop 2 -->
+      <div class="ws-row reveal" style="transition-delay:0.08s">
+        <div class="ws-index">02</div>
+        <div class="ws-content">
+          <div class="ws-type">
+            <span class="he">קבוצה קטנה</span><span class="en">Small group</span>
+          </div>
+          <div class="ws-name">
+            <span class="he">סדנת ערב קבוצתית</span>
+            <span class="en">Evening Group Workshop</span>
+          </div>
+          <div class="ws-desc">
+            <span class="he">חוויה קבוצתית חמה — שיחה, יצירה וגילוי. מתאים לאירועים, ימי הולדת, או ערב יוצר עם חברים.</span>
+            <span class="en">A warm group experience — conversation, creating and discovery. Perfect for events, birthdays, or a creative evening with friends.</span>
+          </div>
+          <div class="ws-specs">
+            <div class="ws-spec">
+              <div class="sk"><span class="he">משך</span><span class="en">Duration</span></div>
+              <div class="sv"><span class="he">[X] שעות</span><span class="en">[X] hours</span></div>
+            </div>
+            <div class="ws-spec">
+              <div class="sk"><span class="he">משתתפים</span><span class="en">Group size</span></div>
+              <div class="sv"><span class="he">עד [X] אנשים</span><span class="en">Up to [X] people</span></div>
+            </div>
+            <div class="ws-spec">
+              <div class="sk"><span class="he">מועד הבא</span><span class="en">Next date</span></div>
+              <div class="sv"><span class="he">[תאריך]</span><span class="en">[DATE]</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ws-right">
+          <div>
+            <div class="ws-price">₪[PRICE]</div>
+            <div class="ws-price-note"><span class="he">לאדם · כולל חומרים</span><span class="en">per person · incl. materials</span></div>
+          </div>
+          <a href="#contact" class="btn-ws">
+            <span class="he">הרשמה</span><span class="en">Register</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Workshop 3 -->
+      <div class="ws-row reveal" style="transition-delay:0.16s">
+        <div class="ws-index">03</div>
+        <div class="ws-content">
+          <div class="ws-type">
+            <span class="he">קורס מתמשך</span><span class="en">Ongoing course</span>
+          </div>
+          <div class="ws-name">
+            <span class="he">יסודות פיסול הנייר — [X] מפגשים</span>
+            <span class="en">Foundations of Paper Sculpture — [X] sessions</span>
+          </div>
+          <div class="ws-desc">
+            <span class="he">קורס מלא שעובר דרך כל שלבי הפאפייה-מאשה — מבנה, שכבות, גמר וצביעה. מיועד למי שרוצה עומק ומיומנות אמיתית.</span>
+            <span class="en">A complete course covering all stages of papier-mâché — structure, layering, finishing, painting. For those who want real depth and skill.</span>
+          </div>
+          <div class="ws-specs">
+            <div class="ws-spec">
+              <div class="sk"><span class="he">מפגשים</span><span class="en">Sessions</span></div>
+              <div class="sv"><span class="he">[X] × [X] שעות</span><span class="en">[X] × [X] hrs</span></div>
+            </div>
+            <div class="ws-spec">
+              <div class="sk"><span class="he">רמה</span><span class="en">Level</span></div>
+              <div class="sv"><span class="he">כל הרמות</span><span class="en">All levels</span></div>
+            </div>
+            <div class="ws-spec">
+              <div class="sk"><span class="he">מחזור הבא</span><span class="en">Next cohort</span></div>
+              <div class="sv"><span class="he">[תאריך]</span><span class="en">[DATE]</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ws-right">
+          <div>
+            <div class="ws-price">₪[PRICE]</div>
+            <div class="ws-price-note"><span class="he">לקורס מלא · כולל חומרים</span><span class="en">full course · incl. materials</span></div>
+          </div>
+          <a href="#contact" class="btn-ws">
+            <span class="he">הרשמה</span><span class="en">Register</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT ──────────────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="wrap">
     <div class="contact-grid">
 
-      <!-- Info -->
       <div class="contact-left reveal">
-        <span class="eyebrow">
-          <span class="lang-he">צור קשר</span>
-          <span class="lang-en">Get in touch</span>
-        </span>
-        <h2 id="contact-heading">
-          <span class="lang-he">נשמח לשמוע מכם.</span>
-          <span class="lang-en">We'd love to hear from you.</span>
+        <div class="section-eyebrow">
+          <span class="he">יצירת קשר</span>
+          <span class="en">Contact</span>
+        </div>
+        <h2 class="section-title">
+          <span class="he">נשמח לשמוע מכם</span>
+          <span class="en">Get in touch</span>
         </h2>
         <p>
-          <span class="lang-he">לשאלות על יצירות, הזמנות מיוחדות, סדנאות קבוצתיות מותאמות, או שיתופי פעולה — פנו ישירות.</span>
-          <span class="lang-en">For artwork inquiries, commissions, bespoke group sessions, or collaborations — reach out directly.</span>
+          <span class="he">לשאלות על יצירות, הזמנות מיוחדות, סדנאות, או שיתופי פעולה — פנו ישירות.</span>
+          <span class="en">For artwork inquiries, commissions, workshops, or collaborations — reach out directly.</span>
         </p>
 
         <div class="channels">
-          <a href="https://wa.me/[PHONE_INTERNATIONAL]" class="channel" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <div class="ch-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/></svg>
-            </div>
+          <a href="https://wa.me/[PHONE_INTERNATIONAL]" class="ch" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <div class="ch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/></svg></div>
             <div>
-              <div class="ch-label">WhatsApp</div>
+              <div class="ch-lbl">WhatsApp</div>
               <div class="ch-val">[PHONE_DISPLAY]</div>
             </div>
           </a>
-
-          <a href="https://instagram.com/[INSTAGRAM]" class="channel" target="_blank" rel="noopener" aria-label="Instagram">
-            <div class="ch-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
-            </div>
+          <a href="https://instagram.com/[INSTAGRAM]" class="ch" target="_blank" rel="noopener" aria-label="Instagram">
+            <div class="ch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></div>
             <div>
-              <div class="ch-label">Instagram</div>
+              <div class="ch-lbl">Instagram</div>
               <div class="ch-val">@[INSTAGRAM]</div>
             </div>
           </a>
-
-          <a href="mailto:[EMAIL]" class="channel" aria-label="Email">
-            <div class="ch-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-            </div>
+          <a href="mailto:[EMAIL]" class="ch" aria-label="Email">
+            <div class="ch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
             <div>
-              <div class="ch-label"><span class="lang-he">אימייל</span><span class="lang-en">Email</span></div>
+              <div class="ch-lbl"><span class="he">אימייל</span><span class="en">Email</span></div>
               <div class="ch-val">[EMAIL]</div>
             </div>
           </a>
-
-          <div class="channel" style="cursor:default;">
-            <div class="ch-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            </div>
+          <div class="ch">
+            <div class="ch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
             <div>
-              <div class="ch-label"><span class="lang-he">סטודיו</span><span class="lang-en">Studio</span></div>
-              <div class="ch-val"><span class="lang-he">[כתובת], [עיר]</span><span class="lang-en">[ADDRESS], [CITY]</span></div>
+              <div class="ch-lbl"><span class="he">סטודיו</span><span class="en">Studio</span></div>
+              <div class="ch-val"><span class="he">[כתובת], [עיר]</span><span class="en">[ADDRESS], [CITY]</span></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Form -->
-      <div class="reveal" style="transition-delay:0.15s">
+      <div class="reveal" style="transition-delay:0.12s">
         <form class="contact-form" name="contact" method="POST">
-          <div class="form-row">
-            <div class="field">
-              <label for="f-name">
-                <span class="lang-he">שם מלא</span>
-                <span class="lang-en">Full name</span>
-              </label>
-              <input type="text" id="f-name" name="name" required autocomplete="name" />
+          <div class="f-row">
+            <div class="f-field">
+              <label for="fn"><span class="he">שם מלא</span><span class="en">Full name</span></label>
+              <input type="text" id="fn" name="name" required autocomplete="name" />
             </div>
-            <div class="field">
-              <label for="f-email">
-                <span class="lang-he">אימייל</span>
-                <span class="lang-en">Email</span>
-              </label>
-              <input type="email" id="f-email" name="email" required autocomplete="email" />
+            <div class="f-field">
+              <label for="fe"><span class="he">אימייל</span><span class="en">Email</span></label>
+              <input type="email" id="fe" name="email" required autocomplete="email" />
             </div>
           </div>
-
-          <div class="field">
-            <label for="f-subject">
-              <span class="lang-he">נושא</span>
-              <span class="lang-en">Subject</span>
-            </label>
-            <select id="f-subject" name="subject" required>
+          <div class="f-field">
+            <label for="fs"><span class="he">נושא</span><span class="en">Subject</span></label>
+            <select id="fs" name="subject" required>
               <option value="" disabled selected>—</option>
-              <option value="gallery">
-                <span class="lang-he">שאלה על יצירה</span>
-                <span class="lang-en">Artwork inquiry</span>
-              </option>
-              <option value="private">
-                <span class="lang-he">סדנה פרטית</span>
-                <span class="lang-en">Private workshop</span>
-              </option>
-              <option value="group">
-                <span class="lang-he">סדנה קבוצתית</span>
-                <span class="lang-en">Group workshop</span>
-              </option>
-              <option value="course">
-                <span class="lang-he">קורס</span>
-                <span class="lang-en">Course</span>
-              </option>
-              <option value="commission">
-                <span class="lang-he">הזמנה מיוחדת</span>
-                <span class="lang-en">Commission</span>
-              </option>
-              <option value="other">
-                <span class="lang-he">אחר</span>
-                <span class="lang-en">Other</span>
-              </option>
+              <option value="gallery"><span class="he">שאלה על יצירה</span><span class="en">Artwork inquiry</span></option>
+              <option value="private"><span class="he">סדנה פרטית</span><span class="en">Private workshop</span></option>
+              <option value="group"><span class="he">סדנה קבוצתית</span><span class="en">Group workshop</span></option>
+              <option value="course"><span class="he">קורס</span><span class="en">Course</span></option>
+              <option value="commission"><span class="he">הזמנה מיוחדת</span><span class="en">Commission</span></option>
+              <option value="other"><span class="he">אחר</span><span class="en">Other</span></option>
             </select>
           </div>
-
-          <div class="field">
-            <label for="f-msg">
-              <span class="lang-he">הודעה</span>
-              <span class="lang-en">Message</span>
-            </label>
-            <textarea id="f-msg" name="message" required></textarea>
+          <div class="f-field">
+            <label for="fm"><span class="he">הודעה</span><span class="en">Message</span></label>
+            <textarea id="fm" name="message" required></textarea>
           </div>
-
           <button type="submit" class="btn-send">
-            <span class="lang-he">שלחו הודעה</span>
-            <span class="lang-en">Send message</span>
+            <span class="he">שלחו הודעה</span><span class="en">Send message</span>
           </button>
         </form>
       </div>
@@ -1899,48 +1486,108 @@
   </div>
 </section>
 
-<!-- ══ FOOTER ═════════════════════════════════════════════════════════ -->
+<!-- FOOTER ──────────────────────────────────────────────────────────── -->
 <footer>
-  <div class="container">
+  <div class="wrap">
     <div class="footer-inner">
-      <span class="footer-logo">
-        <span class="lang-he">רבקה חיים</span>
-        <span class="lang-en">Rivka Chaim</span>
-      </span>
-      <div class="footer-social">
-        <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://wa.me/[PHONE_INTERNATIONAL]" target="_blank" rel="noopener">WhatsApp</a>
+      <p class="footer-tagline">
+        <span class="he">© <span id="yr"></span> רבקה חיים — כל הזכויות שמורות</span>
+        <span class="en">© <span class="yr-en"></span> Rivka Chaim — All rights reserved</span>
+      </p>
+      <div class="footer-right">
+        <div class="footer-links">
+          <a href="#about"><span class="he">אודות</span><span class="en">About</span></a>
+          <a href="#workshops"><span class="he">סדנאות</span><span class="en">Workshops</span></a>
+          <a href="#contact"><span class="he">יצירת קשר</span><span class="en">Contact</span></a>
+          <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener">Instagram (@[INSTAGRAM])</a>
+        </div>
       </div>
-      <span class="footer-copy">
-        © <span id="yr"></span>
-        <span class="lang-he"> רבקה חיים.</span>
-        <span class="lang-en"> Rivka Chaim.</span>
-      </span>
     </div>
   </div>
 </footer>
 
-<!-- ══ JAVASCRIPT ══════════════════════════════════════════════════════ -->
+<!-- JAVASCRIPT ──────────────────────────────────────────────────────── -->
 <script>
+  /* ── Piece data ───────────────────────────────────────────────── */
+  const pieces = [
+    {
+      titleHe: '[שם יצירה 1]', titleEn: '[Piece Title 1]',
+      mediumHe: 'פאפייה-מאשה על בסיס עץ', mediumEn: 'Papier-mâché on wood base',
+      dims: '[W × H × D] cm', year: '[YEAR]',
+      descHe: '[תיאור קצר של היצירה — רוח, תהליך, מה היא מעוררת. כ-30 מילה.]',
+      descEn: '[Short description — spirit, process, what it evokes. Approx. 30 words.]',
+      price: '₪[PRICE]',
+      nextTitleHe: '[שם יצירה 2]', nextTitleEn: '[Piece Title 2]',
+    },
+    {
+      titleHe: '[שם יצירה 2]', titleEn: '[Piece Title 2]',
+      mediumHe: 'פיסול נייר ידני', mediumEn: 'Hand-formed paper sculpture',
+      dims: '[W × H × D] cm', year: '[YEAR]',
+      descHe: '[תיאור קצר]', descEn: '[Short description]',
+      price: '₪[PRICE]',
+      nextTitleHe: '[שם יצירה 3]', nextTitleEn: '[Piece Title 3]',
+    },
+    {
+      titleHe: '[שם יצירה 3]', titleEn: '[Piece Title 3]',
+      mediumHe: 'נייר ופיגמנטים טבעיים', mediumEn: 'Paper with natural pigments',
+      dims: '[W × H × D] cm', year: '[YEAR]',
+      descHe: '[תיאור קצר]', descEn: '[Short description]',
+      price: '₪[PRICE]',
+      nextTitleHe: '[שם יצירה 4]', nextTitleEn: '[Piece Title 4]',
+    },
+    {
+      titleHe: '[שם יצירה 4]', titleEn: '[Piece Title 4]',
+      mediumHe: 'פאפייה-מאשה משכבות', mediumEn: 'Layered papier-mâché',
+      dims: '[W × H × D] cm', year: '[YEAR]',
+      descHe: '[תיאור קצר]', descEn: '[Short description]',
+      price: '₪[PRICE]',
+      nextTitleHe: '[שם יצירה 5]', nextTitleEn: '[Piece Title 5]',
+    },
+    {
+      titleHe: '[שם יצירה 5]', titleEn: '[Piece Title 5]',
+      mediumHe: 'נייר ומתכת', mediumEn: 'Paper and metal',
+      dims: '[W × H × D] cm', year: '[YEAR]',
+      descHe: '[תיאור קצר]', descEn: '[Short description]',
+      price: '₪[PRICE]',
+      nextTitleHe: '[שם יצירה 6]', nextTitleEn: '[Piece Title 6]',
+    },
+    {
+      titleHe: '[שם יצירה 6]', titleEn: '[Piece Title 6]',
+      mediumHe: 'קולאז\' נייר ואקוורל', mediumEn: 'Paper collage and watercolour',
+      dims: '[W × H × D] cm', year: '[YEAR]',
+      descHe: '[תיאור קצר]', descEn: '[Short description]',
+      price: '₪[PRICE]',
+      nextTitleHe: '[שם יצירה 7]', nextTitleEn: '[Piece Title 7]',
+    },
+    {
+      titleHe: '[שם יצירה 7]', titleEn: '[Piece Title 7]',
+      mediumHe: 'פאפייה-מאשה וצבעי אקריל', mediumEn: 'Papier-mâché and acrylic',
+      dims: '[W × H × D] cm', year: '[YEAR]',
+      descHe: '[תיאור קצר]', descEn: '[Short description]',
+      price: '₪[PRICE]',
+      nextTitleHe: '[שם יצירה 1]', nextTitleEn: '[Piece Title 1]',
+    },
+  ]
+
   /* ── Language ─────────────────────────────────────────────────── */
   const html = document.documentElement
-  const langBtn = document.getElementById('lang-btn')
-
-  function setLang(l) {
-    html.setAttribute('lang', l)
-    html.setAttribute('dir', l === 'he' ? 'rtl' : 'ltr')
-    localStorage.setItem('rc2-lang', l)
-  }
-  setLang(localStorage.getItem('rc2-lang') || 'he')
-  langBtn.addEventListener('click', () => setLang(html.lang === 'he' ? 'en' : 'he'))
+  document.getElementById('lang-btn').addEventListener('click', () => {
+    const next = html.lang === 'he' ? 'en' : 'he'
+    html.setAttribute('lang', next)
+    html.setAttribute('dir', next === 'he' ? 'rtl' : 'ltr')
+    localStorage.setItem('rc-lang', next)
+  })
+  const saved = localStorage.getItem('rc-lang') || 'he'
+  html.setAttribute('lang', saved)
+  html.setAttribute('dir', saved === 'he' ? 'rtl' : 'ltr')
 
   /* ── Mobile menu ──────────────────────────────────────────────── */
   const menuBtn  = document.getElementById('menu-btn')
   const navLinks = document.getElementById('nav-links')
   menuBtn.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open')
-    menuBtn.setAttribute('aria-expanded', String(open))
-    document.body.style.overflow = open ? 'hidden' : ''
+    const o = navLinks.classList.toggle('open')
+    menuBtn.setAttribute('aria-expanded', String(o))
+    document.body.style.overflow = o ? 'hidden' : ''
   })
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     navLinks.classList.remove('open')
@@ -1949,25 +1596,17 @@
   }))
 
   /* ── Sticky header ────────────────────────────────────────────── */
-  const header = document.getElementById('site-header')
   window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 50)
+    document.getElementById('header').style.borderBottomColor =
+      window.scrollY > 10 ? '' : 'transparent'
   }, { passive: true })
 
   /* ── Active nav ───────────────────────────────────────────────── */
-  const sections = document.querySelectorAll('section[id]')
-  const navAs    = document.querySelectorAll('.nav-links a')
-  new IntersectionObserver(entries => {
-    entries.forEach(e => {
+  document.querySelectorAll('section[id]').forEach(s =>
+    new IntersectionObserver(([e]) => {
       if (e.isIntersecting)
-        navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id))
-    })
-  }, { rootMargin: '-40% 0px -55% 0px' }).observe && sections.forEach(s =>
-    new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting)
-          navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id))
-      })
+        document.querySelectorAll('.nav-links a').forEach(a =>
+          a.classList.toggle('active', a.getAttribute('href') === '#' + s.id))
     }, { rootMargin: '-40% 0px -55% 0px' }).observe(s)
   )
 
@@ -1975,24 +1614,61 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (!reduced) {
     const ro = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target) } })
-    }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' })
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target) } })
+    }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' })
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el))
   } else {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'))
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'))
   }
 
-  /* ── Jade underline on hero title ─────────────────────────────── */
-  if (!reduced) {
-    setTimeout(() => {
-      document.querySelectorAll('.hero-title-underline').forEach(el => el.classList.add('drawn'))
-    }, 700)
-  } else {
-    document.querySelectorAll('.hero-title-underline').forEach(el => el.classList.add('drawn'))
+  /* ── Piece overlay ────────────────────────────────────────────── */
+  const overlay   = document.getElementById('piece-overlay')
+  const oTitle    = document.getElementById('overlay-title')
+  const oMedium   = document.getElementById('om-medium')
+  const oDims     = document.getElementById('om-dims')
+  const oYear     = document.getElementById('om-year')
+  const oDesc     = document.getElementById('overlay-desc')
+  const oPrice    = document.getElementById('overlay-price')
+  const oNextTitle= document.getElementById('overlay-next-title')
+
+  function openPiece(idx) {
+    const p = pieces[idx]
+    const isHe = html.lang === 'he'
+    oTitle.textContent   = isHe ? p.titleHe  : p.titleEn
+    oMedium.textContent  = isHe ? p.mediumHe : p.mediumEn
+    oDims.textContent    = p.dims
+    oYear.textContent    = p.year
+    oDesc.textContent    = isHe ? p.descHe   : p.descEn
+    oPrice.textContent   = p.price
+    oNextTitle.innerHTML =
+      `<span class="he">${p.nextTitleHe}</span><span class="en">${p.nextTitleEn}</span>`
+    // Re-apply lang show/hide inside overlay
+    overlay.querySelectorAll('.he').forEach(el => el.style.display = isHe ? '' : 'none')
+    overlay.querySelectorAll('.en').forEach(el => el.style.display = isHe ? 'none' : '')
+    overlay.classList.add('open')
+    overlay.scrollTop = 0
+    document.body.style.overflow = 'hidden'
   }
+
+  function closeOverlay() {
+    overlay.classList.remove('open')
+    document.body.style.overflow = ''
+  }
+
+  document.getElementById('overlay-close').addEventListener('click', closeOverlay)
+  document.getElementById('overlay-back').addEventListener('click', closeOverlay)
+
+  document.querySelectorAll('.work-item').forEach(item => {
+    item.addEventListener('click', () => openPiece(+item.dataset.piece))
+    item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openPiece(+item.dataset.piece) })
+  })
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay() })
 
   /* ── Footer year ──────────────────────────────────────────────── */
-  document.getElementById('yr').textContent = new Date().getFullYear()
+  const y = new Date().getFullYear()
+  document.getElementById('yr').textContent = y
+  document.querySelectorAll('.yr-en').forEach(el => el.textContent = y)
 </script>
 </body>
 </html>
