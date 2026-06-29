@@ -3,908 +3,1013 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>רבקה חיים | נייר נוזלי</title>
-<meta name="description" content="רבקה חיים — יצירות נייר נוזלי לתלייה על הקיר. רכישת יצירות וסדנאות סטודיו."/>
-<meta property="og:title"       content="רבקה חיים | נייר נוזלי"/>
-<meta property="og:description" content="יצירות נייר נוזלי מקוריות לתלייה על הקיר וסדנאות סטודיו — רבקה חיים"/>
-<meta property="og:image"       content="images/social/og-image.jpg"/>
-<meta property="og:type"        content="website"/>
+<title>רבקה חיים — פיסול נייר</title>
+<meta name="description" content="רבקה חיים — אמנית פיסול נייר ופאפייה-מאשה. יצירות מקוריות וסדנאות סטודיו."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Suez+One&family=Frank+Ruhl+Libre:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Spectral:ital,wght@0,200;0,300;0,400;1,300&family=Assistant:wght@300;400;500&family=Frank+Ruhl+Libre:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
-/* ═══════════════════════════════════════════════════════════════
-   DESIGN TOKENS
-═══════════════════════════════════════════════════════════════ */
+/* ── Exact reference design tokens ──────────────────────────────── */
 :root {
-  --kraft: #D9CBAD;
-  --card:  #F5F0E4;
-  --ink:   #2B2118;
-  --teal:  #34525E;
-  --gold:  #B9842A;
-  --clay:  #9C4F2C;
-  --muted: #7A6E62;
-  --border:rgba(43,33,24,.15);
-  --font-d:'Suez One','Frank Ruhl Libre',Georgia,serif;
-  --font-b:'Frank Ruhl Libre',Georgia,serif;
+  --paper: #fcfbf9;
+  --ink:   #282623;
+  --char:  #16130e;
+  --line:  #d3caba;
+  --muted: #8a8174;
   --ease:  cubic-bezier(.22,1,.36,1);
-  --max:   1280px;
-  --rad:   4px;
 }
+html[lang="he"] { --fs: 'Assistant',system-ui,sans-serif; --fsr: 'Frank Ruhl Libre',Georgia,serif; }
+html[lang="en"] { --fs: 'Inter',system-ui,sans-serif;     --fsr: 'Spectral',Georgia,serif; }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESET
-═══════════════════════════════════════════════════════════════ */
-*,::before,::after { box-sizing:border-box; margin:0; padding:0; }
-html  { scroll-behavior:smooth; }
-body  { background:var(--kraft); color:var(--ink); font-family:var(--font-b); font-size:16px; line-height:1.7; -webkit-font-smoothing:antialiased; }
-img   { display:block; max-width:100%; }
-a     { color:inherit; text-decoration:none; }
-button{ cursor:pointer; font:inherit; border:none; background:none; color:inherit; }
-h1,h2,h3,h4 { font-family:var(--font-d); font-weight:400; line-height:1.2; }
-ul    { list-style:none; }
-:focus-visible { outline:2px solid var(--teal); outline-offset:3px; }
+/* ── Reset ───────────────────────────────────────────────────────── */
+*,::before,::after { box-sizing:border-box; margin:0; padding:0; border:0 solid var(--line); }
+html { line-height:1.5; -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+body { background:var(--paper); color:var(--ink); font-family:var(--fs); -webkit-font-smoothing:antialiased; }
+img  { display:block; max-width:100%; }
+a    { color:inherit; text-decoration:none; }
+button { cursor:pointer; background:none; border:none; font:inherit; color:inherit; padding:0; }
+h1,h2,h3,h4,h5,h6 { font-size:inherit; font-weight:inherit; }
+ul,ol { list-style:none; }
+:focus-visible { outline:1.5px solid var(--ink); outline-offset:2px; }
 
-/* ═══════════════════════════════════════════════════════════════
-   LAYOUT
-═══════════════════════════════════════════════════════════════ */
-.container { max-width:var(--max); margin-inline:auto; padding-inline:clamp(1rem,5vw,3rem); }
-.section   { padding-block:clamp(4rem,8vw,7rem); }
+/* ── Core utilities ──────────────────────────────────────────────── */
+.label { font-family:var(--fs); font-size:11px; text-transform:uppercase; letter-spacing:.22em; }
+.serif { font-family:var(--fsr); }
+.muted { color:var(--muted); }
 
-/* ═══════════════════════════════════════════════════════════════
-   LANGUAGE TOGGLE
-   Uses inline/block instead of revert for full browser compat
-═══════════════════════════════════════════════════════════════ */
-[data-he],[data-en] { display:none; }
-html[lang="he"] [data-he] { display:inline; }
-html[lang="en"] [data-en] { display:inline; }
-/* Block-level lang elements */
-html[lang="he"] p[data-he],
-html[lang="he"] div[data-he],
-html[lang="he"] li[data-he]  { display:block; }
-html[lang="en"] p[data-en],
-html[lang="en"] div[data-en],
-html[lang="en"] li[data-en]  { display:block; }
+/* Link underline animation — exact from reference CSS */
+.link-u { position:relative; display:inline-block; }
+.link-u::after {
+  content:''; position:absolute; bottom:0; left:0;
+  height:1px; width:100%;
+  transform-origin:right; transform:scaleX(0);
+  background:currentColor;
+  transition:transform .5s var(--ease);
+}
+.link-u:hover::after, .link-u.on::after { transform-origin:left; transform:scaleX(1); }
 
-/* ═══════════════════════════════════════════════════════════════
-   HEADER
-═══════════════════════════════════════════════════════════════ */
+/* ── Layout ──────────────────────────────────────────────────────── */
+.mx-page { max-width:1600px; margin-inline:auto; }
+.px     { padding-inline:1.5rem; }
+@media(min-width:768px){ .px{ padding-inline:2.5rem; } }
+
+/* ── Page transition ─────────────────────────────────────────────── */
+#app { transition:opacity .18s ease; min-height:100vh; }
+#app.fade { opacity:0; }
+
+/* ══ HEADER ══════════════════════════════════════════════════════════ */
 #hdr {
-  position:fixed; inset-inline:0; top:0; z-index:100;
-  background:rgba(217,203,173,.92);
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-  transition:box-shadow .3s;
+  position:fixed; inset-inline:0; top:0; z-index:50;
+  background:rgba(252,251,249,.75);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
 }
-#hdr.scrolled { box-shadow:0 2px 24px rgba(43,33,24,.14); }
-
 .hdr-in {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:1.25rem;
   display:flex; align-items:center; justify-content:space-between;
-  padding-block:.9rem; gap:1.5rem;
 }
+@media(min-width:768px){ .hdr-in{ padding-inline:2.5rem; padding-block:1.5rem; } }
 
-/* Logo */
-.logo-block { display:flex; flex-direction:column; gap:.08rem; line-height:1; }
-.logo-name  {
-  font-family:var(--font-d); font-size:1.4rem;
-  color:var(--ink); display:block;
-}
-.logo-sig   {
-  font-family:var(--font-b); font-size:.65rem;
-  letter-spacing:.1em; color:var(--muted); display:block;
-}
+.logo { font-family:var(--fsr); font-size:clamp(1.4rem,3vw,2.25rem); font-weight:300; color:var(--ink); line-height:1; }
 
-/* Desktop nav */
-.nav-d { display:none; gap:2rem; align-items:center; }
-@media(min-width:720px){ .nav-d{ display:flex; } }
-.nav-d a {
-  font-size:.85rem; letter-spacing:.08em; color:var(--muted);
-  position:relative; padding-bottom:2px; transition:color .3s;
-}
-.nav-d a::after {
-  content:''; position:absolute; bottom:0; inset-inline-start:0;
-  height:1.5px; width:0; background:var(--gold);
-  transition:width .4s var(--ease);
-}
-.nav-d a:hover { color:var(--ink); }
-.nav-d a:hover::after { width:100%; }
+.nav-d { display:none; align-items:center; gap:2.25rem; }
+@media(min-width:768px){ .nav-d{ display:flex; } }
+.nav-d a { color:var(--muted); transition:color .4s; }
+.nav-d a:hover, .nav-d a.on { color:var(--ink); }
 
-/* Right side controls */
-.hdr-right { display:flex; align-items:center; gap:1rem; }
-.lang-btn {
-  font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
-  border:1px solid var(--border); padding:.28rem .65rem; border-radius:2px;
-  color:var(--muted); transition:border-color .3s,color .3s;
-}
-.lang-btn:hover { border-color:var(--teal); color:var(--teal); }
+.hdr-right { display:flex; align-items:center; gap:1.25rem; }
+.lang-btn  { color:var(--muted); transition:color .3s; }
+.lang-btn:hover { color:var(--ink); }
 
-/* Hamburger */
 .ham { display:flex; flex-direction:column; gap:5px; padding:4px; }
-.ham span { display:block; width:22px; height:1.5px; background:var(--ink); transition:transform .4s var(--ease),opacity .3s; }
-@media(min-width:720px){ .ham{ display:none; } }
+.ham span { display:block; width:22px; height:1px; background:var(--ink); transition:transform .4s var(--ease),opacity .3s; }
+@media(min-width:768px){ .ham{ display:none; } }
 
 /* Mobile nav overlay */
 #mob-nav {
-  position:fixed; inset:0; z-index:90;
-  background:var(--card);
+  position:fixed; inset:0; z-index:40; background:var(--paper);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem;
+  transition:opacity .5s var(--ease); pointer-events:none; opacity:0;
+}
+#mob-nav.open { pointer-events:auto; opacity:1; }
+#mob-nav a { font-family:var(--fsr); font-size:1.875rem; font-weight:300; color:var(--ink); }
+
+/* ══ FOOTER ══════════════════════════════════════════════════════════ */
+footer { position:relative; z-index:10; border-top:1px solid var(--line); }
+.ftr-in {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:3rem;
+  display:flex; flex-direction:column; gap:2rem;
+}
+@media(min-width:768px){
+  .ftr-in{ flex-direction:row; align-items:flex-end; justify-content:space-between; padding-inline:2.5rem; padding-block:4rem; }
+}
+.ftr-tag { font-family:var(--fsr); font-size:1.125rem; font-weight:300; max-width:20rem; line-height:1.55; color:rgba(40,38,35,.7); }
+.ftr-links { display:flex; flex-direction:column; gap:.6rem; }
+@media(min-width:768px){ .ftr-links{ align-items:flex-end; } }
+.ftr-links a { color:var(--muted); transition:color .3s; }
+.ftr-links a:hover { color:var(--ink); }
+.ftr-copy { color:var(--muted); margin-top:.5rem; }
+
+/* ══ HOME ════════════════════════════════════════════════════════════ */
+.home-hero {
+  min-height:100svh;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:2.5rem; opacity:0; pointer-events:none;
-  transition:opacity .4s var(--ease);
+  padding-inline:1.5rem; padding-block:7rem 8rem; gap:0;
 }
-#mob-nav.open { opacity:1; pointer-events:auto; }
-#mob-nav a { font-family:var(--font-d); font-size:1.75rem; color:var(--ink); }
+.home-tag {
+  font-family:var(--fsr); font-size:1.5rem; font-weight:300;
+  line-height:1.4; text-align:center; max-width:36rem;
+  color:var(--ink); margin-bottom:3rem;
+}
+@media(min-width:768px){ .home-tag{ font-size:1.875rem; } }
 
-/* ═══════════════════════════════════════════════════════════════
-   HERO
-═══════════════════════════════════════════════════════════════ */
-#hero {
-  position:relative; min-height:100svh;
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden; background-color:var(--kraft);
+.home-cats {
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+  gap:1.25rem 1.5rem; margin-bottom:3.5rem; max-width:36rem;
 }
-.hero-bg {
+@media(min-width:768px){ .home-cats{ flex-wrap:nowrap; max-width:none; gap:0 1.5rem; margin-bottom:4rem; } }
+.home-cats a { color:var(--muted); transition:color .3s; }
+.home-cats a:hover, .home-cats a.on { color:var(--ink); }
+
+/* Featured artwork card — portrait, viewport-relative (exact reference sizes) */
+.feat {
+  position:relative; overflow:hidden;
+  background:rgba(211,202,186,.4);
+  cursor:pointer; display:block;
+  height:64vw; width:51.2vw;
+}
+@media(min-width:640px){ .feat{ height:58vw; width:46.4vw; } }
+@media(min-width:768px){ .feat{ height:58vh; width:46.4vh; } }
+
+/* Slideshow slides */
+.feat-slide {
   position:absolute; inset:0;
-  background-image:url('images/hero/hero-bg.jpg');
-  background-size:cover; background-position:center;
-  opacity:.45;
+  opacity:0; transition:opacity 1s var(--ease);
 }
-.hero-overlay {
-  position:absolute; inset:0;
-  background:linear-gradient(160deg,rgba(43,33,24,.55) 0%,rgba(43,33,24,.15) 60%,rgba(217,203,173,.3) 100%);
+.feat-slide.active { opacity:1; }
+.feat-slide img {
+  width:100%; height:100%; object-fit:cover; opacity:.82;
+  transition:transform 5000ms var(--ease), opacity 1400ms var(--ease);
 }
-.hero-cnt {
-  position:relative; z-index:2;
-  padding-inline:clamp(1rem,5vw,3rem);
-  max-width:860px; margin-inline:auto;
-  text-align:center; padding-block:10rem 5rem;
-}
-.hero-eyebrow {
-  font-size:.75rem; letter-spacing:.25em; text-transform:uppercase;
-  color:var(--gold); margin-bottom:1.5rem;
-}
-.hero-h1 {
-  font-family:var(--font-d);
-  font-size:clamp(2.4rem,7vw,5rem);
-  color:var(--card); line-height:1.1; margin-bottom:1.5rem;
-  text-shadow:0 2px 18px rgba(43,33,24,.35);
-}
-.hero-sub {
-  font-size:clamp(1rem,2.5vw,1.25rem);
-  color:rgba(245,240,228,.85); margin-bottom:2.5rem;
-  max-width:560px; margin-inline:auto;
-}
-.hero-btns { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
-.btn-primary {
-  background:var(--teal); color:var(--card);
-  padding:.85rem 2rem; border-radius:var(--rad);
-  font-size:.9rem; letter-spacing:.08em;
-  transition:background .3s,transform .3s var(--ease);
-}
-.btn-primary:hover { background:#2a424d; transform:translateY(-2px); }
-.btn-outline {
-  border:1.5px solid rgba(245,240,228,.7); color:var(--card);
-  padding:.85rem 2rem; border-radius:var(--rad);
-  font-size:.9rem; letter-spacing:.08em;
-  transition:background .3s,border-color .3s,transform .3s var(--ease);
-}
-.btn-outline:hover { background:rgba(245,240,228,.15); border-color:var(--card); transform:translateY(-2px); }
+.feat-slide.active img { transform:scale(1.04); }
+.feat:hover .feat-slide.active img { opacity:.97; }
 
-/* ═══════════════════════════════════════════════════════════════
-   TORN EDGES
-═══════════════════════════════════════════════════════════════ */
-.torn { display:block; width:100%; line-height:0; }
-.torn svg { display:block; width:100%; }
-.torn-to-card svg path  { fill:var(--card); }
-.torn-to-kraft svg path { fill:var(--kraft); }
-
-/* ═══════════════════════════════════════════════════════════════
-   ABOUT
-═══════════════════════════════════════════════════════════════ */
-#about { background:var(--card); }
-.about-grid {
-  display:grid; grid-template-columns:1fr; gap:3rem; align-items:start;
+.feat-grad {
+  position:absolute; inset:0; z-index:1;
+  background:linear-gradient(to bottom,rgba(22,19,14,.1),transparent 50%,rgba(22,19,14,.5));
+  pointer-events:none;
 }
-@media(min-width:720px){ .about-grid{ grid-template-columns:320px 1fr; gap:4rem; } }
-
-.portrait-frame {
-  aspect-ratio:4/5; overflow:hidden; border-radius:var(--rad);
-  background:var(--kraft); box-shadow:6px 6px 0 var(--gold);
-  max-width:320px;
+.feat-info {
+  position:absolute; inset-inline:0; bottom:0; z-index:2;
+  padding-inline:1.5rem; padding-bottom:2rem;
 }
-.portrait-frame img { width:100%; height:100%; object-fit:cover; }
-.portrait-ph {
-  width:100%; height:100%;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:.5rem; color:var(--muted); font-size:.8rem; letter-spacing:.1em;
+@media(min-width:768px){ .feat-info{ padding-inline:2rem; padding-bottom:2.5rem; } }
+.feat-cat   { color:rgba(252,251,249,.8); transition:opacity .5s; }
+.feat-title { font-family:var(--fsr); font-size:1.25rem; font-weight:300; color:var(--paper); margin-top:.4rem; transition:opacity .5s; }
+
+/* Dot indicators */
+.feat-dots {
+  position:absolute; inset-inline:0; top:1.25rem; z-index:2;
+  display:flex; justify-content:center; gap:.4rem;
 }
-.portrait-ph svg { width:48px; opacity:.4; }
-
-.about-eyebrow { font-size:.75rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:.75rem; }
-.about-h2  { font-size:clamp(1.75rem,4vw,2.75rem); margin-bottom:1.25rem; }
-.about-bio { color:var(--muted); font-size:1rem; line-height:1.8; }
-.stats { display:flex; flex-wrap:wrap; gap:1.5rem 3rem; margin-top:2rem; }
-.stat-n { font-family:var(--font-d); font-size:2.5rem; color:var(--teal); line-height:1; }
-.stat-l { font-size:.8rem; letter-spacing:.1em; color:var(--muted); }
-
-/* ═══════════════════════════════════════════════════════════════
-   GALLERY
-═══════════════════════════════════════════════════════════════ */
-#gallery { background:var(--kraft); }
-.section-header  { text-align:center; margin-bottom:3rem; }
-.section-eyebrow { font-size:.75rem; letter-spacing:.22em; text-transform:uppercase; color:var(--clay); margin-bottom:.75rem; }
-.section-h2  { font-size:clamp(1.75rem,4vw,2.75rem); }
-.section-sub { color:var(--muted); max-width:520px; margin-inline:auto; margin-top:.75rem; font-size:.95rem; }
-
-.gal-grid {
-  display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;
+.feat-dot {
+  width:18px; height:1.5px;
+  background:rgba(252,251,249,.4);
+  transition:background .4s, width .4s var(--ease);
 }
-@media(min-width:640px){ .gal-grid{ grid-template-columns:repeat(3,1fr); gap:1.75rem; } }
+.feat-dot.active { background:rgba(252,251,249,.9); width:28px; }
 
-.gal-card {
-  background:var(--card); border-radius:var(--rad); overflow:hidden;
-  box-shadow:0 2px 12px rgba(43,33,24,.08);
-  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
-  display:flex; flex-direction:column;
-}
-.gal-card:hover { transform:translateY(-5px); box-shadow:0 12px 32px rgba(43,33,24,.16); }
-
-.gal-img { position:relative; aspect-ratio:1; background:var(--kraft); overflow:hidden; }
-.gal-img img { width:100%; height:100%; object-fit:cover; transition:transform 1.2s var(--ease); }
-.gal-card:hover .gal-img img { transform:scale(1.06); }
-.gal-ph {
+/* Image placeholder */
+.iph {
   position:absolute; inset:0;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:.4rem; color:var(--muted); font-size:.7rem; letter-spacing:.1em;
+  gap:.75rem; color:rgba(211,202,186,.9);
 }
-.gal-ph svg { width:32px; opacity:.35; }
+.iph svg   { width:36px; opacity:.6; }
+.iph span  { font-size:10px; letter-spacing:.2em; text-transform:uppercase; }
 
-.gal-body  { padding:1rem 1.1rem 1.25rem; flex:1; display:flex; flex-direction:column; gap:.3rem; }
-.gal-title { font-size:1rem; font-family:var(--font-d); color:var(--ink); }
-.gal-med   { font-size:.75rem; color:var(--muted); letter-spacing:.05em; }
-.gal-foot  { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.75rem; }
-.gal-price { font-family:var(--font-d); font-size:1rem; color:var(--gold); }
-.gal-inq   {
-  font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--teal); border-bottom:1px solid currentColor; padding-bottom:1px;
-  transition:opacity .3s;
+/* ══ GALLERY ═════════════════════════════════════════════════════════ */
+.gal-page { padding-top:56px; }
+.gal-hdr {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:4rem 2rem;
 }
-.gal-inq:hover { opacity:.6; }
-
-/* ═══════════════════════════════════════════════════════════════
-   WORKSHOPS — ticket cards
-═══════════════════════════════════════════════════════════════ */
-#workshops { background:var(--card); }
-
-.ws-grid {
-  display:grid; grid-template-columns:1fr; gap:2rem; margin-top:3rem;
+@media(min-width:768px){ .gal-hdr{ padding-inline:2.5rem; padding-block:7rem 2.5rem; } }
+.gal-h1 { font-family:var(--fsr); font-size:3rem; font-weight:200; line-height:1; }
+@media(min-width:768px){ .gal-h1{ font-size:4.5rem; } }
+.gal-filter {
+  display:flex; flex-wrap:wrap; gap:.75rem 2rem;
+  margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--line);
 }
-@media(min-width:820px){ .ws-grid{ grid-template-columns:repeat(3,1fr); } }
+.gal-filter a { color:var(--muted); transition:color .3s; }
+.gal-filter a:hover, .gal-filter a.on { color:var(--ink); }
 
-.ticket {
-  background:var(--kraft); border-radius:var(--rad) var(--rad) 0 0;
-  overflow:hidden; box-shadow:0 4px 24px rgba(43,33,24,.1);
-  display:flex; flex-direction:column;
-  transition:transform .4s var(--ease),box-shadow .4s;
+.works-grid {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:2.5rem 6rem;
+  display:grid; grid-template-columns:1fr; gap:1.5rem;
 }
-.ticket:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(43,33,24,.18); }
+@media(min-width:640px){ .works-grid{ grid-template-columns:1fr 1fr; gap:2.5rem; } }
+@media(min-width:768px){ .works-grid{ padding-inline:2.5rem; } }
 
-.ticket-top  { padding:1.75rem 1.5rem 1.5rem; flex:1; }
-.ticket-badge {
-  display:inline-block; background:var(--clay); color:var(--card);
-  font-size:.65rem; letter-spacing:.15em; text-transform:uppercase;
-  padding:.25rem .65rem; border-radius:2px; margin-bottom:1.1rem;
+.wcard { display:block; cursor:pointer; }
+.wcard-img {
+  position:relative; aspect-ratio:4/3;
+  overflow:hidden; background:rgba(211,202,186,.35);
 }
-.ticket-name { font-size:1.2rem; font-family:var(--font-d); margin-bottom:.65rem; color:var(--ink); }
-.ticket-desc { font-size:.88rem; color:var(--muted); line-height:1.75; }
-.ticket-specs { margin-top:1.25rem; display:flex; flex-direction:column; gap:.45rem; }
-.ticket-spec  { display:flex; gap:.6rem; font-size:.82rem; color:var(--muted); align-items:flex-start; }
-.ticket-spec-k { color:var(--teal); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; min-width:4.5rem; padding-top:.12rem; }
-
-/* Perforation divider with notch circles */
-.perf-wrap { position:relative; overflow:visible; }
-.perf-wrap::before,.perf-wrap::after {
-  content:''; position:absolute; top:50%; transform:translateY(-50%);
-  width:20px; height:20px; border-radius:50%; background:var(--card); z-index:1;
+.wcard-img img {
+  width:100%; height:100%; object-fit:cover; opacity:.82;
+  transition:transform 1600ms var(--ease),opacity 1400ms var(--ease);
 }
-.perf-wrap::before { inset-inline-start:-10px; }
-.perf-wrap::after  { inset-inline-end:-10px; }
-.perf { border:none; height:0; border-top:2px dashed rgba(43,33,24,.2); margin-inline:1.5rem; }
+.wcard:hover .wcard-img img { transform:scale(1.04); opacity:.97; }
+.wcard-info { padding-block:.85rem; display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; }
+.wcard-cat   { color:var(--muted); }
+.wcard-title { font-family:var(--fsr); font-size:1.125rem; font-weight:300; margin-top:.2rem; }
+.wcard-year  { color:var(--muted); flex-shrink:0; margin-top:.15rem; }
 
-.ticket-bottom {
-  padding:1.25rem 1.5rem 1.5rem;
-  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+/* ══ WORK DETAIL ═════════════════════════════════════════════════════ */
+/* Hero — full-width, tall (88svh on desktop), title overlaid at bottom */
+.wd-hero {
+  position:relative; width:100%; height:78svh;
+  overflow:hidden; background:var(--char);
 }
-.ticket-price { font-family:var(--font-d); font-size:1.4rem; color:var(--gold); }
-.ticket-pnote { font-size:.72rem; color:var(--muted); }
-.btn-reg {
-  background:var(--teal); color:var(--card);
-  padding:.65rem 1.35rem; border-radius:var(--rad);
-  font-size:.8rem; letter-spacing:.08em;
-  transition:background .3s,transform .3s var(--ease); white-space:nowrap;
+@media(min-width:768px){ .wd-hero{ height:88svh; } }
+.wd-hero-img { position:absolute; inset:0; }
+.wd-hero-img img { width:100%; height:100%; object-fit:cover; opacity:.82; }
+.wd-grad {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom,rgba(22,19,14,.2),transparent 45%,rgba(22,19,14,.5));
 }
-.btn-reg:hover { background:#2a424d; transform:translateY(-1px); }
-
-/* ═══════════════════════════════════════════════════════════════
-   CONTACT
-═══════════════════════════════════════════════════════════════ */
-#contact { background:var(--kraft); }
-.ct-grid { display:grid; grid-template-columns:1fr; gap:3rem; }
-@media(min-width:720px){ .ct-grid{ grid-template-columns:1fr 1fr; gap:4rem; align-items:start; } }
-
-.ct-h2   { font-size:clamp(1.5rem,3.5vw,2.25rem); margin-bottom:.75rem; }
-.ct-sub  { color:var(--muted); font-size:.95rem; margin-bottom:2rem; }
-.ct-chs  { display:flex; flex-direction:column; gap:1rem; }
-
-.ch {
-  display:flex; align-items:center; gap:.85rem;
-  padding:1rem 1.25rem; background:var(--card); border-radius:var(--rad);
-  border:1px solid var(--border);
-  transition:border-color .3s,box-shadow .3s,transform .3s var(--ease);
+/* Title + breadcrumb OVERLAID at the bottom of the hero image */
+.wd-btm {
+  position:absolute; inset-inline:0; bottom:0;
+  padding-inline:1.5rem; padding-bottom:3rem;
+  max-width:1600px; margin-inline:auto;
 }
-.ch:hover { border-color:var(--teal); box-shadow:0 4px 16px rgba(52,82,94,.15); transform:translateX(-3px); }
-html[lang="en"] .ch:hover { transform:translateX(3px); }
-.ch-icon { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.ch-icon.wa { background:#25D366; color:#fff; }
-.ch-icon.ig { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:#fff; }
-.ch-icon.em { background:var(--kraft); color:var(--teal); border:1px solid var(--border); }
-.ch-txt   { display:flex; flex-direction:column; gap:.1rem; }
-.ch-lbl   { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
-.ch-val   { font-size:.9rem; color:var(--ink); }
+@media(min-width:768px){ .wd-btm{ padding-inline:2.5rem; padding-bottom:4rem; } }
+.wd-bread { color:rgba(252,251,249,.8); }
+.wd-htitle {
+  font-family:var(--fsr); font-weight:200; line-height:1;
+  color:var(--paper); margin-top:1rem; font-size:2.25rem;
+}
+@media(min-width:768px){ .wd-htitle{ font-size:4.5rem; } }
 
-/* Contact form */
-.cform { background:var(--card); padding:2rem 1.75rem; border-radius:var(--rad); border:1px solid var(--border); }
-.cform-h { font-family:var(--font-d); font-size:1.15rem; margin-bottom:1.5rem; }
-.fg { margin-bottom:1.25rem; }
-.fg label { display:block; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:.4rem; }
+/* Content below hero */
+.wd-body {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:4rem 2rem;
+}
+@media(min-width:768px){ .wd-body{ padding-inline:2.5rem; padding-block:7rem 2.5rem; } }
+
+.wd-back {
+  display:inline-flex; align-items:center; gap:.4rem;
+  color:var(--muted); margin-bottom:2.5rem; transition:color .3s;
+}
+.wd-back:hover { color:var(--ink); }
+
+/* Metadata — flex row of key/value pairs */
+.wd-meta {
+  display:flex; flex-wrap:wrap; gap:1.5rem 3rem;
+  padding-bottom:2.5rem; border-bottom:1px solid var(--line);
+}
+.wd-mk { color:var(--muted); margin-bottom:.35rem; }
+.wd-mv { font-family:var(--fsr); font-size:1.125rem; font-weight:300; }
+
+/* 12-col grid for description */
+.wd-grid { display:grid; grid-template-columns:1fr; gap:2.5rem; margin-top:2.5rem; }
+@media(min-width:768px){
+  .wd-grid{ grid-template-columns:repeat(12,1fr); gap:0 4rem; }
+  .wd-c4{ grid-column:span 4; }
+  .wd-c8{ grid-column:span 8; }
+}
+
+.wd-desc {
+  font-family:var(--fsr); font-weight:300; line-height:1.65;
+  color:rgba(40,38,35,.85); font-size:1.5rem;
+}
+@media(min-width:768px){ .wd-desc{ font-size:1.875rem; } }
+
+.btn-inq {
+  display:inline-flex; align-items:center; gap:.5rem;
+  margin-top:2rem; border:1px solid var(--line);
+  padding:.85rem 1.75rem; color:var(--ink);
+  transition:background .4s,color .4s,border-color .4s;
+}
+.btn-inq:hover { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
+/* Gallery strip */
+.wd-gal-wrap {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:1.5rem 0;
+}
+@media(min-width:768px){ .wd-gal-wrap{ padding-inline:2.5rem; } }
+.wd-gal { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+@media(min-width:640px){ .wd-gal{ grid-template-columns:1fr 1fr; } }
+@media(min-width:768px){ .wd-gal{ gap:2.5rem; } }
+.wd-gi { position:relative; overflow:hidden; background:rgba(211,202,186,.3); aspect-ratio:4/3; }
+.wd-gi.wide { grid-column:1/-1; aspect-ratio:16/7; }
+.wd-gi img  { width:100%; height:100%; object-fit:cover; }
+
+/* Next artwork — full-width tall card */
+.wd-next {
+  position:relative; display:block; width:100%; overflow:hidden;
+  height:52svh; background:var(--char); margin-top:2.5rem; cursor:pointer;
+}
+@media(min-width:768px){ .wd-next{ height:64svh; } }
+.wd-next-img { position:absolute; inset:0; }
+.wd-next-img img { width:100%; height:100%; object-fit:cover; }
+.wd-next-grad {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom,rgba(22,19,14,.65),rgba(22,19,14,0) 40%,rgba(22,19,14,.75));
+}
+.wd-next-cnt {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; color:var(--paper); padding:2rem;
+}
+.wd-next-lbl  { color:rgba(252,251,249,.8); }
+.wd-next-ttl  { font-family:var(--fsr); font-weight:200; font-size:2.25rem; line-height:1.1; margin-top:1rem; }
+@media(min-width:768px){ .wd-next-ttl{ font-size:3.75rem; } }
+.wd-next-arr  { display:flex; align-items:center; gap:.5rem; margin-top:1.25rem; color:rgba(252,251,249,.8); }
+
+/* ══ ABOUT ═══════════════════════════════════════════════════════════ */
+.ab-page { padding-top:56px; }
+.ab-wrap {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:6rem;
+}
+@media(min-width:768px){ .ab-wrap{ padding-inline:2.5rem; padding-block:11rem 8rem; } }
+.ab-grid { display:grid; grid-template-columns:1fr; gap:3rem; }
+@media(min-width:768px){
+  .ab-grid{ grid-template-columns:repeat(12,1fr); gap:4rem; }
+  .ab-c5{ grid-column:span 5; }
+  .ab-c7{ grid-column:span 7; padding-inline-start:2rem; }
+}
+.ab-port { position:relative; overflow:hidden; background:rgba(211,202,186,.5); aspect-ratio:4/5; }
+.ab-port img { width:100%; height:100%; object-fit:cover; }
+
+.ab-eye { color:var(--muted); }
+.ab-h1  {
+  font-family:var(--fsr); font-weight:200; line-height:1.2;
+  margin-top:1.25rem; font-size:3rem; max-width:36rem;
+}
+@media(min-width:768px){ .ab-h1{ font-size:3.75rem; } }
+.ab-body {
+  margin-top:2.5rem; max-width:36rem;
+  display:flex; flex-direction:column; gap:1.5rem;
+  font-size:1rem; line-height:1.7; color:rgba(40,38,35,.75);
+}
+html[lang="he"] .ab-body { font-family:var(--fsr); font-size:1.05rem; }
+.ab-cats {
+  margin-top:3rem; padding-top:2rem; border-top:1px solid var(--line);
+  display:flex; flex-wrap:wrap; gap:.75rem 1.5rem;
+}
+.ab-cats a { font-family:var(--fsr); font-size:1.125rem; font-weight:300; color:var(--ink); transition:opacity .3s; }
+.ab-cats a:hover { opacity:.55; }
+.ab-cta { display:inline-flex; align-items:center; gap:.5rem; margin-top:1.25rem; font-family:var(--fsr); font-size:1.125rem; font-weight:300; }
+
+/* ══ WORKSHOPS ═══════════════════════════════════════════════════════ */
+.ws-page { padding-top:56px; }
+.ws-wrap {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:6rem;
+}
+@media(min-width:768px){ .ws-wrap{ padding-inline:2.5rem; padding-block:11rem 8rem; } }
+.ws-h1 { font-family:var(--fsr); font-weight:200; line-height:1; font-size:3rem; }
+@media(min-width:768px){ .ws-h1{ font-size:4.5rem; } }
+.ws-intro {
+  margin-top:1.25rem; max-width:36rem;
+  font-family:var(--fsr); font-size:1.125rem; font-weight:300;
+  line-height:1.6; color:rgba(40,38,35,.7);
+}
+@media(min-width:768px){ .ws-intro{ font-size:1.25rem; } }
+.ws-list { margin-top:4rem; border-top:1px solid var(--line); }
+.ws-row {
+  padding-block:2rem; border-bottom:1px solid var(--line);
+  display:grid; grid-template-columns:1fr; gap:1.5rem;
+}
+@media(min-width:768px){
+  .ws-row{ grid-template-columns:repeat(12,1fr); gap:2rem 4rem; padding-block:2.5rem; align-items:start; }
+  .wsr-l{ grid-column:span 7; }
+  .wsr-r{ grid-column:span 5; display:flex; flex-direction:column; align-items:flex-end; gap:1rem; }
+  html[dir="rtl"] .wsr-r{ align-items:flex-start; }
+}
+.wsr-type { color:var(--muted); margin-bottom:.5rem; }
+.wsr-name { font-family:var(--fsr); font-size:1.5rem; font-weight:300; line-height:1.2; margin-bottom:.85rem; }
+@media(min-width:768px){ .wsr-name{ font-size:1.875rem; } }
+.wsr-desc { font-size:.9rem; line-height:1.7; color:rgba(40,38,35,.7); max-width:36rem; }
+html[lang="he"] .wsr-desc{ font-family:var(--fsr); font-size:.95rem; }
+.wsr-specs { display:flex; flex-wrap:wrap; gap:1rem 2rem; margin-top:1.25rem; }
+.wsr-sk { color:var(--muted); margin-bottom:.15rem; }
+.wsr-sv { font-size:.9rem; }
+.wsr-price { font-family:var(--fsr); font-size:2.25rem; font-weight:300; line-height:1; }
+.wsr-pnote { color:var(--muted); margin-top:.3rem; }
+.btn-ws {
+  display:inline-block; margin-top:.75rem;
+  border:1px solid var(--line); padding:.75rem 1.5rem;
+  color:var(--ink); transition:background .4s,color .4s,border-color .4s; white-space:nowrap;
+}
+.btn-ws:hover { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
+/* ══ CONTACT ═════════════════════════════════════════════════════════ */
+.ct-page { padding-top:56px; }
+.ct-wrap {
+  max-width:1600px; margin-inline:auto;
+  padding-inline:1.5rem; padding-block:6rem;
+}
+@media(min-width:768px){ .ct-wrap{ padding-inline:2.5rem; padding-block:11rem 8rem; } }
+.ct-grid { display:grid; grid-template-columns:1fr; gap:4rem; }
+@media(min-width:768px){
+  .ct-grid{ grid-template-columns:repeat(12,1fr); gap:4rem; }
+  .ct-l{ grid-column:span 4; }
+  .ct-r{ grid-column:span 8; }
+}
+.ct-h1 { font-family:var(--fsr); font-weight:200; line-height:1; font-size:3rem; margin-bottom:2rem; }
+@media(min-width:768px){ .ct-h1{ font-size:4.5rem; } }
+.ct-chs { display:flex; flex-direction:column; }
+.ct-ch {
+  display:flex; align-items:flex-start; gap:.75rem;
+  padding-block:1.25rem; border-bottom:1px solid var(--line);
+  color:var(--ink); transition:opacity .3s;
+}
+.ct-ch:first-child { border-top:1px solid var(--line); }
+.ct-ch:hover { opacity:.6; }
+.ct-ch-k { color:var(--muted); min-width:5rem; flex-shrink:0; }
+.ct-ch-v { font-family:var(--fsr); font-size:1rem; font-weight:300; }
+.ct-fh { font-family:var(--fsr); font-size:1.5rem; font-weight:300; margin-bottom:2rem; color:rgba(40,38,35,.75); }
+.fg { margin-bottom:2rem; }
+.fg label { display:block; color:var(--muted); margin-bottom:.45rem; }
 .fg input,.fg textarea,.fg select {
-  width:100%; background:var(--kraft);
-  border:1px solid var(--border); border-radius:var(--rad);
-  padding:.65rem .85rem; font-family:var(--font-b); font-size:.9rem; color:var(--ink);
-  outline:none; transition:border-color .3s; -webkit-appearance:none;
+  width:100%; background:transparent;
+  border-bottom:1px solid var(--line);
+  font-family:var(--fs); font-size:.95rem; color:var(--ink);
+  padding-block:.5rem; outline:none; -webkit-appearance:none;
+  transition:border-color .3s;
 }
-.fg input:focus,.fg textarea:focus,.fg select:focus { border-color:var(--teal); }
-.fg textarea { resize:vertical; min-height:110px; }
-.fg-row { display:grid; grid-template-columns:1fr 1fr; gap:0 1rem; }
+.fg input:focus,.fg textarea:focus,.fg select:focus { border-bottom-color:var(--ink); }
+.fg input::placeholder,.fg textarea::placeholder { color:var(--line); }
+.fg textarea { resize:vertical; min-height:120px; }
+.fg select option { background:var(--paper); }
+.fg-row { display:grid; grid-template-columns:1fr 1fr; gap:0 1.5rem; }
 @media(max-width:480px){ .fg-row{ grid-template-columns:1fr; } }
 .btn-send {
-  width:100%; background:var(--ink); color:var(--card);
-  padding:.85rem; border-radius:var(--rad);
-  font-size:.9rem; letter-spacing:.1em; text-transform:uppercase;
-  transition:background .3s,transform .3s var(--ease); margin-top:.5rem;
+  display:inline-block; background:var(--ink); color:var(--paper);
+  border:1px solid var(--ink); padding:1rem 2.5rem;
+  transition:background .4s,color .4s; margin-top:.5rem;
 }
-.btn-send:hover { background:var(--teal); transform:translateY(-2px); }
-
-/* ═══════════════════════════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════════════════════════ */
-footer { background:var(--ink); color:rgba(245,240,228,.6); padding-block:2.5rem; }
-.ftr-in {
-  display:flex; flex-direction:column; gap:1.5rem;
-  align-items:center; text-align:center;
-}
-@media(min-width:720px){ .ftr-in{ flex-direction:row; justify-content:space-between; text-align:start; } }
-.ftr-logo { font-family:var(--font-d); font-size:1.15rem; color:rgba(245,240,228,.85); }
-.ftr-sig  { font-size:.7rem; letter-spacing:.1em; color:rgba(245,240,228,.4); margin-top:.15rem; }
-.ftr-links { display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center; }
-.ftr-links a { font-size:.8rem; letter-spacing:.08em; transition:color .3s; }
-.ftr-links a:hover { color:var(--gold); }
-.ftr-copy { font-size:.75rem; color:rgba(245,240,228,.3); }
-
-/* ═══════════════════════════════════════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════════════════════════════════════ */
-.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s var(--ease),transform .7s var(--ease); }
-.reveal.visible { opacity:1; transform:none; }
+.btn-send:hover { background:transparent; color:var(--ink); }
 </style>
 </head>
 <body>
 
-<!-- ══ MOBILE NAV ═══════════════════════════════════════════════════ -->
+<!-- Mobile nav overlay -->
 <div id="mob-nav" role="dialog" aria-modal="true">
-  <a href="#gallery"   onclick="closeMob()"><span data-he>גלריה</span><span data-en>Gallery</span></a>
-  <a href="#workshops" onclick="closeMob()"><span data-he>סדנאות</span><span data-en>Workshops</span></a>
-  <a href="#about"     onclick="closeMob()"><span data-he>אודות</span><span data-en>About</span></a>
-  <a href="#contact"   onclick="closeMob()"><span data-he>צרו קשר</span><span data-en>Contact</span></a>
-  <button class="lang-btn" onclick="toggleLang();closeMob()">
-    <span data-he>English</span><span data-en>עברית</span>
-  </button>
+  <a href="#/" data-nav class="serif" style="font-size:1.875rem;font-weight:300"><span data-he>רבקה חיים</span><span data-en>Rivka Haim</span></a>
+  <a href="#/gallery"   data-nav class="serif" style="font-size:1.5rem;font-weight:300"><span data-he>גלריה</span><span data-en>Gallery</span></a>
+  <a href="#/workshops" data-nav class="serif" style="font-size:1.5rem;font-weight:300"><span data-he>סדנאות</span><span data-en>Workshops</span></a>
+  <a href="#/about"     data-nav class="serif" style="font-size:1.5rem;font-weight:300"><span data-he>אודות</span><span data-en>About</span></a>
+  <a href="#/contact"   data-nav class="serif" style="font-size:1.5rem;font-weight:300"><span data-he>יצירת קשר</span><span data-en>Contact</span></a>
 </div>
 
-<!-- ══ HEADER ═══════════════════════════════════════════════════════ -->
+<!-- Header -->
 <header id="hdr">
-  <div class="container hdr-in">
-
-    <a href="#" class="logo-block">
-      <span class="logo-name">
-        <span data-he>רבקה חיים</span><span data-en>Rivka Haim</span>
-      </span>
-      <span class="logo-sig">
-        <span data-he>יוצרת בנייר</span><span data-en>Liquid Paper Artist</span>
-      </span>
+  <div class="hdr-in">
+    <a href="#/" class="logo link-u" style="display:flex;flex-direction:column;gap:.15rem">
+      <span><span data-he>רבקה חיים</span><span data-en>Rivka Haim</span></span>
+      <span style="font-family:var(--fs);font-size:.6rem;letter-spacing:.18em;color:var(--muted)"><span data-he>יוצרת בנייר</span><span data-en>Liquid Paper Artist</span></span>
     </a>
-
-    <nav class="nav-d">
-      <a href="#gallery">  <span data-he>גלריה</span>  <span data-en>Gallery</span></a>
-      <a href="#workshops"><span data-he>סדנאות</span> <span data-en>Workshops</span></a>
-      <a href="#about">    <span data-he>אודות</span>  <span data-en>About</span></a>
-      <a href="#contact">  <span data-he>צרו קשר</span><span data-en>Contact</span></a>
+    <nav class="nav-d" aria-label="Main">
+      <a href="#/gallery"   class="label link-u"><span data-he>גלריה</span><span data-en>Gallery</span></a>
+      <a href="#/workshops" class="label link-u"><span data-he>סדנאות</span><span data-en>Workshops</span></a>
+      <a href="#/about"     class="label link-u"><span data-he>אודות</span><span data-en>About</span></a>
+      <a href="#/contact"   class="label link-u"><span data-he>יצירת קשר</span><span data-en>Contact</span></a>
     </nav>
-
     <div class="hdr-right">
-      <button class="lang-btn" onclick="toggleLang()">
+      <button class="lang-btn label" id="lang-btn" aria-label="Switch language">
         <span data-he>EN</span><span data-en>עב</span>
       </button>
-      <button class="ham" id="ham-btn" aria-expanded="false" onclick="toggleMob()">
+      <button class="ham" id="ham-btn" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<!-- ══ HERO ══════════════════════════════════════════════════════════ -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-cnt">
-    <p class="hero-eyebrow">
-      <span data-he>נייר נוזלי — אמנות קיר מקורית</span>
-      <span data-en>Liquid Paper — Original Wall Art</span>
-    </p>
-    <h1 class="hero-h1">
-      <span data-he>כשהנייר זורם,<br>הקיר מתעורר</span>
-      <span data-en>When paper flows,<br>the wall awakens</span>
-    </h1>
-    <p class="hero-sub">
-      <span data-he>יצירות שכבות נייר נוזלי בעבודת יד — כל יצירה ייחודית ומיועדת לתלייה על הקיר. רכישה ישירה מהסטודיו.</span>
-      <span data-en>Hand-built layers of liquid paper pulp — each piece unique, designed to hang on your wall. Buy direct from the studio.</span>
-    </p>
-    <div class="hero-btns">
-      <a href="#gallery"   class="btn-primary"><span data-he>לצפייה ביצירות</span><span data-en>View the Art</span></a>
-      <a href="#workshops" class="btn-outline"><span data-he>הרשמה לסדנה</span>  <span data-en>Book a Workshop</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- torn: kraft → card -->
-<div class="torn torn-to-card" aria-hidden="true">
-  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,48 L0,18 C60,28 120,8 180,20 C240,32 300,12 360,22 C420,32 480,10 540,20 C600,30 660,14 720,24 C780,34 840,8 900,18 C960,28 1020,10 1080,22 C1140,34 1200,12 1260,24 C1320,36 1380,14 1440,20 L1440,48 Z"/>
-  </svg>
-</div>
-
-<!-- ══ ABOUT ══════════════════════════════════════════════════════════ -->
-<section id="about" class="section">
-  <div class="container">
-    <div class="about-grid">
-
-      <div class="portrait-frame reveal">
-        <img src="images/portrait/rivka-portrait.jpg" alt="רבקה חיים"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="portrait-ph" style="display:none">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width=".8">
-            <circle cx="20" cy="14" r="7"/><path d="M4 38c0-8.8 7.2-16 16-16s16 7.2 16 16"/>
-          </svg>
-          <span>rivka-portrait.jpg</span>
-        </div>
-      </div>
-
-      <div class="reveal">
-        <p class="about-eyebrow"><span data-he>אודות</span><span data-en>About</span></p>
-        <h2 class="about-h2">
-          <span data-he>רבקה חיים — יוצרת בנייר</span>
-          <span data-en>Rivka Haim — Liquid Paper Artist</span>
-        </h2>
-        <p class="about-bio">
-          <span data-he>[ביוגרפיה — מי היא רבקה, מה הוביל אותה לעבוד עם נייר נוזלי, מה הייחודיות של הטכניקה שלה. כ-80 מילה.]</span>
-          <span data-en>[Biography — who Rivka is, what led her to liquid paper, what makes her technique unique. Approx. 80 words.]</span>
-        </p>
-        <div class="stats">
-          <div><p class="stat-n">+[X]</p><p class="stat-l"><span data-he>יצירות שנמכרו</span><span data-en>Pieces sold</span></p></div>
-          <div><p class="stat-n">+[X]</p><p class="stat-l"><span data-he>תלמידים</span><span data-en>Students</span></p></div>
-          <div><p class="stat-n">[X]</p> <p class="stat-l"><span data-he>שנות יצירה</span><span data-en>Years creating</span></p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- torn: card → kraft -->
-<div class="torn torn-to-kraft" aria-hidden="true">
-  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,0 L0,30 C80,18 160,38 240,26 C320,14 400,36 480,24 C560,12 640,34 720,22 C800,10 880,32 960,20 C1040,8 1120,30 1200,18 C1280,6 1360,28 1440,16 L1440,0 Z"/>
-  </svg>
-</div>
-
-<!-- ══ GALLERY ════════════════════════════════════════════════════════ -->
-<section id="gallery" class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <p class="section-eyebrow"><span data-he>יצירות לרכישה</span><span data-en>Works for Sale</span></p>
-      <h2 class="section-h2"><span data-he>גלריה — נייר נוזלי</span><span data-en>Gallery — Liquid Paper</span></h2>
-      <p class="section-sub">
-        <span data-he>כל יצירה עשויה ידנית — שכבות עיסת נייר נוזלי שנשפכה, עוצבה ויובשה. מיועדת לתלייה על הקיר.</span>
-        <span data-en>Every piece is hand-built — layers of poured liquid paper pulp, shaped and dried. Designed for hanging on any wall.</span>
-      </p>
-    </div>
-    <div class="gal-grid">
-
-      <!-- repeat for each of 6 pieces -->
-      <div class="gal-card reveal">
-        <div class="gal-img">
-          <img src="images/gallery/piece-1.jpg" alt="יצירה 1" loading="lazy"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="gal-ph" style="display:none">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width=".8"><rect x="2" y="2" width="36" height="36"/><line x1="2" y1="2" x2="38" y2="38"/><line x1="38" y1="2" x2="2" y2="38"/></svg>
-            <span>piece-1.jpg</span>
-          </div>
-        </div>
-        <div class="gal-body">
-          <p class="gal-title"><span data-he>[שם היצירה]</span><span data-en>[Piece Title]</span></p>
-          <p class="gal-med"><span data-he>נייר נוזלי · [W]×[H] ס"מ</span><span data-en>Liquid paper · [W]×[H] cm</span></p>
-          <div class="gal-foot">
-            <span class="gal-price">₪[מחיר]</span>
-            <a href="#contact" class="gal-inq"><span data-he>ליצירת קשר</span><span data-en>Inquire</span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="gal-card reveal">
-        <div class="gal-img">
-          <img src="images/gallery/piece-2.jpg" alt="יצירה 2" loading="lazy"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="gal-ph" style="display:none">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width=".8"><rect x="2" y="2" width="36" height="36"/><line x1="2" y1="2" x2="38" y2="38"/><line x1="38" y1="2" x2="2" y2="38"/></svg>
-            <span>piece-2.jpg</span>
-          </div>
-        </div>
-        <div class="gal-body">
-          <p class="gal-title"><span data-he>[שם היצירה]</span><span data-en>[Piece Title]</span></p>
-          <p class="gal-med"><span data-he>נייר נוזלי · [W]×[H] ס"מ</span><span data-en>Liquid paper · [W]×[H] cm</span></p>
-          <div class="gal-foot">
-            <span class="gal-price">₪[מחיר]</span>
-            <a href="#contact" class="gal-inq"><span data-he>ליצירת קשר</span><span data-en>Inquire</span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="gal-card reveal">
-        <div class="gal-img">
-          <img src="images/gallery/piece-3.jpg" alt="יצירה 3" loading="lazy"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="gal-ph" style="display:none">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width=".8"><rect x="2" y="2" width="36" height="36"/><line x1="2" y1="2" x2="38" y2="38"/><line x1="38" y1="2" x2="2" y2="38"/></svg>
-            <span>piece-3.jpg</span>
-          </div>
-        </div>
-        <div class="gal-body">
-          <p class="gal-title"><span data-he>[שם היצירה]</span><span data-en>[Piece Title]</span></p>
-          <p class="gal-med"><span data-he>נייר נוזלי · [W]×[H] ס"מ</span><span data-en>Liquid paper · [W]×[H] cm</span></p>
-          <div class="gal-foot">
-            <span class="gal-price">₪[מחיר]</span>
-            <a href="#contact" class="gal-inq"><span data-he>ליצירת קשר</span><span data-en>Inquire</span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="gal-card reveal">
-        <div class="gal-img">
-          <img src="images/gallery/piece-4.jpg" alt="יצירה 4" loading="lazy"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="gal-ph" style="display:none">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width=".8"><rect x="2" y="2" width="36" height="36"/><line x1="2" y1="2" x2="38" y2="38"/><line x1="38" y1="2" x2="2" y2="38"/></svg>
-            <span>piece-4.jpg</span>
-          </div>
-        </div>
-        <div class="gal-body">
-          <p class="gal-title"><span data-he>[שם היצירה]</span><span data-en>[Piece Title]</span></p>
-          <p class="gal-med"><span data-he>נייר נוזלי · [W]×[H] ס"מ</span><span data-en>Liquid paper · [W]×[H] cm</span></p>
-          <div class="gal-foot">
-            <span class="gal-price">₪[מחיר]</span>
-            <a href="#contact" class="gal-inq"><span data-he>ליצירת קשר</span><span data-en>Inquire</span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="gal-card reveal">
-        <div class="gal-img">
-          <img src="images/gallery/piece-5.jpg" alt="יצירה 5" loading="lazy"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="gal-ph" style="display:none">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width=".8"><rect x="2" y="2" width="36" height="36"/><line x1="2" y1="2" x2="38" y2="38"/><line x1="38" y1="2" x2="2" y2="38"/></svg>
-            <span>piece-5.jpg</span>
-          </div>
-        </div>
-        <div class="gal-body">
-          <p class="gal-title"><span data-he>[שם היצירה]</span><span data-en>[Piece Title]</span></p>
-          <p class="gal-med"><span data-he>נייר נוזלי · [W]×[H] ס"מ</span><span data-en>Liquid paper · [W]×[H] cm</span></p>
-          <div class="gal-foot">
-            <span class="gal-price">₪[מחיר]</span>
-            <a href="#contact" class="gal-inq"><span data-he>ליצירת קשר</span><span data-en>Inquire</span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="gal-card reveal">
-        <div class="gal-img">
-          <img src="images/gallery/piece-6.jpg" alt="יצירה 6" loading="lazy"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="gal-ph" style="display:none">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width=".8"><rect x="2" y="2" width="36" height="36"/><line x1="2" y1="2" x2="38" y2="38"/><line x1="38" y1="2" x2="2" y2="38"/></svg>
-            <span>piece-6.jpg</span>
-          </div>
-        </div>
-        <div class="gal-body">
-          <p class="gal-title"><span data-he>[שם היצירה]</span><span data-en>[Piece Title]</span></p>
-          <p class="gal-med"><span data-he>נייר נוזלי · [W]×[H] ס"מ</span><span data-en>Liquid paper · [W]×[H] cm</span></p>
-          <div class="gal-foot">
-            <span class="gal-price">₪[מחיר]</span>
-            <a href="#contact" class="gal-inq"><span data-he>ליצירת קשר</span><span data-en>Inquire</span></a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- torn: kraft → card -->
-<div class="torn torn-to-card" aria-hidden="true">
-  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,48 L0,22 C90,36 180,10 270,24 C360,38 450,8 540,20 C630,32 720,14 810,28 C900,42 990,6 1080,20 C1170,34 1260,10 1350,22 C1395,28 1418,24 1440,26 L1440,48 Z"/>
-  </svg>
-</div>
-
-<!-- ══ WORKSHOPS ══════════════════════════════════════════════════════ -->
-<section id="workshops" class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <p class="section-eyebrow"><span data-he>למדו את הטכניקה</span><span data-en>Learn the Technique</span></p>
-      <h2 class="section-h2"><span data-he>סדנאות נייר נוזלי</span><span data-en>Liquid Paper Workshops</span></h2>
-      <p class="section-sub">
-        <span data-he>ניסיון ישיר בטכניקת הנייר הנוזלי בסטודיו — מהכנת עיסת הנייר ועד יצירה גמורה שלוקחים הביתה.</span>
-        <span data-en>Hands-on liquid paper experience in the studio — from preparing the pulp to a finished piece you take home.</span>
-      </p>
-    </div>
-    <div class="ws-grid">
-
-      <!-- Ticket 1 -->
-      <div class="ticket reveal">
-        <div class="ticket-top">
-          <span class="ticket-badge"><span data-he>סדנת היכרות</span><span data-en>Intro session</span></span>
-          <h3 class="ticket-name"><span data-he>נייר נוזלי — מפגש ראשון</span><span data-en>Liquid Paper — First Session</span></h3>
-          <p class="ticket-desc">
-            <span data-he>מפגש חד-פעמי לכל רמה. תלמדו להכין עיסת נייר נוזלי, לשפוך, לעצב ולבנות שכבות — ותצאו עם יצירה קטנה תלויה.</span>
-            <span data-en>A single session for all levels. Learn to prepare liquid paper pulp, pour, shape, and build layers — leave with a small wall piece.</span>
-          </p>
-          <div class="ticket-specs">
-            <div class="ticket-spec"><span class="ticket-spec-k"><span data-he>משך</span><span data-en>Duration</span></span><span><span data-he>[X] שעות</span><span data-en>[X] hours</span></span></div>
-            <div class="ticket-spec"><span class="ticket-spec-k"><span data-he>קבוצה</span><span data-en>Group</span></span><span><span data-he>עד [X]</span><span data-en>Up to [X]</span></span></div>
-            <div class="ticket-spec"><span class="ticket-spec-k"><span data-he>מיקום</span><span data-en>Location</span></span><span><span data-he>סטודיו, [עיר]</span><span data-en>Studio, [CITY]</span></span></div>
-          </div>
-        </div>
-        <div class="perf-wrap"><hr class="perf"/></div>
-        <div class="ticket-bottom">
-          <div><p class="ticket-price">₪[מחיר]</p><p class="ticket-pnote"><span data-he>לאדם · כולל חומרים</span><span data-en>per person · incl. materials</span></p></div>
-          <a href="#contact" class="btn-reg"><span data-he>הרשמה</span><span data-en>Register</span></a>
-        </div>
-      </div>
-
-      <!-- Ticket 2 -->
-      <div class="ticket reveal">
-        <div class="ticket-top">
-          <span class="ticket-badge"><span data-he>קבוצה פרטית</span><span data-en>Private group</span></span>
-          <h3 class="ticket-name"><span data-he>סדנה פרטית לקבוצה</span><span data-en>Private Group Workshop</span></h3>
-          <p class="ticket-desc">
-            <span data-he>חוויה ייחודית לאירועים, ימי הולדת, מפגשי חברות או team building. הסדנה מותאמת לקבוצה שלכם.</span>
-            <span data-en>A unique experience for events, birthdays, group get-togethers, or team building — tailored to your group.</span>
-          </p>
-          <div class="ticket-specs">
-            <div class="ticket-spec"><span class="ticket-spec-k"><span data-he>משך</span><span data-en>Duration</span></span><span><span data-he>[X]–[X] שעות</span><span data-en>[X]–[X] hours</span></span></div>
-            <div class="ticket-spec"><span class="ticket-spec-k"><span data-he>קבוצה</span><span data-en>Group</span></span><span><span data-he>[X]–[X] משתתפים</span><span data-en>[X]–[X] participants</span></span></div>
-            <div class="ticket-spec"><span class="ticket-spec-k"><span data-he>מיקום</span><span data-en>Location</span></span><span><span data-he>סטודיו / אתר אחר</span><span data-en>Studio or off-site</span></span></div>
-          </div>
-        </div>
-        <div class="perf-wrap"><hr class="perf"/></div>
-        <div class="ticket-bottom">
-          <div><p class="ticket-price">₪[מחיר]</p><p class="ticket-pnote"><span data-he>לאדם · כולל חומרים</span><span data-en>per person · incl. materials</span></p></div>
-          <a href="#contact" class="btn-reg"><span data-he>הרשמה</span><span data-en>Register</span></a>
-        </div>
-      </div>
-
-      <!-- Ticket 3 -->
-      <div class="ticket reveal">
-        <div class="ticket-top">
-          <span class="ticket-badge"><span data-he>קורס סטודיו</span><span data-en>Studio course</span></span>
-          <h3 class="ticket-name"><span data-he>קורס נייר נוזלי — מתקדמים</span><span data-en>Liquid Paper — Advanced Course</span></h3>
-          <p class="ticket-desc">
-            <span data-he>סדרת מפגשים לציפוי עמוק בטכניקה. שכבות מתקדמות, מרקמים, עיבוד ועיגון. למי שעבר סדנת היכרות.</span>
-            <span data-en>A series of sessions for an in-depth dive. Advanced layering, textures, finishing, and mounting. For those who completed an intro session.</span>
-          </p>
-          <div class="ticket-specs">
-            <div class="ticket-spec"><span class="ticket-spec-k"><span data-he>מפגשים</span><span data-en>Sessions</span></span><span><span data-he>[X] × [X] שעות</span><span data-en>[X] × [X] hrs</span></span></div>
-            <div class="ticket-spec"><span class="ticket-spec-k"><span data-he>רמה</span><span data-en>Level</span></span><span><span data-he>מתחילים+</span><span data-en>Beginners+</span></span></div>
-            <div class="ticket-spec"><span class="ticket-spec-k"><span data-he>מחזור</span><span data-en>Cohort</span></span><span><span data-he>[תאריך]</span><span data-en>[DATE]</span></span></div>
-          </div>
-        </div>
-        <div class="perf-wrap"><hr class="perf"/></div>
-        <div class="ticket-bottom">
-          <div><p class="ticket-price">₪[מחיר]</p><p class="ticket-pnote"><span data-he>לקורס מלא · כולל חומרים</span><span data-en>full course · incl. materials</span></p></div>
-          <a href="#contact" class="btn-reg"><span data-he>הרשמה</span><span data-en>Register</span></a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- torn: card → kraft -->
-<div class="torn torn-to-kraft" aria-hidden="true">
-  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,0 L0,26 C72,14 144,38 216,22 C288,6 360,34 432,20 C504,6 576,32 648,18 C720,4 792,30 864,16 C936,2 1008,28 1080,14 C1152,0 1224,26 1296,12 C1368,0 1404,20 1440,14 L1440,0 Z"/>
-  </svg>
-</div>
-
-<!-- ══ CONTACT ════════════════════════════════════════════════════════ -->
-<section id="contact" class="section">
-  <div class="container">
-    <div class="ct-grid">
-
-      <div class="reveal">
-        <h2 class="ct-h2"><span data-he>צרו קשר</span><span data-en>Get in Touch</span></h2>
-        <p class="ct-sub">
-          <span data-he>לשאלות על יצירות, הזמנות מותאמות, פרטי סדנאות — שמחה לשמוע.</span>
-          <span data-en>Questions about pieces, custom commissions, workshop details — happy to hear from you.</span>
-        </p>
-        <div class="ct-chs">
-
-          <a href="https://wa.me/972[PHONE]" target="_blank" rel="noopener" class="ch">
-            <div class="ch-icon wa">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.121 1.523 5.858L0 24l6.335-1.51A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.014-1.374l-.36-.214-3.76.896.953-3.658-.236-.376A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.429 0 9.818 4.388 9.818 9.818 0 5.429-4.389 9.818-9.818 9.818z"/></svg>
-            </div>
-            <div class="ch-txt">
-              <span class="ch-lbl"><span data-he>וואטסאפ</span><span data-en>WhatsApp</span></span>
-              <span class="ch-val">+972-[PHONE]</span>
-            </div>
-          </a>
-
-          <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener" class="ch">
-            <div class="ch-icon ig">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </div>
-            <div class="ch-txt">
-              <span class="ch-lbl">Instagram</span>
-              <span class="ch-val">@[INSTAGRAM]</span>
-            </div>
-          </a>
-
-          <a href="mailto:[EMAIL]" class="ch">
-            <div class="ch-icon em">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            </div>
-            <div class="ch-txt">
-              <span class="ch-lbl"><span data-he>אימייל</span><span data-en>Email</span></span>
-              <span class="ch-val">[EMAIL]</span>
-            </div>
-          </a>
-
-          <div class="ch" style="cursor:default">
-            <div class="ch-icon em">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            </div>
-            <div class="ch-txt">
-              <span class="ch-lbl"><span data-he>סטודיו</span><span data-en>Studio</span></span>
-              <span class="ch-val"><span data-he>[כתובת], [עיר]</span><span data-en>[ADDRESS], [CITY]</span></span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="cform reveal">
-        <p class="cform-h"><span data-he>שלחו הודעה</span><span data-en>Send a message</span></p>
-        <form onsubmit="handleForm(event)">
-          <div class="fg-row">
-            <div class="fg">
-              <label><span data-he>שם מלא</span><span data-en>Full name</span></label>
-              <input type="text" name="name" required autocomplete="name"/>
-            </div>
-            <div class="fg">
-              <label><span data-he>אימייל</span><span data-en>Email</span></label>
-              <input type="email" name="email" required autocomplete="email"/>
-            </div>
-          </div>
-          <div class="fg">
-            <label><span data-he>נושא</span><span data-en>Subject</span></label>
-            <select name="subject" required>
-              <option value="" disabled selected>—</option>
-              <option value="artwork"><span data-he>שאלה על יצירה</span><span data-en>Artwork inquiry</span></option>
-              <option value="commission"><span data-he>הזמנה מותאמת</span><span data-en>Custom commission</span></option>
-              <option value="intro"><span data-he>סדנת היכרות</span><span data-en>Intro workshop</span></option>
-              <option value="private"><span data-he>סדנה פרטית לקבוצה</span><span data-en>Private group workshop</span></option>
-              <option value="course"><span data-he>קורס מתקדמים</span><span data-en>Advanced course</span></option>
-              <option value="other"><span data-he>אחר</span><span data-en>Other</span></option>
-            </select>
-          </div>
-          <div class="fg">
-            <label><span data-he>הודעה</span><span data-en>Message</span></label>
-            <textarea name="message" required></textarea>
-          </div>
-          <button type="submit" class="btn-send"><span data-he>שליחה</span><span data-en>Send</span></button>
-        </form>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
-<footer>
-  <div class="container ftr-in">
-    <div>
-      <p class="ftr-logo"><span data-he>רבקה חיים</span><span data-en>Rivka Haim</span></p>
-      <p class="ftr-sig"><span data-he>יוצרת בנייר</span><span data-en>Liquid Paper Artist</span></p>
-    </div>
-    <nav class="ftr-links">
-      <a href="#gallery">  <span data-he>גלריה</span>  <span data-en>Gallery</span></a>
-      <a href="#workshops"><span data-he>סדנאות</span> <span data-en>Workshops</span></a>
-      <a href="#about">    <span data-he>אודות</span>  <span data-en>About</span></a>
-      <a href="#contact">  <span data-he>צרו קשר</span><span data-en>Contact</span></a>
-      <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener">Instagram</a>
-    </nav>
-    <p class="ftr-copy">© <span id="yr"></span> רבקה חיים</p>
-  </div>
-</footer>
+<!-- Page root -->
+<div id="app"></div>
 
 <script>
-/* ══ LANG ══════════════════════════════════════════════════════════ */
-const H = document.documentElement;
-let lang = localStorage.getItem('rh-lang') || 'he';
-setLang(lang);
+/* ══ DATA ══════════════════════════════════════════════════════════ */
+const AW = [
+  { slug:'yotzer-1', featured:true,
+    tHe:'[שם יצירה 1]', tEn:'[Piece Title 1]',
+    cSlug:'papier-mache', cHe:'פאפייה-מאשה', cEn:'Papier-mâché',
+    mHe:'פאפייה-מאשה על עץ', mEn:'Papier-mâché on wood',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר של היצירה — רוח, תהליך, מה שהיא מעוררת. כ-40 מילה.]',
+    dEn:'[Short description — spirit, process, what it evokes. Approx. 40 words.]' },
+  { slug:'yotzer-2',
+    tHe:'[שם יצירה 2]', tEn:'[Piece Title 2]',
+    cSlug:'paper-sculpture', cHe:'פיסול נייר', cEn:'Paper sculpture',
+    mHe:'נייר ידני מקופל', mEn:'Hand-folded paper',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-3',
+    tHe:'[שם יצירה 3]', tEn:'[Piece Title 3]',
+    cSlug:'collage', cHe:"קולאז'", cEn:'Collage',
+    mHe:"קולאז' נייר ואקוורל", mEn:'Paper collage and watercolour',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-4',
+    tHe:'[שם יצירה 4]', tEn:'[Piece Title 4]',
+    cSlug:'papier-mache', cHe:'פאפייה-מאשה', cEn:'Papier-mâché',
+    mHe:'פאפייה-מאשה ופיגמנטים', mEn:'Papier-mâché and pigments',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-5',
+    tHe:'[שם יצירה 5]', tEn:'[Piece Title 5]',
+    cSlug:'paper-sculpture', cHe:'פיסול נייר', cEn:'Paper sculpture',
+    mHe:'נייר ומתכת', mEn:'Paper and metal',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-6',
+    tHe:'[שם יצירה 6]', tEn:'[Piece Title 6]',
+    cSlug:'collage', cHe:"קולאז'", cEn:'Collage',
+    mHe:'שכבות נייר ודיו', mEn:'Layered paper and ink',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-7',
+    tHe:'[שם יצירה 7]', tEn:'[Piece Title 7]',
+    cSlug:'papier-mache', cHe:'פאפייה-מאשה', cEn:'Papier-mâché',
+    mHe:'פאפייה-מאשה וצבעי אקריל', mEn:'Papier-mâché and acrylic',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+  { slug:'yotzer-8',
+    tHe:'[שם יצירה 8]', tEn:'[Piece Title 8]',
+    cSlug:'paper-sculpture', cHe:'פיסול נייר', cEn:'Paper sculpture',
+    mHe:'נייר ועץ', mEn:'Paper and wood',
+    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
+    dHe:'[תיאור קצר]', dEn:'[Short description]' },
+];
+const CATS = [
+  { slug:'all',            he:'כל היצירות',   en:'All works' },
+  { slug:'papier-mache',   he:'פאפייה-מאשה',  en:'Papier-mâché' },
+  { slug:'paper-sculpture',he:'פיסול נייר',   en:'Paper sculpture' },
+  { slug:'collage',        he:"קולאז'",        en:'Collage' },
+];
 
-function setLang(l) {
+/* ══ LANGUAGE ══════════════════════════════════════════════════════ */
+const HL = document.documentElement;
+let lang = localStorage.getItem('rc-lang') || 'he';
+
+function applyLang(l) {
   lang = l;
-  H.setAttribute('lang', l);
-  H.setAttribute('dir', l === 'he' ? 'rtl' : 'ltr');
-  localStorage.setItem('rh-lang', l);
+  HL.setAttribute('lang', l);
+  HL.setAttribute('dir', l === 'he' ? 'rtl' : 'ltr');
+  localStorage.setItem('rc-lang', l);
+  document.querySelectorAll('[data-he]').forEach(el => el.style.display = l==='he' ? '' : 'none');
+  document.querySelectorAll('[data-en]').forEach(el => el.style.display = l==='en' ? '' : 'none');
 }
-function toggleLang() { setLang(lang === 'he' ? 'en' : 'he'); }
+function T(he, en) { return lang === 'he' ? he : en; }
 
-/* ══ MOBILE NAV ════════════════════════════════════════════════════ */
-const mob = document.getElementById('mob-nav');
-const ham = document.getElementById('ham-btn');
-function toggleMob() {
-  const o = mob.classList.toggle('open');
-  ham.setAttribute('aria-expanded', String(o));
-  document.body.style.overflow = o ? 'hidden' : '';
-}
+document.getElementById('lang-btn').addEventListener('click', () => {
+  applyLang(lang === 'he' ? 'en' : 'he');
+  route();
+});
+
+/* ══ MOBILE MENU ══════════════════════════════════════════════════ */
+const mobNav = document.getElementById('mob-nav');
+const hamBtn = document.getElementById('ham-btn');
 function closeMob() {
-  mob.classList.remove('open');
-  ham.setAttribute('aria-expanded','false');
+  mobNav.classList.remove('open');
+  hamBtn.setAttribute('aria-expanded','false');
   document.body.style.overflow = '';
 }
+hamBtn.addEventListener('click', () => {
+  const o = mobNav.classList.toggle('open');
+  hamBtn.setAttribute('aria-expanded', String(o));
+  document.body.style.overflow = o ? 'hidden' : '';
+});
+document.querySelectorAll('[data-nav]').forEach(a => a.addEventListener('click', closeMob));
 
-/* ══ HEADER SCROLL SHADOW ══════════════════════════════════════════ */
-window.addEventListener('scroll', () => {
-  document.getElementById('hdr').classList.toggle('scrolled', scrollY > 40);
-}, { passive:true });
+/* ══ ROUTER ════════════════════════════════════════════════════════ */
+const app = document.getElementById('app');
 
-/* ══ SCROLL REVEAL ═════════════════════════════════════════════════ */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-}, { threshold:.12 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+function navigate(path) { location.hash = path; }
 
-/* ══ CONTACT FORM ══════════════════════════════════════════════════ */
-function handleForm(e) {
-  e.preventDefault();
-  const f = e.target;
-  const subj = encodeURIComponent(`[אתר] ${f.subject.value} — ${f.name.value.trim()}`);
-  const body = encodeURIComponent(`שם: ${f.name.value.trim()}\nאימייל: ${f.email.value.trim()}\n\n${f.message.value.trim()}`);
-  window.location.href = `mailto:[EMAIL]?subject=${subj}&body=${body}`;
+function route() {
+  const hash  = location.hash.replace('#','') || '/';
+  const parts = hash.split('/').filter(Boolean);
+  const page  = parts[0] || '';
+  const sub   = parts[1] || '';
+
+  document.querySelectorAll('.nav-d a').forEach(a => {
+    const h = a.getAttribute('href').replace('#/','');
+    a.classList.toggle('on', h === page || (h==='gallery' && page==='gallery'));
+  });
+
+  let html;
+  if (!page)               html = buildHome();
+  else if (page==='gallery') html = buildGallery(sub);
+  else if (page==='work' && sub) {
+    const w = AW.find(a => a.slug === sub);
+    html = w ? buildWork(w) : buildHome();
+  }
+  else if (page==='about')     html = buildAbout();
+  else if (page==='workshops') html = buildWorkshops();
+  else if (page==='contact')   html = buildContact();
+  else html = buildHome();
+
+  app.classList.add('fade');
+  setTimeout(() => {
+    app.innerHTML = html;
+    app.classList.remove('fade');
+    window.scrollTo(0, 0);
+    applyLang(lang);
+    bindEvents();
+  }, 180);
 }
 
-/* ══ FOOTER YEAR ════════════════════════════════════════════════════ */
-document.getElementById('yr').textContent = new Date().getFullYear();
+function bindEvents() {
+  // Stop any running slideshow when navigating away
+  if (_slideTimer) { clearInterval(_slideTimer); _slideTimer = null; }
+
+  app.querySelectorAll('[data-slug]').forEach(el => {
+    el.addEventListener('click',    () => navigate('#/work/' + el.dataset.slug));
+    el.addEventListener('keydown',  e => { if(e.key==='Enter'||e.key===' ') navigate('#/work/'+el.dataset.slug); });
+  });
+  app.querySelectorAll('[data-cat]').forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); navigate('#/gallery/' + el.dataset.cat); });
+  });
+  const f = app.querySelector('form[data-cf]');
+  if (f) f.addEventListener('submit', e => { e.preventDefault(); alert(T('תודה! ניצור איתך קשר בקרוב.','Thank you! We\'ll be in touch soon.')); });
+
+  // Start slideshow if we're on the home page
+  if (document.getElementById('feat-card')) startSlideshow();
+}
+
+window.addEventListener('hashchange', route);
+
+/* ══ SHARED HELPERS ════════════════════════════════════════════════ */
+function iph(he, en) {
+  return `<div class="iph">
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width=".7" aria-hidden="true">
+      <rect x="1" y="1" width="38" height="38"/><line x1="1" y1="1" x2="39" y2="39"/><line x1="39" y1="1" x2="1" y2="39"/>
+    </svg>
+    <span data-he>${he}</span><span data-en>${en}</span>
+  </div>`;
+}
+function arrR() { return `<svg width="20" height="8" viewBox="0 0 20 8" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M1 4h18M14 1l4 3-4 3"/></svg>`; }
+function arrL() { return `<svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M13 4H1M5 1L1 4l4 3"/></svg>`; }
+
+function footer() {
+  const yr = new Date().getFullYear();
+  return `<footer>
+    <div class="ftr-in">
+      <p class="ftr-tag">
+        <span data-he>פיסול נייר ופאפייה-מאשה — יצירות שמחזיקות זמן בתוכן.</span>
+        <span data-en>Paper sculpture and papier-mâché — works that hold time inside them.</span>
+      </p>
+      <div class="ftr-links label">
+        <a href="#/gallery"   class="link-u"><span data-he>גלריה</span><span data-en>Gallery</span></a>
+        <a href="#/workshops" class="link-u"><span data-he>סדנאות</span><span data-en>Workshops</span></a>
+        <a href="#/about"     class="link-u"><span data-he>אודות</span><span data-en>About</span></a>
+        <a href="#/contact"   class="link-u"><span data-he>יצירת קשר</span><span data-en>Contact</span></a>
+        <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener" class="link-u">Instagram (@[INSTAGRAM])</a>
+        <p class="ftr-copy">© ${yr} <span data-he>רבקה חיים — כל הזכויות שמורות</span><span data-en>Rivka Haim — All rights reserved</span></p>
+      </div>
+    </div>
+  </footer>`;
+}
+
+/* ══ HOME ══════════════════════════════════════════════════════════ */
+let _slideTimer = null;
+let _slideIdx   = 0;
+
+function buildHome() {
+  const cats = CATS.map(c =>
+    `<a href="#" data-cat="${c.slug}" class="label link-u">
+      <span data-he>${c.he}</span><span data-en>${c.en}</span>
+    </a>`).join('');
+
+  // One slide per artwork
+  const slides = AW.map((w, i) =>
+    `<div class="feat-slide${i===0?' active':''}" data-i="${i}">
+      ${iph(`[תמונה ${i+1}]`, `[IMAGE ${i+1}]`)}
+    </div>`
+  ).join('');
+
+  const dots = AW.map((_,i) =>
+    `<div class="feat-dot${i===0?' active':''}"></div>`
+  ).join('');
+
+  return `<main>
+    <section class="home-hero">
+      <p class="home-tag">
+        <span data-he>פיסול שמעביר את מה שמרגישים כשמחזיקים נייר בידיים — לא רק את מה שרואים.</span>
+        <span data-en>Sculpture that conveys what it feels like to hold paper in your hands — not only what you see.</span>
+      </p>
+      <nav class="home-cats label">${cats}</nav>
+      <div class="feat" id="feat-card" role="button" tabindex="0" data-slug="${AW[0].slug}">
+        ${slides}
+        <div class="feat-grad"></div>
+        <div class="feat-dots">${dots}</div>
+        <div class="feat-info">
+          <p class="label feat-cat" id="feat-cat">
+            <span data-he>${AW[0].cHe}</span><span data-en>${AW[0].cEn}</span>
+          </p>
+          <p class="feat-title" id="feat-title">
+            <span data-he>${AW[0].tHe}</span><span data-en>${AW[0].tEn}</span>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>${footer()}`;
+}
+
+function startSlideshow() {
+  if (_slideTimer) clearInterval(_slideTimer);
+  _slideIdx = 0;
+  _slideTimer = setInterval(advanceSlide, 3800);
+}
+
+function advanceSlide() {
+  const slides = document.querySelectorAll('.feat-slide');
+  const dots   = document.querySelectorAll('.feat-dot');
+  const catEl  = document.getElementById('feat-cat');
+  const ttlEl  = document.getElementById('feat-title');
+  const card   = document.getElementById('feat-card');
+  if (!slides.length) return;
+
+  slides[_slideIdx].classList.remove('active');
+  dots[_slideIdx].classList.remove('active');
+  _slideIdx = (_slideIdx + 1) % AW.length;
+  slides[_slideIdx].classList.add('active');
+  dots[_slideIdx].classList.add('active');
+
+  const w = AW[_slideIdx];
+  if (catEl) catEl.innerHTML = `<span data-he>${w.cHe}</span><span data-en>${w.cEn}</span>`;
+  if (ttlEl) ttlEl.innerHTML = `<span data-he>${w.tHe}</span><span data-en>${w.tEn}</span>`;
+  if (card)  card.dataset.slug = w.slug;
+  applyLang(lang);
+}
+
+/* ══ GALLERY ═══════════════════════════════════════════════════════ */
+function buildGallery(cat) {
+  const active = cat || 'all';
+  const list   = active==='all' ? AW : AW.filter(a => a.cSlug===active);
+  const fil = CATS.map(c =>
+    `<a href="#" data-cat="${c.slug}" class="label link-u ${c.slug===active?'on':''}">
+      <span data-he>${c.he}</span><span data-en>${c.en}</span>
+    </a>`).join('');
+  const cards = list.map(w =>
+    `<div class="wcard" data-slug="${w.slug}" role="button" tabindex="0">
+      <div class="wcard-img">${iph('[תמונה]','[IMAGE]')}</div>
+      <div class="wcard-info">
+        <div class="wcard-left">
+          <p class="label wcard-cat"><span data-he>${w.cHe}</span><span data-en>${w.cEn}</span></p>
+          <p class="wcard-title"><span data-he>${w.tHe}</span><span data-en>${w.tEn}</span></p>
+        </div>
+        <p class="label wcard-year muted">${w.yr}</p>
+      </div>
+    </div>`).join('');
+  return `<div class="gal-page">
+    <div class="gal-hdr">
+      <h1 class="gal-h1"><span data-he>גלריה</span><span data-en>Gallery</span></h1>
+      <nav class="gal-filter label">${fil}</nav>
+    </div>
+    <div class="works-grid">${cards||`<p class="muted label" style="grid-column:1/-1;padding:3rem">
+      <span data-he>אין יצירות בקטגוריה זו.</span><span data-en>No works in this category.</span></p>`}
+    </div>
+  </div>${footer()}`;
+}
+
+/* ══ WORK DETAIL ═══════════════════════════════════════════════════ */
+function buildWork(w) {
+  const idx  = AW.indexOf(w);
+  const next = AW[(idx+1) % AW.length];
+  const meta = [
+    { kh:'חומר',   ke:'Medium',     vh:w.mHe,   ve:w.mEn   },
+    { kh:'מידות',  ke:'Dimensions', vh:w.dims,  ve:w.dims  },
+    { kh:'שנה',    ke:'Year',       vh:w.yr,    ve:w.yr    },
+    { kh:'מחיר',   ke:'Price',      vh:w.price, ve:w.price },
+  ].map(m => `<div>
+    <p class="label wd-mk"><span data-he>${m.kh}</span><span data-en>${m.ke}</span></p>
+    <p class="wd-mv"><span data-he>${m.vh}</span><span data-en>${m.ve}</span></p>
+  </div>`).join('');
+
+  return `<article>
+    <div class="wd-hero">
+      <div class="wd-hero-img">${iph('[תמונת כיסוי]','[COVER IMAGE]')}</div>
+      <div class="wd-grad"></div>
+      <div class="wd-btm">
+        <p class="label wd-bread"><span data-he>${w.cHe}</span><span data-en>${w.cEn}</span></p>
+        <h1 class="wd-htitle"><span data-he>${w.tHe}</span><span data-en>${w.tEn}</span></h1>
+      </div>
+    </div>
+    <div class="wd-body">
+      <a href="#/gallery" class="wd-back label link-u">${arrL()}<span data-he>חזרה לגלריה</span><span data-en>Back to gallery</span></a>
+      <div class="wd-meta">${meta}</div>
+      <div class="wd-grid">
+        <div class="wd-c4"></div>
+        <div class="wd-c8">
+          <p class="wd-desc"><span data-he>${w.dHe}</span><span data-en>${w.dEn}</span></p>
+          <a href="#/contact" class="btn-inq label">
+            <span data-he>פנייה לרכישה</span><span data-en>Inquire to purchase</span>${arrR()}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="wd-gal-wrap">
+      <div class="wd-gal">
+        <div class="wd-gi wide">${iph('[פירוט 1]','[DETAIL 1]')}</div>
+        <div class="wd-gi">${iph('[פירוט 2]','[DETAIL 2]')}</div>
+        <div class="wd-gi">${iph('[פירוט 3]','[DETAIL 3]')}</div>
+        <div class="wd-gi">${iph('[פירוט 4]','[DETAIL 4]')}</div>
+        <div class="wd-gi">${iph('[פירוט 5]','[DETAIL 5]')}</div>
+      </div>
+    </div>
+    <div class="wd-next" data-slug="${next.slug}" role="button" tabindex="0">
+      <div class="wd-next-img">${iph('[יצירה הבאה]','[NEXT ARTWORK]')}</div>
+      <div class="wd-next-grad"></div>
+      <div class="wd-next-cnt">
+        <p class="label wd-next-lbl"><span data-he>היצירה הבאה</span><span data-en>Next work</span></p>
+        <p class="wd-next-ttl"><span data-he>${next.tHe}</span><span data-en>${next.tEn}</span></p>
+        <div class="wd-next-arr label"><span data-he>לצפייה ביצירה</span><span data-en>View work</span>${arrR()}</div>
+      </div>
+    </div>
+  </article>${footer()}`;
+}
+
+/* ══ ABOUT ═════════════════════════════════════════════════════════ */
+function buildAbout() {
+  const catLinks = CATS.filter(c=>c.slug!=='all').map(c =>
+    `<a href="#" data-cat="${c.slug}" class="link-u serif" style="font-size:1.125rem;font-weight:300">
+      <span data-he>${c.he}</span><span data-en>${c.en}</span>
+    </a>`).join('');
+  return `<div class="ab-page">
+    <div class="ab-wrap">
+      <div class="ab-grid">
+        <div class="ab-c5">
+          <div class="ab-port">${iph('[תמונת האמנית]','[ARTIST PHOTO]')}</div>
+        </div>
+        <div class="ab-c7">
+          <p class="label ab-eye"><span data-he>אודות</span><span data-en>About</span></p>
+          <h1 class="ab-h1">
+            <span data-he>אני עובדת עם נייר כי הוא מחזיק כל מה שמניחים עליו.</span>
+            <span data-en>I work with paper because it holds everything placed on it.</span>
+          </h1>
+          <div class="ab-body">
+            <p><span data-he>[פסקה ראשונה — מי היא רבקה, מה הוביל אותה לפיסול נייר ופאפייה-מאשה, הסגנון הייחודי שלה. כ-70 מילה.]</span>
+               <span data-en>[First paragraph — who Rivka is, what led her to paper sculpture and papier-mâché, her distinctive aesthetic. Approx. 70 words.]</span></p>
+            <p><span data-he>[פסקה שנייה — הסטודיו, תהליך העבודה, מה שמניע אותה. כ-55 מילה.]</span>
+               <span data-en>[Second paragraph — the studio, working process, what drives her. Approx. 55 words.]</span></p>
+            <p><span data-he>[פסקה שלישית — זמינות, שיתופי פעולה, מיקום.]</span>
+               <span data-en>[Third paragraph — availability, collaborations, location.]</span></p>
+          </div>
+          <div class="ab-cats label">${catLinks}
+            <a href="#/workshops" class="link-u serif" style="font-size:1.125rem;font-weight:300">
+              <span data-he>סדנאות</span><span data-en>Workshops</span>
+            </a>
+          </div>
+          <a href="#/contact" class="ab-cta">
+            <span data-he>בואו ניצור משהו</span><span data-en>Let's create something</span>${arrR()}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>${footer()}`;
+}
+
+/* ══ WORKSHOPS ═════════════════════════════════════════════════════ */
+function buildWorkshops() {
+  const WS = [
+    { idx:'01', typeHe:'סדנה פרטית', typeEn:'Private session',
+      nHe:'מפגש אחד על אחד', nEn:'One-on-One',
+      dHe:'סדנה מותאמת אישית לרמתך ולמטרותיך. נעסוק בטכניקת הפאפייה-מאשה, גמר, צבע ושמירה.',
+      dEn:'A fully tailored session matched to your level and goals — papier-mâché technique, finishing, colour, and preservation.',
+      specs:[{kh:'משך',ke:'Duration',vh:'[X] שעות',ve:'[X] hours'},{kh:'מיקום',ke:'Location',vh:'סטודיו, [עיר]',ve:'Studio, [CITY]'},{kh:'זמינות',ke:'Availability',vh:'[ימים]',ve:'[DAYS]'}],
+      pH:'₪[מחיר]', pE:'₪[PRICE]', pnH:'למפגש · כולל חומרים', pnE:'per session · incl. materials' },
+    { idx:'02', typeHe:'קבוצה קטנה', typeEn:'Small group',
+      nHe:'סדנת ערב קבוצתית', nEn:'Evening Group Workshop',
+      dHe:'חוויה קבוצתית חמה — שיחה, יצירה וגילוי. מתאים לאירועים, ימי הולדת, וערבי יצירה.',
+      dEn:'A warm group experience — conversation, creating and discovery. Perfect for events, birthdays, and creative evenings.',
+      specs:[{kh:'משך',ke:'Duration',vh:'[X] שעות',ve:'[X] hours'},{kh:'משתתפים',ke:'Group size',vh:'עד [X]',ve:'Up to [X]'},{kh:'מועד הבא',ke:'Next date',vh:'[תאריך]',ve:'[DATE]'}],
+      pH:'₪[מחיר]', pE:'₪[PRICE]', pnH:'לאדם · כולל חומרים', pnE:'per person · incl. materials' },
+    { idx:'03', typeHe:'קורס מתמשך', typeEn:'Ongoing course',
+      nHe:'יסודות פיסול הנייר', nEn:'Foundations of Paper Sculpture',
+      dHe:'קורס מלא שעובר דרך כל שלבי הפאפייה-מאשה — מבנה, שכבות, גמר וצביעה. לכל רמות הניסיון.',
+      dEn:'A complete course covering all stages of papier-mâché — structure, layering, finishing, and painting. All levels welcome.',
+      specs:[{kh:'מפגשים',ke:'Sessions',vh:'[X] × [X] שעות',ve:'[X] × [X] hrs'},{kh:'רמה',ke:'Level',vh:'כל הרמות',ve:'All levels'},{kh:'מחזור הבא',ke:'Next cohort',vh:'[תאריך]',ve:'[DATE]'}],
+      pH:'₪[מחיר]', pE:'₪[PRICE]', pnH:'לקורס מלא · כולל חומרים', pnE:'full course · incl. materials' },
+  ];
+
+  const rows = WS.map(w => {
+    const specs = w.specs.map(s =>
+      `<div><p class="label wsr-sk muted"><span data-he>${s.kh}</span><span data-en>${s.ke}</span></p>
+       <p class="wsr-sv"><span data-he>${s.vh}</span><span data-en>${s.ve}</span></p></div>`
+    ).join('');
+    return `<div class="ws-row">
+      <div class="wsr-l">
+        <p class="label wsr-type muted">${w.idx} — <span data-he>${w.typeHe}</span><span data-en>${w.typeEn}</span></p>
+        <h2 class="wsr-name"><span data-he>${w.nHe}</span><span data-en>${w.nEn}</span></h2>
+        <p class="wsr-desc"><span data-he>${w.dHe}</span><span data-en>${w.dEn}</span></p>
+        <div class="wsr-specs label">${specs}</div>
+      </div>
+      <div class="wsr-r">
+        <div>
+          <p class="wsr-price"><span data-he>${w.pH}</span><span data-en>${w.pE}</span></p>
+          <p class="label wsr-pnote muted"><span data-he>${w.pnH}</span><span data-en>${w.pnE}</span></p>
+        </div>
+        <a href="#/contact" class="btn-ws label"><span data-he>שריינו מקום</span><span data-en>Reserve</span></a>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<div class="ws-page">
+    <div class="ws-wrap">
+      <p class="label muted"><span data-he>סדנאות סטודיו</span><span data-en>Studio workshops</span></p>
+      <h1 class="ws-h1" style="margin-top:.75rem">
+        <span data-he>ללמוד עם הידיים</span><span data-en>Learning through the hands</span>
+      </h1>
+      <p class="ws-intro">
+        <span data-he>סדנאות אינטימיות בסטודיו לכל רמות הניסיון. כל מפגש כולל חומרים ויצירה שלוקחים הביתה.</span>
+        <span data-en>Intimate studio sessions for all experience levels. Every session includes materials and a piece to take home.</span>
+      </p>
+      <div class="ws-list">${rows}</div>
+    </div>
+  </div>${footer()}`;
+}
+
+/* ══ CONTACT ═══════════════════════════════════════════════════════ */
+function buildContact() {
+  return `<div class="ct-page">
+    <div class="ct-wrap">
+      <div class="ct-grid">
+        <div class="ct-l">
+          <h1 class="ct-h1"><span data-he>יצירת קשר</span><span data-en>Contact</span></h1>
+          <div class="ct-chs label">
+            <a href="https://wa.me/[PHONE]" target="_blank" rel="noopener" class="ct-ch">
+              <span class="ct-ch-k"><span data-he>וואטסאפ</span><span data-en>WhatsApp</span></span>
+              <span class="ct-ch-v">[PHONE_DISPLAY]</span>
+            </a>
+            <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener" class="ct-ch">
+              <span class="ct-ch-k">Instagram</span>
+              <span class="ct-ch-v">@[INSTAGRAM]</span>
+            </a>
+            <a href="mailto:[EMAIL]" class="ct-ch">
+              <span class="ct-ch-k"><span data-he>אימייל</span><span data-en>Email</span></span>
+              <span class="ct-ch-v">[EMAIL]</span>
+            </a>
+            <div class="ct-ch" style="cursor:default">
+              <span class="ct-ch-k"><span data-he>סטודיו</span><span data-en>Studio</span></span>
+              <span class="ct-ch-v"><span data-he>[כתובת], [עיר]</span><span data-en>[ADDRESS], [CITY]</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="ct-r">
+          <p class="ct-fh"><span data-he>שלחו הודעה</span><span data-en>Send a message</span></p>
+          <form data-cf>
+            <div class="fg-row">
+              <div class="fg">
+                <label class="label" for="cf-n"><span data-he>שם מלא</span><span data-en>Full name</span></label>
+                <input type="text" id="cf-n" name="name" required autocomplete="name"/>
+              </div>
+              <div class="fg">
+                <label class="label" for="cf-e"><span data-he>אימייל</span><span data-en>Email</span></label>
+                <input type="email" id="cf-e" name="email" required autocomplete="email"/>
+              </div>
+            </div>
+            <div class="fg">
+              <label class="label" for="cf-s"><span data-he>נושא</span><span data-en>Subject</span></label>
+              <select id="cf-s" name="subject" required>
+                <option value="" disabled selected>—</option>
+                <option value="artwork"><span data-he>שאלה על יצירה</span><span data-en>Artwork inquiry</span></option>
+                <option value="private"><span data-he>סדנה פרטית</span><span data-en>Private workshop</span></option>
+                <option value="group"><span data-he>סדנה קבוצתית</span><span data-en>Group workshop</span></option>
+                <option value="course"><span data-he>קורס</span><span data-en>Course</span></option>
+                <option value="commission"><span data-he>הזמנה מיוחדת</span><span data-en>Commission</span></option>
+                <option value="other"><span data-he>אחר</span><span data-en>Other</span></option>
+              </select>
+            </div>
+            <div class="fg">
+              <label class="label" for="cf-m"><span data-he>הודעה</span><span data-en>Message</span></label>
+              <textarea id="cf-m" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn-send label">
+              <span data-he>שלחו</span><span data-en>Send</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>${footer()}`;
+}
+
+/* ══ BOOT ══════════════════════════════════════════════════════════ */
+applyLang(lang);
+route();
 </script>
 </body>
 </html>
