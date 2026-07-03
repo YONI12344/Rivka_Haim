@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>רבקה חיים — פיסול נייר</title>
-<meta name="description" content="רבקה חיים — אמנית פיסול נייר ופאפייה-מאשה. יצירות מקוריות וסדנאות סטודיו."/>
+<title>רבקה חיים — אמנות נייר ופיסול</title>
+<meta name="description" content="רבקה חיים — אמנית נייר נוזלי ופיסול. יצירות מקוריות, הזמנות אישיות וסדנאות סטודיו."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Spectral:ital,wght@0,200;0,300;0,400;1,300&family=Assistant:wght@300;400;500&family=Frank+Ruhl+Libre:wght@300;400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500&family=Frank+Ruhl+Libre:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
-/* ── Exact reference design tokens ──────────────────────────────── */
+/* ── Design tokens ──────────────────────────────── */
 :root {
   --paper: #fcfbf9;
   --ink:   #282623;
@@ -17,14 +17,15 @@
   --line:  #d3caba;
   --muted: #8a8174;
   --ease:  cubic-bezier(.22,1,.36,1);
+  --max:   1600px;
 }
 html[lang="he"] { --fs: 'Assistant',system-ui,sans-serif; --fsr: 'Frank Ruhl Libre',Georgia,serif; }
-html[lang="en"] { --fs: 'Inter',system-ui,sans-serif;     --fsr: 'Spectral',Georgia,serif; }
+html[lang="en"] { --fs: 'Assistant',system-ui,sans-serif; --fsr: 'Frank Ruhl Libre',Georgia,serif; }
 
-/* ── Reset ───────────────────────────────────────────────────────── */
+/* ── Reset ─── */
 *,::before,::after { box-sizing:border-box; margin:0; padding:0; border:0 solid var(--line); }
-html { line-height:1.5; -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
-body { background:var(--paper); color:var(--ink); font-family:var(--fs); -webkit-font-smoothing:antialiased; }
+html { line-height:1.5; -webkit-text-size-adjust:100%; scroll-behavior:smooth; overflow-x:hidden; }
+body { background:var(--paper); color:var(--ink); font-family:var(--fs); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
 img  { display:block; max-width:100%; }
 a    { color:inherit; text-decoration:none; }
 button { cursor:pointer; background:none; border:none; font:inherit; color:inherit; padding:0; }
@@ -32,60 +33,59 @@ h1,h2,h3,h4,h5,h6 { font-size:inherit; font-weight:inherit; }
 ul,ol { list-style:none; }
 :focus-visible { outline:1.5px solid var(--ink); outline-offset:2px; }
 
-/* ── Core utilities ──────────────────────────────────────────────── */
+/* ── Utilities ─── */
 .label { font-family:var(--fs); font-size:11px; text-transform:uppercase; letter-spacing:.22em; }
 .serif { font-family:var(--fsr); }
 .muted { color:var(--muted); }
 
-/* Link underline animation — exact from reference CSS */
 .link-u { position:relative; display:inline-block; }
 .link-u::after {
   content:''; position:absolute; bottom:0; left:0;
-  height:1px; width:100%;
-  transform-origin:right; transform:scaleX(0);
-  background:currentColor;
-  transition:transform .5s var(--ease);
+  height:1px; width:100%; transform-origin:right; transform:scaleX(0);
+  background:currentColor; transition:transform .5s var(--ease);
 }
 .link-u:hover::after, .link-u.on::after { transform-origin:left; transform:scaleX(1); }
 
-/* ── Layout ──────────────────────────────────────────────────────── */
-.mx-page { max-width:1600px; margin-inline:auto; }
-.px     { padding-inline:1.5rem; }
+/* ── Layout ─── */
+.mx   { max-width:var(--max); margin-inline:auto; }
+.px   { padding-inline:1.5rem; }
 @media(min-width:768px){ .px{ padding-inline:2.5rem; } }
 
-/* ── Page transition ─────────────────────────────────────────────── */
+/* ── Page transition ─── */
 #app { transition:opacity .18s ease; min-height:100vh; }
 #app.fade { opacity:0; }
 
-/* ══ HEADER ══════════════════════════════════════════════════════════ */
+/* ══ HEADER ══ */
 #hdr {
   position:fixed; inset-inline:0; top:0; z-index:50;
-  background:rgba(252,251,249,.75);
+  background:rgba(252,251,249,.82);
   backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(211,202,186,.5);
 }
 .hdr-in {
-  max-width:1600px; margin-inline:auto;
-  padding-inline:1.5rem; padding-block:1.25rem;
+  max-width:var(--max); margin-inline:auto;
+  padding-inline:1.5rem; padding-block:1.1rem;
   display:flex; align-items:center; justify-content:space-between;
 }
-@media(min-width:768px){ .hdr-in{ padding-inline:2.5rem; padding-block:1.5rem; } }
+@media(min-width:768px){ .hdr-in{ padding-inline:2.5rem; padding-block:1.35rem; } }
 
-.logo { font-family:var(--fsr); font-size:clamp(1.4rem,3vw,2.25rem); font-weight:300; color:var(--ink); line-height:1; }
+.logo { display:flex; flex-direction:column; gap:.1rem; }
+.logo-name { font-family:var(--fsr); font-size:clamp(1.3rem,2.8vw,2rem); font-weight:300; color:var(--ink); line-height:1; }
+.logo-sub  { font-family:var(--fs); font-size:.58rem; letter-spacing:.2em; color:var(--muted); text-transform:uppercase; }
 
-.nav-d { display:none; align-items:center; gap:2.25rem; }
+.nav-d { display:none; align-items:center; gap:2rem; }
 @media(min-width:768px){ .nav-d{ display:flex; } }
-.nav-d a { color:var(--muted); transition:color .4s; }
+.nav-d a { color:var(--muted); transition:color .4s; font-size:.85rem; letter-spacing:.04em; }
 .nav-d a:hover, .nav-d a.on { color:var(--ink); }
 
-.hdr-right { display:flex; align-items:center; gap:1.25rem; }
-.lang-btn  { color:var(--muted); transition:color .3s; }
+.hdr-right { display:flex; align-items:center; gap:1rem; }
+.lang-btn  { color:var(--muted); transition:color .3s; font-size:.75rem; letter-spacing:.1em; }
 .lang-btn:hover { color:var(--ink); }
 
 .ham { display:flex; flex-direction:column; gap:5px; padding:4px; }
 .ham span { display:block; width:22px; height:1px; background:var(--ink); transition:transform .4s var(--ease),opacity .3s; }
 @media(min-width:768px){ .ham{ display:none; } }
 
-/* Mobile nav overlay */
 #mob-nav {
   position:fixed; inset:0; z-index:40; background:var(--paper);
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem;
@@ -94,45 +94,49 @@ ul,ol { list-style:none; }
 #mob-nav.open { pointer-events:auto; opacity:1; }
 #mob-nav a { font-family:var(--fsr); font-size:1.875rem; font-weight:300; color:var(--ink); }
 
-/* ══ FOOTER ══════════════════════════════════════════════════════════ */
+/* ══ FOOTER ══ */
 footer { position:relative; z-index:10; border-top:1px solid var(--line); }
 .ftr-in {
-  max-width:1600px; margin-inline:auto;
+  max-width:var(--max); margin-inline:auto;
   padding-inline:1.5rem; padding-block:3rem;
   display:flex; flex-direction:column; gap:2rem;
 }
 @media(min-width:768px){
   .ftr-in{ flex-direction:row; align-items:flex-end; justify-content:space-between; padding-inline:2.5rem; padding-block:4rem; }
 }
-.ftr-tag { font-family:var(--fsr); font-size:1.125rem; font-weight:300; max-width:20rem; line-height:1.55; color:rgba(40,38,35,.7); }
-.ftr-links { display:flex; flex-direction:column; gap:.6rem; }
+.ftr-cta {
+  font-family:var(--fsr); font-size:1.5rem; font-weight:300;
+  color:var(--ink); display:inline-flex; align-items:center; gap:.6rem;
+  transition:opacity .3s;
+}
+.ftr-cta:hover { opacity:.6; }
+.ftr-tag { font-size:.85rem; color:rgba(40,38,35,.55); margin-top:.6rem; }
+.ftr-links { display:flex; flex-direction:column; gap:.55rem; }
 @media(min-width:768px){ .ftr-links{ align-items:flex-end; } }
-.ftr-links a { color:var(--muted); transition:color .3s; }
+.ftr-links a { color:var(--muted); transition:color .3s; font-size:.82rem; letter-spacing:.04em; }
 .ftr-links a:hover { color:var(--ink); }
-.ftr-copy { color:var(--muted); margin-top:.5rem; }
+.ftr-copy { color:var(--muted); margin-top:.5rem; font-size:.75rem; }
 
-/* ══ HOME ════════════════════════════════════════════════════════════ */
+/* ══ HOME ══ */
 .home-hero {
   min-height:100svh;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   padding-inline:1.5rem; padding-block:7rem 8rem; gap:0;
 }
 .home-tag {
-  font-family:var(--fsr); font-size:1.5rem; font-weight:300;
-  line-height:1.4; text-align:center; max-width:36rem;
-  color:var(--ink); margin-bottom:3rem;
+  font-family:var(--fsr); font-size:clamp(1.3rem,2.5vw,1.75rem); font-weight:300;
+  line-height:1.45; text-align:center; max-width:32rem;
+  color:var(--ink); margin-bottom:2.5rem;
 }
-@media(min-width:768px){ .home-tag{ font-size:1.875rem; } }
 
 .home-cats {
   display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
-  gap:1.25rem 1.5rem; margin-bottom:3.5rem; max-width:36rem;
+  gap:.85rem 1.25rem; margin-bottom:3rem;
 }
-@media(min-width:768px){ .home-cats{ flex-wrap:nowrap; max-width:none; gap:0 1.5rem; margin-bottom:4rem; } }
-.home-cats a { color:var(--muted); transition:color .3s; }
+.home-cats a { color:var(--muted); transition:color .3s; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; }
 .home-cats a:hover, .home-cats a.on { color:var(--ink); }
 
-/* Featured artwork card — portrait, viewport-relative (exact reference sizes) */
+/* Featured slideshow */
 .feat {
   position:relative; overflow:hidden;
   background:rgba(211,202,186,.4);
@@ -140,16 +144,12 @@ footer { position:relative; z-index:10; border-top:1px solid var(--line); }
   height:64vw; width:51.2vw;
 }
 @media(min-width:640px){ .feat{ height:58vw; width:46.4vw; } }
-@media(min-width:768px){ .feat{ height:58vh; width:46.4vh; } }
+@media(min-width:768px){ .feat{ height:60vh; width:48vh; } }
 
-/* Slideshow slides */
-.feat-slide {
-  position:absolute; inset:0;
-  opacity:0; transition:opacity 1s var(--ease);
-}
+.feat-slide { position:absolute; inset:0; opacity:0; transition:opacity 1s var(--ease); }
 .feat-slide.active { opacity:1; }
 .feat-slide img {
-  width:100%; height:100%; object-fit:cover; opacity:.82;
+  width:100%; height:100%; object-fit:cover; opacity:.84;
   transition:transform 5000ms var(--ease), opacity 1400ms var(--ease);
 }
 .feat-slide.active img { transform:scale(1.04); }
@@ -157,7 +157,7 @@ footer { position:relative; z-index:10; border-top:1px solid var(--line); }
 
 .feat-grad {
   position:absolute; inset:0; z-index:1;
-  background:linear-gradient(to bottom,rgba(22,19,14,.1),transparent 50%,rgba(22,19,14,.5));
+  background:linear-gradient(to bottom,rgba(22,19,14,.08),transparent 50%,rgba(22,19,14,.52));
   pointer-events:none;
 }
 .feat-info {
@@ -165,10 +165,9 @@ footer { position:relative; z-index:10; border-top:1px solid var(--line); }
   padding-inline:1.5rem; padding-bottom:2rem;
 }
 @media(min-width:768px){ .feat-info{ padding-inline:2rem; padding-bottom:2.5rem; } }
-.feat-cat   { color:rgba(252,251,249,.8); transition:opacity .5s; }
-.feat-title { font-family:var(--fsr); font-size:1.25rem; font-weight:300; color:var(--paper); margin-top:.4rem; transition:opacity .5s; }
+.feat-cat   { color:rgba(252,251,249,.8); }
+.feat-title { font-family:var(--fsr); font-size:1.25rem; font-weight:300; color:var(--paper); margin-top:.35rem; }
 
-/* Dot indicators */
 .feat-dots {
   position:absolute; inset-inline:0; top:1.25rem; z-index:2;
   display:flex; justify-content:center; gap:.4rem;
@@ -180,37 +179,51 @@ footer { position:relative; z-index:10; border-top:1px solid var(--line); }
 }
 .feat-dot.active { background:rgba(252,251,249,.9); width:28px; }
 
-/* Image placeholder */
-.iph {
-  position:absolute; inset:0;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:.75rem; color:rgba(211,202,186,.9);
+/* Home category strip below slideshow */
+.home-strip {
+  max-width:var(--max); margin-inline:auto; width:100%;
+  padding-inline:1.5rem; padding-block:3.5rem 5rem;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:1.5rem;
 }
-.iph svg   { width:36px; opacity:.6; }
-.iph span  { font-size:10px; letter-spacing:.2em; text-transform:uppercase; }
+@media(min-width:640px){ .home-strip{ grid-template-columns:repeat(4,1fr); gap:2rem; } }
+@media(min-width:768px){ .home-strip{ padding-inline:2.5rem; } }
 
-/* ══ GALLERY ═════════════════════════════════════════════════════════ */
+.hs-card {
+  display:block; cursor:pointer;
+  border-top:1px solid var(--line); padding-top:1.1rem;
+  transition:opacity .3s;
+}
+.hs-card:hover { opacity:.65; }
+.hs-card-img { aspect-ratio:3/4; overflow:hidden; background:rgba(211,202,186,.4); margin-bottom:.85rem; }
+.hs-card-img img { width:100%; height:100%; object-fit:cover; transition:transform 1200ms var(--ease); }
+.hs-card:hover .hs-card-img img { transform:scale(1.04); }
+.hs-cat  { font-size:10px; text-transform:uppercase; letter-spacing:.18em; color:var(--muted); margin-bottom:.35rem; }
+.hs-name { font-family:var(--fsr); font-size:1rem; font-weight:300; line-height:1.3; }
+
+/* ══ GALLERY ══ */
 .gal-page { padding-top:56px; }
 .gal-hdr {
-  max-width:1600px; margin-inline:auto;
+  max-width:var(--max); margin-inline:auto;
   padding-inline:1.5rem; padding-block:4rem 2rem;
 }
 @media(min-width:768px){ .gal-hdr{ padding-inline:2.5rem; padding-block:7rem 2.5rem; } }
 .gal-h1 { font-family:var(--fsr); font-size:3rem; font-weight:200; line-height:1; }
 @media(min-width:768px){ .gal-h1{ font-size:4.5rem; } }
 .gal-filter {
-  display:flex; flex-wrap:wrap; gap:.75rem 2rem;
+  display:flex; flex-wrap:wrap; gap:.6rem 1.75rem;
   margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--line);
 }
-.gal-filter a { color:var(--muted); transition:color .3s; }
+.gal-filter a { color:var(--muted); transition:color .3s; font-size:.78rem; letter-spacing:.1em; }
 .gal-filter a:hover, .gal-filter a.on { color:var(--ink); }
 
 .works-grid {
-  max-width:1600px; margin-inline:auto;
+  max-width:var(--max); margin-inline:auto;
   padding-inline:1.5rem; padding-block:2.5rem 6rem;
   display:grid; grid-template-columns:1fr; gap:1.5rem;
 }
 @media(min-width:640px){ .works-grid{ grid-template-columns:1fr 1fr; gap:2.5rem; } }
+@media(min-width:1024px){ .works-grid{ grid-template-columns:1fr 1fr 1fr; } }
 @media(min-width:768px){ .works-grid{ padding-inline:2.5rem; } }
 
 .wcard { display:block; cursor:pointer; }
@@ -219,88 +232,81 @@ footer { position:relative; z-index:10; border-top:1px solid var(--line); }
   overflow:hidden; background:rgba(211,202,186,.35);
 }
 .wcard-img img {
-  width:100%; height:100%; object-fit:cover; opacity:.82;
+  width:100%; height:100%; object-fit:cover; opacity:.84;
   transition:transform 1600ms var(--ease),opacity 1400ms var(--ease);
 }
 .wcard:hover .wcard-img img { transform:scale(1.04); opacity:.97; }
 .wcard-info { padding-block:.85rem; display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; }
-.wcard-cat   { color:var(--muted); }
-.wcard-title { font-family:var(--fsr); font-size:1.125rem; font-weight:300; margin-top:.2rem; }
-.wcard-year  { color:var(--muted); flex-shrink:0; margin-top:.15rem; }
+.wcard-cat   { color:var(--muted); font-size:10px; letter-spacing:.15em; text-transform:uppercase; }
+.wcard-title { font-family:var(--fsr); font-size:1.05rem; font-weight:300; margin-top:.2rem; }
+.wcard-year  { color:var(--muted); flex-shrink:0; margin-top:.15rem; font-size:.8rem; }
 
-/* ══ WORK DETAIL ═════════════════════════════════════════════════════ */
-/* Hero — full-width, tall (88svh on desktop), title overlaid at bottom */
+/* ══ WORK DETAIL ══ */
 .wd-hero {
   position:relative; width:100%; height:78svh;
   overflow:hidden; background:var(--char);
 }
 @media(min-width:768px){ .wd-hero{ height:88svh; } }
 .wd-hero-img { position:absolute; inset:0; }
-.wd-hero-img img { width:100%; height:100%; object-fit:cover; opacity:.82; }
+.wd-hero-img img { width:100%; height:100%; object-fit:cover; opacity:.84; }
 .wd-grad {
   position:absolute; inset:0;
   background:linear-gradient(to bottom,rgba(22,19,14,.2),transparent 45%,rgba(22,19,14,.5));
 }
-/* Title + breadcrumb OVERLAID at the bottom of the hero image */
 .wd-btm {
   position:absolute; inset-inline:0; bottom:0;
   padding-inline:1.5rem; padding-bottom:3rem;
-  max-width:1600px; margin-inline:auto;
+  max-width:var(--max); margin-inline:auto;
 }
 @media(min-width:768px){ .wd-btm{ padding-inline:2.5rem; padding-bottom:4rem; } }
-.wd-bread { color:rgba(252,251,249,.8); }
+.wd-bread { color:rgba(252,251,249,.8); font-size:.75rem; letter-spacing:.15em; text-transform:uppercase; }
 .wd-htitle {
   font-family:var(--fsr); font-weight:200; line-height:1;
   color:var(--paper); margin-top:1rem; font-size:2.25rem;
 }
 @media(min-width:768px){ .wd-htitle{ font-size:4.5rem; } }
 
-/* Content below hero */
 .wd-body {
-  max-width:1600px; margin-inline:auto;
+  max-width:var(--max); margin-inline:auto;
   padding-inline:1.5rem; padding-block:4rem 2rem;
 }
 @media(min-width:768px){ .wd-body{ padding-inline:2.5rem; padding-block:7rem 2.5rem; } }
 
 .wd-back {
   display:inline-flex; align-items:center; gap:.4rem;
-  color:var(--muted); margin-bottom:2.5rem; transition:color .3s;
+  color:var(--muted); margin-bottom:2.5rem; transition:color .3s; font-size:.82rem;
 }
 .wd-back:hover { color:var(--ink); }
 
-/* Metadata — flex row of key/value pairs */
 .wd-meta {
   display:flex; flex-wrap:wrap; gap:1.5rem 3rem;
   padding-bottom:2.5rem; border-bottom:1px solid var(--line);
 }
-.wd-mk { color:var(--muted); margin-bottom:.35rem; }
-.wd-mv { font-family:var(--fsr); font-size:1.125rem; font-weight:300; }
+.wd-mk { color:var(--muted); margin-bottom:.35rem; font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; }
+.wd-mv { font-family:var(--fsr); font-size:1.1rem; font-weight:300; }
 
-/* 12-col grid for description */
 .wd-grid { display:grid; grid-template-columns:1fr; gap:2.5rem; margin-top:2.5rem; }
 @media(min-width:768px){
   .wd-grid{ grid-template-columns:repeat(12,1fr); gap:0 4rem; }
   .wd-c4{ grid-column:span 4; }
   .wd-c8{ grid-column:span 8; }
 }
-
 .wd-desc {
   font-family:var(--fsr); font-weight:300; line-height:1.65;
-  color:rgba(40,38,35,.85); font-size:1.5rem;
+  color:rgba(40,38,35,.85); font-size:1.4rem;
 }
-@media(min-width:768px){ .wd-desc{ font-size:1.875rem; } }
+@media(min-width:768px){ .wd-desc{ font-size:1.75rem; } }
 
 .btn-inq {
   display:inline-flex; align-items:center; gap:.5rem;
   margin-top:2rem; border:1px solid var(--line);
-  padding:.85rem 1.75rem; color:var(--ink);
+  padding:.85rem 1.75rem; color:var(--ink); font-size:.8rem; letter-spacing:.1em; text-transform:uppercase;
   transition:background .4s,color .4s,border-color .4s;
 }
 .btn-inq:hover { background:var(--ink); color:var(--paper); border-color:var(--ink); }
 
-/* Gallery strip */
 .wd-gal-wrap {
-  max-width:1600px; margin-inline:auto;
+  max-width:var(--max); margin-inline:auto;
   padding-inline:1.5rem; padding-block:1.5rem 0;
 }
 @media(min-width:768px){ .wd-gal-wrap{ padding-inline:2.5rem; } }
@@ -311,14 +317,13 @@ footer { position:relative; z-index:10; border-top:1px solid var(--line); }
 .wd-gi.wide { grid-column:1/-1; aspect-ratio:16/7; }
 .wd-gi img  { width:100%; height:100%; object-fit:cover; }
 
-/* Next artwork — full-width tall card */
 .wd-next {
   position:relative; display:block; width:100%; overflow:hidden;
   height:52svh; background:var(--char); margin-top:2.5rem; cursor:pointer;
 }
 @media(min-width:768px){ .wd-next{ height:64svh; } }
 .wd-next-img { position:absolute; inset:0; }
-.wd-next-img img { width:100%; height:100%; object-fit:cover; }
+.wd-next-img img { width:100%; height:100%; object-fit:cover; opacity:.7; }
 .wd-next-grad {
   position:absolute; inset:0;
   background:linear-gradient(to bottom,rgba(22,19,14,.65),rgba(22,19,14,0) 40%,rgba(22,19,14,.75));
@@ -328,94 +333,133 @@ footer { position:relative; z-index:10; border-top:1px solid var(--line); }
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   text-align:center; color:var(--paper); padding:2rem;
 }
-.wd-next-lbl  { color:rgba(252,251,249,.8); }
-.wd-next-ttl  { font-family:var(--fsr); font-weight:200; font-size:2.25rem; line-height:1.1; margin-top:1rem; }
+.wd-next-lbl { color:rgba(252,251,249,.8); font-size:.75rem; letter-spacing:.15em; text-transform:uppercase; }
+.wd-next-ttl { font-family:var(--fsr); font-weight:200; font-size:2.25rem; line-height:1.1; margin-top:1rem; }
 @media(min-width:768px){ .wd-next-ttl{ font-size:3.75rem; } }
-.wd-next-arr  { display:flex; align-items:center; gap:.5rem; margin-top:1.25rem; color:rgba(252,251,249,.8); }
+.wd-next-arr { display:flex; align-items:center; gap:.5rem; margin-top:1.25rem; color:rgba(252,251,249,.8); font-size:.78rem; letter-spacing:.1em; }
 
-/* ══ ABOUT ═══════════════════════════════════════════════════════════ */
+/* ══ ABOUT ══ */
 .ab-page { padding-top:56px; }
-.ab-wrap {
-  max-width:1600px; margin-inline:auto;
-  padding-inline:1.5rem; padding-block:6rem;
+.ab-hero {
+  position:relative; width:100%; height:60svh;
+  overflow:hidden; background:var(--char);
 }
-@media(min-width:768px){ .ab-wrap{ padding-inline:2.5rem; padding-block:11rem 8rem; } }
+@media(min-width:768px){ .ab-hero{ height:72svh; } }
+.ab-hero img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.72; }
+.ab-hero-grad {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom,rgba(22,19,14,.1),transparent 40%,rgba(22,19,14,.65));
+}
+.ab-hero-txt {
+  position:absolute; inset-inline:0; bottom:0;
+  padding-inline:1.5rem; padding-bottom:3rem;
+  max-width:var(--max); margin-inline:auto;
+}
+@media(min-width:768px){ .ab-hero-txt{ padding-inline:2.5rem; padding-bottom:4rem; } }
+.ab-hero-h { font-family:var(--fsr); font-size:clamp(2rem,5vw,3.5rem); font-weight:200; color:var(--paper); line-height:1.1; }
+
+.ab-wrap {
+  max-width:var(--max); margin-inline:auto;
+  padding-inline:1.5rem; padding-block:5rem 4rem;
+}
+@media(min-width:768px){ .ab-wrap{ padding-inline:2.5rem; padding-block:7rem 6rem; } }
 .ab-grid { display:grid; grid-template-columns:1fr; gap:3rem; }
 @media(min-width:768px){
   .ab-grid{ grid-template-columns:repeat(12,1fr); gap:4rem; }
   .ab-c5{ grid-column:span 5; }
-  .ab-c7{ grid-column:span 7; padding-inline-start:2rem; }
+  .ab-c7{ grid-column:span 7; }
 }
-.ab-port { position:relative; overflow:hidden; background:rgba(211,202,186,.5); aspect-ratio:4/5; }
-.ab-port img { width:100%; height:100%; object-fit:cover; }
 
-.ab-eye { color:var(--muted); }
-.ab-h1  {
-  font-family:var(--fsr); font-weight:200; line-height:1.2;
-  margin-top:1.25rem; font-size:3rem; max-width:36rem;
+.ab-img-stack { position:relative; }
+.ab-img-main { aspect-ratio:4/5; overflow:hidden; background:rgba(211,202,186,.4); }
+.ab-img-main img { width:100%; height:100%; object-fit:cover; }
+.ab-img-accent {
+  position:absolute; width:55%; aspect-ratio:1;
+  overflow:hidden; background:rgba(211,202,186,.5);
+  bottom:-1.5rem; inset-inline-start:-1.25rem;
+  border:4px solid var(--paper);
 }
-@media(min-width:768px){ .ab-h1{ font-size:3.75rem; } }
+.ab-img-accent img { width:100%; height:100%; object-fit:cover; }
+
+.ab-eye { color:var(--muted); font-size:.75rem; letter-spacing:.18em; text-transform:uppercase; }
+.ab-h1 {
+  font-family:var(--fsr); font-weight:300; line-height:1.25;
+  margin-top:1.25rem; font-size:clamp(1.65rem,3vw,2.5rem);
+}
 .ab-body {
-  margin-top:2.5rem; max-width:36rem;
-  display:flex; flex-direction:column; gap:1.5rem;
-  font-size:1rem; line-height:1.7; color:rgba(40,38,35,.75);
+  margin-top:2rem; display:flex; flex-direction:column; gap:1.4rem;
+  font-family:var(--fsr); font-size:1rem; line-height:1.75;
+  color:rgba(40,38,35,.78);
 }
-html[lang="he"] .ab-body { font-family:var(--fsr); font-size:1.05rem; }
-.ab-cats {
-  margin-top:3rem; padding-top:2rem; border-top:1px solid var(--line);
-  display:flex; flex-wrap:wrap; gap:.75rem 1.5rem;
+.ab-divider { border-top:1px solid var(--line); margin-block:2.5rem; }
+.ab-list { display:flex; flex-direction:column; gap:.9rem; }
+.ab-list-item {
+  display:flex; align-items:flex-start; gap:1rem;
+  padding-bottom:.9rem; border-bottom:1px solid var(--line);
 }
-.ab-cats a { font-family:var(--fsr); font-size:1.125rem; font-weight:300; color:var(--ink); transition:opacity .3s; }
-.ab-cats a:hover { opacity:.55; }
-.ab-cta { display:inline-flex; align-items:center; gap:.5rem; margin-top:1.25rem; font-family:var(--fsr); font-size:1.125rem; font-weight:300; }
+.ab-list-item:last-child { border-bottom:none; }
+.ab-list-num { font-family:var(--fsr); font-size:.9rem; color:var(--muted); flex-shrink:0; min-width:1.5rem; }
+.ab-list-txt { font-family:var(--fsr); font-size:1rem; font-weight:300; line-height:1.5; }
+.ab-cta-wrap { margin-top:3rem; display:flex; flex-wrap:wrap; gap:1rem; align-items:center; }
+.btn-cta {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:var(--ink); color:var(--paper);
+  padding:.9rem 2rem; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase;
+  transition:background .4s,color .4s;
+}
+.btn-cta:hover { background:rgba(40,38,35,.8); }
+.btn-cta-out {
+  display:inline-flex; align-items:center; gap:.5rem;
+  border:1px solid var(--line); padding:.9rem 2rem;
+  color:var(--ink); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase;
+  transition:background .4s,color .4s,border-color .4s;
+}
+.btn-cta-out:hover { background:var(--ink); color:var(--paper); border-color:var(--ink); }
 
-/* ══ WORKSHOPS ═══════════════════════════════════════════════════════ */
+/* ══ WORKSHOPS ══ */
 .ws-page { padding-top:56px; }
 .ws-wrap {
-  max-width:1600px; margin-inline:auto;
+  max-width:var(--max); margin-inline:auto;
   padding-inline:1.5rem; padding-block:6rem;
 }
 @media(min-width:768px){ .ws-wrap{ padding-inline:2.5rem; padding-block:11rem 8rem; } }
-.ws-h1 { font-family:var(--fsr); font-weight:200; line-height:1; font-size:3rem; }
-@media(min-width:768px){ .ws-h1{ font-size:4.5rem; } }
+.ws-h1 { font-family:var(--fsr); font-weight:200; line-height:1; font-size:clamp(2.5rem,5vw,4.5rem); }
 .ws-intro {
-  margin-top:1.25rem; max-width:36rem;
-  font-family:var(--fsr); font-size:1.125rem; font-weight:300;
-  line-height:1.6; color:rgba(40,38,35,.7);
+  margin-top:1.25rem; max-width:34rem;
+  font-family:var(--fsr); font-size:1.1rem; font-weight:300;
+  line-height:1.65; color:rgba(40,38,35,.7);
 }
-@media(min-width:768px){ .ws-intro{ font-size:1.25rem; } }
 .ws-list { margin-top:4rem; border-top:1px solid var(--line); }
 .ws-row {
-  padding-block:2rem; border-bottom:1px solid var(--line);
+  padding-block:2.25rem; border-bottom:1px solid var(--line);
   display:grid; grid-template-columns:1fr; gap:1.5rem;
 }
 @media(min-width:768px){
-  .ws-row{ grid-template-columns:repeat(12,1fr); gap:2rem 4rem; padding-block:2.5rem; align-items:start; }
+  .ws-row{ grid-template-columns:repeat(12,1fr); gap:2rem 4rem; padding-block:2.75rem; align-items:start; }
   .wsr-l{ grid-column:span 7; }
   .wsr-r{ grid-column:span 5; display:flex; flex-direction:column; align-items:flex-end; gap:1rem; }
   html[dir="rtl"] .wsr-r{ align-items:flex-start; }
 }
-.wsr-type { color:var(--muted); margin-bottom:.5rem; }
-.wsr-name { font-family:var(--fsr); font-size:1.5rem; font-weight:300; line-height:1.2; margin-bottom:.85rem; }
-@media(min-width:768px){ .wsr-name{ font-size:1.875rem; } }
-.wsr-desc { font-size:.9rem; line-height:1.7; color:rgba(40,38,35,.7); max-width:36rem; }
-html[lang="he"] .wsr-desc{ font-family:var(--fsr); font-size:.95rem; }
+.wsr-type { color:var(--muted); margin-bottom:.5rem; font-size:.75rem; letter-spacing:.15em; text-transform:uppercase; }
+.wsr-name { font-family:var(--fsr); font-size:clamp(1.35rem,2.5vw,1.75rem); font-weight:300; line-height:1.2; margin-bottom:.85rem; }
+.wsr-desc { font-family:var(--fsr); font-size:.95rem; line-height:1.72; color:rgba(40,38,35,.72); max-width:36rem; }
 .wsr-specs { display:flex; flex-wrap:wrap; gap:1rem 2rem; margin-top:1.25rem; }
-.wsr-sk { color:var(--muted); margin-bottom:.15rem; }
-.wsr-sv { font-size:.9rem; }
+.wsr-sk { color:var(--muted); margin-bottom:.15rem; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; }
+.wsr-sv { font-size:.88rem; font-family:var(--fsr); }
 .wsr-price { font-family:var(--fsr); font-size:2.25rem; font-weight:300; line-height:1; }
-.wsr-pnote { color:var(--muted); margin-top:.3rem; }
+.wsr-pnote { color:var(--muted); margin-top:.3rem; font-size:.78rem; }
 .btn-ws {
   display:inline-block; margin-top:.75rem;
   border:1px solid var(--line); padding:.75rem 1.5rem;
-  color:var(--ink); transition:background .4s,color .4s,border-color .4s; white-space:nowrap;
+  color:var(--ink); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase;
+  transition:background .4s,color .4s,border-color .4s; white-space:nowrap;
 }
 .btn-ws:hover { background:var(--ink); color:var(--paper); border-color:var(--ink); }
 
-/* ══ CONTACT ═════════════════════════════════════════════════════════ */
+/* ══ CONTACT ══ */
 .ct-page { padding-top:56px; }
 .ct-wrap {
-  max-width:1600px; margin-inline:auto;
+  max-width:var(--max); margin-inline:auto;
   padding-inline:1.5rem; padding-block:6rem;
 }
 @media(min-width:768px){ .ct-wrap{ padding-inline:2.5rem; padding-block:11rem 8rem; } }
@@ -425,8 +469,7 @@ html[lang="he"] .wsr-desc{ font-family:var(--fsr); font-size:.95rem; }
   .ct-l{ grid-column:span 4; }
   .ct-r{ grid-column:span 8; }
 }
-.ct-h1 { font-family:var(--fsr); font-weight:200; line-height:1; font-size:3rem; margin-bottom:2rem; }
-@media(min-width:768px){ .ct-h1{ font-size:4.5rem; } }
+.ct-h1 { font-family:var(--fsr); font-weight:200; line-height:1; font-size:clamp(2.5rem,5vw,4.5rem); margin-bottom:2rem; }
 .ct-chs { display:flex; flex-direction:column; }
 .ct-ch {
   display:flex; align-items:flex-start; gap:.75rem;
@@ -435,11 +478,11 @@ html[lang="he"] .wsr-desc{ font-family:var(--fsr); font-size:.95rem; }
 }
 .ct-ch:first-child { border-top:1px solid var(--line); }
 .ct-ch:hover { opacity:.6; }
-.ct-ch-k { color:var(--muted); min-width:5rem; flex-shrink:0; }
+.ct-ch-k { color:var(--muted); min-width:5rem; flex-shrink:0; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; }
 .ct-ch-v { font-family:var(--fsr); font-size:1rem; font-weight:300; }
 .ct-fh { font-family:var(--fsr); font-size:1.5rem; font-weight:300; margin-bottom:2rem; color:rgba(40,38,35,.75); }
 .fg { margin-bottom:2rem; }
-.fg label { display:block; color:var(--muted); margin-bottom:.45rem; }
+.fg label { display:block; color:var(--muted); margin-bottom:.45rem; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; }
 .fg input,.fg textarea,.fg select {
   width:100%; background:transparent;
   border-bottom:1px solid var(--line);
@@ -456,14 +499,24 @@ html[lang="he"] .wsr-desc{ font-family:var(--fsr); font-size:.95rem; }
 .btn-send {
   display:inline-block; background:var(--ink); color:var(--paper);
   border:1px solid var(--ink); padding:1rem 2.5rem;
+  font-size:.8rem; letter-spacing:.1em; text-transform:uppercase;
   transition:background .4s,color .4s; margin-top:.5rem;
 }
 .btn-send:hover { background:transparent; color:var(--ink); }
+
+/* Image placeholder */
+.iph {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:.75rem; color:rgba(211,202,186,.9);
+}
+.iph svg  { width:36px; opacity:.6; }
+.iph span { font-size:10px; letter-spacing:.2em; text-transform:uppercase; }
 </style>
 </head>
 <body>
 
-<!-- Mobile nav overlay -->
+<!-- Mobile nav -->
 <div id="mob-nav" role="dialog" aria-modal="true">
   <a href="#/" data-nav class="serif" style="font-size:1.875rem;font-weight:300"><span data-he>רבקה חיים</span><span data-en>Rivka Haim</span></a>
   <a href="#/gallery"   data-nav class="serif" style="font-size:1.5rem;font-weight:300"><span data-he>גלריה</span><span data-en>Gallery</span></a>
@@ -475,18 +528,18 @@ html[lang="he"] .wsr-desc{ font-family:var(--fsr); font-size:.95rem; }
 <!-- Header -->
 <header id="hdr">
   <div class="hdr-in">
-    <a href="#/" class="logo link-u" style="display:flex;flex-direction:column;gap:.15rem">
-      <span><span data-he>רבקה חיים</span><span data-en>Rivka Haim</span></span>
-      <span style="font-family:var(--fs);font-size:.6rem;letter-spacing:.18em;color:var(--muted)"><span data-he>יוצרת בנייר</span><span data-en>Liquid Paper Artist</span></span>
+    <a href="#/" class="logo">
+      <span class="logo-name"><span data-he>רבקה חיים</span><span data-en>Rivka Haim</span></span>
+      <span class="logo-sub"><span data-he>נייר נוזלי</span><span data-en>Liquid Paper</span></span>
     </a>
     <nav class="nav-d" aria-label="Main">
-      <a href="#/gallery"   class="label link-u"><span data-he>גלריה</span><span data-en>Gallery</span></a>
-      <a href="#/workshops" class="label link-u"><span data-he>סדנאות</span><span data-en>Workshops</span></a>
-      <a href="#/about"     class="label link-u"><span data-he>אודות</span><span data-en>About</span></a>
-      <a href="#/contact"   class="label link-u"><span data-he>יצירת קשר</span><span data-en>Contact</span></a>
+      <a href="#/gallery"   class="link-u"><span data-he>גלריה</span><span data-en>Gallery</span></a>
+      <a href="#/workshops" class="link-u"><span data-he>סדנאות</span><span data-en>Workshops</span></a>
+      <a href="#/about"     class="link-u"><span data-he>אודות</span><span data-en>About</span></a>
+      <a href="#/contact"   class="link-u"><span data-he>יצירת קשר</span><span data-en>Contact</span></a>
     </nav>
     <div class="hdr-right">
-      <button class="lang-btn label" id="lang-btn" aria-label="Switch language">
+      <button class="lang-btn" id="lang-btn" aria-label="Switch language">
         <span data-he>EN</span><span data-en>עב</span>
       </button>
       <button class="ham" id="ham-btn" aria-label="Menu" aria-expanded="false">
@@ -496,70 +549,200 @@ html[lang="he"] .wsr-desc{ font-family:var(--fsr); font-size:.95rem; }
   </div>
 </header>
 
-<!-- Page root -->
 <div id="app"></div>
 
 <script>
 /* ══ DATA ══════════════════════════════════════════════════════════ */
-const AW = [
-  { slug:'yotzer-1', featured:true,
-    tHe:'[שם יצירה 1]', tEn:'[Piece Title 1]',
-    cSlug:'papier-mache', cHe:'פאפייה-מאשה', cEn:'Papier-mâché',
-    mHe:'פאפייה-מאשה על עץ', mEn:'Papier-mâché on wood',
-    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
-    dHe:'[תיאור קצר של היצירה — רוח, תהליך, מה שהיא מעוררת. כ-40 מילה.]',
-    dEn:'[Short description — spirit, process, what it evokes. Approx. 40 words.]' },
-  { slug:'yotzer-2',
-    tHe:'[שם יצירה 2]', tEn:'[Piece Title 2]',
-    cSlug:'paper-sculpture', cHe:'פיסול נייר', cEn:'Paper sculpture',
-    mHe:'נייר ידני מקופל', mEn:'Hand-folded paper',
-    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
-    dHe:'[תיאור קצר]', dEn:'[Short description]' },
-  { slug:'yotzer-3',
-    tHe:'[שם יצירה 3]', tEn:'[Piece Title 3]',
-    cSlug:'collage', cHe:"קולאז'", cEn:'Collage',
-    mHe:"קולאז' נייר ואקוורל", mEn:'Paper collage and watercolour',
-    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
-    dHe:'[תיאור קצר]', dEn:'[Short description]' },
-  { slug:'yotzer-4',
-    tHe:'[שם יצירה 4]', tEn:'[Piece Title 4]',
-    cSlug:'papier-mache', cHe:'פאפייה-מאשה', cEn:'Papier-mâché',
-    mHe:'פאפייה-מאשה ופיגמנטים', mEn:'Papier-mâché and pigments',
-    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
-    dHe:'[תיאור קצר]', dEn:'[Short description]' },
-  { slug:'yotzer-5',
-    tHe:'[שם יצירה 5]', tEn:'[Piece Title 5]',
-    cSlug:'paper-sculpture', cHe:'פיסול נייר', cEn:'Paper sculpture',
-    mHe:'נייר ומתכת', mEn:'Paper and metal',
-    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
-    dHe:'[תיאור קצר]', dEn:'[Short description]' },
-  { slug:'yotzer-6',
-    tHe:'[שם יצירה 6]', tEn:'[Piece Title 6]',
-    cSlug:'collage', cHe:"קולאז'", cEn:'Collage',
-    mHe:'שכבות נייר ודיו', mEn:'Layered paper and ink',
-    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
-    dHe:'[תיאור קצר]', dEn:'[Short description]' },
-  { slug:'yotzer-7',
-    tHe:'[שם יצירה 7]', tEn:'[Piece Title 7]',
-    cSlug:'papier-mache', cHe:'פאפייה-מאשה', cEn:'Papier-mâché',
-    mHe:'פאפייה-מאשה וצבעי אקריל', mEn:'Papier-mâché and acrylic',
-    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
-    dHe:'[תיאור קצר]', dEn:'[Short description]' },
-  { slug:'yotzer-8',
-    tHe:'[שם יצירה 8]', tEn:'[Piece Title 8]',
-    cSlug:'paper-sculpture', cHe:'פיסול נייר', cEn:'Paper sculpture',
-    mHe:'נייר ועץ', mEn:'Paper and wood',
-    dims:'[W × H × D] ס"מ', yr:'[שנה]', price:'₪[מחיר]',
-    dHe:'[תיאור קצר]', dEn:'[Short description]' },
-];
 const CATS = [
-  { slug:'all',            he:'כל היצירות',   en:'All works' },
-  { slug:'papier-mache',   he:'פאפייה-מאשה',  en:'Papier-mâché' },
-  { slug:'paper-sculpture',he:'פיסול נייר',   en:'Paper sculpture' },
-  { slug:'collage',        he:"קולאז'",        en:'Collage' },
+  { slug:'all',        he:'כל היצירות',         en:'All works' },
+  { slug:'sale',       he:'אומנות למכירה',       en:'Art for Sale' },
+  { slug:'commission', he:'הזמנה אישית',          en:'Commission' },
+  { slug:'students',   he:'עבודות תלמידים',      en:'Student Works' },
+  { slug:'sculpture',  he:'פיסול',               en:'Sculpture' },
 ];
 
-/* ══ LANGUAGE ══════════════════════════════════════════════════════ */
+const AW = [
+  /* ── אומנות למכירה ── */
+  { slug:'lp-flowers', featured:true,
+    img:'images/gallery/lp-05.jpg',
+    tHe:'פרחים בנייר נוזלי', tEn:'Flowers in Liquid Paper',
+    cSlug:'sale', cHe:'אומנות למכירה', cEn:'Art for Sale',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'60 × 80 ס"מ', yr:'2026', price:'ליצירת קשר',
+    dHe:'פרחים שנולדו מניח נייר רטוב — כל שכבה נפתחת לכיוון אחר. יצירה מקורית חתומה.',
+    dEn:'Flowers born from wet paper — each layer opens in its own direction. Original signed work.' },
+  { slug:'lp-01',
+    img:'images/gallery/lp-01.jpg',
+    tHe:'יצירה בנייר נוזלי — א׳', tEn:'Liquid Paper Work I',
+    cSlug:'sale', cHe:'אומנות למכירה', cEn:'Art for Sale',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'40 × 50 ס"מ', yr:'2026', price:'ליצירת קשר',
+    dHe:'עבודה מקורית בטכניקת הנייר הנוזלי. זמינה לרכישה.',
+    dEn:'Original work in liquid paper technique. Available for purchase.' },
+  { slug:'lp-02',
+    img:'images/gallery/lp-02.jpg',
+    tHe:'יצירה בנייר נוזלי — ב׳', tEn:'Liquid Paper Work II',
+    cSlug:'sale', cHe:'אומנות למכירה', cEn:'Art for Sale',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'40 × 50 ס"מ', yr:'2026', price:'ליצירת קשר',
+    dHe:'עבודה מקורית בטכניקת הנייר הנוזלי. זמינה לרכישה.',
+    dEn:'Original work in liquid paper technique. Available for purchase.' },
+  { slug:'lp-03',
+    img:'images/gallery/lp-03.jpg',
+    tHe:'יצירה בנייר נוזלי — ג׳', tEn:'Liquid Paper Work III',
+    cSlug:'sale', cHe:'אומנות למכירה', cEn:'Art for Sale',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'40 × 50 ס"מ', yr:'2026', price:'ליצירת קשר',
+    dHe:'עבודה מקורית בטכניקת הנייר הנוזלי. זמינה לרכישה.',
+    dEn:'Original work in liquid paper technique. Available for purchase.' },
+  { slug:'lp-04',
+    img:'images/gallery/lp-04.jpg',
+    tHe:'יצירה בנייר נוזלי — ד׳', tEn:'Liquid Paper Work IV',
+    cSlug:'sale', cHe:'אומנות למכירה', cEn:'Art for Sale',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'40 × 50 ס"מ', yr:'2026', price:'ליצירת קשר',
+    dHe:'עבודה מקורית בטכניקת הנייר הנוזלי. זמינה לרכישה.',
+    dEn:'Original work in liquid paper technique. Available for purchase.' },
+  { slug:'pr-01',
+    img:'images/gallery/pr-01.jpg',
+    tHe:'סדרת צבע — א׳', tEn:'Color Series I',
+    cSlug:'sale', cHe:'אומנות למכירה', cEn:'Art for Sale',
+    mHe:'נייר נוזלי ופיגמנט', mEn:'Liquid paper & pigment',
+    dims:'50 × 70 ס"מ', yr:'2025', price:'ליצירת קשר',
+    dHe:'סדרה צבעונית שנוצרה בשכבות — הצבע והנייר ביחד.',
+    dEn:'A color series created in layers — paint and paper together.' },
+  { slug:'pr-02',
+    img:'images/gallery/pr-02.jpg',
+    tHe:'סדרת צבע — ב׳', tEn:'Color Series II',
+    cSlug:'sale', cHe:'אומנות למכירה', cEn:'Art for Sale',
+    mHe:'נייר נוזלי ופיגמנט', mEn:'Liquid paper & pigment',
+    dims:'50 × 70 ס"מ', yr:'2025', price:'ליצירת קשר',
+    dHe:'עבודה מקורית מהסדרה הצבעונית. זמינה לרכישה.',
+    dEn:'Original work from the color series. Available for purchase.' },
+
+  /* ── הזמנה אישית ── */
+  { slug:'pr-03',
+    img:'images/gallery/pr-03.jpg',
+    tHe:'עבודה בהזמנה אישית — א׳', tEn:'Commission Work I',
+    cSlug:'commission', cHe:'הזמנה אישית', cEn:'Commission',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'לפי הזמנה', yr:'2025', price:'בהתאמה אישית',
+    dHe:'כל עבודה בהזמנה אישית נוצרת מחדש — לפי הצבעים, הגודל והרגש שאתם מביאים.',
+    dEn:'Every commission is created fresh — shaped by the colours, size, and feeling you bring.' },
+  { slug:'pr-04',
+    img:'images/gallery/pr-04.jpg',
+    tHe:'עבודה בהזמנה אישית — ב׳', tEn:'Commission Work II',
+    cSlug:'commission', cHe:'הזמנה אישית', cEn:'Commission',
+    mHe:'נייר נוזלי ופיסול', mEn:'Liquid paper & sculpture',
+    dims:'לפי הזמנה', yr:'2025', price:'בהתאמה אישית',
+    dHe:'פיסול ונייר בשיתוף — עבודה שנבנית סביב הסיפור שלכם.',
+    dEn:'Sculpture and paper together — a work built around your story.' },
+  { slug:'pr-05',
+    img:'images/gallery/pr-05.jpg',
+    tHe:'עבודה בהזמנה אישית — ג׳', tEn:'Commission Work III',
+    cSlug:'commission', cHe:'הזמנה אישית', cEn:'Commission',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'לפי הזמנה', yr:'2025', price:'בהתאמה אישית',
+    dHe:'עבודה מקורית שנוצרה בהזמנה. לפרטים נוספים — בואו ניצור קשר.',
+    dEn:'Original commissioned work. For details — let\'s get in touch.' },
+  { slug:'after-fish',
+    img:'images/gallery/h-05.jpg',
+    tHe:'אחרי הדגים', tEn:'After Fish',
+    cSlug:'commission', cHe:'הזמנה אישית', cEn:'Commission',
+    mHe:'נייר נוזלי ופיסול', mEn:'Liquid paper & sculpture',
+    dims:'80 × 100 ס"מ', yr:'2026', price:'בהתאמה אישית',
+    dHe:'יצירה שנולדה מתוך השקט שבא אחרי — שכבות נייר שמחזיקות זמן בתוכן. עבודה מקורית בהזמנה אישית.',
+    dEn:'A work born from the quiet that comes after — layers of paper holding time inside them. Original commission.' },
+
+  /* ── עבודות תלמידים ── */
+  { slug:'st-01',
+    img:'images/gallery/h-03.jpg',
+    tHe:'עבודת תלמיד — א׳', tEn:'Student Work I',
+    cSlug:'students', cHe:'עבודות תלמידים', cEn:'Student Works',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'', yr:'2026', price:'',
+    dHe:'יצירה שנוצרה בסדנת הסטודיו. כל תלמיד יוצר בסגנון שלו.',
+    dEn:'Created in the studio workshop. Every student creates in their own style.' },
+  { slug:'st-02',
+    img:'images/gallery/h-04.jpg',
+    tHe:'עבודת תלמיד — ב׳', tEn:'Student Work II',
+    cSlug:'students', cHe:'עבודות תלמידים', cEn:'Student Works',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'', yr:'2026', price:'',
+    dHe:'יצירה מהסדנה הקבוצתית.',
+    dEn:'From the group workshop.' },
+  { slug:'st-03',
+    img:'images/gallery/h-06.jpg',
+    tHe:'עבודת תלמיד — ג׳', tEn:'Student Work III',
+    cSlug:'students', cHe:'עבודות תלמידים', cEn:'Student Works',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'', yr:'2026', price:'',
+    dHe:'יצירה מהסדנה הקבוצתית.',
+    dEn:'From the group workshop.' },
+  { slug:'st-04',
+    img:'images/gallery/h-07.jpg',
+    tHe:'עבודת תלמיד — ד׳', tEn:'Student Work IV',
+    cSlug:'students', cHe:'עבודות תלמידים', cEn:'Student Works',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'', yr:'2026', price:'',
+    dHe:'יצירה מהסדנה הקבוצתית.',
+    dEn:'From the group workshop.' },
+  { slug:'st-05',
+    img:'images/gallery/h-08.jpg',
+    tHe:'עבודת תלמיד — ה׳', tEn:'Student Work V',
+    cSlug:'students', cHe:'עבודות תלמידים', cEn:'Student Works',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'', yr:'2026', price:'',
+    dHe:'יצירה מהסדנה הקבוצתית.',
+    dEn:'From the group workshop.' },
+  { slug:'st-06',
+    img:'images/gallery/h-09.jpg',
+    tHe:'עבודת תלמיד — ו׳', tEn:'Student Work VI',
+    cSlug:'students', cHe:'עבודות תלמידים', cEn:'Student Works',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'', yr:'2026', price:'',
+    dHe:'יצירה מהסדנה הקבוצתית.',
+    dEn:'From the group workshop.' },
+
+  /* ── פיסול ── */
+  { slug:'sc-01',
+    img:'images/gallery/h-01.jpg',
+    tHe:'פיסול — א׳', tEn:'Sculpture I',
+    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    mHe:'נייר ופיסול', mEn:'Paper sculpture',
+    dims:'לפי הזמנה', yr:'2026', price:'ליצירת קשר',
+    dHe:'פיסול נייר — טכניקה שבונה צורה מתוך שכבות. כל יצירה היא מבנה שלם בפני עצמה.',
+    dEn:'Paper sculpture — a technique that builds form from layers. Each piece is its own complete structure.' },
+  { slug:'sc-02',
+    img:'images/gallery/h-02.jpg',
+    tHe:'פיסול — ב׳', tEn:'Sculpture II',
+    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    mHe:'נייר ופיסול', mEn:'Paper sculpture',
+    dims:'לפי הזמנה', yr:'2026', price:'ליצירת קשר',
+    dHe:'עבודת פיסול בנייר. ניתן להזמין עבודות מותאמות אישית.',
+    dEn:'Paper sculpture. Custom works available on commission.' },
+  { slug:'sc-03',
+    img:'images/gallery/h-10.jpg',
+    tHe:'פיסול — ג׳', tEn:'Sculpture III',
+    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    mHe:'נייר ופיסול', mEn:'Paper sculpture',
+    dims:'לפי הזמנה', yr:'2026', price:'ליצירת קשר',
+    dHe:'עבודת פיסול בנייר. ניתן להזמין עבודות מותאמות אישית.',
+    dEn:'Paper sculpture. Custom works available on commission.' },
+];
+
+/* Hero slideshow images (from the full collection) */
+const HERO_IMGS = [
+  { src:'images/gallery/lp-05.jpg',  tHe:'פרחים בנייר נוזלי', tEn:'Flowers in Liquid Paper', slug:'lp-flowers' },
+  { src:'images/gallery/lp-01.jpg',  tHe:'יצירה בנייר נוזלי', tEn:'Liquid Paper Work', slug:'lp-01' },
+  { src:'images/gallery/pr-01.jpg',  tHe:'סדרת צבע', tEn:'Color Series', slug:'pr-01' },
+  { src:'images/gallery/h-01.jpg',   tHe:'פיסול', tEn:'Sculpture', slug:'sc-01' },
+  { src:'images/gallery/lp-02.jpg',  tHe:'יצירה בנייר נוזלי', tEn:'Liquid Paper Work', slug:'lp-02' },
+  { src:'images/gallery/pr-03.jpg',  tHe:'הזמנה אישית', tEn:'Commission', slug:'pr-03' },
+  { src:'images/gallery/h-05.jpg',   tHe:'אחרי הדגים', tEn:'After Fish', slug:'after-fish' },
+];
+
+/* ══ LANGUAGE ══ */
 const HL = document.documentElement;
 let lang = localStorage.getItem('rc-lang') || 'he';
 
@@ -578,7 +761,7 @@ document.getElementById('lang-btn').addEventListener('click', () => {
   route();
 });
 
-/* ══ MOBILE MENU ══════════════════════════════════════════════════ */
+/* ══ MOBILE MENU ══ */
 const mobNav = document.getElementById('mob-nav');
 const hamBtn = document.getElementById('ham-btn');
 function closeMob() {
@@ -593,9 +776,8 @@ hamBtn.addEventListener('click', () => {
 });
 document.querySelectorAll('[data-nav]').forEach(a => a.addEventListener('click', closeMob));
 
-/* ══ ROUTER ════════════════════════════════════════════════════════ */
+/* ══ ROUTER ══ */
 const app = document.getElementById('app');
-
 function navigate(path) { location.hash = path; }
 
 function route() {
@@ -632,12 +814,11 @@ function route() {
 }
 
 function bindEvents() {
-  // Stop any running slideshow when navigating away
   if (_slideTimer) { clearInterval(_slideTimer); _slideTimer = null; }
 
   app.querySelectorAll('[data-slug]').forEach(el => {
-    el.addEventListener('click',    () => navigate('#/work/' + el.dataset.slug));
-    el.addEventListener('keydown',  e => { if(e.key==='Enter'||e.key===' ') navigate('#/work/'+el.dataset.slug); });
+    el.addEventListener('click', () => navigate('#/work/' + el.dataset.slug));
+    el.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') navigate('#/work/'+el.dataset.slug); });
   });
   app.querySelectorAll('[data-cat]').forEach(el => {
     el.addEventListener('click', e => { e.preventDefault(); navigate('#/gallery/' + el.dataset.cat); });
@@ -645,13 +826,12 @@ function bindEvents() {
   const f = app.querySelector('form[data-cf]');
   if (f) f.addEventListener('submit', e => { e.preventDefault(); alert(T('תודה! ניצור איתך קשר בקרוב.','Thank you! We\'ll be in touch soon.')); });
 
-  // Start slideshow if we're on the home page
   if (document.getElementById('feat-card')) startSlideshow();
 }
 
 window.addEventListener('hashchange', route);
 
-/* ══ SHARED HELPERS ════════════════════════════════════════════════ */
+/* ══ HELPERS ══ */
 function iph(he, en) {
   return `<div class="iph">
     <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width=".7" aria-hidden="true">
@@ -667,64 +847,82 @@ function footer() {
   const yr = new Date().getFullYear();
   return `<footer>
     <div class="ftr-in">
-      <p class="ftr-tag">
-        <span data-he>פיסול נייר ופאפייה-מאשה — יצירות שמחזיקות זמן בתוכן.</span>
-        <span data-en>Paper sculpture and papier-mâché — works that hold time inside them.</span>
-      </p>
+      <div>
+        <a href="#/contact" class="ftr-cta">
+          <span data-he>בואו ניצור משהו</span><span data-en>Let's create something</span>${arrR()}
+        </a>
+        <p class="ftr-tag">
+          <span data-he>אומנות נייר ופיסול — יצירות מקוריות, הזמנות אישיות וסדנאות.</span>
+          <span data-en>Paper art and sculpture — original works, commissions and workshops.</span>
+        </p>
+      </div>
       <div class="ftr-links label">
         <a href="#/gallery"   class="link-u"><span data-he>גלריה</span><span data-en>Gallery</span></a>
         <a href="#/workshops" class="link-u"><span data-he>סדנאות</span><span data-en>Workshops</span></a>
         <a href="#/about"     class="link-u"><span data-he>אודות</span><span data-en>About</span></a>
         <a href="#/contact"   class="link-u"><span data-he>יצירת קשר</span><span data-en>Contact</span></a>
-        <a href="https://www.instagram.com/rivkahaim" target="_blank" rel="noopener" class="link-u">Instagram (@rivkahaim)</a>
-        <p class="ftr-copy">© ${yr} <span data-he>רבקה חיים — כל הזכויות שמורות</span><span data-en>Rivka Haim — All rights reserved</span></p>
+        <a href="https://www.instagram.com/rivkahaim" target="_blank" rel="noopener" class="link-u">Instagram</a>
+        <p class="ftr-copy">© ${yr} <span data-he>רבקה חיים</span><span data-en>Rivka Haim</span></p>
       </div>
     </div>
   </footer>`;
 }
 
-/* ══ HOME ══════════════════════════════════════════════════════════ */
+/* ══ HOME ══ */
 let _slideTimer = null;
 let _slideIdx   = 0;
 
 function buildHome() {
-  const cats = CATS.map(c =>
-    `<a href="#" data-cat="${c.slug}" class="label link-u">
+  const cats = CATS.filter(c => c.slug !== 'all').map(c =>
+    `<a href="#" data-cat="${c.slug}" class="link-u">
       <span data-he>${c.he}</span><span data-en>${c.en}</span>
     </a>`).join('');
 
-  // One slide per artwork
-  const slides = AW.map((w, i) =>
+  const slides = HERO_IMGS.map((h, i) =>
     `<div class="feat-slide${i===0?' active':''}" data-i="${i}">
-      ${iph(`[תמונה ${i+1}]`, `[IMAGE ${i+1}]`)}
+      <img src="${h.src}" alt="${h.tHe}" loading="${i===0?'eager':'lazy'}">
     </div>`
   ).join('');
 
-  const dots = AW.map((_,i) =>
+  const dots = HERO_IMGS.map((_,i) =>
     `<div class="feat-dot${i===0?' active':''}"></div>`
+  ).join('');
+
+  /* Category preview cards — one per non-all category */
+  const previewCats = [
+    { slug:'sale',       img:'images/gallery/lp-05.jpg', heTitle:'אומנות למכירה', enTitle:'Art for Sale' },
+    { slug:'commission', img:'images/gallery/pr-03.jpg', heTitle:'הזמנה אישית',   enTitle:'Commission' },
+    { slug:'students',   img:'images/gallery/h-03.jpg',  heTitle:'עבודות תלמידים', enTitle:'Student Works' },
+    { slug:'sculpture',  img:'images/gallery/h-01.jpg',  heTitle:'פיסול',          enTitle:'Sculpture' },
+  ];
+
+  const stripCards = previewCats.map((c, i) =>
+    `<div class="hs-card" data-cat="${c.slug}" role="button" tabindex="0">
+      <div class="hs-card-img"><img src="${c.img}" alt="" loading="lazy"></div>
+      <p class="hs-cat">${String(i+1).padStart(2,'0')}</p>
+      <p class="hs-name"><span data-he>${c.heTitle}</span><span data-en>${c.enTitle}</span></p>
+    </div>`
   ).join('');
 
   return `<main>
     <section class="home-hero">
       <p class="home-tag">
-        <span data-he>פיסול שמעביר את מה שמרגישים כשמחזיקים נייר בידיים — לא רק את מה שרואים.</span>
-        <span data-en>Sculpture that conveys what it feels like to hold paper in your hands — not only what you see.</span>
+        <span data-he>נייר שחי — יצירות מקוריות, הזמנות אישיות וסדנאות שמשאירים אתכם עם משהו בידיים.</span>
+        <span data-en>Paper that lives — original works, personal commissions and workshops that leave you with something in your hands.</span>
       </p>
       <nav class="home-cats label">${cats}</nav>
-      <div class="feat" id="feat-card" role="button" tabindex="0" data-slug="${AW[0].slug}">
+      <div class="feat" id="feat-card" role="button" tabindex="0" data-slug="${HERO_IMGS[0].slug}">
         ${slides}
         <div class="feat-grad"></div>
         <div class="feat-dots">${dots}</div>
         <div class="feat-info">
           <p class="label feat-cat" id="feat-cat">
-            <span data-he>${AW[0].cHe}</span><span data-en>${AW[0].cEn}</span>
-          </p>
-          <p class="feat-title" id="feat-title">
-            <span data-he>${AW[0].tHe}</span><span data-en>${AW[0].tEn}</span>
+            <span data-he>${T(HERO_IMGS[0].tHe, HERO_IMGS[0].tEn)}</span>
           </p>
         </div>
       </div>
     </section>
+    <div class="home-strip">${stripCards}</div>
   </main>${footer()}`;
 }
 
@@ -738,24 +936,21 @@ function advanceSlide() {
   const slides = document.querySelectorAll('.feat-slide');
   const dots   = document.querySelectorAll('.feat-dot');
   const catEl  = document.getElementById('feat-cat');
-  const ttlEl  = document.getElementById('feat-title');
   const card   = document.getElementById('feat-card');
   if (!slides.length) return;
 
   slides[_slideIdx].classList.remove('active');
   dots[_slideIdx].classList.remove('active');
-  _slideIdx = (_slideIdx + 1) % AW.length;
+  _slideIdx = (_slideIdx + 1) % HERO_IMGS.length;
   slides[_slideIdx].classList.add('active');
   dots[_slideIdx].classList.add('active');
 
-  const w = AW[_slideIdx];
-  if (catEl) catEl.innerHTML = `<span data-he>${w.cHe}</span><span data-en>${w.cEn}</span>`;
-  if (ttlEl) ttlEl.innerHTML = `<span data-he>${w.tHe}</span><span data-en>${w.tEn}</span>`;
-  if (card)  card.dataset.slug = w.slug;
-  applyLang(lang);
+  const h = HERO_IMGS[_slideIdx];
+  if (catEl) catEl.innerHTML = `<span>${lang==='he' ? h.tHe : h.tEn}</span>`;
+  if (card)  card.dataset.slug = h.slug;
 }
 
-/* ══ GALLERY ═══════════════════════════════════════════════════════ */
+/* ══ GALLERY ══ */
 function buildGallery(cat) {
   const active = cat || 'all';
   const list   = active==='all' ? AW : AW.filter(a => a.cSlug===active);
@@ -763,45 +958,56 @@ function buildGallery(cat) {
     `<a href="#" data-cat="${c.slug}" class="label link-u ${c.slug===active?'on':''}">
       <span data-he>${c.he}</span><span data-en>${c.en}</span>
     </a>`).join('');
+
   const cards = list.map(w =>
     `<div class="wcard" data-slug="${w.slug}" role="button" tabindex="0">
-      <div class="wcard-img">${iph('[תמונה]','[IMAGE]')}</div>
+      <div class="wcard-img">
+        ${w.img ? `<img src="${w.img}" alt="${w.tHe}" loading="lazy">` : iph('[תמונה]','[IMAGE]')}
+      </div>
       <div class="wcard-info">
-        <div class="wcard-left">
-          <p class="label wcard-cat"><span data-he>${w.cHe}</span><span data-en>${w.cEn}</span></p>
+        <div>
+          <p class="wcard-cat"><span data-he>${w.cHe}</span><span data-en>${w.cEn}</span></p>
           <p class="wcard-title"><span data-he>${w.tHe}</span><span data-en>${w.tEn}</span></p>
         </div>
-        <p class="label wcard-year muted">${w.yr}</p>
+        ${w.yr ? `<p class="label wcard-year muted">${w.yr}</p>` : ''}
       </div>
     </div>`).join('');
+
   return `<div class="gal-page">
     <div class="gal-hdr">
       <h1 class="gal-h1"><span data-he>גלריה</span><span data-en>Gallery</span></h1>
       <nav class="gal-filter label">${fil}</nav>
     </div>
-    <div class="works-grid">${cards||`<p class="muted label" style="grid-column:1/-1;padding:3rem">
+    <div class="works-grid">${cards || `<p class="muted label" style="grid-column:1/-1;padding:3rem">
       <span data-he>אין יצירות בקטגוריה זו.</span><span data-en>No works in this category.</span></p>`}
     </div>
   </div>${footer()}`;
 }
 
-/* ══ WORK DETAIL ═══════════════════════════════════════════════════ */
+/* ══ WORK DETAIL ══ */
 function buildWork(w) {
   const idx  = AW.indexOf(w);
   const next = AW[(idx+1) % AW.length];
-  const meta = [
-    { kh:'חומר',   ke:'Medium',     vh:w.mHe,   ve:w.mEn   },
-    { kh:'מידות',  ke:'Dimensions', vh:w.dims,  ve:w.dims  },
-    { kh:'שנה',    ke:'Year',       vh:w.yr,    ve:w.yr    },
-    { kh:'מחיר',   ke:'Price',      vh:w.price, ve:w.price },
-  ].map(m => `<div>
+
+  const metaRows = [
+    w.mHe   ? { kh:'חומר',   ke:'Medium',     vh:w.mHe,   ve:w.mEn   } : null,
+    w.dims  ? { kh:'מידות',  ke:'Dimensions', vh:w.dims,  ve:w.dims  } : null,
+    w.yr    ? { kh:'שנה',    ke:'Year',       vh:w.yr,    ve:w.yr    } : null,
+    w.price ? { kh:'מחיר',   ke:'Price',      vh:w.price, ve:w.price } : null,
+  ].filter(Boolean);
+
+  const meta = metaRows.map(m => `<div>
     <p class="label wd-mk"><span data-he>${m.kh}</span><span data-en>${m.ke}</span></p>
     <p class="wd-mv"><span data-he>${m.vh}</span><span data-en>${m.ve}</span></p>
   </div>`).join('');
 
+  const isStudentWork = w.cSlug === 'students';
+
   return `<article>
     <div class="wd-hero">
-      <div class="wd-hero-img">${iph('[תמונת כיסוי]','[COVER IMAGE]')}</div>
+      <div class="wd-hero-img">
+        ${w.img ? `<img src="${w.img}" alt="${w.tHe}">` : iph('[תמונת כיסוי]','[COVER IMAGE]')}
+      </div>
       <div class="wd-grad"></div>
       <div class="wd-btm">
         <p class="label wd-bread"><span data-he>${w.cHe}</span><span data-en>${w.cEn}</span></p>
@@ -810,28 +1016,22 @@ function buildWork(w) {
     </div>
     <div class="wd-body">
       <a href="#/gallery" class="wd-back label link-u">${arrL()}<span data-he>חזרה לגלריה</span><span data-en>Back to gallery</span></a>
-      <div class="wd-meta">${meta}</div>
+      ${metaRows.length ? `<div class="wd-meta">${meta}</div>` : ''}
       <div class="wd-grid">
         <div class="wd-c4"></div>
         <div class="wd-c8">
           <p class="wd-desc"><span data-he>${w.dHe}</span><span data-en>${w.dEn}</span></p>
-          <a href="#/contact" class="btn-inq label">
-            <span data-he>פנייה לרכישה</span><span data-en>Inquire to purchase</span>${arrR()}
-          </a>
+          ${!isStudentWork ? `<a href="#/contact" class="btn-inq label">
+            <span data-he>${w.cSlug==='sale' ? 'פנייה לרכישה' : 'בואו ניצור משהו'}</span>
+            <span data-en>${w.cSlug==='sale' ? 'Inquire to purchase' : 'Let\'s create something'}</span>${arrR()}
+          </a>` : ''}
         </div>
       </div>
     </div>
-    <div class="wd-gal-wrap">
-      <div class="wd-gal">
-        <div class="wd-gi wide">${iph('[פירוט 1]','[DETAIL 1]')}</div>
-        <div class="wd-gi">${iph('[פירוט 2]','[DETAIL 2]')}</div>
-        <div class="wd-gi">${iph('[פירוט 3]','[DETAIL 3]')}</div>
-        <div class="wd-gi">${iph('[פירוט 4]','[DETAIL 4]')}</div>
-        <div class="wd-gi">${iph('[פירוט 5]','[DETAIL 5]')}</div>
-      </div>
-    </div>
     <div class="wd-next" data-slug="${next.slug}" role="button" tabindex="0">
-      <div class="wd-next-img">${iph('[יצירה הבאה]','[NEXT ARTWORK]')}</div>
+      <div class="wd-next-img">
+        ${next.img ? `<img src="${next.img}" alt="${next.tHe}" loading="lazy">` : iph('[יצירה הבאה]','[NEXT ARTWORK]')}
+      </div>
       <div class="wd-next-grad"></div>
       <div class="wd-next-cnt">
         <p class="label wd-next-lbl"><span data-he>היצירה הבאה</span><span data-en>Next work</span></p>
@@ -842,67 +1042,128 @@ function buildWork(w) {
   </article>${footer()}`;
 }
 
-/* ══ ABOUT ═════════════════════════════════════════════════════════ */
+/* ══ ABOUT ══ */
 function buildAbout() {
-  const catLinks = CATS.filter(c=>c.slug!=='all').map(c =>
-    `<a href="#" data-cat="${c.slug}" class="link-u serif" style="font-size:1.125rem;font-weight:300">
-      <span data-he>${c.he}</span><span data-en>${c.en}</span>
-    </a>`).join('');
+  const services = [
+    { he:'אומנות למכירה — יצירות מקוריות זמינות', en:'Art for Sale — original works available now' },
+    { he:'הזמנה אישית — עבודה שנוצרת בשבילכם', en:'Personal Commission — a work created for you' },
+    { he:'עבודות תלמידים — מה שנוצר בסדנאות', en:'Student Works — from the studio workshops' },
+    { he:'פיסול — טכניקה שבונה צורה מנייר', en:'Sculpture — technique that builds form from paper' },
+  ];
+
+  const listItems = services.map((s, i) =>
+    `<div class="ab-list-item">
+      <span class="ab-list-num">${String(i+1).padStart(2,'0')}</span>
+      <span class="ab-list-txt"><span data-he>${s.he}</span><span data-en>${s.en}</span></span>
+    </div>`
+  ).join('');
+
   return `<div class="ab-page">
+    <div class="ab-hero">
+      <img src="images/gallery/lp-05.jpg" alt="">
+      <div class="ab-hero-grad"></div>
+      <div class="ab-hero-txt">
+        <h1 class="ab-hero-h">
+          <span data-he>אני עובדת עם נייר<br>כי הוא חי בידיים.</span>
+          <span data-en>I work with paper<br>because it lives in your hands.</span>
+        </h1>
+      </div>
+    </div>
     <div class="ab-wrap">
       <div class="ab-grid">
         <div class="ab-c5">
-          <div class="ab-port">${iph('[תמונת האמנית]','[ARTIST PHOTO]')}</div>
+          <div class="ab-img-stack">
+            <div class="ab-img-main">
+              <img src="images/gallery/h-01.jpg" alt="" loading="lazy">
+            </div>
+            <div class="ab-img-accent">
+              <img src="images/gallery/pr-01.jpg" alt="" loading="lazy">
+            </div>
+          </div>
         </div>
         <div class="ab-c7">
-          <p class="label ab-eye"><span data-he>אודות</span><span data-en>About</span></p>
-          <h1 class="ab-h1">
-            <span data-he>אני עובדת עם נייר כי הוא מחזיק כל מה שמניחים עליו.</span>
-            <span data-en>I work with paper because it holds everything placed on it.</span>
-          </h1>
+          <p class="ab-eye label"><span data-he>אודות</span><span data-en>About</span></p>
+          <h2 class="ab-h1">
+            <span data-he>רבקה חיים — אמנית נייר נוזלי ופיסול</span>
+            <span data-en>Rivka Haim — Liquid Paper Artist &amp; Sculptor</span>
+          </h2>
           <div class="ab-body">
-            <p><span data-he>[פסקה ראשונה — מי היא רבקה, מה הוביל אותה לפיסול נייר ופאפייה-מאשה, הסגנון הייחודי שלה. כ-70 מילה.]</span>
-               <span data-en>[First paragraph — who Rivka is, what led her to paper sculpture and papier-mâché, her distinctive aesthetic. Approx. 70 words.]</span></p>
-            <p><span data-he>[פסקה שנייה — הסטודיו, תהליך העבודה, מה שמניע אותה. כ-55 מילה.]</span>
-               <span data-en>[Second paragraph — the studio, working process, what drives her. Approx. 55 words.]</span></p>
-            <p><span data-he>[פסקה שלישית — זמינות, שיתופי פעולה, מיקום.]</span>
-               <span data-en>[Third paragraph — availability, collaborations, location.]</span></p>
+            <p>
+              <span data-he>אני עובדת עם נייר נוזלי כבר שנים — טכניקה שמאפשרת לחומר לנוע בדיוק כפי שהוא רוצה, ורק אחר כך אני נכנסת לתוכו. כל יצירה מתחילה בלחות ובמרחב פתוח, ומגיעה לאיזשהו מקום שהוא לא לגמרי שלי ולא לגמרי של הנייר — שניהם ביחד.</span>
+              <span data-en>I've worked with liquid paper for years — a technique that lets the material move the way it wants to, and only then I step in. Every piece starts with moisture and open space, and arrives somewhere that's not entirely mine and not entirely the paper's — both together.</span>
+            </p>
+            <p>
+              <span data-he>בסטודיו שלי אני יוצרת יצירות מקוריות, עובדת בהזמנות אישיות, ומלמדת. הסדנאות הן חלק מהלב של הדבר — לראות מה קורה כשאנשים שלא "עשו אמנות" מתחילים לעבוד עם חומר שלא מעמיד פנים.</span>
+              <span data-en>In my studio I create original works, take personal commissions, and teach. The workshops are part of the heart of it — seeing what happens when people who haven't "done art" start working with a material that doesn't pretend.</span>
+            </p>
+            <p>
+              <span data-he>אם יש לכם יצירה בראש — בין אם לבית, למתנה או לאירוע מיוחד — אני רוצה לשמוע עליה.</span>
+              <span data-en>If you have a piece in mind — for home, as a gift, or for a special occasion — I want to hear about it.</span>
+            </p>
           </div>
-          <div class="ab-cats label">${catLinks}
-            <a href="#/workshops" class="link-u serif" style="font-size:1.125rem;font-weight:300">
-              <span data-he>סדנאות</span><span data-en>Workshops</span>
+          <div class="ab-divider"></div>
+          <div class="ab-list">${listItems}</div>
+          <div class="ab-cta-wrap">
+            <a href="#/contact" class="btn-cta">
+              <span data-he>בואו ניצור משהו</span><span data-en>Let's create something</span>${arrR()}
+            </a>
+            <a href="#/gallery" class="btn-cta-out">
+              <span data-he>לגלריה</span><span data-en>View gallery</span>
             </a>
           </div>
-          <a href="#/contact" class="ab-cta">
-            <span data-he>בואו ניצור משהו</span><span data-en>Let's create something</span>${arrR()}
-          </a>
         </div>
       </div>
     </div>
   </div>${footer()}`;
 }
 
-/* ══ WORKSHOPS ═════════════════════════════════════════════════════ */
+/* ══ WORKSHOPS ══ */
 function buildWorkshops() {
   const WS = [
-    { idx:'01', typeHe:'סדנה פרטית', typeEn:'Private session',
-      nHe:'מפגש אחד על אחד', nEn:'One-on-One',
-      dHe:'סדנה מותאמת אישית לרמתך ולמטרותיך. נעסוק בטכניקת הפאפייה-מאשה, גמר, צבע ושמירה.',
-      dEn:'A fully tailored session matched to your level and goals — papier-mâché technique, finishing, colour, and preservation.',
-      specs:[{kh:'משך',ke:'Duration',vh:'[X] שעות',ve:'[X] hours'},{kh:'מיקום',ke:'Location',vh:'סטודיו, [עיר]',ve:'Studio, [CITY]'},{kh:'זמינות',ke:'Availability',vh:'[ימים]',ve:'[DAYS]'}],
-      pH:'₪[מחיר]', pE:'₪[PRICE]', pnH:'למפגש · כולל חומרים', pnE:'per session · incl. materials' },
-    { idx:'02', typeHe:'קבוצה קטנה', typeEn:'Small group',
-      nHe:'סדנת ערב קבוצתית', nEn:'Evening Group Workshop',
-      dHe:'חוויה קבוצתית חמה — שיחה, יצירה וגילוי. מתאים לאירועים, ימי הולדת, וערבי יצירה.',
-      dEn:'A warm group experience — conversation, creating and discovery. Perfect for events, birthdays, and creative evenings.',
-      specs:[{kh:'משך',ke:'Duration',vh:'[X] שעות',ve:'[X] hours'},{kh:'משתתפים',ke:'Group size',vh:'עד [X]',ve:'Up to [X]'},{kh:'מועד הבא',ke:'Next date',vh:'[תאריך]',ve:'[DATE]'}],
-      pH:'₪[מחיר]', pE:'₪[PRICE]', pnH:'לאדם · כולל חומרים', pnE:'per person · incl. materials' },
-    { idx:'03', typeHe:'קורס מתמשך', typeEn:'Ongoing course',
-      nHe:'יסודות פיסול הנייר', nEn:'Foundations of Paper Sculpture',
-      dHe:'קורס מלא שעובר דרך כל שלבי הפאפייה-מאשה — מבנה, שכבות, גמר וצביעה. לכל רמות הניסיון.',
-      dEn:'A complete course covering all stages of papier-mâché — structure, layering, finishing, and painting. All levels welcome.',
-      specs:[{kh:'מפגשים',ke:'Sessions',vh:'[X] × [X] שעות',ve:'[X] × [X] hrs'},{kh:'רמה',ke:'Level',vh:'כל הרמות',ve:'All levels'},{kh:'מחזור הבא',ke:'Next cohort',vh:'[תאריך]',ve:'[DATE]'}],
-      pH:'₪[מחיר]', pE:'₪[PRICE]', pnH:'לקורס מלא · כולל חומרים', pnE:'full course · incl. materials' },
+    { idx:'01',
+      typeHe:'פגישה פרטית', typeEn:'Private session',
+      nHe:'מפגש אחד על אחד', nEn:'One on One',
+      dHe:'מפגש פרטי בסטודיו — מותאם אישית לרמה שלכם, לחומרים שמעניינים אתכם ולמה שאתם רוצים לצאת איתו. לא קורס, לא קבוצה — רק אתם, אני, ונייר.',
+      dEn:'A private studio session — tailored to your level, the materials you are drawn to, and what you want to leave with. Not a course, not a group — just you, me, and paper.',
+      specs:[
+        {kh:'משך',ke:'Duration',vh:'2–3 שעות',ve:'2–3 hours'},
+        {kh:'מיקום',ke:'Location',vh:'סטודיו',ve:'Studio'},
+        {kh:'חומרים',ke:'Materials',vh:'כלולים',ve:'Included'}
+      ],
+      pH:'לתיאום', pE:'By inquiry', pnH:'', pnE:'' },
+    { idx:'02',
+      typeHe:'ערב קבוצתי', typeEn:'Group evening',
+      nHe:'סדנת ערב קבוצתית', nEn:'Group Evening Workshop',
+      dHe:'ערב של יצירה קבוצתית — שיחה, מוזיקה ונייר. מתאים לקבוצות של חברות, ימי הולדת, ואירועים קטנים. כל אחד יוצא עם יצירה משלו.',
+      dEn:'A group creative evening — conversation, music and paper. Perfect for groups of friends, birthdays, and small events. Everyone leaves with their own piece.',
+      specs:[
+        {kh:'משך',ke:'Duration',vh:'2.5 שעות',ve:'2.5 hours'},
+        {kh:'משתתפים',ke:'Participants',vh:'עד 10',ve:'Up to 10'},
+        {kh:'חומרים',ke:'Materials',vh:'כלולים',ve:'Included'}
+      ],
+      pH:'לתיאום', pE:'By inquiry', pnH:'לאדם', pnE:'per person' },
+    { idx:'03',
+      typeHe:'אירוע מיוחד', typeEn:'Special event',
+      nHe:'נייר ויין', nEn:'Paper & Wine',
+      dHe:'פגישה חד פעמית ליצירה בקבוצה קטנה — נייר, יין ושיחה. הפורמט הזה נוצר במיוחד לאירועים מיוחדים: מסיבות, ימי הולדת, רווקות ואסיפות. קסם קטן שיוצאים ממנו עם משהו בידיים.',
+      dEn:'A one-time creative session for a small group — paper, wine and conversation. Designed especially for special events: parties, birthdays, bachelorettes and gatherings. A little magic you leave with something in your hands.',
+      specs:[
+        {kh:'משך',ke:'Duration',vh:'2 שעות',ve:'2 hours'},
+        {kh:'קבוצה',ke:'Group',vh:'עד 8',ve:'Up to 8'},
+        {kh:'כולל',ke:'Includes',vh:'חומרים + יין',ve:'Materials + wine'}
+      ],
+      pH:'לתיאום', pE:'By inquiry', pnH:'לאדם', pnE:'per person' },
+    { idx:'04',
+      typeHe:'קבוצה מתמשכת', typeEn:'Ongoing group',
+      nHe:'קבוצת פיסול', nEn:'Sculpture Group',
+      dHe:'קבוצה שמתמקדת בפיסול נייר — בניית צורות, שכבות ומבנים. מתאים למי שרוצה להעמיק בממד ה-3D של החומר. הקבוצה נפגשת אחת לשבוע ומתקדמת בקצב של הקבוצה.',
+      dEn:'A group focused on paper sculpture — building shapes, layers and structures. For those who want to explore the 3D dimension of the material. The group meets weekly and progresses at its own pace.',
+      specs:[
+        {kh:'תדירות',ke:'Frequency',vh:'שבועי',ve:'Weekly'},
+        {kh:'רמה',ke:'Level',vh:'מנוסים',ve:'Experienced'},
+        {kh:'גודל קבוצה',ke:'Group',vh:'עד 6',ve:'Up to 6'}
+      ],
+      pH:'לתיאום', pE:'By inquiry', pnH:'לחודש', pnE:'per month' },
   ];
 
   const rows = WS.map(w => {
@@ -912,7 +1173,7 @@ function buildWorkshops() {
     ).join('');
     return `<div class="ws-row">
       <div class="wsr-l">
-        <p class="label wsr-type muted">${w.idx} — <span data-he>${w.typeHe}</span><span data-en>${w.typeEn}</span></p>
+        <p class="label wsr-type">${w.idx} — <span data-he>${w.typeHe}</span><span data-en>${w.typeEn}</span></p>
         <h2 class="wsr-name"><span data-he>${w.nHe}</span><span data-en>${w.nEn}</span></h2>
         <p class="wsr-desc"><span data-he>${w.dHe}</span><span data-en>${w.dEn}</span></p>
         <div class="wsr-specs label">${specs}</div>
@@ -920,9 +1181,9 @@ function buildWorkshops() {
       <div class="wsr-r">
         <div>
           <p class="wsr-price"><span data-he>${w.pH}</span><span data-en>${w.pE}</span></p>
-          <p class="label wsr-pnote muted"><span data-he>${w.pnH}</span><span data-en>${w.pnE}</span></p>
+          ${w.pnH ? `<p class="label wsr-pnote muted"><span data-he>${w.pnH}</span><span data-en>${w.pnE}</span></p>` : ''}
         </div>
-        <a href="#/contact" class="btn-ws label"><span data-he>שריינו מקום</span><span data-en>Reserve</span></a>
+        <a href="#/contact" class="btn-ws label"><span data-he>שריינו מקום</span><span data-en>Reserve a spot</span></a>
       </div>
     </div>`;
   }).join('');
@@ -934,21 +1195,30 @@ function buildWorkshops() {
         <span data-he>ללמוד עם הידיים</span><span data-en>Learning through the hands</span>
       </h1>
       <p class="ws-intro">
-        <span data-he>סדנאות אינטימיות בסטודיו לכל רמות הניסיון. כל מפגש כולל חומרים ויצירה שלוקחים הביתה.</span>
-        <span data-en>Intimate studio sessions for all experience levels. Every session includes materials and a piece to take home.</span>
+        <span data-he>סדנאות אינטימיות לכל רמות הניסיון. כל מפגש כולל חומרים ויצירה שלוקחים הביתה.</span>
+        <span data-en>Intimate sessions for all experience levels. Every session includes materials and a piece to take home.</span>
       </p>
       <div class="ws-list">${rows}</div>
+      <div style="margin-top:4rem;padding-top:3rem;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem">
+        <p style="font-family:var(--fsr);font-size:1.5rem;font-weight:300;max-width:28rem;line-height:1.35">
+          <span data-he>יש לכם רעיון לסדנה מותאמת? בואו ניצור משהו ביחד.</span>
+          <span data-en>Have an idea for a custom workshop? Let's create something together.</span>
+        </p>
+        <a href="#/contact" class="btn-cta">
+          <span data-he>דברו איתי</span><span data-en>Get in touch</span>${arrR()}
+        </a>
+      </div>
     </div>
   </div>${footer()}`;
 }
 
-/* ══ CONTACT ═══════════════════════════════════════════════════════ */
+/* ══ CONTACT ══ */
 function buildContact() {
   return `<div class="ct-page">
     <div class="ct-wrap">
       <div class="ct-grid">
         <div class="ct-l">
-          <h1 class="ct-h1"><span data-he>יצירת קשר</span><span data-en>Contact</span></h1>
+          <h1 class="ct-h1"><span data-he>בואו ניצור משהו</span><span data-en>Let's create something</span></h1>
           <div class="ct-chs label">
             <a href="https://wa.me/972523245039" target="_blank" rel="noopener" class="ct-ch">
               <span class="ct-ch-k"><span data-he>וואטסאפ</span><span data-en>WhatsApp</span></span>
@@ -985,11 +1255,12 @@ function buildContact() {
               <label class="label" for="cf-s"><span data-he>נושא</span><span data-en>Subject</span></label>
               <select id="cf-s" name="subject" required>
                 <option value="" disabled selected>—</option>
-                <option value="artwork"><span data-he>שאלה על יצירה</span><span data-en>Artwork inquiry</span></option>
-                <option value="private"><span data-he>סדנה פרטית</span><span data-en>Private workshop</span></option>
-                <option value="group"><span data-he>סדנה קבוצתית</span><span data-en>Group workshop</span></option>
-                <option value="course"><span data-he>קורס</span><span data-en>Course</span></option>
-                <option value="commission"><span data-he>הזמנה מיוחדת</span><span data-en>Commission</span></option>
+                <option value="sale"><span data-he>רכישת יצירה</span><span data-en>Purchase artwork</span></option>
+                <option value="commission"><span data-he>הזמנה אישית</span><span data-en>Personal commission</span></option>
+                <option value="private"><span data-he>מפגש אחד על אחד</span><span data-en>One-on-one session</span></option>
+                <option value="group"><span data-he>סדנת ערב קבוצתית</span><span data-en>Group evening workshop</span></option>
+                <option value="wine"><span data-he>נייר ויין</span><span data-en>Paper &amp; Wine</span></option>
+<option value="sculpture"><span data-he>קבוצת פיסול</span><span data-en>Sculpture group</span></option>
                 <option value="other"><span data-he>אחר</span><span data-en>Other</span></option>
               </select>
             </div>
@@ -1007,7 +1278,7 @@ function buildContact() {
   </div>${footer()}`;
 }
 
-/* ══ BOOT ══════════════════════════════════════════════════════════ */
+/* ══ BOOT ══ */
 applyLang(lang);
 route();
 </script>
