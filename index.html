@@ -824,7 +824,19 @@ function bindEvents() {
     el.addEventListener('click', e => { e.preventDefault(); navigate('#/gallery/' + el.dataset.cat); });
   });
   const f = app.querySelector('form[data-cf]');
-  if (f) f.addEventListener('submit', e => { e.preventDefault(); alert(T('תודה! ניצור איתך קשר בקרוב.','Thank you! We\'ll be in touch soon.')); });
+  if (f) f.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = f.querySelector('[name=name]').value.trim();
+    const subject = f.querySelector('[name=subject]').value;
+    const msg = f.querySelector('[name=message]').value.trim();
+    const subjectMap = {
+      sale:'רכישת יצירה', commission:'הזמנה אישית', private:'מפגש אחד על אחד',
+      group:'סדנת ערב קבוצתית', wine:'נייר ויין', sculpture:'קבוצת פיסול', other:'אחר'
+    };
+    const subLabel = subjectMap[subject] || subject;
+    const text = `שלום רבקה!\nשמי ${name}.\nנושא: ${subLabel}\n\n${msg}`;
+    window.open('https://wa.me/972523245039?text=' + encodeURIComponent(text), '_blank');
+  });
 
   if (document.getElementById('feat-card')) startSlideshow();
 }
@@ -842,13 +854,14 @@ function iph(he, en) {
 }
 function arrR() { return `<svg width="20" height="8" viewBox="0 0 20 8" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M1 4h18M14 1l4 3-4 3"/></svg>`; }
 function arrL() { return `<svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M13 4H1M5 1L1 4l4 3"/></svg>`; }
+function wa(msg) { return 'https://wa.me/972523245039?text=' + encodeURIComponent(msg); }
 
 function footer() {
   const yr = new Date().getFullYear();
   return `<footer>
     <div class="ftr-in">
       <div>
-        <a href="#/contact" class="ftr-cta">
+        <a href="${wa('שלום רבקה! אני מעוניין/ת ליצור קשר ולשמוע עוד על היצירות והסדנאות שלך 🙏')}" target="_blank" rel="noopener" class="ftr-cta">
           <span data-he>בואו ניצור משהו</span><span data-en>Let's create something</span>${arrR()}
         </a>
         <p class="ftr-tag">
@@ -1021,7 +1034,9 @@ function buildWork(w) {
         <div class="wd-c4"></div>
         <div class="wd-c8">
           <p class="wd-desc"><span data-he>${w.dHe}</span><span data-en>${w.dEn}</span></p>
-          ${!isStudentWork ? `<a href="#/contact" class="btn-inq label">
+          ${!isStudentWork ? `<a href="${wa(w.cSlug==='sale'
+            ? 'שלום רבקה! ראיתי את היצירה "' + w.tHe + '" ואני מעוניין/ת לרכוש אותה. אשמח לשמוע פרטים 🙏'
+            : 'שלום רבקה! אני מעוניין/ת בהזמנת יצירה אישית. אשמח לשמוע עוד על האפשרויות 🙏')}" target="_blank" rel="noopener" class="btn-inq label">
             <span data-he>${w.cSlug==='sale' ? 'פנייה לרכישה' : 'בואו ניצור משהו'}</span>
             <span data-en>${w.cSlug==='sale' ? 'Inquire to purchase' : 'Let\'s create something'}</span>${arrR()}
           </a>` : ''}
@@ -1104,7 +1119,7 @@ function buildAbout() {
           <div class="ab-divider"></div>
           <div class="ab-list">${listItems}</div>
           <div class="ab-cta-wrap">
-            <a href="#/contact" class="btn-cta">
+            <a href="${wa('שלום רבקה! קראתי קצת עלייך ואני מעוניין/ת ליצור קשר. אשמח לשמוע עוד על היצירות שלך 🙏')}" target="_blank" rel="noopener" class="btn-cta">
               <span data-he>בואו ניצור משהו</span><span data-en>Let's create something</span>${arrR()}
             </a>
             <a href="#/gallery" class="btn-cta-out">
@@ -1130,7 +1145,8 @@ function buildWorkshops() {
         {kh:'מיקום',ke:'Location',vh:'סטודיו',ve:'Studio'},
         {kh:'חומרים',ke:'Materials',vh:'כלולים',ve:'Included'}
       ],
-      pH:'לתיאום', pE:'By inquiry', pnH:'', pnE:'' },
+      pH:'לתיאום', pE:'By inquiry', pnH:'', pnE:'',
+      waMsg:'שלום רבקה! אני מעוניין/ת במפגש פרטי אחד על אחד בסטודיו. אשמח לשמוע על המועדים הפנויים 🙏' },
     { idx:'02',
       typeHe:'ערב קבוצתי', typeEn:'Group evening',
       nHe:'סדנת ערב קבוצתית', nEn:'Group Evening Workshop',
@@ -1141,7 +1157,8 @@ function buildWorkshops() {
         {kh:'משתתפים',ke:'Participants',vh:'עד 10',ve:'Up to 10'},
         {kh:'חומרים',ke:'Materials',vh:'כלולים',ve:'Included'}
       ],
-      pH:'לתיאום', pE:'By inquiry', pnH:'לאדם', pnE:'per person' },
+      pH:'לתיאום', pE:'By inquiry', pnH:'לאדם', pnE:'per person',
+      waMsg:'שלום רבקה! אני מעוניין/ת בסדנת ערב קבוצתית. אשמח לשמוע על המועדים הקרובים 🙏' },
     { idx:'03',
       typeHe:'אירוע מיוחד', typeEn:'Special event',
       nHe:'נייר ויין', nEn:'Paper & Wine',
@@ -1152,7 +1169,8 @@ function buildWorkshops() {
         {kh:'קבוצה',ke:'Group',vh:'עד 8',ve:'Up to 8'},
         {kh:'כולל',ke:'Includes',vh:'חומרים + יין',ve:'Materials + wine'}
       ],
-      pH:'לתיאום', pE:'By inquiry', pnH:'לאדם', pnE:'per person' },
+      pH:'לתיאום', pE:'By inquiry', pnH:'לאדם', pnE:'per person',
+      waMsg:'שלום רבקה! אני מעוניין/ת בסדנת נייר ויין 🍷 אשמח לשמוע על המועדים הקרובים ולשריין מקום!' },
     { idx:'04',
       typeHe:'קבוצה מתמשכת', typeEn:'Ongoing group',
       nHe:'קבוצת פיסול', nEn:'Sculpture Group',
@@ -1163,7 +1181,8 @@ function buildWorkshops() {
         {kh:'רמה',ke:'Level',vh:'מנוסים',ve:'Experienced'},
         {kh:'גודל קבוצה',ke:'Group',vh:'עד 6',ve:'Up to 6'}
       ],
-      pH:'לתיאום', pE:'By inquiry', pnH:'לחודש', pnE:'per month' },
+      pH:'לתיאום', pE:'By inquiry', pnH:'לחודש', pnE:'per month',
+      waMsg:'שלום רבקה! אני מעוניין/ת להצטרף לקבוצת הפיסול. אשמח לשמוע פרטים ומועדים 🙏' },
   ];
 
   const rows = WS.map(w => {
@@ -1183,7 +1202,7 @@ function buildWorkshops() {
           <p class="wsr-price"><span data-he>${w.pH}</span><span data-en>${w.pE}</span></p>
           ${w.pnH ? `<p class="label wsr-pnote muted"><span data-he>${w.pnH}</span><span data-en>${w.pnE}</span></p>` : ''}
         </div>
-        <a href="#/contact" class="btn-ws label"><span data-he>שריינו מקום</span><span data-en>Reserve a spot</span></a>
+        <a href="${wa(w.waMsg)}" target="_blank" rel="noopener" class="btn-ws label"><span data-he>שריינו מקום</span><span data-en>Reserve a spot</span></a>
       </div>
     </div>`;
   }).join('');
@@ -1204,7 +1223,7 @@ function buildWorkshops() {
           <span data-he>יש לכם רעיון לסדנה מותאמת? בואו ניצור משהו ביחד.</span>
           <span data-en>Have an idea for a custom workshop? Let's create something together.</span>
         </p>
-        <a href="#/contact" class="btn-cta">
+        <a href="${wa('שלום רבקה! יש לי רעיון לסדנה מותאמת ואשמח לדבר איתך על זה 🙏')}" target="_blank" rel="noopener" class="btn-cta">
           <span data-he>דברו איתי</span><span data-en>Get in touch</span>${arrR()}
         </a>
       </div>
