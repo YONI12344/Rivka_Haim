@@ -338,7 +338,21 @@ ul,ol { list-style:none; }
 /* ══ WORK DETAIL ══ */
 .wd-hero { position:relative; width:100%; height:100svh; overflow:hidden; background:var(--bg-2); }
 .wd-hero img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; animation:kb 9s var(--ease) forwards; }
-.wd-grad { position:absolute; inset:0; background:var(--veil); }
+.wd-grad { position:absolute; inset:0; background:var(--veil); pointer-events:none; }
+.wd-hero-scroll {
+  position:absolute; inset:0; display:flex; overflow-x:auto; height:100%;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+}
+.wd-hero-scroll::-webkit-scrollbar { display:none; }
+.wd-hero-scroll > div { flex:0 0 100%; height:100%; scroll-snap-align:start; }
+.wd-hero-scroll img { width:100%; height:100%; object-fit:cover; }
+.wd-hero-hint {
+  position:absolute; top:6.5rem; inset-inline-end:1.5rem; z-index:3;
+  color:var(--ivory); font-size:9.5px; letter-spacing:.24em; text-transform:uppercase;
+  background:rgba(11,10,8,.45); padding:.55rem 1.1rem; backdrop-filter:blur(3px);
+  pointer-events:none;
+}
+@media(min-width:768px){ .wd-hero-hint{ inset-inline-end:4rem; top:8rem; } }
 .wd-btm {
   position:absolute; inset-inline:0; bottom:0; z-index:2;
   max-width:var(--max); margin-inline:auto;
@@ -750,6 +764,7 @@ const AW = [
   /* ── פיסול ואובייקטים למכירה ── */
   { slug:'sc-ballerina',
     img:'images/gallery/h-01.jpg',
+    imgs:['images/gallery/h-01.jpg','images/gallery/sc-ballerina-2.jpg'],
     tHe:'רקדנית', tEn:'Ballerina',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
@@ -758,6 +773,7 @@ const AW = [
     dEn:'A paper dress on an iron stand, a dancer born of layered recycled paper. Original signed work.' },
   { slug:'sc-dog',
     img:'images/gallery/sc-dog.jpg',
+    imgs:['images/gallery/sc-dog.jpg','images/gallery/sc-dog-2.jpg'],
     tHe:'כלבלב', tEn:'Puppy',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
@@ -766,6 +782,7 @@ const AW = [
     dEn:'A hand-built paper puppy, every detail, from the eyes to the paws, sculpted in layers of paper.' },
   { slug:'sc-fox',
     img:'images/gallery/sc-fox.jpg',
+    imgs:['images/gallery/sc-fox.jpg','images/gallery/sc-fox-2.jpg'],
     tHe:'שועלה', tEn:'Fox Lady',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
@@ -774,6 +791,7 @@ const AW = [
     dEn:'A fox figure in a green dress, hand-built paper sculpture, somewhere between fable and reality.' },
   { slug:'sc-pinocchio',
     img:'images/gallery/sc-pinocchio.jpg',
+    imgs:['images/gallery/sc-pinocchio.jpg','images/gallery/sc-pinocchio-2.jpg'],
     tHe:'פינוקיו', tEn:'Pinocchio',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
@@ -781,7 +799,7 @@ const AW = [
     dHe:'פינוקיו יושב על ערימת ספרים, פיסול נייר בעבודת יד, מפרקים נעים.',
     dEn:'Pinocchio seated on a stack of books, hand-built paper sculpture with moving joints.' },
   { slug:'sc-bird',
-    img:'images/gallery/sc-bird.jpg',
+    img:'images/gallery/sc-bird.jpg', pos:'top',
     tHe:'ציפור', tEn:'Bird',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
@@ -790,6 +808,7 @@ const AW = [
     dEn:'A hanging paper bird, handmade, for the home or a covered garden.' },
   { slug:'sc-vessels',
     img:'images/gallery/h-10.jpg',
+    imgs:['images/gallery/h-10.jpg','images/gallery/sc-vessels-2.jpg'],
     tHe:'כלים מנייר', tEn:'Paper Vessels',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
@@ -798,6 +817,7 @@ const AW = [
     dEn:'Vessels sculpted from paper, ancient forms in a new material.' },
   { slug:'sc-vessel-flowers',
     img:'images/gallery/sc-vessel.jpg',
+    imgs:['images/gallery/sc-vessel.jpg','images/gallery/sc-vessel-2.jpg'],
     tHe:'כלי ופרחים', tEn:'Vessel with Flowers',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
@@ -832,12 +852,12 @@ const AW = [
     dEn:'A hand-stitched shoulder bag, paper only. Strong, light, and surprisingly durable.' },
   { slug:'obj-adidas',
     img:'images/gallery/obj-adidas.jpg',
-    tHe:'תיק משקית אדידס', tEn:'Adidas Paper-Bag Tote',
+    tHe:'תיק זהב', tEn:'Gold Bag',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'נייר ממוחזר', mEn:'Upcycled paper',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
-    dHe:'שקית נייר של אדידס שהפכה לתיק של ממש, מיחזור בעבודת יד.',
-    dEn:'An Adidas paper bag reborn as a real tote, upcycling by hand.' },
+    dHe:'שקית נייר שהפכה לתיק של ממש, מיחזור בעבודת יד.',
+    dEn:'A paper bag reborn as a real tote, upcycling by hand.' },
   { slug:'obj-tote',
     img:'images/gallery/obj-tote.jpg',
     tHe:'תיק נייר וצמר', tEn:'Paper & Wool Bag',
@@ -1058,20 +1078,12 @@ function buildHome() {
       <div class="hero-veil"></div>
       <div class="hero-vig"></div>
       <div class="hero-cnt">
+        <p class="hero-eye hero-eye-lg"><span data-he>רבקה חיים, אמנית. יוצרת בנייר</span><span data-en>Rivka Haim, Artist. Paper Creator</span></p>
         <h1 class="hero-name serif"><span data-he>רבקה חיים</span><span data-en>Rivka Haim</span></h1>
         <div class="rule hero-rule"></div>
         <a href="#/gallery" class="btn hero-btn" style="margin-top:2.4rem"><span data-he>כניסה לגלריה</span><span data-en>Enter the Gallery</span></a>
       </div>
       <div class="hero-scroll"><span data-he>גלילה</span><span data-en>Scroll</span></div>
-    </section>
-
-    <!-- Statement -->
-    <section class="stmt px">
-      <p class="label stmt-eye rv"><span data-he>הסטודיו</span><span data-en>The Studio</span></p>
-      <p class="stmt-txt rv">
-        <span data-he>אני נותנת לנייר לנוע כפי שהוא רוצה,<br>ורק אז נכנסת לתוכו.<br><em>כל יצירה נולדת פעם אחת בלבד.</em></span>
-        <span data-en>I let the paper move the way it wants,<br>and only then I step in.<br><em>Each work is born exactly once.</em></span>
-      </p>
     </section>
 
     <!-- Collections, full-bleed panels -->
@@ -1145,7 +1157,7 @@ function buildGallery(cat) {
   const cards = list.map((w, i) =>
     `<div class="wcard rv" data-slug="${w.slug}" role="button" tabindex="0" style="transition-delay:${(i%2)*90}ms">
       <div class="wcard-img">
-        ${w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}" loading="lazy">` : iph('[תמונה]','[IMAGE]')}
+        ${w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}" loading="lazy" style="object-position:center ${w.pos||'center'}">` : iph('[תמונה]','[IMAGE]')}
       </div>
       <div class="wcard-info">
         <div>
@@ -1189,9 +1201,14 @@ function buildWork(w) {
     <p class="wd-mv"><span data-he>${m.vh}</span><span data-en>${m.ve}</span></p>
   </div>`).join('');
 
+  const gallery = w.imgs && w.imgs.length > 1;
+
   return `<article>
     <div class="wd-hero">
-      ${w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}">` : iph('[תמונת כיסוי]','[COVER IMAGE]')}
+      ${gallery
+        ? `<div class="wd-hero-scroll">${w.imgs.map(im => `<div><img src="${im}" alt="${T(w.tHe,w.tEn)}"></div>`).join('')}</div>
+           <p class="wd-hero-hint"><span data-he>${arrL()}גררו לתמונות נוספות</span><span data-en>Swipe for more photos${arrR()}</span></p>`
+        : (w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}" style="object-position:center ${w.pos||'center'}">` : iph('[תמונת כיסוי]','[COVER IMAGE]'))}
       <div class="wd-grad"></div>
       <div class="wd-btm">
         <p class="wd-bread"><span data-he>${w.cHe}</span><span data-en>${w.cEn}</span></p>
