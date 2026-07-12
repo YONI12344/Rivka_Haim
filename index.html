@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>רבקה חיים — יוצרת בנייר | Rivka Haim — Paper Artist</title>
-<meta name="description" content="רבקה חיים — יוצרת בנייר. יצירות מקור בנייר נוזלי, פיסול, הזמנות אישיות וסדנאות סטודיו."/>
+<meta name="description" content="רבקה חיים — יוצרת בנייר. נייר נוזלי, פיסול, אובייקטים וסדנאות סטודיו."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Frank+Ruhl+Libre:wght@200;300;400&family=Montserrat:wght@200;300;400&family=Assistant:wght@200;300;400&display=swap" rel="stylesheet"/>
@@ -616,6 +616,7 @@ html[dir="rtl"] .ftr-links { align-items:flex-start; }
     <a href="#/"          data-nav class="mlink"><span data-he>בית</span><span data-en>Home</span></a>
     <a href="#/gallery"   data-nav class="mlink"><span data-he>הגלריה</span><span data-en>The Gallery</span></a>
     <a href="#/workshops" data-nav class="mlink"><span data-he>סדנאות הסטודיו</span><span data-en>Studio Ateliers</span></a>
+    <a href="#/studio"    data-nav class="mlink"><span data-he>הסטודיו</span><span data-en>The Studio</span></a>
     <a href="#/about"     data-nav class="mlink"><span data-he>האמנית</span><span data-en>The Artist</span></a>
     <a href="#/contact"   data-nav class="mlink"><span data-he>יצירת קשר</span><span data-en>Enquiries</span></a>
     <div class="menu-meta">
@@ -930,6 +931,7 @@ function route() {
   }
   else if (page==='about')     html = buildAbout();
   else if (page==='workshops') html = buildWorkshops();
+  else if (page==='studio')    html = buildStudio();
   else if (page==='contact')   html = buildContact();
   else html = buildHome();
 
@@ -1050,8 +1052,8 @@ function buildHome() {
         <h1 class="hero-name serif"><span data-he>רבקה חיים</span><span data-en>Rivka Haim</span></h1>
         <div class="rule hero-rule"></div>
         <p class="hero-tag">
-          <span data-he>יצירות מקור בנייר נוזלי, נוצרות ביד בסטודיו.<br>כל יצירה — אחת ויחידה.</span>
-          <span data-en>Original works in liquid paper, created by hand in the studio.<br>Each piece — one of a kind.</span>
+          <span data-he>נוצרות ביד בסטודיו.<br>כל יצירה — אחת ויחידה.</span>
+          <span data-en>Created by hand in the studio.<br>Each piece — one of a kind.</span>
         </p>
         <a href="#/gallery" class="btn hero-btn"><span data-he>כניסה לגלריה</span><span data-en>Enter the Gallery</span></a>
       </div>
@@ -1070,16 +1072,6 @@ function buildHome() {
     <!-- Collections — full-bleed panels -->
     ${panelHtml}
 
-    <!-- Studio -->
-    <section class="studio-door rv">
-      <div class="studio-door-img"><img src="images/portrait/studio-corner.jpg" alt="" loading="lazy"></div>
-      <div class="studio-door-veil"></div>
-      <div class="studio-door-cnt">
-        <p class="label gold"><span data-he>סטודיו</span><span data-en>Studio</span></p>
-        <p class="studio-door-stmt serif"><span data-he>מקום יצירה והשראה</span><span data-en>A place of creation and inspiration</span></p>
-      </div>
-    </section>
-
     <!-- Ateliers -->
     <div class="panel rv" data-goto="workshops" role="button" tabindex="0">
       <img src="images/workshops/studio-table.jpg" alt="" loading="lazy">
@@ -1092,12 +1084,24 @@ function buildHome() {
       </div>
     </div>
 
-    <!-- Students' work -->
-    <div class="panel rv" data-goto="workshops" role="button" tabindex="0">
-      <img src="images/gallery/students-figure.jpg" alt="" loading="lazy">
+    <!-- Studio -->
+    <div class="panel rv" data-goto="studio" role="button" tabindex="0">
+      <img src="images/portrait/studio-corner.jpg" alt="" loading="lazy">
       <div class="panel-veil"></div>
       <div class="panel-cnt">
         <p class="panel-no">III</p>
+        <h2 class="panel-name"><span data-he>הסטודיו</span><span data-en>The Studio</span></h2>
+        <p class="panel-sub"><span data-he>מקום יצירה והשראה</span><span data-en>A place of creation and inspiration</span></p>
+        <span class="panel-go"><span data-he>לצפייה</span><span data-en>Explore</span>${arrR()}</span>
+      </div>
+    </div>
+
+    <!-- Students' work -->
+    <div class="panel rv" data-goto="studio" role="button" tabindex="0">
+      <img src="images/gallery/students-figure.jpg" alt="" loading="lazy">
+      <div class="panel-veil"></div>
+      <div class="panel-cnt">
+        <p class="panel-no">IV</p>
         <h2 class="panel-name"><span data-he>עבודות תלמידים</span><span data-en>Students' Work</span></h2>
         <p class="panel-sub"><span data-he>מה שנוצר בסדנאות שלנו</span><span data-en>What's made in our ateliers</span></p>
         <span class="panel-go"><span data-he>לצפייה</span><span data-en>Explore</span>${arrR()}</span>
@@ -1392,6 +1396,85 @@ function buildWorkshops() {
         </p>
         <a href="${wa('שלום רבקה! יש לי רעיון לסדנה מותאמת ואשמח לדבר איתך על זה 🙏')}" target="_blank" rel="noopener" class="btn btn-solid">
           <span data-he>דברו איתי</span><span data-en>Get in touch</span>
+        </a>
+      </div>
+    </div>
+  </div>${footer()}`;
+}
+
+/* ══ STUDIO ══ */
+function buildStudio() {
+  const studioImgs = [
+    { img:'images/portrait/studio-shelf.jpg',   cHe:'פינת העבודה', cEn:'The work corner' },
+    { img:'images/portrait/studio-corner2.jpg', cHe:'חומרי גלם', cEn:'Raw materials' },
+    { img:'images/portrait/studio-table2.jpg',  cHe:'שולחן העבודה', cEn:'The work table' },
+    { img:'images/workshops/studio-tools.jpg',  cHe:'כלי הסטודיו', cEn:"The studio's tools" },
+  ];
+  const studioGrid = studioImgs.map(s =>
+    `<div>
+      <div class="ws-strip-im"><img src="${s.img}" alt="" loading="lazy"></div>
+      <p class="ws-strip-cap"><span data-he>${s.cHe}</span><span data-en>${s.cEn}</span></p>
+    </div>`
+  ).join('');
+
+  const studentImgs = [
+    { img:'images/gallery/students-figure.jpg', cHe:'דמות מנייר', cEn:'A paper figure' },
+    { img:'images/gallery/students-boat.jpg',    cHe:'סירת נייר', cEn:'A paper boat' },
+    { img:'images/gallery/students-trays.jpg',   cHe:'מגשים מעוטרים', cEn:'Decorated trays' },
+  ];
+  const studentGrid = studentImgs.map(s =>
+    `<div>
+      <div class="ws-strip-im"><img src="${s.img}" alt="" loading="lazy"></div>
+      <p class="ws-strip-cap"><span data-he>${s.cHe}</span><span data-en>${s.cEn}</span></p>
+    </div>`
+  ).join('');
+
+  return `<div>
+    <div class="ws-hero">
+      <img src="images/portrait/studio-corner.jpg" alt="">
+      <div class="ws-hero-veil"></div>
+      <div class="ws-hero-cnt">
+        <p class="label pg-eye"><span data-he>הסטודיו</span><span data-en>The Studio</span></p>
+        <h1 class="pg-h1 serif"><span data-he>מקום יצירה והשראה</span><span data-en>A place of creation and inspiration</span></h1>
+      </div>
+    </div>
+    <div class="ws-wrap">
+      <div class="ab-grid rv" style="align-items:center">
+        <div class="ab-c5">
+          <div class="ab-img-main" style="aspect-ratio:4/5">
+            <img src="images/portrait/rivka-atmosphere.jpg" alt="" loading="lazy">
+          </div>
+        </div>
+        <div class="ab-c7">
+          <p class="label gold"><span data-he>רבקה חיים</span><span data-en>Rivka Haim</span></p>
+          <p class="ws-intro serif" style="margin-top:1.2rem">
+            <span data-he>הסטודיו שלי נמצא במושב שער אפרים. בגינה שלנו יצרנו את גן העדן האמנותי שלנו — מקום שקט ומוקף ירוק, שבו כל יצירה מתחילה.</span>
+            <span data-en>My studio is in Moshav Sha'ar Efraim. In our garden we built our own artistic paradise — a quiet, green place where every piece begins.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="ab-divider"></div>
+
+      <p class="label gold"><span data-he>מבט אל הסטודיו</span><span data-en>A look inside the studio</span></p>
+      <div class="ws-strip rv" style="margin-top:1.8rem">${studioGrid}</div>
+
+      <div class="ab-divider"></div>
+
+      <p class="label gold"><span data-he>עבודות תלמידים</span><span data-en>Students' Work</span></p>
+      <p class="ws-intro serif rv" style="margin-top:1rem">
+        <span data-he>מה שנוצר בסדנאות שלנו — עבודות של תלמידות ותלמידים שיצאו מהסטודיו.</span>
+        <span data-en>What's made in our ateliers — pieces by students who've passed through the studio.</span>
+      </p>
+      <div class="ws-strip rv" style="margin-top:1.8rem">${studentGrid}</div>
+
+      <div class="ws-custom rv">
+        <p class="ws-custom-h serif">
+          <span data-he>רוצים לבקר בסטודיו או להצטרף לסדנה?</span>
+          <span data-en>Want to visit the studio or join an atelier?</span>
+        </p>
+        <a href="#/workshops" class="btn btn-solid">
+          <span data-he>לסדנאות</span><span data-en>See the ateliers</span>
         </a>
       </div>
     </div>
