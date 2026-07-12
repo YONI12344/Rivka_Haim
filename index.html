@@ -648,11 +648,9 @@ html[dir="rtl"] .ftr-links { align-items:flex-start; }
 <script>
 /* ══ DATA ══════════════════════════════════════════════════════════ */
 const CATS = [
-  { slug:'all',        he:'כל היצירות',         en:'All works' },
-  { slug:'sale',       he:'אמנות לרכישה',        en:'Available Works' },
-  { slug:'commission', he:'הזמנה אישית',          en:'Commission' },
-  { slug:'sculpture',  he:'פיסול',               en:'Sculpture' },
-  { slug:'objects',    he:'אובייקטים מנייר',      en:'Paper Objects' },
+  { slug:'all',    he:'כל היצירות',              en:'All works' },
+  { slug:'liquid', he:'נייר נוזלי למכירה',        en:'Liquid Paper' },
+  { slug:'pieces', he:'פסלים ואובייקטים למכירה',  en:'Sculptures & Objects' },
 ];
 
 const AW = [
@@ -660,7 +658,7 @@ const AW = [
   { slug:'lp-wall', featured:true,
     img:'images/gallery/lp-08.jpg',
     tHe:'שורות של צבע', tEn:'Rows of Colour',
-    cSlug:'sale', cHe:'אמנות לרכישה', cEn:'Available Works',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי, ממוסגר בעץ טבעי', mEn:'Liquid paper, framed in natural wood',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'יצירת נייר נוזלי ממוסגרת מאחורי זכוכית — מוכנה לתלייה. שורות של צבע בקצב שקט.',
@@ -668,7 +666,7 @@ const AW = [
   { slug:'lp-flowers',
     img:'images/gallery/lp-05.jpg',
     tHe:'פרחים בנייר נוזלי', tEn:'Flowers in Liquid Paper',
-    cSlug:'sale', cHe:'אמנות לרכישה', cEn:'Available Works',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'60 × 80 ס"מ', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'פרחים שנולדו מניח נייר רטוב — כל שכבה נפתחת לכיוון אחר. יצירה מקורית חתומה.',
@@ -676,7 +674,7 @@ const AW = [
   { slug:'lp-01',
     img:'images/gallery/lp-01.jpg',
     tHe:'יצירה בנייר נוזלי — א׳', tEn:'Liquid Paper Work I',
-    cSlug:'sale', cHe:'אמנות לרכישה', cEn:'Available Works',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'40 × 50 ס"מ', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'עבודה מקורית בטכניקת הנייר הנוזלי. זמינה לרכישה.',
@@ -684,7 +682,7 @@ const AW = [
   { slug:'lp-02',
     img:'images/gallery/lp-02.jpg',
     tHe:'יצירה בנייר נוזלי — ב׳', tEn:'Liquid Paper Work II',
-    cSlug:'sale', cHe:'אמנות לרכישה', cEn:'Available Works',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'40 × 50 ס"מ', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'עבודה מקורית בטכניקת הנייר הנוזלי. זמינה לרכישה.',
@@ -692,7 +690,7 @@ const AW = [
   { slug:'lp-03',
     img:'images/gallery/lp-03.jpg',
     tHe:'יצירה בנייר נוזלי — ג׳', tEn:'Liquid Paper Work III',
-    cSlug:'sale', cHe:'אמנות לרכישה', cEn:'Available Works',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'40 × 50 ס"מ', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'עבודה מקורית בטכניקת הנייר הנוזלי. זמינה לרכישה.',
@@ -700,7 +698,7 @@ const AW = [
   { slug:'lp-04',
     img:'images/gallery/lp-04.jpg',
     tHe:'יצירה בנייר נוזלי — ד׳', tEn:'Liquid Paper Work IV',
-    cSlug:'sale', cHe:'אמנות לרכישה', cEn:'Available Works',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'40 × 50 ס"מ', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'עבודה מקורית בטכניקת הנייר הנוזלי. זמינה לרכישה.',
@@ -708,7 +706,7 @@ const AW = [
   { slug:'lp-red',
     img:'images/gallery/lp-06.jpg',
     tHe:'פסים באדום', tEn:'Stripes in Red',
-    cSlug:'sale', cHe:'אמנות לרכישה', cEn:'Available Works',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'שכבות של נייר נוזלי על רקע אדום עז. יצירה מקורית חתומה.',
@@ -716,7 +714,7 @@ const AW = [
   { slug:'lp-poppies',
     img:'images/gallery/lp-09.jpg',
     tHe:'פרגים בנייר נוזלי', tEn:'Poppies in Liquid Paper',
-    cSlug:'sale', cHe:'אמנות לרכישה', cEn:'Available Works',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'פרגים אדומים על רקע בהיר — שכבות נייר רטוב שהתייבשו לתוך הצורה.',
@@ -724,7 +722,7 @@ const AW = [
   { slug:'lp-mosaic',
     img:'images/gallery/lp-10.jpg',
     tHe:'מוזאיקה בכחול וירוק', tEn:'Mosaic in Blue & Green',
-    cSlug:'sale', cHe:'אמנות לרכישה', cEn:'Available Works',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'רשת של אריחים מצוירים ביד — כל משבצת עולם קטן משלה.',
@@ -732,59 +730,17 @@ const AW = [
   { slug:'lp-garden',
     img:'images/gallery/lp-11.jpg',
     tHe:'גן בנייר נוזלי', tEn:'Garden in Liquid Paper',
-    cSlug:'sale', cHe:'אמנות לרכישה', cEn:'Available Works',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'גן פורח מנייר נוזלי — עלים, פרחים וענפים בצפיפות של קיץ.',
     dEn:'A blooming garden in liquid paper — leaves, flowers and branches in summer density.' },
 
-  /* ── הזמנה אישית ── */
-  { slug:'lp-lattice',
-    img:'images/gallery/lp-07.jpg',
-    tHe:'רשת של אור', tEn:'Lattice of Light',
-    cSlug:'commission', cHe:'הזמנה אישית', cEn:'Commission',
-    mHe:'נייר נוזלי', mEn:'Liquid paper',
-    dims:'לפי הזמנה', yr:'2026', price:'בהתאמה אישית',
-    dHe:'רשת נייר נוזלי שקופה — האור עובר דרכה ומשלים את היצירה. ניתן להזמין בהתאמה אישית.',
-    dEn:'A translucent liquid-paper lattice — light passes through and completes the work. Available as a personal commission.' },
-  { slug:'pr-03',
-    img:'images/gallery/pr-03.jpg',
-    tHe:'עבודה בהזמנה אישית — א׳', tEn:'Commission Work I',
-    cSlug:'commission', cHe:'הזמנה אישית', cEn:'Commission',
-    mHe:'נייר נוזלי', mEn:'Liquid paper',
-    dims:'לפי הזמנה', yr:'2025', price:'בהתאמה אישית',
-    dHe:'כל עבודה בהזמנה אישית נוצרת מחדש — לפי הצבעים, הגודל והרגש שאתם מביאים.',
-    dEn:'Every commission is created fresh — shaped by the colours, size, and feeling you bring.' },
-  { slug:'pr-04',
-    img:'images/gallery/pr-04.jpg',
-    tHe:'עבודה בהזמנה אישית — ב׳', tEn:'Commission Work II',
-    cSlug:'commission', cHe:'הזמנה אישית', cEn:'Commission',
-    mHe:'נייר נוזלי ופיסול', mEn:'Liquid paper & sculpture',
-    dims:'לפי הזמנה', yr:'2025', price:'בהתאמה אישית',
-    dHe:'פיסול ונייר בשיתוף — עבודה שנבנית סביב הסיפור שלכם.',
-    dEn:'Sculpture and paper together — a work built around your story.' },
-  { slug:'pr-05',
-    img:'images/gallery/pr-05.jpg',
-    tHe:'עבודה בהזמנה אישית — ג׳', tEn:'Commission Work III',
-    cSlug:'commission', cHe:'הזמנה אישית', cEn:'Commission',
-    mHe:'נייר נוזלי', mEn:'Liquid paper',
-    dims:'לפי הזמנה', yr:'2025', price:'בהתאמה אישית',
-    dHe:'עבודה מקורית שנוצרה בהזמנה אישית. לפרטים נוספים — נשמח לשוחח.',
-    dEn:'Original commissioned work. For details — let\'s get in touch.' },
-  { slug:'after-fish',
-    img:'images/gallery/h-05.jpg',
-    tHe:'אחרי הדגים', tEn:'After Fish',
-    cSlug:'commission', cHe:'הזמנה אישית', cEn:'Commission',
-    mHe:'נייר נוזלי ופיסול', mEn:'Liquid paper & sculpture',
-    dims:'80 × 100 ס"מ', yr:'2026', price:'בהתאמה אישית',
-    dHe:'יצירה שנולדה מתוך השקט שבא אחרי — שכבות נייר שמחזיקות זמן בתוכן. עבודה מקורית בהזמנה אישית.',
-    dEn:'A work born from the quiet that comes after — layers of paper holding time inside them. Original commission.' },
-
-  /* ── פיסול ── */
+  /* ── פיסול ואובייקטים למכירה ── */
   { slug:'sc-ballerina',
     img:'images/gallery/h-01.jpg',
     tHe:'רקדנית', tEn:'Ballerina',
-    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'שמלת נייר על כן ברזל — רקדנית שנולדה משכבות של נייר ממוחזר. יצירה מקורית חתומה.',
@@ -792,7 +748,7 @@ const AW = [
   { slug:'sc-dog',
     img:'images/gallery/sc-dog.jpg',
     tHe:'כלבלב', tEn:'Puppy',
-    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'כלבלב מנייר בעבודת יד — כל פרט, מהעיניים ועד הכפות, מפוסל בשכבות נייר.',
@@ -800,7 +756,7 @@ const AW = [
   { slug:'sc-fox',
     img:'images/gallery/sc-fox.jpg',
     tHe:'שועלה', tEn:'Fox Lady',
-    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'דמות שועלה בשמלה ירוקה — פיסול נייר בעבודת יד, בין אגדה למציאות.',
@@ -808,7 +764,7 @@ const AW = [
   { slug:'sc-pinocchio',
     img:'images/gallery/sc-pinocchio.jpg',
     tHe:'פינוקיו', tEn:'Pinocchio',
-    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'פינוקיו יושב על ערימת ספרים — פיסול נייר בעבודת יד, מפרקים נעים.',
@@ -816,7 +772,7 @@ const AW = [
   { slug:'sc-bird',
     img:'images/gallery/sc-bird.jpg',
     tHe:'ציפור', tEn:'Bird',
-    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'ציפור מנייר לתלייה — עבודת יד, לבית או לגינה מקורה.',
@@ -824,7 +780,7 @@ const AW = [
   { slug:'sc-vessels',
     img:'images/gallery/h-10.jpg',
     tHe:'כלים מנייר', tEn:'Paper Vessels',
-    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'כלים מפוסלים מנייר — צורות עתיקות בחומר חדש.',
@@ -832,7 +788,7 @@ const AW = [
   { slug:'sc-vessel-flowers',
     img:'images/gallery/sc-vessel.jpg',
     tHe:'כלי ופרחים', tEn:'Vessel with Flowers',
-    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'כלי נייר מפוסל ביד עם פרחים מיובשים — יצירה שהיא גם אובייקט חי בבית.',
@@ -840,7 +796,7 @@ const AW = [
   { slug:'sc-bust',
     img:'images/gallery/sc-bust.jpg',
     tHe:'ראש בפטינה', tEn:'Bronze-Patina Head',
-    cSlug:'sculpture', cHe:'פיסול', cEn:'Sculpture',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר בגימור פטינה', mEn:'Paper sculpture, patina finish',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'פיסול ראש ברוגע מהורהר, בגימור פטינה הדומה לברונזה — עבודת יד מלאה.',
@@ -850,7 +806,7 @@ const AW = [
   { slug:'obj-dress',
     img:'images/gallery/obj-dress.jpg',
     tHe:'שמלה לבנה', tEn:'White Dress',
-    cSlug:'objects', cHe:'אובייקטים מנייר', cEn:'Paper Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'רק נייר', mEn:'Paper only',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'שמלה לבנה שנוצרה כולה מנייר — עבודת יד עדינה על קולב נחושת.',
@@ -858,7 +814,7 @@ const AW = [
   { slug:'obj-bag',
     img:'images/gallery/obj-bag.jpg',
     tHe:'תיק כתף', tEn:'Shoulder Bag',
-    cSlug:'objects', cHe:'אובייקטים מנייר', cEn:'Paper Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'רק נייר', mEn:'Paper only',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'תיק כתף תפור ביד — רק נייר. חזק, קל ומפתיע בעמידותו.',
@@ -866,7 +822,7 @@ const AW = [
   { slug:'obj-adidas',
     img:'images/gallery/obj-adidas.jpg',
     tHe:'תיק משקית אדידס', tEn:'Adidas Paper-Bag Tote',
-    cSlug:'objects', cHe:'אובייקטים מנייר', cEn:'Paper Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'נייר ממוחזר', mEn:'Upcycled paper',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'שקית נייר של אדידס שהפכה לתיק של ממש — מיחזור בעבודת יד.',
@@ -874,7 +830,7 @@ const AW = [
   { slug:'obj-tote',
     img:'images/gallery/obj-tote.jpg',
     tHe:'תיק נייר וצמר', tEn:'Paper & Wool Bag',
-    cSlug:'objects', cHe:'אובייקטים מנייר', cEn:'Paper Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'נייר וצמר', mEn:'Paper & wool',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'תיק בעבודת יד — נייר וצמר בלבד. רך מבחוץ, חזק מבפנים.',
@@ -882,7 +838,7 @@ const AW = [
   { slug:'obj-sack',
     img:'images/gallery/obj-sack.jpg',
     tHe:'שקית עדשים', tEn:'Lentil Sack',
-    cSlug:'objects', cHe:'אובייקטים מנייר', cEn:'Paper Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'רק נייר', mEn:'Paper only',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'שק אחסון פרחוני מנייר — אובייקט שימושי שנוצר כולו ביד.',
@@ -890,7 +846,7 @@ const AW = [
   { slug:'obj-tray',
     img:'images/gallery/obj-tray.jpg',
     tHe:'מגש ללחם', tEn:'Bread Tray',
-    cSlug:'objects', cHe:'אובייקטים מנייר', cEn:'Paper Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'רק נייר', mEn:'Paper only',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'מגש נייר קשיח ללחם — טקסטורה של אריגה, כולו נייר.',
@@ -898,7 +854,7 @@ const AW = [
   { slug:'obj-flapbag',
     img:'images/gallery/obj-flapbag.jpg',
     tHe:'תיק עם אבזם', tEn:'Buckle Flap Bag',
-    cSlug:'objects', cHe:'אובייקטים מנייר', cEn:'Paper Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'רק נייר', mEn:'Paper only',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'תיק עם דש ואבזם טבעת — עבודת יד עדינה, רק נייר.',
@@ -906,7 +862,7 @@ const AW = [
   { slug:'obj-journals',
     img:'images/gallery/obj-journals.jpg',
     tHe:'מחברות בעבודת יד', tEn:'Handmade Journals',
-    cSlug:'objects', cHe:'אובייקטים מנייר', cEn:'Paper Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'נייר וכריכה בעבודת יד', mEn:'Paper, hand-bound',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'מחברות כרוכות ביד, כל אחת עם כריכה ייחודית משלה.',
@@ -1007,8 +963,7 @@ function bindEvents() {
     const subject = f.querySelector('[name=subject]').value;
     const msg = f.querySelector('[name=message]').value.trim();
     const subjectMap = {
-      sale:'רכישת יצירה', commission:'הזמנה אישית', private:'מפגש אחד על אחד',
-      group:'סדנת ערב קבוצתית', wine:'נייר ויין', sculpture:'קבוצת פיסול', other:'אחר'
+      sale:'רכישת יצירה', wine:'נייר ויין', sculpture:'קבוצת פיסול', other:'אחר'
     };
     const subLabel = subjectMap[subject] || subject;
     const text = `שלום רבקה!\nשמי ${name}.\nנושא: ${subLabel}\n\n${msg}`;
@@ -1066,18 +1021,9 @@ function footer() {
 /* ══ HOME ══ */
 function buildHome() {
   const panels = [
-    { slug:'sale',       img:'images/gallery/lp-08.jpg', no:'I',
+    { slug:'all', img:'images/gallery/lp-08.jpg', no:'I',
       nHe:'אמנות לרכישה', nEn:'Available Works',
       sHe:'זמינות לרכישה', sEn:'Available for acquisition' },
-    { slug:'commission', img:'images/gallery/lp-07.jpg', no:'II',
-      nHe:'הזמנה אישית', nEn:'Private Commissions',
-      sHe:'יצירה שנוצרת במיוחד עבורכם', sEn:'A work created exclusively for you' },
-    { slug:'sculpture',  img:'images/gallery/h-01.jpg', no:'III',
-      nHe:'פיסול', nEn:'Sculpture',
-      sHe:'פסלי נייר בעבודת יד', sEn:'Hand-built paper sculpture' },
-    { slug:'objects',    img:'images/gallery/obj-dress.jpg', no:'IV',
-      nHe:'אובייקטים מנייר', nEn:'Paper Objects',
-      sHe:'תיקים, כלים ואובייקטים — רק נייר', sEn:'Bags, vessels and objects — paper only' },
   ];
 
   const panelHtml = panels.map(p =>
@@ -1124,14 +1070,36 @@ function buildHome() {
     <!-- Collections — full-bleed panels -->
     ${panelHtml}
 
+    <!-- Studio -->
+    <section class="studio-door rv">
+      <div class="studio-door-img"><img src="images/portrait/studio-corner.jpg" alt="" loading="lazy"></div>
+      <div class="studio-door-veil"></div>
+      <div class="studio-door-cnt">
+        <p class="label gold"><span data-he>סטודיו</span><span data-en>Studio</span></p>
+        <p class="studio-door-stmt serif"><span data-he>מקום יצירה והשראה</span><span data-en>A place of creation and inspiration</span></p>
+      </div>
+    </section>
+
     <!-- Ateliers -->
     <div class="panel rv" data-goto="workshops" role="button" tabindex="0">
       <img src="images/workshops/studio-table.jpg" alt="" loading="lazy">
       <div class="panel-veil"></div>
       <div class="panel-cnt">
-        <p class="panel-no">V</p>
+        <p class="panel-no">II</p>
         <h2 class="panel-name"><span data-he>סדנאות הסטודיו</span><span data-en>Studio Ateliers</span></h2>
-        <p class="panel-sub"><span data-he>מפגשים אינטימיים · נייר ויין · אחד על אחד</span><span data-en>Intimate sessions · Paper &amp; Wine · One on one</span></p>
+        <p class="panel-sub"><span data-he>קבוצת פיסול · נייר ויין</span><span data-en>Sculpture Group · Paper &amp; Wine</span></p>
+        <span class="panel-go"><span data-he>לצפייה</span><span data-en>Explore</span>${arrR()}</span>
+      </div>
+    </div>
+
+    <!-- Students' work -->
+    <div class="panel rv" data-goto="workshops" role="button" tabindex="0">
+      <img src="images/gallery/students-figure.jpg" alt="" loading="lazy">
+      <div class="panel-veil"></div>
+      <div class="panel-cnt">
+        <p class="panel-no">III</p>
+        <h2 class="panel-name"><span data-he>עבודות תלמידים</span><span data-en>Students' Work</span></h2>
+        <p class="panel-sub"><span data-he>מה שנוצר בסדנאות שלנו</span><span data-en>What's made in our ateliers</span></p>
         <span class="panel-go"><span data-he>לצפייה</span><span data-en>Explore</span>${arrR()}</span>
       </div>
     </div>
@@ -1147,8 +1115,8 @@ function buildHome() {
           <span data-en>Every work is accompanied by a signed certificate of authenticity, delivered directly from the studio.</span>
         </h2>
         <p class="acq-p">
-          <span data-he>לרכישת יצירה, להזמנה אישית או לתיאום צפייה פרטית — נשמח לעמוד לרשותכם.</span>
-          <span data-en>For acquisitions, private commissions, or to arrange a private viewing — we are at your service.</span>
+          <span data-he>לרכישת יצירה או לתיאום צפייה פרטית בסטודיו — נשמח לעמוד לרשותכם.</span>
+          <span data-en>For acquisitions or to arrange a private viewing at the studio — we are at your service.</span>
         </p>
         <a href="#/contact" class="btn" style="margin-top:3rem"><span data-he>ליצירת קשר</span><span data-en>Private Enquiries</span></a>
       </div>
@@ -1204,7 +1172,7 @@ function buildWork(w) {
     w.mHe   ? { kh:'חומר',   ke:'Medium',     vh:w.mHe,   ve:w.mEn   } : null,
     w.dims  ? { kh:'מידות',  ke:'Dimensions', vh:w.dims,  ve:w.dims  } : null,
     w.yr    ? { kh:'שנה',    ke:'Year',       vh:w.yr,    ve:w.yr    } : null,
-    w.price ? { kh:'מחיר',   ke:'Price',      vh:w.price, ve:w.cSlug==='commission'?'By commission':'On request' } : null,
+    w.price ? { kh:'מחיר',   ke:'Price',      vh:w.price, ve:'On request' } : null,
   ].filter(Boolean);
 
   const meta = metaRows.map(m => `<div>
@@ -1229,11 +1197,9 @@ function buildWork(w) {
         <div class="wd-c8">
           <p class="wd-desc serif rv"><span data-he>${w.dHe}</span><span data-en>${w.dEn}</span></p>
           <div class="wd-cta rv">
-            <a href="${wa(w.cSlug==='sale'
-              ? 'שלום רבקה! ראיתי את היצירה "' + w.tHe + '" ואני מעוניין/ת לרכוש אותה. אשמח לשמוע פרטים 🙏'
-              : 'שלום רבקה! אני מעוניין/ת בהזמנת יצירה אישית. אשמח לשמוע עוד על האפשרויות 🙏')}" target="_blank" rel="noopener" class="btn">
-              <span data-he>${w.cSlug==='sale' ? 'פנייה לרכישה' : 'להזמנת יצירה'}</span>
-              <span data-en>${w.cSlug==='sale' ? 'Enquire to acquire' : 'Commission a work'}</span>
+            <a href="${wa('שלום רבקה! ראיתי את היצירה "' + w.tHe + '" ואני מעוניין/ת לרכוש אותה. אשמח לשמוע פרטים 🙏')}" target="_blank" rel="noopener" class="btn">
+              <span data-he>פנייה לרכישה</span>
+              <span data-en>Enquire to acquire</span>
             </a>
           </div>
         </div>
@@ -1254,11 +1220,10 @@ function buildWork(w) {
 /* ══ ABOUT ══ */
 function buildAbout() {
   const services = [
-    { he:'אמנות לרכישה — יצירות מקור זמינות', en:'Available Works — original pieces, ready to acquire' },
-    { he:'הזמנה אישית — יצירה שנוצרת במיוחד עבורכם', en:'Private Commission — a work created exclusively for you' },
-    { he:'פיסול — פסלי נייר בעבודת יד', en:'Sculpture — hand-built paper forms' },
-    { he:'אובייקטים מנייר — תיקים, כלים ואובייקטים', en:'Paper Objects — bags, vessels and objects' },
-    { he:'סדנאות סטודיו — מפגשי יצירה אינטימיים', en:'Studio Ateliers — intimate creative sessions' },
+    { he:'נייר נוזלי למכירה — יצירות מקור זמינות', en:'Liquid Paper — original works, ready to acquire' },
+    { he:'פסלים ואובייקטים למכירה — פיסול נייר, תיקים וכלים', en:'Sculptures & Objects — hand-built paper forms, bags and vessels' },
+    { he:'סדנאות סטודיו — קבוצת פיסול ונייר ויין', en:'Studio Ateliers — Sculpture Group and Paper & Wine' },
+    { he:'עבודות תלמידים — מה שנוצר בסדנאות שלנו', en:"Students' Work — what's made in our ateliers" },
   ];
 
   const listItems = services.map((s, i) =>
@@ -1325,14 +1290,6 @@ function buildAbout() {
         </div>
       </div>
     </div>
-    <section class="studio-door rv">
-      <div class="studio-door-img"><img src="images/portrait/studio-corner.jpg" alt="" loading="lazy"></div>
-      <div class="studio-door-veil"></div>
-      <div class="studio-door-cnt">
-        <p class="label gold"><span data-he>מבעד לדלת הסטודיו</span><span data-en>Through the Studio Door</span></p>
-        <p class="studio-door-stmt serif"><span data-he>מקום יצירה והשראה</span><span data-en>A place of creation and inspiration</span></p>
-      </div>
-    </section>
   </div>${footer()}`;
 }
 
@@ -1340,42 +1297,6 @@ function buildAbout() {
 function buildWorkshops() {
   const WS = [
     { idx:'I',
-      typeHe:'פגישה פרטית', typeEn:'Private session',
-      nHe:'מפגש אחד על אחד', nEn:'One on One',
-      dHe:'מפגש פרטי בסטודיו — מותאם אישית לרמה שלכם, לחומרים שמעניינים אתכם ולמה שאתם רוצים לצאת איתו. לא קורס, לא קבוצה — רק אתם, אני, ונייר.',
-      dEn:'A private studio session — tailored to your level, the materials you are drawn to, and what you want to leave with. Not a course, not a group — just you, me, and paper.',
-      specs:[
-        {kh:'משך',ke:'Duration',vh:'2–3 שעות',ve:'2–3 hours'},
-        {kh:'מיקום',ke:'Location',vh:'סטודיו',ve:'Studio'},
-        {kh:'חומרים',ke:'Materials',vh:'כלולים',ve:'Included'}
-      ],
-      pH:'לתיאום', pE:'By enquiry', pnH:'', pnE:'',
-      waMsg:'שלום רבקה! אני מעוניין/ת במפגש פרטי אחד על אחד בסטודיו. אשמח לשמוע על המועדים הפנויים 🙏' },
-    { idx:'II',
-      typeHe:'ערב קבוצתי', typeEn:'Group evening',
-      nHe:'סדנת ערב קבוצתית', nEn:'Group Evening Atelier',
-      dHe:'ערב של יצירה קבוצתית — שיחה, מוזיקה ונייר. מתאים לקבוצות של חברות, ימי הולדת, ואירועים קטנים. כל אחד יוצא עם יצירה משלו.',
-      dEn:'A group creative evening — conversation, music and paper. Perfect for groups of friends, birthdays, and small events. Everyone leaves with their own piece.',
-      specs:[
-        {kh:'משך',ke:'Duration',vh:'2.5 שעות',ve:'2.5 hours'},
-        {kh:'משתתפים',ke:'Participants',vh:'עד 10',ve:'Up to 10'},
-        {kh:'חומרים',ke:'Materials',vh:'כלולים',ve:'Included'}
-      ],
-      pH:'לתיאום', pE:'By enquiry', pnH:'לאדם', pnE:'per person',
-      waMsg:'שלום רבקה! אני מעוניין/ת בסדנת ערב קבוצתית. אשמח לשמוע על המועדים הקרובים 🙏' },
-    { idx:'III',
-      typeHe:'אירוע מיוחד', typeEn:'Special event',
-      nHe:'נייר ויין', nEn:'Paper & Wine',
-      dHe:'פגישה חד פעמית ליצירה בקבוצה קטנה — נייר, יין ושיחה. הפורמט הזה נוצר במיוחד לאירועים מיוחדים: מסיבות, ימי הולדת, רווקות ואסיפות. קסם קטן שיוצאים ממנו עם משהו בידיים.',
-      dEn:'A one-time creative session for a small group — paper, wine and conversation. Designed especially for special events: parties, birthdays, bachelorettes and gatherings. A little magic you leave with something in your hands.',
-      specs:[
-        {kh:'משך',ke:'Duration',vh:'2 שעות',ve:'2 hours'},
-        {kh:'קבוצה',ke:'Group',vh:'עד 8',ve:'Up to 8'},
-        {kh:'כולל',ke:'Includes',vh:'חומרים + יין',ve:'Materials + wine'}
-      ],
-      pH:'לתיאום', pE:'By enquiry', pnH:'לאדם', pnE:'per person',
-      waMsg:'שלום רבקה! אני מעוניין/ת בסדנת נייר ויין 🍷 אשמח לשמוע על המועדים הקרובים ולשריין מקום!' },
-    { idx:'IV',
       typeHe:'קבוצה מתמשכת', typeEn:'Ongoing group',
       nHe:'קבוצת פיסול', nEn:'Sculpture Group',
       dHe:'קבוצה שמתמקדת בפיסול נייר — בניית צורות, שכבות ומבנים. מתאים למי שרוצה להעמיק בממד ה-3D של החומר. הקבוצה נפגשת אחת לשבוע ומתקדמת בקצב של הקבוצה.',
@@ -1387,6 +1308,18 @@ function buildWorkshops() {
       ],
       pH:'לתיאום', pE:'By enquiry', pnH:'לחודש', pnE:'per month',
       waMsg:'שלום רבקה! אני מעוניין/ת להצטרף לקבוצת הפיסול. אשמח לשמוע פרטים ומועדים 🙏' },
+    { idx:'II',
+      typeHe:'אירוע מיוחד', typeEn:'Special event',
+      nHe:'נייר ויין', nEn:'Paper & Wine',
+      dHe:'פגישה חד פעמית ליצירה בקבוצה קטנה — נייר, יין ושיחה. הפורמט הזה נוצר במיוחד לאירועים מיוחדים: מסיבות, ימי הולדת, רווקות ואסיפות. קסם קטן שיוצאים ממנו עם משהו בידיים.',
+      dEn:'A one-time creative session for a small group — paper, wine and conversation. Designed especially for special events: parties, birthdays, bachelorettes and gatherings. A little magic you leave with something in your hands.',
+      specs:[
+        {kh:'משך',ke:'Duration',vh:'2 שעות',ve:'2 hours'},
+        {kh:'קבוצה',ke:'Group',vh:'עד 8',ve:'Up to 8'},
+        {kh:'כולל',ke:'Includes',vh:'חומרים + יין',ve:'Materials + wine'}
+      ],
+      pH:'לתיאום', pE:'By enquiry', pnH:'לאדם', pnE:'per person',
+      waMsg:'שלום רבקה! אני מעוניין/ת בסדנת נייר ויין 🍷 אשמח לשמוע על המועדים הקרובים ולשריין מקום!' },
   ];
 
   const rows = WS.map(w => {
@@ -1427,20 +1360,28 @@ function buildWorkshops() {
       </p>
       <div class="ws-strip rv">
         <div>
-          <div class="ws-strip-im"><img src="images/workshops/action-1.jpg" alt="" loading="lazy"></div>
-          <p class="ws-strip-cap"><span data-he>תפירה ביד — רק נייר</span><span data-en>Hand stitching — paper only</span></p>
-        </div>
-        <div>
-          <div class="ws-strip-im"><img src="images/workshops/action-2.jpg" alt="" loading="lazy"></div>
-          <p class="ws-strip-cap"><span data-he>העבודה בסטודיו</span><span data-en>At work in the studio</span></p>
-        </div>
-        <div>
           <div class="ws-strip-im"><img src="images/workshops/group-session.jpg" alt="" loading="lazy"></div>
           <p class="ws-strip-cap"><span data-he>מפגש קבוצתי בסטודיו</span><span data-en>A group session in the studio</span></p>
         </div>
         <div>
+          <div class="ws-strip-im"><img src="images/workshops/action-1.jpg" alt="" loading="lazy"></div>
+          <p class="ws-strip-cap"><span data-he>תפירה ביד — רק נייר</span><span data-en>Hand stitching — paper only</span></p>
+        </div>
+        <div>
           <div class="ws-strip-im"><img src="images/workshops/notebooks.jpg" alt="" loading="lazy"></div>
           <p class="ws-strip-cap"><span data-he>מחברות בעבודת יד</span><span data-en>Handmade journals</span></p>
+        </div>
+        <div>
+          <div class="ws-strip-im"><img src="images/workshops/studio-tools.jpg" alt="" loading="lazy"></div>
+          <p class="ws-strip-cap"><span data-he>שולחן העבודה</span><span data-en>The work table</span></p>
+        </div>
+        <div>
+          <div class="ws-strip-im"><img src="images/gallery/students-figure.jpg" alt="" loading="lazy"></div>
+          <p class="ws-strip-cap"><span data-he>עבודת תלמידה</span><span data-en>A student's work</span></p>
+        </div>
+        <div>
+          <div class="ws-strip-im"><img src="images/gallery/students-trays.jpg" alt="" loading="lazy"></div>
+          <p class="ws-strip-cap"><span data-he>עבודות תלמידים מהסטודיו</span><span data-en>Students' work from the studio</span></p>
         </div>
       </div>
       <div class="ws-list">${rows}</div>
@@ -1461,9 +1402,6 @@ function buildWorkshops() {
 function buildContact() {
   const subjects = [
     { v:'sale',       he:'רכישת יצירה',        en:'Acquire an artwork' },
-    { v:'commission', he:'הזמנה אישית',         en:'Private commission' },
-    { v:'private',    he:'מפגש אחד על אחד',     en:'One-on-one session' },
-    { v:'group',      he:'סדנת ערב קבוצתית',    en:'Group evening atelier' },
     { v:'wine',       he:'נייר ויין',           en:'Paper & Wine' },
     { v:'sculpture',  he:'קבוצת פיסול',         en:'Sculpture group' },
     { v:'other',      he:'אחר',                 en:'Other' },
