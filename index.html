@@ -344,15 +344,8 @@ ul,ol { list-style:none; }
   scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;
 }
 .wd-hero-scroll::-webkit-scrollbar { display:none; }
-.wd-hero-scroll > div { flex:0 0 100%; height:100%; scroll-snap-align:start; }
-.wd-hero-scroll img { width:100%; height:100%; object-fit:cover; }
-.wd-hero-hint {
-  position:absolute; top:6.5rem; inset-inline-end:1.5rem; z-index:3;
-  color:var(--ivory); font-size:9.5px; letter-spacing:.24em; text-transform:uppercase;
-  background:rgba(11,10,8,.45); padding:.55rem 1.1rem; backdrop-filter:blur(3px);
-  pointer-events:none;
-}
-@media(min-width:768px){ .wd-hero-hint{ inset-inline-end:4rem; top:8rem; } }
+.wd-hero-scroll > div { position:relative; flex:0 0 100%; height:100%; scroll-snap-align:start; }
+.wd-hero-scroll img { position:static; inset:auto; width:100%; height:100%; object-fit:cover; animation:none; }
 .wd-btm {
   position:absolute; inset-inline:0; bottom:0; z-index:2;
   max-width:var(--max); margin-inline:auto;
@@ -690,7 +683,7 @@ const AW = [
     dEn:'A liquid-paper work framed behind glass, ready to hang. Rows of colour in a quiet rhythm.' },
   { slug:'lp-flowers',
     img:'images/gallery/lp-05.jpg',
-    imgs:['images/gallery/lp-05.jpg','images/gallery/lp-01.jpg'],
+    imgs:['images/gallery/lp-05.jpg','images/gallery/lp-01.jpg','images/gallery/lp-09.jpg','images/gallery/lp-11.jpg'],
     tHe:'פרחים בנייר נוזלי', tEn:'Flowers in Liquid Paper',
     cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
@@ -714,16 +707,6 @@ const AW = [
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'שכבות של נייר נוזלי על רקע אדום עז. יצירה מקורית חתומה.',
     dEn:'Layers of liquid paper over a deep red ground. Original signed work.' },
-  { slug:'lp-poppies',
-    img:'images/gallery/lp-09.jpg',
-    imgs:['images/gallery/lp-09.jpg','images/gallery/lp-11.jpg'],
-    tHe:'פרגים בנייר נוזלי', tEn:'Poppies in Liquid Paper',
-    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
-    mHe:'נייר נוזלי', mEn:'Liquid paper',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
-    dHe:'פרגים אדומים על רקע בהיר, שכבות נייר רטוב שהתייבשו לתוך הצורה.',
-    dEn:'Red poppies against a pale ground, wet paper layers dried into shape.' },
-
   /* ── פיסול ואובייקטים למכירה ── */
   { slug:'sc-ballerina',
     img:'images/gallery/h-01.jpg',
@@ -1186,8 +1169,7 @@ function buildWork(w) {
   return `<article>
     <div class="wd-hero">
       ${gallery
-        ? `<div class="wd-hero-scroll">${w.imgs.map(im => `<div><img src="${im}" alt="${T(w.tHe,w.tEn)}"></div>`).join('')}</div>
-           <p class="wd-hero-hint"><span data-he>${arrL()}גררו לתמונות נוספות</span><span data-en>Swipe for more photos${arrR()}</span></p>`
+        ? `<div class="wd-hero-scroll">${w.imgs.map(im => `<div><img src="${im}" alt="${T(w.tHe,w.tEn)}"></div>`).join('')}</div>`
         : (w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}" style="object-position:center ${w.pos||'center'}">` : iph('[תמונת כיסוי]','[COVER IMAGE]'))}
       <div class="wd-grad"></div>
       <div class="wd-btm">
