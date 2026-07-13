@@ -499,6 +499,13 @@ ul,ol { list-style:none; }
 .bigshot-cap { position:absolute; inset-inline:0; bottom:0; padding:1.6rem 1.5rem; color:var(--ivory); font-size:11px; letter-spacing:.28em; text-transform:uppercase; }
 @media(min-width:768px){ .bigshot-cap{ padding:2.4rem 4rem; } }
 
+.ws-mini-wrap { margin-top:3.5rem; }
+.ws-mini-row { display:flex; gap:1rem; margin-top:1.4rem; }
+.ws-mini-box { position:relative; width:92px; height:92px; overflow:hidden; background:var(--bg-2); border:1px solid var(--gold-dim); flex-shrink:0; }
+@media(min-width:768px){ .ws-mini-box{ width:110px; height:110px; } }
+.ws-mini-box img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.6s var(--ease); }
+.ws-mini-box img.on { opacity:1; }
+
 .ws-list { margin-top:5rem; border-top:1px solid var(--hair); }
 .ws-row {
   padding-block:1.6rem; border-bottom:1px solid var(--hair);
@@ -1011,8 +1018,24 @@ function bindEvents() {
       slowScrollTo(slides[idx], 1700);
     }, 6500);
   }
+
+  /* Small rotating student-work boxes */
+  if (_miniTimer) { clearInterval(_miniTimer); _miniTimer = null; }
+  const miniBoxes = app.querySelectorAll('.ws-mini-box');
+  if (miniBoxes.length) {
+    _miniTimer = setInterval(() => {
+      miniBoxes.forEach(box => {
+        const imgs = box.querySelectorAll('img');
+        let cur = 0;
+        imgs.forEach((im, i) => { if (im.classList.contains('on')) cur = i; });
+        imgs[cur].classList.remove('on');
+        imgs[(cur + 1) % imgs.length].classList.add('on');
+      });
+    }, 2600);
+  }
 }
 let _carouselTimer = null;
+let _miniTimer = null;
 
 window.addEventListener('hashchange', route);
 
@@ -1107,7 +1130,7 @@ function buildHome() {
 
     <!-- Studio -->
     <div class="panel rv" data-goto="studio" role="button" tabindex="0">
-      <img src="images/portrait/studio-corner.jpg" alt="" loading="lazy">
+      <img src="images/portrait/studio-shelf.jpg" alt="" loading="lazy">
       <div class="panel-veil"></div>
       <div class="panel-cnt">
         <p class="panel-no">III</p>
@@ -1396,15 +1419,13 @@ function buildWorkshops() {
         <div class="bigshot-veil"></div>
         <p class="bigshot-cap"><span data-he>מחברות בעבודת יד</span><span data-en>Handmade journals</span></p>
       </div>
-      <div class="bigshot rv">
-        <img src="images/gallery/students-figure.jpg" alt="" loading="lazy">
-        <div class="bigshot-veil"></div>
-        <p class="bigshot-cap"><span data-he>עבודות תלמידים</span><span data-en>Students' work</span></p>
-      </div>
-      <div class="bigshot rv">
-        <img src="images/gallery/students-trays.jpg" alt="" loading="lazy">
-        <div class="bigshot-veil"></div>
-        <p class="bigshot-cap"><span data-he>עבודות תלמידים מהסטודיו</span><span data-en>Students' work from the studio</span></p>
+      <div class="ws-mini-wrap rv">
+        <p class="label gold"><span data-he>עבודות תלמידים</span><span data-en>Students' work</span></p>
+        <div class="ws-mini-row">
+          <div class="ws-mini-box"><img src="images/gallery/students-figure.jpg" alt="" class="on"><img src="images/gallery/students-boat.jpg" alt=""><img src="images/gallery/students-trays.jpg" alt=""></div>
+          <div class="ws-mini-box"><img src="images/gallery/students-boat.jpg" alt="" class="on"><img src="images/gallery/students-trays.jpg" alt=""><img src="images/gallery/students-figure.jpg" alt=""></div>
+          <div class="ws-mini-box"><img src="images/gallery/students-trays.jpg" alt="" class="on"><img src="images/gallery/students-figure.jpg" alt=""><img src="images/gallery/students-boat.jpg" alt=""></div>
+        </div>
       </div>
       <div class="ws-list">${rows}</div>
       <div class="ws-custom rv">
@@ -1423,7 +1444,7 @@ function buildWorkshops() {
 /* ══ STUDIO ══ */
 function buildStudio() {
   const studioImgs = [
-    { img:'images/portrait/studio-shelf.jpg',   cHe:'פינת העבודה', cEn:'The work corner' },
+    { img:'images/portrait/studio-corner.jpg',  cHe:'הסטודיו', cEn:'The Studio' },
     { img:'images/portrait/studio-corner2.jpg', cHe:'חומרי גלם', cEn:'Raw materials' },
     { img:'images/portrait/studio-table2.jpg',  cHe:'שולחן העבודה', cEn:'The work table' },
     { img:'images/workshops/studio-tools.jpg',  cHe:'כלי הסטודיו', cEn:"The studio's tools" },
@@ -1451,7 +1472,7 @@ function buildStudio() {
 
   return `<div>
     <div class="ws-hero">
-      <img src="images/portrait/studio-corner.jpg" alt="">
+      <img src="images/portrait/studio-shelf.jpg" alt="">
       <div class="ws-hero-veil"></div>
       <div class="ws-hero-cnt">
         <p class="label pg-eye"><span data-he>הסטודיו</span><span data-en>The Studio</span></p>
