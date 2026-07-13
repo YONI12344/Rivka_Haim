@@ -345,7 +345,8 @@ ul,ol { list-style:none; }
 }
 .wd-hero-scroll::-webkit-scrollbar { display:none; }
 .wd-hero-scroll > div { position:relative; flex:0 0 100%; height:100%; scroll-snap-align:start; }
-.wd-hero-scroll img { position:static; inset:auto; width:100%; height:100%; object-fit:cover; animation:none; }
+.wd-hero-scroll img { position:static; inset:auto; width:100%; height:100%; object-fit:cover; transform:scale(1.11); }
+.wd-hero-scroll img.kb-active { animation:kb 6.5s var(--ease) forwards; }
 .wd-btm {
   position:absolute; inset-inline:0; bottom:0; z-index:2;
   max-width:var(--max); margin-inline:auto;
@@ -675,7 +676,7 @@ const AW = [
   /* ── אמנות לרכישה ── */
   { slug:'lp-wall', featured:true,
     img:'images/gallery/lp-08.jpg',
-    tHe:'שורות של צבע', tEn:'Rows of Colour',
+    tHe:'פסים של צבע', tEn:'Stripes of Colour',
     cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי, ממוסגר בעץ טבעי', mEn:'Liquid paper, framed in natural wood',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
@@ -684,7 +685,7 @@ const AW = [
   { slug:'lp-flowers',
     img:'images/gallery/lp-05.jpg',
     imgs:['images/gallery/lp-05.jpg','images/gallery/lp-01.jpg','images/gallery/lp-09.jpg','images/gallery/lp-11.jpg'],
-    tHe:'פרחים בנייר נוזלי', tEn:'Flowers in Liquid Paper',
+    tHe:'גינה בנייר', tEn:'Garden in Paper',
     cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'60 × 80 ס"מ', yr:'2026', price:'מחיר לפי פנייה',
@@ -693,7 +694,7 @@ const AW = [
   { slug:'lp-mosaic',
     img:'images/gallery/lp-10.jpg',
     imgs:['images/gallery/lp-10.jpg','images/gallery/lp-02.jpg','images/gallery/lp-03.jpg','images/gallery/lp-04.jpg'],
-    tHe:'מוזאיקה בכחול וירוק', tEn:'Mosaic in Blue & Green',
+    tHe:'אריחים בכחול וירוק', tEn:'Tiles in Blue & Green',
     cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
@@ -707,6 +708,23 @@ const AW = [
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'שכבות של נייר נוזלי על רקע אדום עז. יצירה מקורית חתומה.',
     dEn:'Layers of liquid paper over a deep red ground. Original signed work.' },
+  { slug:'lp-orange',
+    img:'images/gallery/lp-12.jpg',
+    tHe:'שורות בכתום', tEn:'Rows in Orange',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    mHe:'נייר נוזלי, ממוסגר בעץ טבעי', mEn:'Liquid paper, framed in natural wood',
+    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dHe:'יצירת נייר נוזלי ממוסגרת, שורות של כתום וחום בקצב חם ותוסס.',
+    dEn:'A framed liquid-paper work, rows of orange and warm rust in a lively rhythm.' },
+  { slug:'lp-gold-mosaic',
+    img:'images/gallery/lp-13.jpg',
+    imgs:['images/gallery/lp-13.jpg','images/gallery/lp-14.jpg','images/gallery/lp-15.jpg'],
+    tHe:'מוזאיקה בזהב', tEn:'Mosaic in Gold',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dHe:'רשת של אריחים מצוירים ביד בגווני זהב וכתום, כל משבצת עולם קטן משלה.',
+    dEn:'A grid of hand-painted tiles in gold and amber tones, each square its own small world.' },
   /* ── פיסול ואובייקטים למכירה ── */
   { slug:'sc-ballerina',
     img:'images/gallery/h-01.jpg',
@@ -752,15 +770,6 @@ const AW = [
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'ציפור מנייר לתלייה, עבודת יד, לבית או לגינה מקורה.',
     dEn:'A hanging paper bird, handmade, for the home or a covered garden.' },
-  { slug:'sc-vessels',
-    img:'images/gallery/h-10.jpg',
-    imgs:['images/gallery/h-10.jpg','images/gallery/sc-vessels-2.jpg'],
-    tHe:'כלים מנייר', tEn:'Paper Vessels',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
-    mHe:'פיסול נייר', mEn:'Paper sculpture',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
-    dHe:'כלים מפוסלים מנייר, צורות עתיקות בחומר חדש.',
-    dEn:'Vessels sculpted from paper, ancient forms in a new material.' },
   { slug:'sc-vessel-flowers',
     img:'images/gallery/sc-vessel.jpg',
     imgs:['images/gallery/sc-vessel.jpg','images/gallery/sc-vessel-2.jpg'],
@@ -960,15 +969,47 @@ function bindEvents() {
   const carousel = app.querySelector('.wd-hero-scroll');
   if (carousel && carousel.children.length > 1) {
     const slides = Array.from(carousel.children);
+    const imgs = slides.map(s => s.querySelector('img'));
     let idx = 0;
+
+    function activate(i) {
+      imgs.forEach(im => im.classList.remove('kb-active'));
+      void imgs[i].offsetWidth; // force reflow so the animation restarts
+      imgs[i].classList.add('kb-active');
+    }
+    function slowScrollTo(targetEl, duration) {
+      const prev = carousel.style.scrollBehavior;
+      carousel.style.scrollBehavior = 'auto';
+      const before = carousel.scrollLeft;
+      targetEl.scrollIntoView({ inline:'start', block:'nearest' });
+      const after = carousel.scrollLeft;
+      carousel.scrollLeft = before;
+      carousel.style.scrollBehavior = prev;
+      const change = after - before;
+      const start = performance.now();
+      (function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2) / 2;
+        carousel.scrollLeft = before + change * eased;
+        if (p < 1) requestAnimationFrame(step);
+      })(start);
+    }
+
+    let userScrollTimer = null;
     carousel.addEventListener('scroll', () => {
-      const w = carousel.clientWidth;
-      idx = Math.round(Math.abs(carousel.scrollLeft) / w) % slides.length;
+      clearTimeout(userScrollTimer);
+      userScrollTimer = setTimeout(() => {
+        const w = carousel.clientWidth;
+        idx = Math.round(Math.abs(carousel.scrollLeft) / w) % slides.length;
+        activate(idx);
+      }, 120);
     }, { passive:true });
+
+    activate(0);
     _carouselTimer = setInterval(() => {
       idx = (idx + 1) % slides.length;
-      slides[idx].scrollIntoView({ behavior:'smooth', inline:'start', block:'nearest' });
-    }, 4200);
+      slowScrollTo(slides[idx], 1700);
+    }, 6500);
   }
 }
 let _carouselTimer = null;
@@ -1173,7 +1214,6 @@ function buildWork(w) {
         : (w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}" style="object-position:center ${w.pos||'center'}">` : iph('[תמונת כיסוי]','[COVER IMAGE]'))}
       <div class="wd-grad"></div>
       <div class="wd-btm">
-        <p class="wd-bread"><span data-he>${w.cHe}</span><span data-en>${w.cEn}</span></p>
         <h1 class="wd-htitle serif"><span data-he>${w.tHe}</span><span data-en>${w.tEn}</span></h1>
       </div>
     </div>
