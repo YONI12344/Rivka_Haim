@@ -112,6 +112,8 @@ ul,ol { list-style:none; }
 .hdr-right { display:flex; align-items:center; gap:1.6rem; }
 .lang-btn { color:var(--ivory-dim); font-size:10px; letter-spacing:.22em; transition:color .4s; }
 .lang-btn:hover { color:var(--gold); }
+.hdr-ig { color:var(--ivory-dim); display:flex; transition:color .4s; }
+.hdr-ig:hover { color:var(--gold); }
 
 /* Hamburger — always, on every viewport */
 .ham { display:flex; flex-direction:column; gap:7px; padding:6px 2px; z-index:70; position:relative; }
@@ -439,6 +441,9 @@ ul,ol { list-style:none; }
 }
 .ab-img-accent img { width:100%; height:100%; object-fit:cover; }
 .ab-h1 { font-family:var(--serif); font-weight:300; line-height:1.25; margin-top:1.4rem; font-size:clamp(1.7rem,3.2vw,2.6rem); }
+.ab-quote { margin-top:1.6rem; font-style:italic; font-weight:300; font-size:clamp(1.15rem,2vw,1.5rem); line-height:1.6; color:var(--gold); }
+.ab-quote-sub { margin-top:1rem; font-size:.9rem; letter-spacing:.02em; line-height:1.7; color:var(--ivory-ftn); }
+.ab-quote-cta { margin-top:1.2rem; font-size:1.05rem; font-weight:300; color:var(--ivory-dim); }
 .ab-body {
   margin-top:2.4rem; display:flex; flex-direction:column; gap:1.6rem;
   font-family:var(--serif); font-size:1.1rem; font-weight:300; line-height:1.85;
@@ -501,10 +506,22 @@ ul,ol { list-style:none; }
 
 .ws-mini-wrap { margin-top:3.5rem; }
 .ws-mini-row { display:flex; gap:1rem; margin-top:1.4rem; }
-.ws-mini-box { position:relative; width:92px; height:92px; overflow:hidden; background:var(--bg-2); border:1px solid var(--gold-dim); flex-shrink:0; }
+.ws-mini-box { position:relative; width:92px; height:92px; overflow:hidden; background:var(--bg-2); border:1px solid var(--gold-dim); flex-shrink:0; cursor:pointer; }
 @media(min-width:768px){ .ws-mini-box{ width:110px; height:110px; } }
-.ws-mini-box img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.6s var(--ease); }
+.ws-mini-box img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; transition:opacity 1.6s var(--ease); }
 .ws-mini-box img.on { opacity:1; }
+
+.lightbox {
+  position:fixed; inset:0; z-index:200; background:rgba(6,5,4,.94);
+  display:flex; align-items:center; justify-content:center; padding:2rem;
+  opacity:0; pointer-events:none; transition:opacity .4s var(--ease);
+}
+.lightbox.open { opacity:1; pointer-events:auto; }
+.lightbox img { max-width:100%; max-height:90vh; object-fit:contain; }
+.lightbox-close {
+  position:absolute; top:1.6rem; inset-inline-end:1.6rem; color:var(--ivory);
+  font-size:11px; letter-spacing:.3em; text-transform:uppercase; cursor:pointer;
+}
 
 .ws-list { margin-top:5rem; border-top:1px solid var(--hair); }
 .ws-row {
@@ -659,6 +676,13 @@ html[dir="rtl"] .ftr-links { align-items:flex-start; }
       <span class="logo-sub"><span data-he>יוצרת בנייר</span><span data-en>Paper Artist</span></span>
     </a>
     <div class="hdr-right">
+      <a href="https://www.instagram.com/rivkahaim" target="_blank" rel="noopener" class="hdr-ig" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5"/>
+          <circle cx="12" cy="12" r="4.2"/>
+          <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
       <button class="lang-btn" id="lang-btn" aria-label="Switch language">
         <span data-he>EN</span><span data-en>עברית</span>
       </button>
@@ -670,6 +694,11 @@ html[dir="rtl"] .ftr-links { align-items:flex-start; }
 </header>
 
 <div id="app"></div>
+
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lightbox-close"><span data-he>סגירה</span><span data-en>Close</span></span>
+  <img id="lightbox-img" src="" alt="">
+</div>
 
 <script>
 /* ══ DATA ══════════════════════════════════════════════════════════ */
@@ -891,6 +920,28 @@ hamBtn.addEventListener('click', () => {
 });
 document.querySelectorAll('[data-nav]').forEach(a => a.addEventListener('click', closeMenu));
 
+/* ══ LIGHTBOX (click-to-enlarge mini boxes) ══ */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+function openLightbox(src) {
+  lightboxImg.src = src;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+document.addEventListener('click', e => {
+  const box = e.target.closest('.ws-mini-box');
+  if (!box) return;
+  const active = box.querySelector('img.on');
+  if (active) openLightbox(active.src);
+});
+
 /* Header scrim on scroll */
 const hdr = document.getElementById('hdr');
 window.addEventListener('scroll', () => {
@@ -1054,8 +1105,8 @@ function footer() {
           <span data-he>${arrL()}נתחיל בשיחה</span><span data-en>Begin a conversation${arrR()}</span>
         </a>
         <p class="ftr-tag">
-          <span data-he>אמנות מקור בנייר, כל יצירה חתומה, יחידה במינה.</span>
-          <span data-en>Original art in paper, every piece signed, one of a kind.</span>
+          <span data-he>רבקה חיים, יוצרת בנייר</span>
+          <span data-en>Rivka Haim, Paper Creator</span>
         </p>
       </div>
       <div class="ftr-links">
@@ -1111,7 +1162,7 @@ function buildHome() {
 
     <!-- Ateliers -->
     <div class="panel rv" data-goto="workshops" role="button" tabindex="0">
-      <img src="images/workshops/studio-table.jpg" alt="" loading="lazy">
+      <img src="images/workshops/group-session.jpg" alt="" loading="lazy">
       <div class="panel-veil"></div>
       <div class="panel-cnt">
         <p class="panel-no">II</p>
@@ -1150,15 +1201,10 @@ function buildHome() {
       <div class="acq-bg"><img src="images/gallery/lp-02.jpg" alt="" loading="lazy"></div>
       <div class="acq-veil"></div>
       <div class="acq-cnt rv">
-        <p class="label gold" style="margin-bottom:2rem"><span data-he>רכישה והזמנות</span><span data-en>Acquisitions</span></p>
         <h2 class="acq-h serif">
-          <span data-he>כל יצירה מלווה בתעודת מקוריות חתומה, ונמסרת ישירות מהסטודיו.</span>
-          <span data-en>Every work is accompanied by a signed certificate of authenticity, delivered directly from the studio.</span>
+          <span data-he>ליצירת קשר</span>
+          <span data-en>Get in Touch</span>
         </h2>
-        <p class="acq-p">
-          <span data-he>לרכישת יצירה או לתיאום צפייה פרטית בסטודיו, נשמח לעמוד לרשותכם.</span>
-          <span data-en>For acquisitions or to arrange a private viewing at the studio, we are at your service.</span>
-        </p>
         <a href="#/contact" class="btn" style="margin-top:3rem"><span data-he>ליצירת קשר</span><span data-en>Private Enquiries</span></a>
       </div>
     </section>
@@ -1307,6 +1353,18 @@ function buildAbout() {
             <span data-he>רבקה חיים, אמנית נייר נוזלי ופיסול</span>
             <span data-en>Rivka Haim, Liquid Paper Artist &amp; Sculptor</span>
           </h2>
+          <p class="ab-quote serif">
+            <span data-he>"לכל פיסת נייר יש חיים שלמים שמחכים להתגלות"</span>
+            <span data-en>"Every piece of paper has a whole life waiting to be discovered"</span>
+          </p>
+          <p class="ab-quote-sub">
+            <span data-he>רבקה חיים, יוצרת בנייר, מחברת בין חומר לדמיון, בין אנשים להשראה, במסע בלתי פוסק של גילוי, התרגשות ויצירה.</span>
+            <span data-en>Rivka Haim, paper creator, connecting material to imagination, people to inspiration, in an unceasing journey of discovery, excitement and creation.</span>
+          </p>
+          <p class="ab-quote-cta serif">
+            <span data-he>בואו לראות איך נייר הופך לאמנות</span>
+            <span data-en>Come see how paper becomes art</span>
+          </p>
           <div class="ab-body">
             <p>
               <span data-he>אני עובדת עם נייר נוזלי כבר שנים, טכניקה שמאפשרת לחומר לנוע בדיוק כפי שהוא רוצה, ורק אחר כך אני נכנסת לתוכו. כל יצירה מתחילה בלחות ובמרחב פתוח, ומגיעה לאיזשהו מקום שהוא לא לגמרי שלי ולא לגמרי של הנייר, שניהם ביחד.</span>
@@ -1390,7 +1448,7 @@ function buildWorkshops() {
 
   return `<div>
     <div class="ws-hero">
-      <img src="images/workshops/studio-table.jpg" alt="">
+      <img src="images/workshops/group-session.jpg" alt="">
       <div class="ws-hero-veil"></div>
       <div class="ws-hero-cnt">
         <p class="label pg-eye"><span data-he>סדנאות הסטודיו</span><span data-en>Studio Ateliers</span></p>
@@ -1403,9 +1461,9 @@ function buildWorkshops() {
         <span data-en>Intimate studio sessions for all levels of experience. Every session includes all materials, and an original piece that stays with you.</span>
       </p>
       <div class="bigshot rv">
-        <img src="images/workshops/group-session.jpg" alt="" loading="lazy">
+        <img src="images/workshops/action-1.jpg" alt="" loading="lazy">
         <div class="bigshot-veil"></div>
-        <p class="bigshot-cap"><span data-he>מפגש קבוצתי בסטודיו</span><span data-en>A group session in the studio</span></p>
+        <p class="bigshot-cap"><span data-he>תפירה ביד, רק נייר</span><span data-en>Hand stitching, paper only</span></p>
       </div>
       <div class="bigshot rv">
         <img src="images/workshops/notebooks.jpg" alt="" loading="lazy">
