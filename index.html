@@ -440,6 +440,7 @@ ul,ol { list-style:none; }
   border:1px solid var(--gold-dim); padding:.5rem; background:var(--bg);
 }
 .ab-img-accent img { width:100%; height:100%; object-fit:cover; }
+.ab-img-cap { margin-top:3.5rem; font-size:1.05rem; font-weight:300; line-height:1.6; color:var(--ivory-dim); }
 .ab-h1 { font-family:var(--serif); font-weight:300; line-height:1.25; margin-top:1.4rem; font-size:clamp(1.7rem,3.2vw,2.6rem); }
 .ab-quote { margin-top:1.6rem; font-style:italic; font-weight:300; font-size:clamp(1.15rem,2vw,1.5rem); line-height:1.6; color:var(--gold); }
 .ab-quote-sub { margin-top:1rem; font-size:.9rem; letter-spacing:.02em; line-height:1.7; color:var(--ivory-ftn); }
@@ -1330,8 +1331,8 @@ function buildAbout() {
       <div class="ab-hero-cnt">
         <p class="label gold" style="margin-bottom:1.4rem"><span data-he>האמנית</span><span data-en>The Artist</span></p>
         <h1 class="ab-hero-h serif">
-          <span data-he>אני עובדת עם נייר<br>כי הוא חי בידיים.</span>
-          <span data-en>I work with paper<br>because it lives in your hands.</span>
+          <span data-he>רבקה חיים, אמנית נייר נוזלי ופיסול<br>מאז שאני זוכרת את עצמי אני יוצרת בידיים.</span>
+          <span data-en>Rivka Haim, Liquid Paper Artist &amp; Sculptor<br>For as long as I can remember, I've created with my hands.</span>
         </h1>
       </div>
     </div>
@@ -1346,6 +1347,10 @@ function buildAbout() {
               <img src="images/portrait/rivka-studio.jpg" alt="" loading="lazy">
             </div>
           </div>
+          <p class="ab-img-cap serif">
+            <span data-he>היי, אני רבקה חיים, אמנית, יוצרת, מדריכה וחוקרת.</span>
+            <span data-en>Hi, I'm Rivka Haim, artist, creator, instructor and researcher.</span>
+          </p>
         </div>
         <div class="ab-c7 rv">
           <p class="label gold"><span data-he>אודות</span><span data-en>About</span></p>
@@ -1481,9 +1486,8 @@ function buildWorkshops() {
       <div class="ws-mini-wrap rv">
         <p class="label gold"><span data-he>עבודות תלמידים</span><span data-en>Students' work</span></p>
         <div class="ws-mini-row">
-          <div class="ws-mini-box"><img src="images/gallery/students-figure.jpg" alt="" class="on"><img src="images/gallery/students-boat.jpg" alt=""><img src="images/gallery/students-trays.jpg" alt=""></div>
-          <div class="ws-mini-box"><img src="images/gallery/students-boat.jpg" alt="" class="on"><img src="images/gallery/students-trays.jpg" alt=""><img src="images/gallery/students-figure.jpg" alt=""></div>
-          <div class="ws-mini-box"><img src="images/gallery/students-trays.jpg" alt="" class="on"><img src="images/gallery/students-figure.jpg" alt=""><img src="images/gallery/students-boat.jpg" alt=""></div>
+          <div class="ws-mini-box"><img src="images/gallery/students-boat.jpg" alt="" class="on"><img src="images/gallery/students-trays.jpg" alt=""></div>
+          <div class="ws-mini-box"><img src="images/gallery/students-trays.jpg" alt="" class="on"><img src="images/gallery/students-boat.jpg" alt=""></div>
         </div>
       </div>
       <div class="ws-list">${rows}</div>
@@ -1515,7 +1519,6 @@ function buildStudio() {
   ).join('');
 
   const studentImgs = [
-    { img:'images/gallery/students-figure.jpg', cHe:'דמות מנייר', cEn:'A paper figure' },
     { img:'images/gallery/students-boat.jpg',    cHe:'סירת נייר', cEn:'A paper boat' },
     { img:'images/gallery/students-trays.jpg',   cHe:'מגשים מעוטרים', cEn:'Decorated trays' },
   ];
