@@ -505,6 +505,13 @@ ul,ol { list-style:none; }
 .bigshot-cap { position:absolute; inset-inline:0; bottom:0; padding:1.6rem 1.5rem; color:var(--ivory); font-size:11px; letter-spacing:.28em; text-transform:uppercase; }
 @media(min-width:768px){ .bigshot-cap{ padding:2.4rem 4rem; } }
 
+/* Contained image grid — never crops the artwork */
+.stu-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2.2rem 1.5rem; margin-top:1.8rem; }
+@media(min-width:640px){ .stu-grid{ grid-template-columns:repeat(3,1fr); gap:2.8rem 2rem; } }
+.stu-card-img { position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--bg-2); }
+.stu-card-img img { width:100%; height:100%; object-fit:contain; }
+.stu-card-cap { margin-top:.9rem; color:var(--ivory-ftn); font-size:9.5px; letter-spacing:.26em; text-transform:uppercase; text-align:center; }
+
 .ws-mini-wrap { margin-top:3.5rem; }
 .ws-mini-row { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.4rem; }
 .ws-mini-box { position:relative; width:92px; height:92px; overflow:hidden; background:var(--bg-2); border:1px solid var(--gold-dim); flex-shrink:0; cursor:pointer; }
@@ -801,7 +808,7 @@ const AW = [
     dEn:'A fox figure in a green dress, hand-built paper sculpture, somewhere between fable and reality.' },
   { slug:'sc-pinocchio',
     img:'images/gallery/sc-pinocchio.jpg',
-    imgs:['images/gallery/sc-pinocchio.jpg','images/gallery/sc-pinocchio-2.jpg'],
+    imgs:['images/gallery/sc-pinocchio.jpg','images/gallery/sc-pinocchio-2.jpg','images/gallery/sc-boy.jpg','images/gallery/sc-boy-2.jpg'],
     tHe:'פינוקיו', tEn:'Pinocchio',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
@@ -809,7 +816,7 @@ const AW = [
     dHe:'פינוקיו יושב על ערימת ספרים, פיסול נייר בעבודת יד, מפרקים נעים.',
     dEn:'Pinocchio seated on a stack of books, hand-built paper sculpture with moving joints.' },
   { slug:'sc-bird',
-    img:'images/gallery/sc-bird.jpg', pos:'top',
+    img:'images/gallery/sc-bird.jpg', fit:'contain',
     tHe:'ציפור', tEn:'Bird',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
@@ -833,24 +840,6 @@ const AW = [
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'פיסול ראש ברוגע מהורהר, בגימור פטינה הדומה לברונזה, עבודת יד מלאה.',
     dEn:'A serene, contemplative head sculpture finished in a bronze-like patina, entirely hand-built.' },
-  { slug:'sc-boy',
-    img:'images/gallery/sc-boy.jpg',
-    imgs:['images/gallery/sc-boy.jpg','images/gallery/sc-boy-2.jpg'],
-    tHe:'ילד בכובע אדום', tEn:'Boy in a Red Cap',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
-    mHe:'פיסול נייר, מפרקים נעים', mEn:'Paper sculpture, moving joints',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
-    dHe:'דמות ילד עם כובע אדום ומפרקים נעים, פיסול נייר בעבודת יד.',
-    dEn:'A boy figure in a red cap with moving joints, hand-built paper sculpture.' },
-  { slug:'sc-owl',
-    img:'images/gallery/sc-owl.jpg',
-    tHe:'ינשוף', tEn:'Owl',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
-    mHe:'פיסול נייר', mEn:'Paper sculpture',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
-    dHe:'ינשוף מנייר בעבודת יד, נקודות עדינות וגוונים שקטים.',
-    dEn:'A hand-built paper owl, delicate speckling in quiet tones.' },
-
   /* ── אובייקטים מנייר ── */
   { slug:'obj-dress',
     img:'images/gallery/obj-dress.jpg',
@@ -862,6 +851,7 @@ const AW = [
     dEn:'A white dress created entirely from paper, delicate handwork on a copper hanger.' },
   { slug:'obj-bag',
     img:'images/gallery/obj-bag.jpg',
+    imgs:['images/gallery/obj-bag.jpg','images/gallery/obj-bronze.jpg'],
     tHe:'תיק כתף', tEn:'Shoulder Bag',
     cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
     mHe:'רק נייר', mEn:'Paper only',
@@ -900,14 +890,6 @@ const AW = [
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'מגש נייר קשיח ללחם, טקסטורה של אריגה, כולו נייר.',
     dEn:'A rigid paper bread tray, woven texture, all paper.' },
-  { slug:'obj-flapbag',
-    img:'images/gallery/obj-flapbag.jpg',
-    tHe:'תיק עם אבזם', tEn:'Buckle Flap Bag',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
-    mHe:'רק נייר', mEn:'Paper only',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
-    dHe:'תיק עם דש ואבזם טבעת, עבודת יד עדינה, רק נייר.',
-    dEn:'A flap bag with a ring buckle, delicate handwork, paper only.' },
   { slug:'obj-journals',
     img:'images/gallery/obj-journals.jpg',
     tHe:'מחברות בעבודת יד', tEn:'Handmade Journals',
@@ -916,14 +898,6 @@ const AW = [
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'מחברות כרוכות ביד, כל אחת עם כריכה ייחודית משלה.',
     dEn:'Hand-bound journals, each with its own one-of-a-kind cover.' },
-  { slug:'obj-bronze',
-    img:'images/gallery/obj-bronze.jpg',
-    tHe:'תיק ברונזה', tEn:'Bronze Tote',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
-    mHe:'רק נייר', mEn:'Paper only',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
-    dHe:'תיק כתף בגוון ברונזה עמוק, עבודת יד, רק נייר.',
-    dEn:'A shoulder tote in a deep bronze tone, handmade, paper only.' },
 ];
 
 /* ══ LANGUAGE ══ */
@@ -1265,7 +1239,7 @@ function buildGallery(cat) {
   const cards = list.map((w, i) =>
     `<div class="wcard rv" data-slug="${w.slug}" role="button" tabindex="0" style="transition-delay:${(i%2)*90}ms">
       <div class="wcard-img">
-        ${w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}" loading="lazy" style="object-position:center ${w.pos||'center'}">` : iph('[תמונה]','[IMAGE]')}
+        ${w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}" loading="lazy" style="object-position:center ${w.pos||'center'};object-fit:${w.fit||'cover'}">` : iph('[תמונה]','[IMAGE]')}
       </div>
       <div class="wcard-info">
         <div>
@@ -1315,7 +1289,7 @@ function buildWork(w) {
     <div class="wd-hero">
       ${gallery
         ? `<div class="wd-hero-scroll">${w.imgs.map(im => `<div><img src="${im}" alt="${T(w.tHe,w.tEn)}"></div>`).join('')}</div>`
-        : (w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}" style="object-position:center ${w.pos||'center'}">` : iph('[תמונת כיסוי]','[COVER IMAGE]'))}
+        : (w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}" style="object-position:center ${w.pos||'center'};object-fit:${w.fit||'cover'}">` : iph('[תמונת כיסוי]','[COVER IMAGE]'))}
       <div class="wd-grad"></div>
       <div class="wd-btm">
         <h1 class="wd-htitle serif"><span data-he>${w.tHe}</span><span data-en>${w.tEn}</span></h1>
@@ -1571,14 +1545,14 @@ function buildStudio() {
     { img:'images/gallery/students-cat1.jpg',    cHe:'חתול', cEn:'A cat' },
     { img:'images/gallery/students-mimes.jpg',   cHe:'ליצנים', cEn:'Clowns' },
     { img:'images/gallery/students-dog2.jpg',    cHe:'כלבלב מעיתון', cEn:'A newspaper puppy' },
+    { img:'images/gallery/sc-owl.jpg',           cHe:'ינשוף', cEn:'An owl' },
   ];
-  const studentGrid = studentImgs.map(s =>
-    `<div class="bigshot rv">
-      <img src="${s.img}" alt="" loading="lazy">
-      <div class="bigshot-veil"></div>
-      <p class="bigshot-cap"><span data-he>${s.cHe}</span><span data-en>${s.cEn}</span></p>
+  const studentGrid = `<div class="stu-grid">${studentImgs.map(s =>
+    `<div class="rv">
+      <div class="stu-card-img"><img src="${s.img}" alt="" loading="lazy"></div>
+      <p class="stu-card-cap"><span data-he>${s.cHe}</span><span data-en>${s.cEn}</span></p>
     </div>`
-  ).join('');
+  ).join('')}</div>`;
 
   return `<div>
     <div class="ws-hero">
