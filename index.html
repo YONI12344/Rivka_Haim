@@ -1357,14 +1357,36 @@ function buildAbout() {
             <span data-he>"לכל פיסת נייר יש חיים שלמים שמחכים להתגלות"</span>
             <span data-en>"Every piece of paper has a whole life waiting to be discovered"</span>
           </p>
-          <p class="ab-quote-sub">
-            <span data-he>רבקה חיים, יוצרת בנייר, מחברת בין חומר לדמיון, בין אנשים להשראה, במסע בלתי פוסק של גילוי, התרגשות ויצירה.</span>
-            <span data-en>Rivka Haim, paper creator, connecting material to imagination, people to inspiration, in an unceasing journey of discovery, excitement and creation.</span>
-          </p>
-          <p class="ab-quote-cta serif">
-            <span data-he>בואו לראות איך נייר הופך לאמנות</span>
-            <span data-en>Come see how paper becomes art</span>
-          </p>
+          <div class="ab-body">
+            <p>
+              <span data-he>היי, אני רבקה חיים, אמנית, יוצרת, מדריכה וחוקרת.</span>
+              <span data-en>Hi, I'm Rivka Haim, artist, creator, instructor and researcher.</span>
+            </p>
+            <p>
+              <span data-he>מאז שאני זוכרת את עצמי אני יוצרת בידיים. לפני כעשור גיליתי שהנייר הוא החומר שמאפשר לי לבטא את עצמי באופן המדויק ביותר. דווקא בפשטות שלו, בזמינות שלו וביכולת שלו להתחבר כמעט לכל חומר אחר, הוא פותח בפניי עולם אינסופי של חקירה וגילוי.</span>
+              <span data-en>For as long as I can remember, I've created with my hands. About a decade ago I discovered that paper is the material that lets me express myself most precisely. It's precisely in its simplicity, its accessibility, and its ability to connect with almost any other material, that it opens an endless world of exploration and discovery for me.</span>
+            </p>
+            <p>
+              <span data-he>בכל פעם מחדש אני מתרגשת מהרגע שבו הנייר מגלה לי אפשרות חדשה שלא ראיתי רגע קודם.</span>
+              <span data-en>Every time, I'm moved anew by the moment paper reveals a possibility I hadn't seen a second before.</span>
+            </p>
+            <p>
+              <span data-he>היצירה עבורי היא הרבה מעבר לעיסוק בחומר. היא מרחב של התבוננות, של ריפוי ושל נחמה. כשאני יוצרת, הידיים עובדות, המחשבות נרגעות, ומשהו חדש מתבהר.</span>
+              <span data-en>Creating, for me, is far more than working with a material. It's a space for reflection, for healing, for comfort. When I create, my hands work, my thoughts settle, and something new becomes clear.</span>
+            </p>
+            <p>
+              <span data-he>בסטודיו אני יוצרת ומלווה אנשים במסע היצירתי שלהם. אני בוחרת להעניק חיים חדשים לחומרים שסיימו את תפקידם המקורי: דפים, שקיות וחומרים יומיומיים שהיו בדרכם לפח או למחזור. דרך היצירה הם מקבלים חיים חדשים ומשמעות חדשה, ומזכירים שלפעמים דווקא מה שנראה חסר ערך, טומן בחובו פוטנציאל אינסופי.</span>
+              <span data-en>In the studio I create, and accompany people on their own creative journey. I choose to give new life to materials that have finished their original purpose, paper, bags, everyday things that were on their way to the trash or the recycling bin. Through creation they receive new life and new meaning, a reminder that what looks worthless often holds infinite potential.</span>
+            </p>
+            <p>
+              <span data-he>אני לא רק מלמדת פיסול בנייר, אני מזמינה אותך לעצור לרגע, ליצור, ולגלות מחדש את היכולת להתנסות, להתרגש ולמצוא שקט בתוך העשייה.</span>
+              <span data-en>I don't just teach paper sculpture. I invite you to pause for a moment, to create, and to rediscover the ability to experiment, to feel moved, and to find quiet inside the doing.</span>
+            </p>
+            <p>
+              <span data-he>אני מאמינה שהמפגש בין הידיים לחומר פותח מרחב של סקרנות, של שקט וגילוי. לעיתים זו יצירה חדשה שנולדת, ולעיתים זו פשוט התחושה שמצאנו, ולו לרגע, מקום לנשום.</span>
+              <span data-en>I believe the meeting between hands and material opens a space of curiosity, quiet and discovery. Sometimes what's born is a new work. Sometimes it's simply the feeling that we found, even for a moment, a place to breathe.</span>
+            </p>
+          </div>
           <div class="ab-divider"></div>
           <div class="ab-list">${listItems}</div>
           <div class="ab-cta-wrap">
@@ -1483,8 +1505,6 @@ function buildStudio() {
   const studioImgs = [
     { img:'images/portrait/studio-corner.jpg',  cHe:'הסטודיו', cEn:'The Studio' },
     { img:'images/portrait/studio-corner2.jpg', cHe:'חומרי גלם', cEn:'Raw materials' },
-    { img:'images/portrait/studio-table2.jpg',  cHe:'שולחן העבודה', cEn:'The work table' },
-    { img:'images/workshops/studio-tools.jpg',  cHe:'כלי הסטודיו', cEn:"The studio's tools" },
   ];
   const studioGrid = studioImgs.map(s =>
     `<div class="bigshot rv">
