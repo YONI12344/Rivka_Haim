@@ -506,7 +506,7 @@ ul,ol { list-style:none; }
 @media(min-width:768px){ .bigshot-cap{ padding:2.4rem 4rem; } }
 
 .ws-mini-wrap { margin-top:3.5rem; }
-.ws-mini-row { display:flex; gap:1rem; margin-top:1.4rem; }
+.ws-mini-row { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.4rem; }
 .ws-mini-box { position:relative; width:92px; height:92px; overflow:hidden; background:var(--bg-2); border:1px solid var(--gold-dim); flex-shrink:0; cursor:pointer; }
 @media(min-width:768px){ .ws-mini-box{ width:110px; height:110px; } }
 .ws-mini-box img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; transition:opacity 1.6s var(--ease); }
@@ -755,6 +755,22 @@ const AW = [
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'רשת של אריחים מצוירים ביד בגווני זהב וכתום, כל משבצת עולם קטן משלה.',
     dEn:'A grid of hand-painted tiles in gold and amber tones, each square its own small world.' },
+  { slug:'lp-pastel',
+    img:'images/gallery/lp-16.jpg',
+    tHe:'פסים בפסטל', tEn:'Stripes in Pastel',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dHe:'שורות של צבעי פסטל על רשת עדינה, כל פס גוון משלו.',
+    dEn:'Rows of pastel colour over a delicate grid, each stripe its own shade.' },
+  { slug:'lp-swirls',
+    img:'images/gallery/lp-17.jpg',
+    tHe:'ספירלות בכתום', tEn:'Spirals in Orange',
+    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    mHe:'נייר נוזלי', mEn:'Liquid paper',
+    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dHe:'קווים מסתלסלים בכתום שרוף, תנועה חופשית על רקע לבן.',
+    dEn:'Swirling lines in burnt orange, free movement over a white ground.' },
   /* ── פיסול ואובייקטים למכירה ── */
   { slug:'sc-ballerina',
     img:'images/gallery/h-01.jpg',
@@ -817,6 +833,23 @@ const AW = [
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'פיסול ראש ברוגע מהורהר, בגימור פטינה הדומה לברונזה, עבודת יד מלאה.',
     dEn:'A serene, contemplative head sculpture finished in a bronze-like patina, entirely hand-built.' },
+  { slug:'sc-boy',
+    img:'images/gallery/sc-boy.jpg',
+    imgs:['images/gallery/sc-boy.jpg','images/gallery/sc-boy-2.jpg'],
+    tHe:'ילד בכובע אדום', tEn:'Boy in a Red Cap',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    mHe:'פיסול נייר, מפרקים נעים', mEn:'Paper sculpture, moving joints',
+    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dHe:'דמות ילד עם כובע אדום ומפרקים נעים, פיסול נייר בעבודת יד.',
+    dEn:'A boy figure in a red cap with moving joints, hand-built paper sculpture.' },
+  { slug:'sc-owl',
+    img:'images/gallery/sc-owl.jpg',
+    tHe:'ינשוף', tEn:'Owl',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    mHe:'פיסול נייר', mEn:'Paper sculpture',
+    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dHe:'ינשוף מנייר בעבודת יד, נקודות עדינות וגוונים שקטים.',
+    dEn:'A hand-built paper owl, delicate speckling in quiet tones.' },
 
   /* ── אובייקטים מנייר ── */
   { slug:'obj-dress',
@@ -883,6 +916,14 @@ const AW = [
     dims:'', yr:'2026', price:'מחיר לפי פנייה',
     dHe:'מחברות כרוכות ביד, כל אחת עם כריכה ייחודית משלה.',
     dEn:'Hand-bound journals, each with its own one-of-a-kind cover.' },
+  { slug:'obj-bronze',
+    img:'images/gallery/obj-bronze.jpg',
+    tHe:'תיק ברונזה', tEn:'Bronze Tote',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    mHe:'רק נייר', mEn:'Paper only',
+    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dHe:'תיק כתף בגוון ברונזה עמוק, עבודת יד, רק נייר.',
+    dEn:'A shoulder tote in a deep bronze tone, handmade, paper only.' },
 ];
 
 /* ══ LANGUAGE ══ */
@@ -1486,8 +1527,10 @@ function buildWorkshops() {
       <div class="ws-mini-wrap rv">
         <p class="label gold"><span data-he>עבודות תלמידים</span><span data-en>Students' work</span></p>
         <div class="ws-mini-row">
-          <div class="ws-mini-box"><img src="images/gallery/students-boat.jpg" alt="" class="on"><img src="images/gallery/students-trays.jpg" alt=""></div>
-          <div class="ws-mini-box"><img src="images/gallery/students-trays.jpg" alt="" class="on"><img src="images/gallery/students-boat.jpg" alt=""></div>
+          <div class="ws-mini-box"><img src="images/gallery/students-boat.jpg" alt="" class="on"><img src="images/gallery/students-mimes.jpg" alt=""><img src="images/gallery/students-bull.jpg" alt=""></div>
+          <div class="ws-mini-box"><img src="images/gallery/students-tophat.jpg" alt="" class="on"><img src="images/gallery/students-trays.jpg" alt=""><img src="images/gallery/students-cat1.jpg" alt=""></div>
+          <div class="ws-mini-box"><img src="images/gallery/students-cat2.jpg" alt="" class="on"><img src="images/gallery/students-anna.jpg" alt=""><img src="images/gallery/students-dog2.jpg" alt=""></div>
+          <div class="ws-mini-box"><img src="images/gallery/students-anna.jpg" alt="" class="on"><img src="images/gallery/students-bull.jpg" alt=""><img src="images/gallery/students-tophat.jpg" alt=""></div>
         </div>
       </div>
       <div class="ws-list">${rows}</div>
@@ -1521,6 +1564,13 @@ function buildStudio() {
   const studentImgs = [
     { img:'images/gallery/students-boat.jpg',    cHe:'סירת נייר', cEn:'A paper boat' },
     { img:'images/gallery/students-trays.jpg',   cHe:'מגשים מעוטרים', cEn:'Decorated trays' },
+    { img:'images/gallery/students-tophat.jpg',  cHe:'ילד עם כובע', cEn:'A boy with a hat' },
+    { img:'images/gallery/students-cat2.jpg',    cHe:'חתולה עם פרחים', cEn:'A cat with flowers' },
+    { img:'images/gallery/students-bull.jpg',    cHe:'שור', cEn:'A bull' },
+    { img:'images/gallery/students-anna.jpg',    cHe:'כלבה, אנה', cEn:'A dog, Anna' },
+    { img:'images/gallery/students-cat1.jpg',    cHe:'חתול', cEn:'A cat' },
+    { img:'images/gallery/students-mimes.jpg',   cHe:'ליצנים', cEn:'Clowns' },
+    { img:'images/gallery/students-dog2.jpg',    cHe:'כלבלב מעיתון', cEn:'A newspaper puppy' },
   ];
   const studentGrid = studentImgs.map(s =>
     `<div class="bigshot rv">
