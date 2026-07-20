@@ -1267,7 +1267,6 @@ function buildGallery(cat) {
       <div class="wcard-info">
         <div>
           <p class="wcard-cat"><span data-he>${w.cHe}</span><span data-en>${w.cEn}</span></p>
-          <p class="wcard-title"><span data-he>${w.tHe}</span><span data-en>${w.tEn}</span></p>
         </div>
         ${w.yr ? `<p class="wcard-year">${w.yr}</p>` : ''}
       </div>
@@ -1314,9 +1313,6 @@ function buildWork(w) {
         ? `<div class="wd-hero-scroll">${w.imgs.map(im => `<div><img src="${im}" alt="${T(w.tHe,w.tEn)}"></div>`).join('')}</div>`
         : (w.img ? `<img src="${w.img}" alt="${T(w.tHe,w.tEn)}" style="object-position:center ${w.pos||'center'};object-fit:${w.fit||'cover'}">` : iph('[תמונת כיסוי]','[COVER IMAGE]'))}
       <div class="wd-grad"></div>
-      <div class="wd-btm">
-        <h1 class="wd-htitle serif"><span data-he>${w.tHe}</span><span data-en>${w.tEn}</span></h1>
-      </div>
     </div>
     <div class="wd-body">
       <a href="#/gallery" class="wd-back">${arrL()}<span data-he>חזרה לגלריה</span><span data-en>Back to the gallery</span></a>
@@ -1339,7 +1335,6 @@ function buildWork(w) {
       <div class="wd-next-grad"></div>
       <div class="wd-next-cnt">
         <p class="wd-next-lbl"><span data-he>היצירה הבאה</span><span data-en>Next work</span></p>
-        <p class="wd-next-ttl serif"><span data-he>${next.tHe}</span><span data-en>${next.tEn}</span></p>
         <div class="wd-next-arr"><span data-he>${arrL()}לצפייה ביצירה</span><span data-en>View work${arrR()}</span></div>
       </div>
     </div>
@@ -1561,7 +1556,6 @@ function buildStudio() {
   const studentTeaser = `<div class="stu-grid">${STU.slice(0,4).map(s =>
     `<div class="rv" data-stu-slug="${s.slug}" role="button" tabindex="0">
       <div class="stu-card-img"><img src="${s.img}" alt="" loading="lazy"></div>
-      <p class="stu-card-cap"><span data-he>${s.tHe}</span><span data-en>${s.tEn}</span></p>
     </div>`
   ).join('')}</div>`;
 
@@ -1623,9 +1617,6 @@ function buildStudentsGallery() {
       <div class="wcard-img">
         <img src="${s.img}" alt="${T(s.tHe,s.tEn)}" loading="lazy" style="object-fit:contain">
       </div>
-      <div class="wcard-info">
-        <p class="wcard-title"><span data-he>${s.tHe}</span><span data-en>${s.tEn}</span></p>
-      </div>
     </div>`).join('');
 
   return `<div>
@@ -1648,9 +1639,6 @@ function buildStudentWork(s) {
     <div class="wd-hero">
       <img src="${s.img}" alt="${T(s.tHe,s.tEn)}" style="object-fit:contain">
       <div class="wd-grad"></div>
-      <div class="wd-btm">
-        <h1 class="wd-htitle serif"><span data-he>${s.tHe}</span><span data-en>${s.tEn}</span></h1>
-      </div>
     </div>
     <div class="wd-body">
       <a href="#/students" class="wd-back">${arrL()}<span data-he>חזרה לגלריית התלמידים</span><span data-en>Back to the students' gallery</span></a>
@@ -1660,7 +1648,6 @@ function buildStudentWork(s) {
       <div class="wd-next-grad"></div>
       <div class="wd-next-cnt">
         <p class="wd-next-lbl"><span data-he>העבודה הבאה</span><span data-en>Next piece</span></p>
-        <p class="wd-next-ttl serif"><span data-he>${next.tHe}</span><span data-en>${next.tEn}</span></p>
         <div class="wd-next-arr"><span data-he>${arrL()}לצפייה</span><span data-en>View${arrR()}</span></div>
       </div>
     </div>
