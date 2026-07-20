@@ -667,6 +667,7 @@ html[dir="rtl"] .ftr-links { align-items:flex-start; }
     <a href="#/gallery"   data-nav class="mlink"><span data-he>הגלריה</span><span data-en>The Gallery</span></a>
     <a href="#/workshops" data-nav class="mlink"><span data-he>סדנאות הסטודיו</span><span data-en>Studio Ateliers</span></a>
     <a href="#/studio"    data-nav class="mlink"><span data-he>הסטודיו</span><span data-en>The Studio</span></a>
+    <a href="#/students"  data-nav class="mlink"><span data-he>עבודות תלמידים</span><span data-en>Students' Work</span></a>
     <a href="#/about"     data-nav class="mlink"><span data-he>האמנית</span><span data-en>The Artist</span></a>
     <a href="#/contact"   data-nav class="mlink"><span data-he>יצירת קשר</span><span data-en>Enquiries</span></a>
     <div class="menu-meta">
@@ -900,6 +901,20 @@ const AW = [
     dEn:'Hand-bound journals, each with its own one-of-a-kind cover.' },
 ];
 
+/* ══ STUDENTS' WORK ══ */
+const STU = [
+  { slug:'boat',   img:'images/gallery/students-boat.jpg',   tHe:'סירת נייר',      tEn:'A Paper Boat' },
+  { slug:'trays',  img:'images/gallery/students-trays.jpg',  tHe:'מגשים מעוטרים',  tEn:'Decorated Trays' },
+  { slug:'tophat', img:'images/gallery/students-tophat.jpg', tHe:'ילד עם כובע',    tEn:'A Boy with a Hat' },
+  { slug:'cat2',   img:'images/gallery/students-cat2.jpg',   tHe:'חתולה עם פרחים', tEn:'A Cat with Flowers' },
+  { slug:'bull',   img:'images/gallery/students-bull.jpg',   tHe:'שור',            tEn:'A Bull' },
+  { slug:'anna',   img:'images/gallery/students-anna.jpg',   tHe:'כלבה, אנה',      tEn:'A Dog, Anna' },
+  { slug:'cat1',   img:'images/gallery/students-cat1.jpg',   tHe:'חתול',           tEn:'A Cat' },
+  { slug:'mimes',  img:'images/gallery/students-mimes.jpg',  tHe:'ליצנים',         tEn:'Clowns' },
+  { slug:'dog2',   img:'images/gallery/students-dog2.jpg',   tHe:'כלבלב מעיתון',   tEn:'A Newspaper Puppy' },
+  { slug:'owl',    img:'images/gallery/sc-owl.jpg',          tHe:'ינשוף',          tEn:'An Owl' },
+];
+
 /* ══ LANGUAGE ══ */
 const HL = document.documentElement;
 let lang = localStorage.getItem('rc-lang') || 'he';
@@ -984,6 +999,11 @@ function route() {
   else if (page==='about')     html = buildAbout();
   else if (page==='workshops') html = buildWorkshops();
   else if (page==='studio')    html = buildStudio();
+  else if (page==='students' && sub) {
+    const s = STU.find(a => a.slug === sub);
+    html = s ? buildStudentWork(s) : buildStudentsGallery();
+  }
+  else if (page==='students')  html = buildStudentsGallery();
   else if (page==='contact')   html = buildContact();
   else html = buildHome();
 
@@ -1002,6 +1022,10 @@ function bindEvents() {
   app.querySelectorAll('[data-slug]').forEach(el => {
     el.addEventListener('click', () => navigate('#/work/' + el.dataset.slug));
     el.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') navigate('#/work/'+el.dataset.slug); });
+  });
+  app.querySelectorAll('[data-stu-slug]').forEach(el => {
+    el.addEventListener('click', () => navigate('#/students/' + el.dataset.stuSlug));
+    el.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') navigate('#/students/'+el.dataset.stuSlug); });
   });
   app.querySelectorAll('[data-cat]').forEach(el => {
     el.addEventListener('click', e => { e.preventDefault(); navigate('#/gallery/' + el.dataset.cat); });
@@ -1201,7 +1225,7 @@ function buildHome() {
     </div>
 
     <!-- Students' work -->
-    <div class="panel rv" data-goto="studio" role="button" tabindex="0">
+    <div class="panel rv" data-goto="students" role="button" tabindex="0">
       <img src="images/gallery/students-trays.jpg" alt="" loading="lazy">
       <div class="panel-veil"></div>
       <div class="panel-cnt">
@@ -1535,22 +1559,10 @@ function buildStudio() {
     </div>`
   ).join('');
 
-  const studentImgs = [
-    { img:'images/gallery/students-boat.jpg',    cHe:'סירת נייר', cEn:'A paper boat' },
-    { img:'images/gallery/students-trays.jpg',   cHe:'מגשים מעוטרים', cEn:'Decorated trays' },
-    { img:'images/gallery/students-tophat.jpg',  cHe:'ילד עם כובע', cEn:'A boy with a hat' },
-    { img:'images/gallery/students-cat2.jpg',    cHe:'חתולה עם פרחים', cEn:'A cat with flowers' },
-    { img:'images/gallery/students-bull.jpg',    cHe:'שור', cEn:'A bull' },
-    { img:'images/gallery/students-anna.jpg',    cHe:'כלבה, אנה', cEn:'A dog, Anna' },
-    { img:'images/gallery/students-cat1.jpg',    cHe:'חתול', cEn:'A cat' },
-    { img:'images/gallery/students-mimes.jpg',   cHe:'ליצנים', cEn:'Clowns' },
-    { img:'images/gallery/students-dog2.jpg',    cHe:'כלבלב מעיתון', cEn:'A newspaper puppy' },
-    { img:'images/gallery/sc-owl.jpg',           cHe:'ינשוף', cEn:'An owl' },
-  ];
-  const studentGrid = `<div class="stu-grid">${studentImgs.map(s =>
-    `<div class="rv">
+  const studentTeaser = `<div class="stu-grid">${STU.slice(0,4).map(s =>
+    `<div class="rv" data-stu-slug="${s.slug}" role="button" tabindex="0">
       <div class="stu-card-img"><img src="${s.img}" alt="" loading="lazy"></div>
-      <p class="stu-card-cap"><span data-he>${s.cHe}</span><span data-en>${s.cEn}</span></p>
+      <p class="stu-card-cap"><span data-he>${s.tHe}</span><span data-en>${s.tEn}</span></p>
     </div>`
   ).join('')}</div>`;
 
@@ -1591,9 +1603,69 @@ function buildStudio() {
         <span data-he>מה שנוצר בסדנאות שלנו, עבודות של תלמידות ותלמידים שיצאו מהסטודיו.</span>
         <span data-en>What's made in our ateliers, pieces by students who've passed through the studio.</span>
       </p>
-      ${studentGrid}
+      ${studentTeaser}
+      <div class="ws-custom rv">
+        <p class="ws-custom-h serif">
+          <span data-he>לגלריה המלאה של עבודות התלמידים</span>
+          <span data-en>See the full students' work gallery</span>
+        </p>
+        <a href="#/students" class="btn btn-solid">
+          <span data-he>${arrL()}לגלריה</span><span data-en>Enter the gallery${arrR()}</span>
+        </a>
+      </div>
     </div>
   </div>${footer()}`;
+}
+
+/* ══ STUDENTS' GALLERY ══ */
+function buildStudentsGallery() {
+  const cards = STU.map((s, i) =>
+    `<div class="wcard rv" data-stu-slug="${s.slug}" role="button" tabindex="0" style="transition-delay:${(i%2)*90}ms">
+      <div class="wcard-img">
+        <img src="${s.img}" alt="${T(s.tHe,s.tEn)}" loading="lazy" style="object-fit:contain">
+      </div>
+      <div class="wcard-info">
+        <p class="wcard-title"><span data-he>${s.tHe}</span><span data-en>${s.tEn}</span></p>
+      </div>
+    </div>`).join('');
+
+  return `<div>
+    <div class="pg-hero">
+      <img src="images/gallery/students-cat2.jpg" alt="">
+      <div class="pg-hero-veil"></div>
+      <div class="pg-hero-cnt">
+        <p class="label pg-eye"><span data-he>מהסטודיו</span><span data-en>From the Studio</span></p>
+        <h1 class="pg-h1 serif"><span data-he>עבודות תלמידים</span><span data-en>Students' Work</span></h1>
+      </div>
+    </div>
+    <div class="works-grid" style="padding-top:4.5rem">${cards}</div>
+  </div>${footer()}`;
+}
+
+function buildStudentWork(s) {
+  const idx  = STU.indexOf(s);
+  const next = STU[(idx+1) % STU.length];
+  return `<article>
+    <div class="wd-hero">
+      <img src="${s.img}" alt="${T(s.tHe,s.tEn)}" style="object-fit:contain">
+      <div class="wd-grad"></div>
+      <div class="wd-btm">
+        <h1 class="wd-htitle serif"><span data-he>${s.tHe}</span><span data-en>${s.tEn}</span></h1>
+      </div>
+    </div>
+    <div class="wd-body">
+      <a href="#/students" class="wd-back">${arrL()}<span data-he>חזרה לגלריית התלמידים</span><span data-en>Back to the students' gallery</span></a>
+    </div>
+    <div class="wd-next" data-stu-slug="${next.slug}" role="button" tabindex="0">
+      <img src="${next.img}" alt="${T(next.tHe,next.tEn)}" loading="lazy" style="object-fit:contain">
+      <div class="wd-next-grad"></div>
+      <div class="wd-next-cnt">
+        <p class="wd-next-lbl"><span data-he>העבודה הבאה</span><span data-en>Next piece</span></p>
+        <p class="wd-next-ttl serif"><span data-he>${next.tHe}</span><span data-en>${next.tEn}</span></p>
+        <div class="wd-next-arr"><span data-he>${arrL()}לצפייה</span><span data-en>View${arrR()}</span></div>
+      </div>
+    </div>
+  </article>${footer()}`;
 }
 
 /* ══ CONTACT ══ */
