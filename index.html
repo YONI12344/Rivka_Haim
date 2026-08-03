@@ -270,7 +270,7 @@ ul,ol { list-style:none; }
 .panel:hover .panel-go { opacity:1; }
 .panel-go svg, .ftr-cta svg, .wd-next-arr svg { margin-inline:.6rem; vertical-align:middle; }
 
-/* ══ ACQUIRE CTA ══ */
+/* ══ CONTACT CTA ══ */
 .acq { position:relative; overflow:hidden; padding-block:11rem; text-align:center; }
 @media(min-width:768px){ .acq{ padding-block:15rem; } }
 .acq-bg { position:absolute; inset:0; }
@@ -714,190 +714,190 @@ html[dir="rtl"] .ftr-links { align-items:flex-start; }
 /* ══ DATA ══════════════════════════════════════════════════════════ */
 const CATS = [
   { slug:'all',    he:'כל היצירות',              en:'All works' },
-  { slug:'liquid', he:'נייר נוזלי למכירה',        en:'Liquid Paper' },
-  { slug:'pieces', he:'פסלים ואובייקטים למכירה',  en:'Sculptures & Objects' },
+  { slug:'liquid', he:'נייר נוזלי',        en:'Liquid Paper' },
+  { slug:'pieces', he:'פסלים ואובייקטים',  en:'Sculptures & Objects' },
 ];
 
 const AW = [
-  /* ── אמנות לרכישה ── */
+  /* ── גלריית יצירות ── */
   { slug:'lp-wall', featured:true,
     img:'images/gallery/lp-08.jpg',
     tHe:'פסים של צבע', tEn:'Stripes of Colour',
-    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    cSlug:'liquid', cHe:'נייר נוזלי', cEn:'Liquid Paper',
     mHe:'נייר נוזלי, ממוסגר בעץ טבעי', mEn:'Liquid paper, framed in natural wood',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'יצירת נייר נוזלי ממוסגרת מאחורי זכוכית, מוכנה לתלייה. שורות של צבע בקצב שקט.',
     dEn:'A liquid-paper work framed behind glass, ready to hang. Rows of colour in a quiet rhythm.' },
   { slug:'lp-flowers',
     img:'images/gallery/lp-05.jpg',
     imgs:['images/gallery/lp-05.jpg','images/gallery/lp-01.jpg','images/gallery/lp-09.jpg','images/gallery/lp-11.jpg'],
     tHe:'גינה בנייר', tEn:'Garden in Paper',
-    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    cSlug:'liquid', cHe:'נייר נוזלי', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
-    dims:'60 × 80 ס"מ', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'60 × 80 ס"מ', yr:'2026',
     dHe:'פרחים שנולדו מניח נייר רטוב, כל שכבה נפתחת לכיוון אחר. יצירה מקורית חתומה.',
     dEn:'Flowers born from wet paper, each layer opens in its own direction. Original signed work.' },
   { slug:'lp-mosaic',
     img:'images/gallery/lp-10.jpg',
     imgs:['images/gallery/lp-10.jpg','images/gallery/lp-02.jpg','images/gallery/lp-03.jpg','images/gallery/lp-04.jpg'],
     tHe:'אריחים בכחול וירוק', tEn:'Tiles in Blue & Green',
-    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    cSlug:'liquid', cHe:'נייר נוזלי', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'רשת של אריחים מצוירים ביד, כל משבצת עולם קטן משלה.',
     dEn:'A grid of hand-painted tiles, each square its own small world.' },
   { slug:'lp-red',
     img:'images/gallery/lp-12.jpg',
     imgs:['images/gallery/lp-12.jpg','images/gallery/lp-06.jpg'],
     tHe:'פסים באדום', tEn:'Stripes in Red',
-    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    cSlug:'liquid', cHe:'נייר נוזלי', cEn:'Liquid Paper',
     mHe:'נייר נוזלי, ממוסגר בעץ טבעי', mEn:'Liquid paper, framed in natural wood',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'יצירת נייר נוזלי ממוסגרת, שורות של אדום וכתום בקצב חם ותוסס.',
     dEn:'A framed liquid-paper work, rows of red and orange in a lively rhythm.' },
   { slug:'lp-gold-mosaic',
     img:'images/gallery/lp-13.jpg',
     imgs:['images/gallery/lp-13.jpg','images/gallery/lp-14.jpg','images/gallery/lp-15.jpg'],
     tHe:'מוזאיקה בזהב', tEn:'Mosaic in Gold',
-    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    cSlug:'liquid', cHe:'נייר נוזלי', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'רשת של אריחים מצוירים ביד בגווני זהב וכתום, כל משבצת עולם קטן משלה.',
     dEn:'A grid of hand-painted tiles in gold and amber tones, each square its own small world.' },
   { slug:'lp-pastel',
     img:'images/gallery/lp-16.jpg',
     tHe:'פסים בפסטל', tEn:'Stripes in Pastel',
-    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    cSlug:'liquid', cHe:'נייר נוזלי', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'שורות של צבעי פסטל על רשת עדינה, כל פס גוון משלו.',
     dEn:'Rows of pastel colour over a delicate grid, each stripe its own shade.' },
   { slug:'lp-swirls',
     img:'images/gallery/lp-17.jpg',
     tHe:'ספירלות בכתום', tEn:'Spirals in Orange',
-    cSlug:'liquid', cHe:'נייר נוזלי למכירה', cEn:'Liquid Paper',
+    cSlug:'liquid', cHe:'נייר נוזלי', cEn:'Liquid Paper',
     mHe:'נייר נוזלי', mEn:'Liquid paper',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'קווים מסתלסלים בכתום שרוף, תנועה חופשית על רקע לבן.',
     dEn:'Swirling lines in burnt orange, free movement over a white ground.' },
-  /* ── פיסול ואובייקטים למכירה ── */
+  /* ── פיסול ואובייקטים ── */
   { slug:'sc-ballerina',
     img:'images/gallery/h-01.jpg',
     imgs:['images/gallery/h-01.jpg','images/gallery/sc-ballerina-2.jpg'],
     tHe:'רקדנית', tEn:'Ballerina',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'שמלת נייר על כן ברזל, רקדנית שנולדה משכבות של נייר ממוחזר. יצירה מקורית חתומה.',
     dEn:'A paper dress on an iron stand, a dancer born of layered recycled paper. Original signed work.' },
   { slug:'sc-dog',
     img:'images/gallery/sc-dog.jpg',
     imgs:['images/gallery/sc-dog.jpg','images/gallery/sc-dog-2.jpg'],
     tHe:'כלבלב', tEn:'Puppy',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'כלבלב מנייר בעבודת יד, כל פרט, מהעיניים ועד הכפות, מפוסל בשכבות נייר.',
     dEn:'A hand-built paper puppy, every detail, from the eyes to the paws, sculpted in layers of paper.' },
   { slug:'sc-fox',
     img:'images/gallery/sc-fox.jpg',
     imgs:['images/gallery/sc-fox.jpg','images/gallery/sc-fox-2.jpg'],
     tHe:'שועלה', tEn:'Fox Lady',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'דמות שועלה בשמלה ירוקה, פיסול נייר בעבודת יד, בין אגדה למציאות.',
     dEn:'A fox figure in a green dress, hand-built paper sculpture, somewhere between fable and reality.' },
   { slug:'sc-pinocchio',
     img:'images/gallery/sc-pinocchio.jpg',
     imgs:['images/gallery/sc-pinocchio.jpg','images/gallery/sc-pinocchio-2.jpg','images/gallery/sc-boy.jpg','images/gallery/sc-boy-2.jpg'],
     tHe:'פינוקיו', tEn:'Pinocchio',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'פינוקיו יושב על ערימת ספרים, פיסול נייר בעבודת יד, מפרקים נעים.',
     dEn:'Pinocchio seated on a stack of books, hand-built paper sculpture with moving joints.' },
   { slug:'sc-bird',
     img:'images/gallery/sc-bird.jpg', fit:'contain',
     tHe:'ציפור', tEn:'Bird',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'ציפור מנייר לתלייה, עבודת יד, לבית או לגינה מקורה.',
     dEn:'A hanging paper bird, handmade, for the home or a covered garden.' },
   { slug:'sc-vessel-flowers',
     img:'images/gallery/sc-vessel.jpg',
     imgs:['images/gallery/sc-vessel.jpg','images/gallery/sc-vessel-2.jpg'],
     tHe:'כלי ופרחים', tEn:'Vessel with Flowers',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר', mEn:'Paper sculpture',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'כלי נייר מפוסל ביד עם פרחים מיובשים, יצירה שהיא גם אובייקט חי בבית.',
     dEn:'A hand-sculpted paper vessel with dried flowers, a work that lives in the home.' },
   { slug:'sc-bust',
     img:'images/gallery/sc-bust.jpg',
     tHe:'אישה', tEn:'Woman',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'פיסול נייר בגימור פטינה', mEn:'Paper sculpture, patina finish',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'פיסול ראש ברוגע מהורהר, בגימור פטינה הדומה לברונזה, עבודת יד מלאה.',
     dEn:'A serene, contemplative head sculpture finished in a bronze-like patina, entirely hand-built.' },
   /* ── אובייקטים מנייר ── */
   { slug:'obj-dress',
     img:'images/gallery/obj-dress.jpg',
     tHe:'שמלה לבנה', tEn:'White Dress',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'רק נייר', mEn:'Paper only',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'שמלה לבנה שנוצרה כולה מנייר, עבודת יד עדינה על קולב נחושת.',
     dEn:'A white dress created entirely from paper, delicate handwork on a copper hanger.' },
   { slug:'obj-bag',
     img:'images/gallery/obj-bag.jpg',
     imgs:['images/gallery/obj-bag.jpg','images/gallery/obj-bronze.jpg'],
     tHe:'תיק כתף', tEn:'Shoulder Bag',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'רק נייר', mEn:'Paper only',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'תיק כתף תפור ביד, רק נייר. חזק, קל ומפתיע בעמידותו.',
     dEn:'A hand-stitched shoulder bag, paper only. Strong, light, and surprisingly durable.' },
   { slug:'obj-adidas',
     img:'images/gallery/obj-adidas.jpg',
     tHe:'תיק זהב', tEn:'Gold Bag',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'נייר ממוחזר', mEn:'Upcycled paper',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'שקית נייר שהפכה לתיק של ממש, מיחזור בעבודת יד.',
     dEn:'A paper bag reborn as a real tote, upcycling by hand.' },
   { slug:'obj-tote',
     img:'images/gallery/obj-tote.jpg',
     tHe:'תיק נייר וצמר', tEn:'Paper & Wool Bag',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'נייר וצמר', mEn:'Paper & wool',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'תיק בעבודת יד, נייר וצמר בלבד. רך מבחוץ, חזק מבפנים.',
     dEn:'A handmade bag, paper and wool only. Soft outside, strong inside.' },
   { slug:'obj-sack',
     img:'images/gallery/obj-sack.jpg',
     tHe:'תיק שקית', tEn:'Sack Bag',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'רק נייר', mEn:'Paper only',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'שק אחסון פרחוני מנייר, אובייקט שימושי שנוצר כולו ביד.',
     dEn:'A floral paper storage sack, a useful object, made entirely by hand.' },
   { slug:'obj-tray',
     img:'images/gallery/obj-tray.jpg',
     tHe:'מגש ללחם', tEn:'Bread Tray',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'רק נייר', mEn:'Paper only',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'מגש נייר קשיח ללחם, טקסטורה של אריגה, כולו נייר.',
     dEn:'A rigid paper bread tray, woven texture, all paper.' },
   { slug:'obj-journals',
     img:'images/gallery/obj-journals.jpg',
     tHe:'מחברות בעבודת יד', tEn:'Handmade Journals',
-    cSlug:'pieces', cHe:'פסלים ואובייקטים למכירה', cEn:'Sculptures & Objects',
+    cSlug:'pieces', cHe:'פסלים ואובייקטים', cEn:'Sculptures & Objects',
     mHe:'נייר וכריכה בעבודת יד', mEn:'Paper, hand-bound',
-    dims:'', yr:'2026', price:'מחיר לפי פנייה',
+    dims:'', yr:'2026',
     dHe:'מחברות כרוכות ביד, כל אחת עם כריכה ייחודית משלה.',
     dEn:'Hand-bound journals, each with its own one-of-a-kind cover.' },
 ];
@@ -1041,7 +1041,7 @@ function bindEvents() {
     const subject = f.querySelector('[name=subject]').value;
     const msg = f.querySelector('[name=message]').value.trim();
     const subjectMap = {
-      sale:'רכישת יצירה', wine:'נייר ויין', sculpture:'קבוצת פיסול', other:'אחר'
+      artwork:'שאלה על יצירה', wine:'נייר ויין', sculpture:'קבוצת פיסול', other:'אחר'
     };
     const subLabel = subjectMap[subject] || subject;
     const text = `שלום רבקה!\nשמי ${name}.\nנושא: ${subLabel}\n\n${msg}`;
@@ -1165,8 +1165,8 @@ function footer() {
 function buildHome() {
   const panels = [
     { slug:'all', img:'images/gallery/lp-08.jpg', no:'I',
-      nHe:'אמנות לרכישה', nEn:'Available Works',
-      sHe:'זמינות לרכישה', sEn:'Available for acquisition' },
+      nHe:'כל היצירות', nEn:'All Works',
+      sHe:'גלריית האמנות', sEn:'The Gallery' },
   ];
 
   const panelHtml = panels.map(p =>
@@ -1236,7 +1236,7 @@ function buildHome() {
       </div>
     </div>
 
-    <!-- Acquire CTA -->
+    <!-- Contact CTA -->
     <section class="acq">
       <div class="acq-bg"><img src="images/gallery/lp-02.jpg" alt="" loading="lazy"></div>
       <div class="acq-veil"></div>
@@ -1298,7 +1298,6 @@ function buildWork(w) {
     w.mHe   ? { kh:'חומר',   ke:'Medium',     vh:w.mHe,   ve:w.mEn   } : null,
     w.dims  ? { kh:'מידות',  ke:'Dimensions', vh:w.dims,  ve:w.dims  } : null,
     w.yr    ? { kh:'שנה',    ke:'Year',       vh:w.yr,    ve:w.yr    } : null,
-    w.price ? { kh:'מחיר',   ke:'Price',      vh:w.price, ve:'On request' } : null,
   ].filter(Boolean);
 
   const meta = metaRows.map(m => `<div>
@@ -1323,9 +1322,9 @@ function buildWork(w) {
         <div class="wd-c8">
           <p class="wd-desc serif rv"><span data-he>${w.dHe}</span><span data-en>${w.dEn}</span></p>
           <div class="wd-cta rv">
-            <a href="${wa('שלום רבקה! ראיתי את היצירה "' + w.tHe + '" ואני מעוניין/ת לרכוש אותה. אשמח לשמוע פרטים 🙏')}" target="_blank" rel="noopener" class="btn">
-              <span data-he>פנייה לרכישה</span>
-              <span data-en>Enquire to acquire</span>
+            <a href="${wa('שלום רבקה! ראיתי את היצירה "' + w.tHe + '" ואשמח לשמוע פרטים נוספים 🙏')}" target="_blank" rel="noopener" class="btn">
+              <span data-he>יצירת קשר</span>
+              <span data-en>Get in touch</span>
             </a>
           </div>
         </div>
@@ -1345,8 +1344,8 @@ function buildWork(w) {
 /* ══ ABOUT ══ */
 function buildAbout() {
   const services = [
-    { he:'נייר נוזלי למכירה, יצירות מקור זמינות', en:'Liquid Paper, original works, ready to acquire' },
-    { he:'פסלים ואובייקטים למכירה, פיסול נייר, תיקים וכלים', en:'Sculptures & Objects, hand-built paper forms, bags and vessels' },
+    { he:'נייר נוזלי, יצירות מקור', en:'Liquid Paper, original works' },
+    { he:'פסלים ואובייקטים, פיסול נייר, תיקים וכלים', en:'Sculptures & Objects, hand-built paper forms, bags and vessels' },
     { he:'סדנאות סטודיו, קבוצת פיסול ונייר ויין', en:'Studio Ateliers, Sculpture Group and Paper & Wine' },
     { he:'עבודות תלמידים, מה שנוצר בסדנאות שלנו', en:"Students' Work, what's made in our ateliers" },
   ];
@@ -1658,7 +1657,7 @@ function buildStudentWork(s) {
 /* ══ CONTACT ══ */
 function buildContact() {
   const subjects = [
-    { v:'sale',       he:'רכישת יצירה',        en:'Acquire an artwork' },
+    { v:'artwork',    he:'שאלה על יצירה',       en:'Question about an artwork' },
     { v:'wine',       he:'נייר ויין',           en:'Paper & Wine' },
     { v:'sculpture',  he:'קבוצת פיסול',         en:'Sculpture group' },
     { v:'other',      he:'אחר',                 en:'Other' },
