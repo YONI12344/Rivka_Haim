@@ -1,0 +1,455 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T07:10:32+00:00",
+  "title": "Design System: Rivka Haim, Paper Artist",
+  "extensions": {
+    "colorMeta": {
+      "espresso": {
+        "role": "neutral",
+        "displayName": "Espresso",
+        "canonical": "#1c140f",
+        "tonalRamp": [
+          "#281c15",
+          "#493427",
+          "#6a4c39",
+          "#92684e",
+          "#b1876d",
+          "#c6a895",
+          "#dbc8bd",
+          "#f1e9e4"
+        ]
+      },
+      "espresso-raised": {
+        "role": "neutral",
+        "displayName": "Raised Espresso",
+        "canonical": "#2a1e16",
+        "tonalRamp": [
+          "#281d15",
+          "#4a3527",
+          "#6b4d38",
+          "#93694d",
+          "#b2886c",
+          "#c7a894",
+          "#dcc9bc",
+          "#f1e9e4"
+        ]
+      },
+      "umber": {
+        "role": "secondary",
+        "displayName": "Raw Umber",
+        "canonical": "#5b3f2c",
+        "tonalRamp": [
+          "#291d14",
+          "#4c3425",
+          "#6e4c35",
+          "#976949",
+          "#b68768",
+          "#caa891",
+          "#dec9ba",
+          "#f2e9e3"
+        ]
+      },
+      "clay": {
+        "role": "secondary",
+        "displayName": "Burnt Clay",
+        "canonical": "#a8653f",
+        "tonalRamp": [
+          "#2d1b11",
+          "#52311f",
+          "#77472d",
+          "#a3623d",
+          "#c2815c",
+          "#d2a388",
+          "#e3c6b5",
+          "#f4e8e1"
+        ]
+      },
+      "kraft": {
+        "role": "primary",
+        "displayName": "Kraft Bag Brown",
+        "canonical": "#c9a77d",
+        "tonalRamp": [
+          "#2b2012",
+          "#4f3b21",
+          "#735530",
+          "#9f7542",
+          "#bd9460",
+          "#cfb18c",
+          "#e1ceb7",
+          "#f3ebe2"
+        ]
+      },
+      "kraft-light": {
+        "role": "primary",
+        "displayName": "Light Kraft",
+        "canonical": "#dcc19c",
+        "tonalRamp": [
+          "#2d2110",
+          "#533c1d",
+          "#79582b",
+          "#a6793b",
+          "#c49759",
+          "#d4b386",
+          "#e4d0b4",
+          "#f4ece1"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Unbleached Paper",
+        "canonical": "#ebe1cf",
+        "tonalRamp": [
+          "#2b2212",
+          "#4f3f21",
+          "#735b30",
+          "#9e7d42",
+          "#bd9c61",
+          "#cfb78c",
+          "#e1d2b7",
+          "#f3ede2"
+        ]
+      },
+      "paper-light": {
+        "role": "neutral",
+        "displayName": "Paper Light",
+        "canonical": "#f4ece0",
+        "tonalRamp": [
+          "#2d2210",
+          "#533d1d",
+          "#78592b",
+          "#a67b3b",
+          "#c49959",
+          "#d4b587",
+          "#e4d1b4",
+          "#f4ede1"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Espresso Ink",
+        "canonical": "#2a1f17",
+        "tonalRamp": [
+          "#281d16",
+          "#483628",
+          "#694e3a",
+          "#916b4f",
+          "#b08a6e",
+          "#c5aa96",
+          "#dbcabd",
+          "#f1eae5"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#5d4a3b",
+        "tonalRamp": [
+          "#251e18",
+          "#45372c",
+          "#644f3f",
+          "#896d57",
+          "#a88c76",
+          "#c0ab9b",
+          "#d7cbc1",
+          "#efeae6"
+        ]
+      },
+      "on-dark": {
+        "role": "neutral",
+        "displayName": "Warm Linen",
+        "canonical": "#f1e7d7",
+        "tonalRamp": [
+          "#2d2210",
+          "#533e1d",
+          "#795b2a",
+          "#a67d3a",
+          "#c59b59",
+          "#d5b686",
+          "#e5d2b3",
+          "#f4ede1"
+        ]
+      },
+      "on-dark-soft": {
+        "role": "neutral",
+        "displayName": "Faded Linen",
+        "canonical": "#cbb9a0",
+        "tonalRamp": [
+          "#282016",
+          "#493b28",
+          "#69553a",
+          "#91764f",
+          "#b0946e",
+          "#c5b196",
+          "#dbcebd",
+          "#f1ece5"
+        ]
+      },
+      "error-rust": {
+        "role": "error",
+        "displayName": "Rust",
+        "canonical": "#8f3522",
+        "tonalRamp": [
+          "#31130c",
+          "#5a2216",
+          "#833221",
+          "#b4442d",
+          "#d2634b",
+          "#de8e7c",
+          "#ebb8ad",
+          "#f7e3de"
+        ]
+      },
+      "line-on-dark": {
+        "role": "neutral",
+        "displayName": "Linen Hairline",
+        "canonical": "rgba(241,231,215,.16)"
+      },
+      "line-on-paper": {
+        "role": "neutral",
+        "displayName": "Ink Hairline",
+        "canonical": "rgba(42,31,23,.18)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero name and inner page heads only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section heads, work title, the quote."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Slide, collection, step and menu titles; smaller sizes for grid captions and spec values."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default running text."
+      },
+      "body-lead": {
+        "displayName": "Lead",
+        "purpose": "Section intros and prose, 52-62ch, in the soft text colour."
+      },
+      "label": {
+        "displayName": "Wall Label",
+        "purpose": "Museum-label metadata, nav, chips, form labels; tabular figures. English only: 12px uppercase, 0.14em tracking."
+      }
+    },
+    "shadows": [
+      {
+        "name": "hung-work-stream",
+        "value": "0 44px 70px -34px rgba(0,0,0,.8), 0 18px 30px -18px rgba(0,0,0,.55)",
+        "purpose": "Artwork plates in the stream; only artworks cast shadows."
+      },
+      {
+        "name": "hung-work-detail",
+        "value": "0 34px 50px -28px rgba(0,0,0,.75)",
+        "purpose": "Artwork views on the work page."
+      },
+      {
+        "name": "hairline",
+        "value": "inset 0 0 0 1px rgba(241,231,215,.16)",
+        "purpose": "Strokes and dividers drawn without layout shift; not elevation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "The single easing for every transition."
+      },
+      {
+        "name": "control",
+        "value": ".3s-.4s",
+        "purpose": "Button, chip and link colour changes."
+      },
+      {
+        "name": "reveal",
+        "value": ".6s-.8s",
+        "purpose": "Menu wipe (clip-path), enquiry bar slide, page transition."
+      },
+      {
+        "name": "room-tint",
+        "value": "1s-1.2s background-color",
+        "purpose": "Room tint cross-fade to the centred work: color-mix(in oklab, tint 26%, #1c140f)."
+      },
+      {
+        "name": "image-hover",
+        "value": "1.2s-1.4s, scale 1.04-1.045",
+        "purpose": "Slow image drift inside its crop on hover."
+      },
+      {
+        "name": "stream-3d",
+        "value": "perspective 1100px; rotateX to 18deg, rotateY to 3deg, translateZ to -180px, scale to .95",
+        "purpose": "Scroll-driven tilt and recession of stream works; off under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "form-row",
+        "value": "600px"
+      },
+      {
+        "name": "stream-wide",
+        "value": "700px"
+      },
+      {
+        "name": "grid-3",
+        "value": "760px"
+      },
+      {
+        "name": "split",
+        "value": "900px"
+      },
+      {
+        "name": "work-split",
+        "value": "1000px"
+      },
+      {
+        "name": "nav",
+        "value": "1024px"
+      },
+      {
+        "name": "grid-4",
+        "value": "1200px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Kraft Button",
+      "kind": "button",
+      "refersTo": "button-kraft",
+      "description": "The one primary action per view: view the collection, ask about this work.",
+      "html": "<div class=\"ds-stage\"><a href=\"#\" class=\"ds-btn ds-btn-k\">View the collection <svg viewBox=\"0 0 22 10\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" aria-hidden=\"true\"><path d=\"M0 5h20M16 1l4 4-4 4\"/></svg></a></div>",
+      "css": ":host{--esp:#1c140f;--esp-2:#2a1e16;--umber:#5b3f2c;--clay:#a8653f;--kraft:#c9a77d;--kraft-2:#dcc19c;--paper:#ebe1cf;--paper-2:#f4ece0;--ink:#2a1f17;--ink-2:#5d4a3b;--on:#f1e7d7;--on-2:#cbb9a0;--line-d:rgba(241,231,215,.16);--line-l:rgba(42,31,23,.18);--disp:'Bellefair','Times New Roman',serif;--text:'Assistant',system-ui,-apple-system,'Segoe UI',sans-serif;--ease:cubic-bezier(.16,1,.3,1)} .ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:.7em;min-height:52px;padding:0 1.6em;font-family:var(--text);font-size:16px;font-weight:600;border:0;border-radius:2px;cursor:pointer;text-decoration:none;transition:background .4s var(--ease),color .4s var(--ease),box-shadow .4s var(--ease),transform .4s var(--ease)} .ds-btn:active{transform:scale(.98)} .ds-btn:focus-visible{outline:2px solid var(--kraft);outline-offset:3px} .ds-btn svg{width:22px;height:10px} .ds-stage{background:var(--esp);color:var(--on);padding:24px;font-family:var(--text)} .ds-btn-k{background:var(--kraft);color:var(--esp)} .ds-btn-k:hover{background:var(--kraft-2)}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary path beside a kraft button, on espresso.",
+      "html": "<div class=\"ds-stage\"><a href=\"#\" class=\"ds-btn ds-btn-o\">Private enquiry</a></div>",
+      "css": ":host{--esp:#1c140f;--esp-2:#2a1e16;--umber:#5b3f2c;--clay:#a8653f;--kraft:#c9a77d;--kraft-2:#dcc19c;--paper:#ebe1cf;--paper-2:#f4ece0;--ink:#2a1f17;--ink-2:#5d4a3b;--on:#f1e7d7;--on-2:#cbb9a0;--line-d:rgba(241,231,215,.16);--line-l:rgba(42,31,23,.18);--disp:'Bellefair','Times New Roman',serif;--text:'Assistant',system-ui,-apple-system,'Segoe UI',sans-serif;--ease:cubic-bezier(.16,1,.3,1)} .ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:.7em;min-height:52px;padding:0 1.6em;font-family:var(--text);font-size:16px;font-weight:600;border:0;border-radius:2px;cursor:pointer;text-decoration:none;transition:background .4s var(--ease),color .4s var(--ease),box-shadow .4s var(--ease),transform .4s var(--ease)} .ds-btn:active{transform:scale(.98)} .ds-btn:focus-visible{outline:2px solid var(--kraft);outline-offset:3px} .ds-btn svg{width:22px;height:10px} .ds-stage{background:var(--esp);color:var(--on);padding:24px;font-family:var(--text)} .ds-btn-o{background:none;box-shadow:inset 0 0 0 1px var(--line-d);color:var(--on)} .ds-btn-o:hover{box-shadow:inset 0 0 0 1px var(--kraft);color:var(--kraft-2)}"
+    },
+    {
+      "name": "Dark Button on Paper",
+      "kind": "button",
+      "refersTo": "button-dark-on-paper",
+      "description": "Primary action where it sits on a paper surface (contact form).",
+      "html": "<div class=\"ds-stage-p\"><button class=\"ds-btn ds-btn-d\">Send via WhatsApp</button></div>",
+      "css": ":host{--esp:#1c140f;--esp-2:#2a1e16;--umber:#5b3f2c;--clay:#a8653f;--kraft:#c9a77d;--kraft-2:#dcc19c;--paper:#ebe1cf;--paper-2:#f4ece0;--ink:#2a1f17;--ink-2:#5d4a3b;--on:#f1e7d7;--on-2:#cbb9a0;--line-d:rgba(241,231,215,.16);--line-l:rgba(42,31,23,.18);--disp:'Bellefair','Times New Roman',serif;--text:'Assistant',system-ui,-apple-system,'Segoe UI',sans-serif;--ease:cubic-bezier(.16,1,.3,1)} .ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:.7em;min-height:52px;padding:0 1.6em;font-family:var(--text);font-size:16px;font-weight:600;border:0;border-radius:2px;cursor:pointer;text-decoration:none;transition:background .4s var(--ease),color .4s var(--ease),box-shadow .4s var(--ease),transform .4s var(--ease)} .ds-btn:active{transform:scale(.98)} .ds-btn:focus-visible{outline:2px solid var(--kraft);outline-offset:3px} .ds-btn svg{width:22px;height:10px} .ds-stage-p{background:var(--paper);padding:24px} .ds-btn-d{background:var(--esp);color:var(--on)} .ds-btn-d:hover{background:var(--umber)}"
+    },
+    {
+      "name": "Filter Chips",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Collection filters in the sticky gallery bar, with tabular counts.",
+      "html": "<div class=\"ds-stage\"><div class=\"ds-chips\"><button class=\"ds-chip ds-on\">All <span class=\"ds-n\">21</span></button><button class=\"ds-chip\">Liquid Paper <span class=\"ds-n\">13</span></button><button class=\"ds-chip\">Sculptures &amp; Objects <span class=\"ds-n\">8</span></button></div></div>",
+      "css": ":host{--esp:#1c140f;--esp-2:#2a1e16;--umber:#5b3f2c;--clay:#a8653f;--kraft:#c9a77d;--kraft-2:#dcc19c;--paper:#ebe1cf;--paper-2:#f4ece0;--ink:#2a1f17;--ink-2:#5d4a3b;--on:#f1e7d7;--on-2:#cbb9a0;--line-d:rgba(241,231,215,.16);--line-l:rgba(42,31,23,.18);--disp:'Bellefair','Times New Roman',serif;--text:'Assistant',system-ui,-apple-system,'Segoe UI',sans-serif;--ease:cubic-bezier(.16,1,.3,1)} .ds-stage{background:var(--esp);color:var(--on);padding:24px;font-family:var(--text)} .ds-chips{display:flex;gap:6px;flex-wrap:wrap} .ds-chip{min-height:40px;padding:0 15px;border:0;border-radius:2px;background:none;font:600 15px var(--text);color:var(--on-2);box-shadow:inset 0 0 0 1px var(--line-d);cursor:pointer;transition:all .35s var(--ease)} .ds-chip:hover{color:var(--on)} .ds-chip:focus-visible{outline:2px solid var(--kraft);outline-offset:3px} .ds-chip.ds-on{background:var(--on);color:var(--esp);box-shadow:none} .ds-n{opacity:.75;margin-inline-start:6px;font-weight:400;font-variant-numeric:tabular-nums lining-nums}"
+    },
+    {
+      "name": "Field on Paper",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Contact form field inside the paper panel.",
+      "html": "<div class=\"ds-stage-p\"><label class=\"ds-fg\"><span>Your name</span><input placeholder=\"Name\"></label></div>",
+      "css": ":host{--esp:#1c140f;--esp-2:#2a1e16;--umber:#5b3f2c;--clay:#a8653f;--kraft:#c9a77d;--kraft-2:#dcc19c;--paper:#ebe1cf;--paper-2:#f4ece0;--ink:#2a1f17;--ink-2:#5d4a3b;--on:#f1e7d7;--on-2:#cbb9a0;--line-d:rgba(241,231,215,.16);--line-l:rgba(42,31,23,.18);--disp:'Bellefair','Times New Roman',serif;--text:'Assistant',system-ui,-apple-system,'Segoe UI',sans-serif;--ease:cubic-bezier(.16,1,.3,1)} .ds-stage-p{background:var(--paper);color:var(--ink);padding:24px;font-family:var(--text)} .ds-fg{display:grid;gap:6px;max-width:360px} .ds-fg span{font-size:14px;font-weight:600;color:var(--ink-2)} .ds-fg input{font:inherit;font-size:17px;color:var(--ink);background:var(--paper-2);border:0;border-radius:2px;box-shadow:inset 0 0 0 1px var(--line-l);padding:12px 14px;min-height:50px;transition:box-shadow .3s} .ds-fg input:focus{outline:none;box-shadow:inset 0 0 0 2px var(--umber)}"
+    },
+    {
+      "name": "Header",
+      "kind": "nav",
+      "refersTo": "header",
+      "description": "Fixed header in its scrolled (solid, blurred) state with desktop nav and language toggle.",
+      "html": "<header class=\"ds-hdr\"><a href=\"#\" class=\"ds-brand\">Rivka Haim</a><nav class=\"ds-nav\"><a href=\"#\" class=\"ds-on\">Collection</a><a href=\"#\">The Artist</a><a href=\"#\">Ateliers</a><a href=\"#\">Enquiries</a></nav><button class=\"ds-lang\">עב</button></header>",
+      "css": ":host{--esp:#1c140f;--esp-2:#2a1e16;--umber:#5b3f2c;--clay:#a8653f;--kraft:#c9a77d;--kraft-2:#dcc19c;--paper:#ebe1cf;--paper-2:#f4ece0;--ink:#2a1f17;--ink-2:#5d4a3b;--on:#f1e7d7;--on-2:#cbb9a0;--line-d:rgba(241,231,215,.16);--line-l:rgba(42,31,23,.18);--disp:'Bellefair','Times New Roman',serif;--text:'Assistant',system-ui,-apple-system,'Segoe UI',sans-serif;--ease:cubic-bezier(.16,1,.3,1)} .ds-hdr{display:flex;align-items:center;gap:24px;height:64px;padding:0 24px;background:rgba(28,20,15,.84);backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 1px 0 var(--line-d);color:var(--on);font-family:var(--text)} .ds-brand{font-family:var(--disp);font-size:24px;color:var(--on);text-decoration:none} .ds-nav{display:flex;gap:28px;margin-inline:auto;font-size:15px;font-weight:600} .ds-nav a{color:var(--on-2);text-decoration:none;padding:.5em 0;position:relative;transition:color .3s} .ds-nav a:hover,.ds-nav a.ds-on{color:var(--on)} .ds-nav a.ds-on::after{content:'';position:absolute;inset:auto 0 0;height:1px;background:var(--kraft)} .ds-nav a:focus-visible,.ds-lang:focus-visible{outline:2px solid var(--kraft);outline-offset:3px} .ds-lang{min-width:44px;height:44px;background:none;border:0;font:700 14px var(--text);color:var(--on-2);cursor:pointer} .ds-lang:hover{color:var(--on)}"
+    },
+    {
+      "name": "Stream Slide Wall Label",
+      "kind": "custom",
+      "refersTo": "stream-slide",
+      "description": "One work per screen: the hung work with its museum wall label and arrow button, in a tinted room.",
+      "html": "<section class=\"ds-slide\"><div class=\"ds-pl\"></div><div class=\"ds-lab\"><div><h3 class=\"ds-t\">Garden in Paper</h3><p class=\"ds-m\"><span class=\"ds-num\">No. 1</span> · Liquid paper, 2026</p><p class=\"ds-avail\">Original · Available</p></div><a href=\"#\" class=\"ds-go\" aria-label=\"Open\"><svg viewBox=\"0 0 22 10\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" aria-hidden=\"true\"><path d=\"M0 5h20M16 1l4 4-4 4\"/></svg></a></div></section>",
+      "css": ":host{--esp:#1c140f;--esp-2:#2a1e16;--umber:#5b3f2c;--clay:#a8653f;--kraft:#c9a77d;--kraft-2:#dcc19c;--paper:#ebe1cf;--paper-2:#f4ece0;--ink:#2a1f17;--ink-2:#5d4a3b;--on:#f1e7d7;--on-2:#cbb9a0;--line-d:rgba(241,231,215,.16);--line-l:rgba(42,31,23,.18);--disp:'Bellefair','Times New Roman',serif;--text:'Assistant',system-ui,-apple-system,'Segoe UI',sans-serif;--ease:cubic-bezier(.16,1,.3,1)} .ds-slide{background:color-mix(in oklab,#a48e64 26%,#1c140f);color:var(--on);padding:28px 24px;font-family:var(--text);transition:background-color 1.2s var(--ease)} .ds-pl{width:200px;height:250px;margin:0 auto;background:linear-gradient(135deg,#a48e64,#5b3f2c);box-shadow:0 44px 70px -34px rgba(0,0,0,.8),0 18px 30px -18px rgba(0,0,0,.55);transform:perspective(1100px) rotateX(6deg)} .ds-lab{display:flex;align-items:end;justify-content:space-between;gap:16px;padding-top:26px} .ds-t{font-family:var(--disp);font-weight:400;font-size:34px;line-height:1.05;margin:0} .ds-m{margin:4px 0 0;font-size:15px;color:var(--on-2)} .ds-num{font-variant-numeric:tabular-nums lining-nums} .ds-avail{display:inline-flex;align-items:center;gap:8px;margin:8px 0 0;font-size:14px;font-weight:600;color:var(--on-2)} .ds-avail::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--kraft)} .ds-go{flex:none;width:52px;height:52px;border-radius:2px;display:grid;place-items:center;color:var(--on);box-shadow:inset 0 0 0 1px var(--line-d);transition:background .4s,box-shadow .4s,color .4s} .ds-go svg{width:22px;height:10px} .ds-go:hover,.ds-go:focus-visible{background:var(--kraft);color:var(--esp);box-shadow:none;outline:none}"
+    },
+    {
+      "name": "Work Spec Label",
+      "kind": "custom",
+      "refersTo": "work-spec",
+      "description": "Sticky label column on the work page: title and definition list above the enquiry.",
+      "html": "<div class=\"ds-stage\"><h1 class=\"ds-h\">Garden in Paper</h1><dl class=\"ds-spec\"><dt>Number</dt><dd class=\"ds-num\">1</dd><dt>Medium</dt><dd>Liquid paper</dd><dt>Size</dt><dd class=\"ds-num\">60 × 80 cm</dd><dt>Year</dt><dd class=\"ds-num\">2026</dd></dl></div>",
+      "css": ":host{--esp:#1c140f;--esp-2:#2a1e16;--umber:#5b3f2c;--clay:#a8653f;--kraft:#c9a77d;--kraft-2:#dcc19c;--paper:#ebe1cf;--paper-2:#f4ece0;--ink:#2a1f17;--ink-2:#5d4a3b;--on:#f1e7d7;--on-2:#cbb9a0;--line-d:rgba(241,231,215,.16);--line-l:rgba(42,31,23,.18);--disp:'Bellefair','Times New Roman',serif;--text:'Assistant',system-ui,-apple-system,'Segoe UI',sans-serif;--ease:cubic-bezier(.16,1,.3,1)} .ds-stage{background:var(--esp);color:var(--on);padding:24px;font-family:var(--text)} .ds-h{font-family:var(--disp);font-weight:400;font-size:48px;line-height:1.02;letter-spacing:-.01em;margin:0} .ds-spec{margin:24px 0 0;display:grid;grid-template-columns:auto 1fr;gap:10px 22px;font-size:16px} .ds-spec dt{color:var(--on-2);font-weight:600;font-size:14px;padding-top:2px} .ds-spec dd{margin:0} .ds-num{font-variant-numeric:tabular-nums lining-nums}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lamplit Paper Room",
+    "overview": "A gallery for handmade paper works, lit low and warm. The room itself is espresso; the works hang large in it one at a time, and the light around each piece takes on that piece's colour. Unbleached-paper bands open between the dark rooms where the voice turns reflective (the quote, the collections, how to acquire, the studio). Everything typographic is quiet and exact, like a wall label written by a careful registrar; the only colour with a voice is kraft, the brown of a paper bag.\n\nThe site is phone-first and bilingual (Hebrew RTL by default, English LTR), so every layout rule is written in logical directions and every arrow flips with the reading direction. Motion is slow, eased and physical: works tilt back in 3D as they leave the screen, the room tint cross-fades over a second, and the hero drifts. Nothing bounces, nothing spins.\n\nIt rejects the dark veil laid evenly over a photo and the gold hairline ornament of the previous site. Depth comes from the artworks themselves casting shadows onto the wall, never from cards lifted off the page.",
+    "keyCharacteristics": [
+      "Espresso ground with paper bands; kraft as the single accent.",
+      "One work per screen, with a per-work tint washing the room.",
+      "Bellefair display over Assistant text; museum-label metadata in tabular numerals.",
+      "Near-square corners (2px) on every control; hairline dividers drawn as inset shadows.",
+      "Shadows belong to artworks only."
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "Kraft is the only accent on espresso. Clay and umber are supporting tones, not second accents; clay appears only as large numerals on paper.",
+        "section": "colors"
+      },
+      {
+        "name": "The Room Takes the Work's Colour Rule",
+        "body": "Each work carries its own tint, sampled from the piece. The background behind it is `color-mix(in oklab, <tint> 26%, espresso)`, cross-fading over 1–1.2s as the work centres (stream) or on arrival (work page). Never tint the work itself, and never let the tint exceed 26%.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Pure Values Rule",
+        "body": "No #000 or #fff in surfaces or text. Darks are espresso; lights are paper and linen. (Shadow rgba blacks under artworks are the one exception.)",
+        "section": "colors"
+      },
+      {
+        "name": "The Wall Label Rule",
+        "body": "Every work, wherever it appears, is captioned in the same order: title (Bellefair), then \"No. n · medium, year\", then availability. Numbers are tabular. Never invent a dimension, price or edition to fill a slot.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hebrew First Rule",
+        "body": "Tracking and uppercase belong to English labels only. Hebrew text is never letter-spaced.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Work Per Screen Rule",
+        "body": "On listing surfaces that tell the story, a work never shares the viewport with another work. The dense grid exists for finding a piece, not for presenting it.",
+        "section": "layout"
+      },
+      {
+        "name": "The Logical Direction Rule",
+        "body": "Use inline-start/end, never left/right. Arrows mirror under RTL.",
+        "section": "layout"
+      },
+      {
+        "name": "The Only Objects Cast Shadows Rule",
+        "body": "If it is not a photograph of a work, it does not have a drop shadow. No shadowed cards, buttons or panels.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do caption every work with the wall label: title, \"No. n · medium, year\", availability, in tabular figures.",
+      "Do keep kraft as the only accent on espresso, and give each view one kraft button at most.",
+      "Do tint the room, not the work: 26% of the work's colour mixed into espresso, cross-faded over about a second.",
+      "Do use 2px corners on every control and draw strokes as inset 1px hairlines.",
+      "Do use logical properties and mirror arrows for RTL; keep Hebrew untracked.",
+      "Do ease everything with cubic-bezier(.16,1,.3,1) and honour reduced motion by cutting transitions to near zero.",
+      "Do keep tap targets at 44px or more and respect safe-area insets."
+    ],
+    "donts": [
+      "Don't lay a uniform dark veil over a photo; hero overlays are directional gradients that leave the subject clear.",
+      "Don't use gold or metallic hairlines as ornament; hairlines are structural dividers only.",
+      "Don't put drop shadows on cards, buttons or panels; only artworks cast shadows.",
+      "Don't use pure black or white surfaces or text.",
+      "Don't introduce a cool colour or a second bright accent.",
+      "Don't invent prices, dimensions, editions or press to fill a label."
+    ]
+  }
+}

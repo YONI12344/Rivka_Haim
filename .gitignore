@@ -2,3 +2,9 @@
 **/.DS_Store
 Images rivka/
 playground.html
+
+# Design-tool working files (local only)
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/hook.cache.json

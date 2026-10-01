@@ -1,0 +1,4 @@
+# Keep design notes off the public site (GitHub Pages)
+exclude:
+  - PRODUCT.md
+  - DESIGN.md
